@@ -21,3 +21,10 @@ How to manage your dotfiles on github
 
 Source: https://alexpearce.me/2016/02/managing-dotfiles-with-stow/
 
+SSh
+Generate an ssh-key to connect to github
+https://www.w3docs.com/snippets/git/how-to-generate-ssh-key-for-git.html
+
+and change the access to ssh:
+https://help.github.com/em/articles/changing-a-remotes-url
+
