@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: insert
+# key: <ins
+# --
+#+INCLUDE: "$1"
+$0

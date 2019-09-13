@@ -1,0 +1,7 @@
+
+http://www.ee.ryerson.ca/~elf/emacs/logo/logo-appendix.html
+
+To install one of these alternate schemes, download, gunzip and rename it to splash.xpm. Then, move it into your home directory (e.g. your images directory, ~/images) and add:
+
+(setq fancy-splash-image (expand-file-name "~/images/splash.xpm"))
+to your ~/.emacs and start Emacs

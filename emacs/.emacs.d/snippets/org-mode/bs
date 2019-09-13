@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: begin source
+# key: <bs
+# --
+#+CAPTION: $1
+#+begin_src $2
+$3
+#+end_src

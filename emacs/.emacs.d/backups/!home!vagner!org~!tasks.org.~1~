@@ -1,0 +1,129 @@
+
+* 2019
+** 2019-05 maio
+*** 2019-05-28 terça
+**** DONE emacs and vim commands log    :emacs:vim:command:commands:log:keys:
+     CLOSED: [2019-05-28 ter 16:36]
+   Added: [2019-05-28 ter 16:34]
+   You can use screenkey for showing typed commands
+   Emacs has got a command-log-mode as well
+**** TODO Eclesiastes                           :Bible:read:eclesiastes:book:
+   Added: [2019-05-28 ter 16:37]
+   Read the Book of Eclesiastes
+**** TODO Victory over the Darkness :Neil:T:Anderson:book:discipleship:counseling:
+   Added: [2019-05-28 ter 16:38]
+   Read this book
+**** TODO Bibledit local and online app   :bibledit:translation:Greek:Hebrew:
+   Added: [2019-05-28 ter 16:39]
+   Start to figured out how to use Bibledit application
+**** TODO Withexeditor for Chromium   :fix:withexeditorhost:withexeditor:vim:
+   Added: [2019-05-28 ter 16:41]
+   Fix Withexeditor for Chromium browser
+**** DONE Wireless card swap          :wireless:card:atheros:Linux:lenovo:HP:
+     CLOSED: [2019-05-28 ter 16:45]
+   Added: [2019-05-28 ter 16:43]
+   I tried to swap Wireless card from HP to Lenovo, but I could not remove it
+   from HP, because the screw is spanned :(
+**** TODO info command-line study          :emacs:info:cli:command:line:help:
+   Added: [2019-05-28 ter 16:45]
+**** DONE Emergency Lisp tutorial        :elisp:lisp:emacs:programming:study:
+     CLOSED: [2019-05-29 qua 19:29]
+   Added: [2019-05-28 ter 16:46]
+   Keep studying Emergency Lisp tutorial
+**** TODO Blog setup                              :hugo:blog:emacs:localhost:
+   Added: [2019-05-28 ter 16:48]
+   Set up a blog to manage it with Emacs -
+   Use lazyblorg
+**** TODO Genealogy with Emacs :genealogy:family:tree:descendants:ascendants:
+   Added: [2019-05-28 ter 16:49]
+   Install gedcom.el and lines-mode.el for editing Genealogy files
+   Also install:
+   sudo apt install lifelines lifelines-doc lifelines-report
+   in lea-pet
+**** DONE Place auto-complete-mode, company-mode and ivy-mode under autocompletion :auto:complete:mode:company:mode:ivy:mode:emacs:completion:words:
+     CLOSED: [2019-05-29 qua 13:32]
+   Added: [2019-05-28 ter 16:54]
+**** TODO Escrever para o líder da Igreja Evangélica Livre :contato:pastor:líder:missões:interesse:conhecer:
+   Added: [2019-05-28 ter 16:56]
+   Write to the leader of the Igreja Evangélica Livre do Brasil for knowing more this denomination.
+   http://www.evangelicalivre.org.br/portal/
+**** DONE Escrever para a Neidinha :Missão:ALEM:Wycliff:Bible:translation:translators:Brasília:Granja:Torto:
+     CLOSED: [2019-05-29 qua 13:32]
+   Added: [2019-05-28 ter 17:01]
+   Escrever email para a Neidinha
+*** 2019-05-29 quarta
+**** TODO Emacs basics - Xah Lee     :Xa:Lee:emacs:basics:functions:practise:
+   Added: [2019-05-29 qua 16:17]
+   http://ergoemacs.org/emacs/elisp_editing_basics.html
+** 2019-06 junho
+*** 2019-06-03 segunda
+** 2019-08 agosto
+*** 2019-08-18 domingo
+**** TODO study dired                                 :dired:emacs:directory:
+   Added: [2019-08-18 dom 13:34]
+   I have to study dired
+*** 2019-08-20 terça
+**** TODO Stumpemacs                                   :emacs:daemon:manager:
+   https://github.com/cosmonaut-ok/stumpmacs
+   Added: [2019-08-20 ter 12:26]
+**** TODO Install spacemacs                      :spacemacs:emacs:lisp:elisp:
+   https://github.com/syl20bnr/spacemacs/tree/develop
+   Install emacs in an alternative dir
+
+   Added: [2019-08-20 ter 16:02]
+
+Alternative installations
+
+There are currently, two supported, alternative locations, for a Spacemacs configuration.
+Modify HOME environment variable
+
+This solution is ideal for quickly trying Spacemacs without compromising your existing configuration. Clone Spacemacs outside the Emacs dotdirectory ~/.emacs.d and modify the HOME environment variable.
+
+mkdir ~/spacemacs
+git clone https://github.com/syl20bnr/spacemacs.git ~/spacemacs/.emacs.d
+HOME=~/spacemacs emacs
+
+Note: If you're using the Fish shell, then you'll need to modify the last command to: env HOME=$HOME/spacemacs emacs
+Modify spacemacs-start-directory variable
+
+This solution is better suited to "embed" Spacemacs into your own configuration. If you've cloned Spacemacs into ~/.emacs.d/spacemacs/, then drop the following lines in the ~/.emacs.d/init.el file:
+
+(setq spacemacs-start-directory "~/.emacs.d/spacemacs/")
+(load-file (concat spacemacs-start-directory "init.el"))
+**** TODO Overtone                    :music:programming:open:source:clojure:
+     Install Overtone
+   https://github.com/overtone/overtone/
+   Added: [2019-08-20 ter 16:27]
+**** TODO emacs playground                          :sandbox:emacs:test:play:
+   https://github.com/akirak/emacs-playground
+   Added: [2019-08-20 ter 17:59]
+   Make some tests with emacs playground
+**** TODO Learn Hebrew in 40 minutes  :youtube:video:Hebrew:lesson:languages:
+     Find out about this video class in youtube 
+   Added: [2019-08-20 ter 19:39]
+** 2019-09 setembro
+*** 2019-09-01 domingo
+**** TODO Install a Nextcloud server :nextcloud:opensource:free:GNU:Linux:webinars:english:classes:
+      Added: [2019-09-01 dom 15:03]
+*** 2019-09-04 quarta
+**** TODO emacs-wget                            :wget:elpa:emacs:org:install:
+     Install emacs-wget from github
+   https://github.com/ataka/emacs-wget
+   Added: [2019-09-04 qua 18:18]
+**** TODO distro_tube_dotfiles                            :look:into:analise:
+   Have a look into this folder. It is in the ~/Downloads directory
+   Added: [2019-09-04 qua 19:57]
+*** 2019-09-07 sábado
+**** TODO Dotfiles                :management:stow:stowsh:sync:gitlab:github:
+     Added: [2019-09-07 sáb 10:53]
+     Study and make Dotfiles
+     https://www.fullstacksensei.com/blog/dotfiles/
+     https://github.com/webpro/awesome-dotfiles
+     https://github.com/thoughtbot/rcm
+     https://fedoramagazine.org/managing-dotfiles-rcm/
+     https://www.fullstacksensei.com/blog/dotfiles/
+     https://github.com/freistil/dotfiles
+     https://grantammons.me/2017/11/26/efficiently-managing-dotfiles/
+     https://wiki.archlinux.org/index.php/Dotfiles
+     https://www.freecodecamp.org/news/dive-into-dotfiles-part-2-6321b4a73608/
+

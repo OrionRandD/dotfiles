@@ -1,0 +1,6 @@
+"507788a23e41e2871a763675d2ff3a67f2445ec6"
+#s(undo-tree [nil (#1=[nil nil ((1 . 149) (#(";;; Directory Local Variables
+;;; For more information see (info \"(emacs) Directory Variables\")
+
+((dired-mode
+  (subdirs)))" 0 30 (fontified nil) 30 97 (fontified nil) 97 123 (fontified nil)) . -1) (1 . 125) (t -1 65535 0 0)) nil (23929 37546 114792 288000) 0 nil]) nil nil (23929 37546 114796 673000) 0 nil] #1# 155 1 nil)

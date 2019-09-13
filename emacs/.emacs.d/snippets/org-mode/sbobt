@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: src-block-org-babel-translate
+# key: <sbobt
+# --
+#+BEGIN_SRC translate :src $0    :dest $1
+  $2
+#+END_SRC

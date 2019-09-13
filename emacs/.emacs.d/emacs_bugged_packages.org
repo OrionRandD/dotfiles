@@ -1,0 +1,95 @@
+ 
+* DONE Google-translate
+  CLOSED: [2019-05-21 ter 12:53]
+  
+  https://github.com/atykhonov/google-translate/issues/52#issuecomment-423870290
+  Use /home/vagner/bin/tkk_gg_transl_emacs.sh to get the 
+  ;; (list 427110 1469889687) <--> list tkk correct number
+
+
+#+BEGIN_SRC emacs-lisp 
+
+  (use-package google-translate
+    :ensure t
+    :config
+    (when (and (string-match "0.11.17"
+			     (google-translate-version))
+	       (>= (time-to-seconds)
+		   (time-to-seconds
+		    (encode-time 0 0 0 23 9 2018))))
+      (defun google-translate--get-b-d1 ()
+	(list 432928 274893998)))
+    :bind
+    ("C-c t" . google-translate-at-point)
+    ("C-c T" . google-translate-at-point-reverse))
+
+#+END_SRC
+
+* TODO Org-capture
+
+Download the org-capture addon for
+Firefox and Chromium
+[[http://chadok.info/firefox-org-capture/][org-capture.xpi]]
+
+You have to install org-plus-contrib
+
+#+BEGIN_SRC emacs-lisp 
+
+      (global-set-key (kbd "C-c c") 'org-capture)
+
+      (setq org-capture-templates
+
+	'(
+
+  ("a" "Appointments" entry (file+headline "~/org~/my-appointments.org" "Calendar")
+   "* APPT %^{Description} %^g\n%?\nAdded: %U")
+
+     ("b" "Books" entry (file+headline "~/org~/books.org" "books to read")
+   "* TODO %\\1 - %\\2%?\n%U\n:PROPERTIES:\n:NAME: %^{NAME}\n:TITLE: %^{TITLE}\n:END:\n")
+
+    ;; you have to set up a template for this 
+    ;; ("c" "Contacts" entry (file+headline "~/org~/contacts.org" "Contacts"), my/org-contacts-template :empty-lines 1)
+
+     ("d" "Dreams" entry (file+datetree "~/org~/my-dreams.org") "* %^{Description} %^g %?\nAdded: %U")
+
+     ("e" "Cookbook" entry (file "~/org~/cookbook.org")
+	 "%(org-chef-get-recipe-from-url)"
+	 :empty-lines 1)
+
+     ("f" "Manual Cookbook" entry (file "~/org~/cookbook.org")
+	 "* %^{Recipe title: }\n  :PROPERTIES:\n  :source-url:\n  :servings:\n  :prep-time:\n  :cook-time:\n  :ready-in:\n  :END:\n** Ingredients\n   %?\n** Directions\n\n")
+
+     ("j" "Journal" entry (file+datetree "~/org~/journal.org") "* %?\nEntered on %U\n  %i\n  %a")
+
+     ("l" "Log Time" entry (file+datetree "~/org~/timelog.org") "** %U - %^{Activity}  :TIME:")
+
+     ("m" "Brain" entry (function org-brain-goto-end) "* %i%?" :empty-lines 1)
+
+     ("n" "Notes" entry (file+datetree "~/org~/my-notes.org") "* %^{Description} %^g %?\nAdded: %U")
+
+     ;; you have to set hugo up for this
+     ;; ("o" "Posts" (file+datetree "~/org~/my-post.org") "* TODO %^{Description} %^g\n%?\nAdded: %U")
+
+     ("t" "Tasks" entry (file+datetree "~/org~/tasks.org")
+   "* TODO %^{Description} %^g\n%?\nAdded: %U")
+
+     ;; example is in:
+     ;; /home/vagner/.emacs.d/elpa/org-plus-contrib-20190520/org-contacts.el
+     ("c" "Contacts" entry (file "~/org~/contacts.org")
+	"* %(org-contacts-template-name)
+     :PROPERTIES:
+     :EMAIL: 
+     :PHONE:
+     :MOBILE:
+     :BIRTHDAY:
+     :ADDRESS:
+     :NICKNAME:
+     :ALIAS:
+     :ICON:
+     :IGNORE:
+     :NOTE:
+     :END:")
+
+     ("w" "Website" plain (function org-website-clipper) "* %a\n%T\n" :immediate-finish t)))
+
+  #+END_SRC

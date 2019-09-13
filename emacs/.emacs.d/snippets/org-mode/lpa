@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: load-path
+# key: <lpath
+# --
+(add-to-list 'load-path "$0")

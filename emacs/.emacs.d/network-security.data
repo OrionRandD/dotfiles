@@ -1,0 +1,5 @@
+(
+ (:id "sha1:78b9d3260fab9193a82796c17fde59366c4235f1" :fingerprint "sha1:be:03:00:0d:5c:8b:54:e1:43:7d:53:da:21:c3:96:8a:36:5a:b8:fd" :host "mirrors.163.com:443" :conditions (:expired :invalid))
+ (:id "sha1:706608f9b7fcfdea563351d49047f296d74a5a76" :fingerprint "sha1:8d:15:6f:d3:9f:60:4a:74:72:7d:23:c5:0f:8f:6d:d7:83:bb:8f:33")
+ (:id "sha1:85457c729378cc93c732b6a3941c8e4f9c2e60f3" :fingerprint "sha1:ab:a6:d7:6a:b3:d3:63:fa:19:0d:65:41:60:23:6e:ef:d3:2a:46:dc" :host "marmalade-repo.org:443" :conditions (:insecure :unknown-ca :invalid))
+)

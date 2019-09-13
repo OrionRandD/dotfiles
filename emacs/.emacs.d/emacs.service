@@ -1,0 +1,33 @@
+
+
+# put this file in /usr/lib/systemd/user
+
+[Unit]
+Description=Emacs: the extensible, self documenting text editor
+ 
+[Service]
+Type=forking
+ExecStart=/usr/bin/emacs --daemon
+ExecStop=/usr/bin/emacsclient --eval "(kill emacs)"
+Restart=always
+User=%i
+
+[Install]
+WantedBy=default.target
+
+# put this in your ".bashrc"
+alias e="emacsclient -t"
+alias ec="emacsclient -c"
+
+# put this in your "emacs.org"
+(defun on-frame-open (frame)
+  (if (not (display-graphic-p frame))
+      (set-face-background 'default "unspecified-bg" frame)))
+(on-frame-open (selected-frame))
+(add-hook 'after-make-frame-functions 'on-frame-open)
+
+# sources
+# https://coherentmusings.wordpress.com/2016/03/12/making-emacs-theme-and-terminal-theme-play-along-nicely/
+# https://bbs.archlinux.org/viewtopic.php?id=155497
+
+

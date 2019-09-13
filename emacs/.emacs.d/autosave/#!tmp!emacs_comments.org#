@@ -1,0 +1,5 @@
+;;; package --- Summary
+
+;;;Commentary:
+
+(provide '$file-name)\n;;; $file-name.el ends here

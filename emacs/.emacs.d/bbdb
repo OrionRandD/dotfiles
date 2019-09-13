@@ -1,0 +1,4 @@
+;; -*- mode: Emacs-Lisp; coding: utf-8; -*-
+;;; file-format: 9
+["Vagner" "Rener" nil nil ("Sofia") (["(19)(55)3483-2688" "(55)(19)99778-7553"]) nil ("vagnerrener@gmail.com") ((notes . "Cybertron")) "f340d80a-f177-49bd-a3d8-7eaa5624405d" "2019-06-30 22:12:16 +0000" "2019-06-30 22:14:01 +0000" nil]
+["Léa Guimarães da" "Silva" nil nil ("Sofia") (["(55)(19)9860-65506" ""]) nil ("leacna@gmail.com") ((notes . "Penelope")) "49a479ba-0789-4e41-84e4-11cf101818d2" "2019-06-30 22:17:14 +0000" "2019-06-30 22:17:14 +0000" nil]

@@ -1,0 +1,48 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /home/vagner/.emacs.d/emacs.org
+
+
+* Company-mode and company-shell 
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-05-14 ter 21:03
+  :ARCHIVE_FILE: ~/.emacs.d/emacs.org
+  :ARCHIVE_CATEGORY: emacs
+  :END:
+
+apt install clang8 libclang1-8
+company-mode and company-shell
+C-c C-m list-packages - then install with "i-x"
+
+#+BEGIN_SRC emacs-lisp 
+
+  (add-hook 'after-init-hook 'global-company-mode)
+
+    (use-package company)
+    ;; :config
+    ;; (with-eval-after-load 'company
+    ;; (add-hook 'c-mode-hook 'company-mode)
+    ;; (add-hook 'c++-mode-hook 'company-mode)))
+
+
+    (require 'company-capf)
+    (require 'company-files)
+    (require 'company-math)
+    (setq company-backends '((company-files company-math-symbols-unicode company-capf)))
+    (setq-default company-backends '((company-files company-math-symbols-unicode company-capf)))
+
+    (use-package irony
+
+    :config
+    (add-hook 'c-mode-hook 'irony-mode)
+    (add-hook 'c++-mode-hook 'irony-mode)
+    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
+    (use-package company-irony
+    :config
+    (require 'company)
+    (add-to-list 'company-backends 'company-irony))
+
+#+END_SRC
+

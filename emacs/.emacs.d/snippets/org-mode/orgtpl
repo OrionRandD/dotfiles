@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: org-template
+# key: <orgtpt
+# --
+#+TITLE: 
+#+AUTHOR: Vagner Rener 
+#+DATE: \today
+#+LATEX_CLASS: article
+#+options: toc:nil num:nil ^:nil
+#+STARTUP: inlineimages
+#+LaTeX_HEADER: \usepackage[greek,english]{babel}
+#+LATEX_HEADER: \usepackage{enumitem}
+#+LATEX_HEADER: \setlist[enumerate]{label*=\arabic*.}
+#+LATEX_HEADER: \usepackage{hyphenat}
+#+LATEX_HEADER: \hyphenation{}
+#+REVEAL_THEME: black/white/league/sky/beige/simple/serif/blood/night/moon/solarized
+#+REVEAL_THEME: night
+#+REVEAL_TRANS: none/fade/slide/convex/concave/zoom
+#+REVEAL_TRANS: zoom
+# https://orgmode.org/manual/Markup.html
+# For using babel multi languages you have add them above and to wrap them around
+# e.g. John 1:1 \selectlanguage{greek} Εν αρχῃ ην ο λογος, και ο λογος ην προς τον θεον, και θεος ην ο λογος.
+# Then, \selectlanguage{english} John 2:1 (etc.). 
+# see also: https://github.com/jkitchin/jmax/blob/master/examples/technical-documents-in-org.org
+# see also: https://orgmode.org/manual/Export-settings.html#DOCF126
+# you can use "#+ BEGiN_VERSE #+ END_VERSE" to format lines in a literal way
+# or "#+ BEGIN_SRC raw #+ END_SRC" to format lines in a literal way - or:
+# M-x org-insert-structure-template RET TAB. Then write the template you want, e.g. (python sh emacs-lisp etc.)
+# use #+DATE: \today for adding a current date 
+# use #+REVEAL: split for breaking the slides - if they are too big
+# for inserting exporting options, you can use "M-x yas-insert-snippet"
+# then you can use wps to open ".docx" and export the file to ".pdf"
+# you can use "\" to break lines inside a paragraph
+# for translating phrase/words, use "translate" yas-snippet after enclosing them into the code and call:
+# M-x org-babel-execute-src-block-maybe (C-c C-c)
+# you can use "\justify" and other key alightment words to format paragraphs 
+# for organising footnotes, do: "Ctrl-x m RET org-footnote-normalize"
+# for hyphenation you can write words into its curl brackets "{}"
+# for inserting images you can use: file:path/to/image
+# for playing songs inside org files you can use: "M-x mplayer-find-file" or dired-jump and then play it

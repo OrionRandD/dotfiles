@@ -1,0 +1,544 @@
+;;-*-coding: utf-8;-*-
+(define-abbrev-table 'Buffer-menu-mode-abbrev-table '())
+
+(define-abbrev-table 'Custom-mode-abbrev-table '())
+
+(define-abbrev-table 'Info-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'Rd-mode-abbrev-table '())
+
+(define-abbrev-table 'awk-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'bbdb-mode-abbrev-table '())
+
+(define-abbrev-table 'biblio-selection-mode-abbrev-table '())
+
+(define-abbrev-table 'bibtex-mode-abbrev-table '())
+
+(define-abbrev-table 'bookmark-bmenu-mode-abbrev-table '())
+
+(define-abbrev-table 'bookmark-edit-annotation-mode-abbrev-table '())
+
+(define-abbrev-table 'c++-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'c-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'calendar-mode-abbrev-table '())
+
+(define-abbrev-table 'comint-mode-abbrev-table '())
+
+(define-abbrev-table 'completion-list-mode-abbrev-table '())
+
+(define-abbrev-table 'custom-new-theme-mode-abbrev-table '())
+
+(define-abbrev-table 'custom-theme-choose-mode-abbrev-table '())
+
+(define-abbrev-table 'debugger-mode-abbrev-table '())
+
+(define-abbrev-table 'diff-mode-abbrev-table '())
+
+(define-abbrev-table 'dig-mode-abbrev-table '())
+
+(define-abbrev-table 'display-time-world-mode-abbrev-table '())
+
+(define-abbrev-table 'edebug-eval-mode-abbrev-table '())
+
+(define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
+
+(define-abbrev-table 'eieio-custom-mode-abbrev-table '())
+
+(define-abbrev-table 'elisp-byte-code-mode-abbrev-table '())
+
+(define-abbrev-table 'emacs-lisp-mode-abbrev-table '())
+
+(define-abbrev-table 'ensime-connection-list-mode-abbrev-table '())
+
+(define-abbrev-table 'ensime-inf-mode-abbrev-table '())
+
+(define-abbrev-table 'ensime-inspector-mode-abbrev-table '())
+
+(define-abbrev-table 'epa-info-mode-abbrev-table '())
+
+(define-abbrev-table 'epa-key-list-mode-abbrev-table '())
+
+(define-abbrev-table 'epa-key-mode-abbrev-table '())
+
+(define-abbrev-table 'erc-mode-abbrev-table '())
+
+(define-abbrev-table 'eshell-mode-abbrev-table '())
+
+(define-abbrev-table 'ess-julia-mode-abbrev-table '())
+
+(define-abbrev-table 'evil-command-window-mode-abbrev-table '())
+
+(define-abbrev-table 'evil-list-view-mode-abbrev-table '())
+
+(define-abbrev-table 'flycheck-error-list-mode-abbrev-table '())
+
+(define-abbrev-table 'flymake-diagnostics-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'fountain-mode-abbrev-table '())
+
+(define-abbrev-table 'fundamental-mode-abbrev-table '())
+
+(define-abbrev-table 'gdb-breakpoints-mode-abbrev-table '())
+
+(define-abbrev-table 'gdb-disassembly-mode-abbrev-table '())
+
+(define-abbrev-table 'gdb-frames-mode-abbrev-table '())
+
+(define-abbrev-table 'gdb-locals-mode-abbrev-table '())
+
+(define-abbrev-table 'gdb-memory-mode-abbrev-table '())
+
+(define-abbrev-table 'gdb-registers-mode-abbrev-table '())
+
+(define-abbrev-table 'gdb-script-mode-abbrev-table '())
+
+(define-abbrev-table 'gdb-threads-mode-abbrev-table '())
+
+(define-abbrev-table 'gfm-mode-abbrev-table '())
+
+(define-abbrev-table 'gfm-view-mode-abbrev-table '())
+
+(define-abbrev-table 'ggtags-global-mode-abbrev-table '())
+
+(define-abbrev-table 'ggtags-view-search-history-mode-abbrev-table '())
+
+(define-abbrev-table 'gitlab-issues-mode-abbrev-table '())
+
+(define-abbrev-table 'gitlab-projects-mode-abbrev-table '())
+
+(define-abbrev-table 'global-abbrev-table
+  '(
+    ("abençôo" "abençoo" nil 0)
+    ("agüentar" "aguentar" nil 0)
+    ("ante-sacristia" "antessacristia" nil 0)
+    ("ante-sala" "antessala" nil 0)
+    ("anti-imperalista" "anti-imperialista" nil 0)
+    ("anti-rugas" "antirrugas" nil 0)
+    ("anti-social" "antissocial" nil 0)
+    ("antiibérico" "anti-ibérico" nil 0)
+    ("antiimperalista" "aintiimperialista" nil 0)
+    ("análisee" "análise" nil 0)
+    ("apra" "para" nil 1)
+    ("apóio" "apoio" nil 0)
+    ("aqeule" "aquele" nil 0)
+    ("aqiulo" "aquilo" nil 0)
+    ("arcoíris" "arco-íris" nil 0)
+    ("argüição" "arguição" nil 0)
+    ("arqui-rivalidade" "arquirrivalidade" nil 0)
+    ("arqui-romântico" "arquirromântico" nil 0)
+    ("arquiinimigo" "arqui-inimigo" nil 0)
+    ("arquiirmandade" "arqui-irmandade" nil 0)
+    ("aré" "até" nil 0)
+    ("ascenção" "ascensão" nil 0)
+    ("asim" "assim" nil 0)
+    ("assembléia" "assembleia" nil 0)
+    ("assenção" "ascensão" nil 0)
+    ("assin" "assim" nil 0)
+    ("assougue" "açougue" nil 0)
+    ("aue" "que" nil 0)
+    ("augum" "algum" nil 0)
+    ("augun" "algum" nil 0)
+    ("auto-afirmação" "autoafirmação" nil 0)
+    ("auto-ajuda" "autoajuda" nil 0)
+    ("auto-aprendizagem" "autoaprendizagem" nil 0)
+    ("auto-escola" "autoescola" nil 0)
+    ("auto-estrada" "autoestrada" nil 0)
+    ("auto-instrução" "autoinstrução" nil 0)
+    ("auto-regulamentação" "autorregulamentação" nil 0)
+    ("auto-retrato" "autorretrato" nil 0)
+    ("auto-sugestão" "autossugestão" nil 0)
+    ("ben" "bem" nil 0)
+    ("beringela" "berinjela" nil 0)
+    ("boléia" "boleia" nil 0)
+    ("bon" "bom" nil 0)
+    ("bóia" "boia" nil 0)
+    ("caichote" "caixote" nil 0)
+    ("capitões" "capitães" nil 0)
+    ("cinqüenta" "cinquenta" nil 0)
+    ("circumnavegação" "circum-navegação" nil 0)
+    ("ckaro" "claro" nil 0)
+    ("cliche" "clichê" nil 0)
+    ("colméia" "colmeia" nil 0)
+    ("compreenssão" "compreensão" nil 0)
+    ("comprensão" "compreensão" nil 0)
+    ("consequencia" "consequência" nil 0)
+    ("conseqüência" "consequência" nil 0)
+    ("contezto" "contexto" nil 0)
+    ("contra-exemplo" "contraexemplo" nil 0)
+    ("contra-indicação" "contraindicação" nil 0)
+    ("contra-ordem" "contraordem" nil 0)
+    ("contra-regra" "contrarregra" nil 0)
+    ("contra-senha" "contrassenha" nil 0)
+    ("contra-senso" "contrassenso" nil 0)
+    ("corrijir" "corrigir" nil 0)
+    ("coréia" "coreia" nil 0)
+    ("corôo" "coroo" nil 0)
+    ("coxixar" "cochichar" nil 0)
+    ("cpm" "com" nil 0)
+    ("cppara" "para" nil 0)
+    ("crêem" "creem" nil 0)
+    ("côo" "coo" nil 0)
+    ("danca" "dança" nil 0)
+    ("decer" "descer" nil 0)
+    ("definitamente" "definitivamente" nil 0)
+    ("delinqüir" "delinquir" nil 0)
+    ("descrêem" "descreem" nil 0)
+    ("deshonestidade" "desonestidade" nil 0)
+    ("deshonesto" "desonesto" nil 0)
+    ("detale" "detalhe" nil 0)
+    ("deven" "devem" nil 0)
+    ("distingeu" "distingue" nil 0)
+    ("dsa" "das" nil 0)
+    ("dze" "dez" nil 0)
+    ("dêem" "deem" nil 0)
+    ("díficil" "difícil" nil 0)
+    ("ecessão" "exceção" nil 0)
+    ("ecessões" "exceções" nil 0)
+    ("eentão" "então" nil 0)
+    ("eloqüente" "eloquente" nil 0)
+    ("eloqüência" "eloquência" nil 0)
+    ("emb" "bem" nil 0)
+    ("ems" "sem" nil 0)
+    ("enbora" "encoro" nil 0)
+    ("enjôo" "enjoo" nil 0)
+    ("equ" "que" nil 0)
+    ("erv" "ver" nil 0)
+    ("ese" "esse" nil 0)
+    ("esselência" "excelência" nil 0)
+    ("esu" "seu" nil 0)
+    ("excessão" "exceção" nil 0)
+    ("excesões" "exceções" nil 0)
+    ("excurção" "excursão" nil 0)
+    ("exenplo" "exemplo" nil 0)
+    ("exeplo" "exemplo" nil 0)
+    ("exijir" "exigir" nil 0)
+    ("exijência" "exigência" nil 0)
+    ("exmulher" "ex-mulher" nil 0)
+    ("expontâneo" "espontâneo" nil 0)
+    ("extra-escolar" "extraescolar" nil 0)
+    ("extra-oficial" "extraoficial" nil 0)
+    ("extra-regimento" "extrarregimento" nil 0)
+    ("extra-seco" "extrasseco" nil 0)
+    ("extra-sístole" "extrassístole" nil 0)
+    ("ezemplo" "exemplo" nil 0)
+    ("ezercício" "exercício" nil 0)
+    ("faciu" "fácil" nil 0)
+    ("fas" "faz" nil 0)
+    ("fente" "gente" nil 0)
+    ("frequencia" "frequência" nil 0)
+    ("freqüente" "frequente" nil 0)
+    ("freqüência" "frequência" nil 0)
+    ("gamail" "gmail" nil 0)
+    ("gamil" "gmail" nil 0)
+    ("geito" "jeito" nil 0)
+    ("gibóia" "jiboia" nil 0)
+    ("gipe" "jipe" nil 0)
+    ("gmal" "gmail" nil 0)
+    ("gmial" "gmail" nil 0)
+    ("hebréia" "hebreia" nil 0)
+    ("heróico" "heroico" nil 0)
+    ("hezitar" "hesitar" nil 0)
+    ("hezitação" "hesitação" nil 0)
+    ("idéia" "ideia" nil 0)
+    ("igor" "igor" nil 0)
+    ("iigor" "igor" nil 0)
+    ("infra-estrutura" "infraestrutura" nil 0)
+    ("infra-renal" "infrarrenal" nil 0)
+    ("infra-som" "infrassom" nil 0)
+    ("interesado" "interessado" nil 0)
+    ("interese" "interesse" nil 0)
+    ("intra-ocular" "intraocular" nil 0)
+    ("intra-uterino" "intrauterino" nil 0)
+    ("irria" "iria" nil 0)
+    ("iso" "isso" nil 0)
+    ("isot" "isto" nil 0)
+    ("ja" "já" nil 0)
+    ("jente" "gente" nil 0)
+    ("jibóia" "jiboia" nil 0)
+    ("linux" "Linux" nil 16)
+    ("lêem" "leem" nil 0)
+    ("manda-chuva" "mandachuva" nil 0)
+    ("masi" "mais" nil 0)
+    ("mema" "mesma" nil 0)
+    ("mes" "més" nil 0)
+    ("microondas" "micro-ondas" nil 0)
+    ("microorgânico" "micro-orgânico" nil 0)
+    ("microônibus" "micro-ônibus" nil 0)
+    ("muinto" "muito" nil 0)
+    ("muller" "müller" nil 0)
+    ("môo" "moo" nil 0)
+    ("nao" "não" nil 0)
+    ("nehum" "nenhum" nil 0)
+    ("nenina" "menina" nil 0)
+    ("neo-expressionista" "neoexpressionista" nil 0)
+    ("neo-imperialista" "neoimperialista" nil 0)
+    ("noã" "não" nil 0)
+    ("obiter" "obter" nil 0)
+    ("observacao" "observação" nil 0)
+    ("orijem" "origem" nil 0)
+    ("ospital" "hospital" nil 0)
+    ("panacéia" "panaceia" nil 0)
+    ("panamericano" "pan-americano" nil 0)
+    ("paranóia" "paranoia" nil 0)
+    ("paranóico" "paranoico" nil 0)
+    ("pará-brisa" "parabrisa" nil 0)
+    ("pará-choque" "parachoque" nil 0)
+    ("pará-lama" "paralama" nil 0)
+    ("perdôo" "perdoo" nil 0)
+    ("pingüim" "pinguim" nil 0)
+    ("platéia" "plateia" nil 0)
+    ("poden" "podem" nil 0)
+    ("potuguês" "português" nil 0)
+    ("povôo" "povoo" nil 0)
+    ("precisan" "precisam" nil 0)
+    ("prénatal" "pré-natal" nil 0)
+    ("própio" "próprio" nil 0)
+    ("pára" "para" nil 0)
+    ("pára-brisa" "parabrisa" nil 0)
+    ("pára-choque" "parachoque" nil 0)
+    ("pára-quedas" "paraquedas" nil 0)
+    ("pára-quedista" "paraquedista" nil 0)
+    ("pára-vento" "paravento" nil 0)
+    ("péla" "pela" nil 0)
+    ("péra" "pera" nil 0)
+    ("pêlo" "pelo" nil 0)
+    ("pêra" "pera" nil 0)
+    ("pólo" "polo" nil 0)
+    ("quinquenio" "quinquênio" nil 0)
+    ("quiz" "quis" nil 0)
+    ("qüinqüênio" "quinquênio" nil 0)
+    ("recizão" "rescisão" nil 0)
+    ("relêem" "releem" nil 0)
+    ("revêem" "reveem" nil 0)
+    ("sanque" "sangue" nil 0)
+    ("sao" "são" nil 0)
+    ("semi-aberto" "semiaberto" nil 0)
+    ("semi-automático" "semiautomático" nil 0)
+    ("semi-embriagado" "semiembriagado" nil 0)
+    ("semi-obscuridade" "semiobscuridade" nil 0)
+    ("semi-real" "semirreal" nil 0)
+    ("semi-sintético" "semissintético" nil 0)
+    ("semi-árido" "semiárido" nil 0)
+    ("sen" "sem" nil 0)
+    ("sensivel" "sensível" nil 0)
+    ("sequéncia" "sequencia" nil 0)
+    ("seqüência" "sequencia" nil 0)
+    ("significatimente" "significativamente" nil 0)
+    ("significativam" "significativa" nil 0)
+    ("sinceranete" "sinceramente" nil 0)
+    ("sovre" "sobre" nil 0)
+    ("supra-ocular" "supraocular" nil 0)
+    ("supra-renal" "suprarrenal" nil 0)
+    ("supra-sensível" "suprassensível" nil 0)
+    ("susseder" "suceder" nil 0)
+    ("tranqüilo" "tranquilo" nil 0)
+    ("tydo" "tudo" nil 0)
+    ("téxtil" "têxtil" nil 0)
+    ("ultra-elevado" "ultraelevado" nil 0)
+    ("ultra-romântico" "ultrarromântico" nil 0)
+    ("ultra-sonografia" "ultrassonografia" nil 0)
+    ("unico" "único" nil 0)
+    ("utilise" "utilize" nil 0)
+    ("vagber" "vagner" nil 0)
+    ("vega" "veja" nil 0)
+    ("viceprefeito" "vice-prefeito" nil 0)
+    ("vja" "veja" nil 0)
+    ("voc" "você" nil 0)
+    ("vêem" "veem" nil 0)
+    ("vôo" "voo" nil 0)
+    ("wue" "que" nil 0)
+    ("xave" "chave" nil 0)
+    ("ítens" "tuns" nil 0)
+   ))
+
+(define-abbrev-table 'gnus-article-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'gnus-article-mode-abbrev-table '())
+
+(define-abbrev-table 'gnus-group-mode-abbrev-table '())
+
+(define-abbrev-table 'gnus-sticky-article-mode-abbrev-table '())
+
+(define-abbrev-table 'google-contacts-mode-abbrev-table '())
+
+(define-abbrev-table 'grep-mode-abbrev-table '())
+
+(define-abbrev-table 'gud-mode-abbrev-table '())
+
+(define-abbrev-table 'helm-grep-mode-abbrev-table '())
+
+(define-abbrev-table 'helm-major-mode-abbrev-table '())
+
+(define-abbrev-table 'helm-occur-mode-abbrev-table '())
+
+(define-abbrev-table 'help-mode-abbrev-table '())
+
+(define-abbrev-table 'html-mode-abbrev-table '())
+
+(define-abbrev-table 'ibuffer-mode-abbrev-table '())
+
+(define-abbrev-table 'idl-mode-abbrev-table '())
+
+(define-abbrev-table 'image-dired-display-image-mode-abbrev-table '())
+
+(define-abbrev-table 'image-dired-thumbnail-mode-abbrev-table '())
+
+(define-abbrev-table 'inferior-julia-mode-abbrev-table '())
+
+(define-abbrev-table 'ivy-occur-grep-mode-abbrev-table '())
+
+(define-abbrev-table 'ivy-occur-mode-abbrev-table '())
+
+(define-abbrev-table 'jabber-console-mode-abbrev-table '())
+
+(define-abbrev-table 'java-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'julia-mode-abbrev-table '())
+
+(define-abbrev-table 'lisp-mode-abbrev-table '())
+
+(define-abbrev-table 'locate-mode-abbrev-table '())
+
+(define-abbrev-table 'log4e-mode-abbrev-table '())
+
+(define-abbrev-table 'markdown-mode-abbrev-table '())
+
+(define-abbrev-table 'markdown-view-mode-abbrev-table '())
+
+(define-abbrev-table 'memrise-mode-abbrev-table '())
+
+(define-abbrev-table 'memrise-session-mode-abbrev-table '())
+
+(define-abbrev-table 'message-mode-abbrev-table '())
+
+(define-abbrev-table 'messages-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'moccur-mode-abbrev-table '())
+
+(define-abbrev-table 'mu4e-compose-mode-abbrev-table '())
+
+(define-abbrev-table 'mu4e-org-mode-abbrev-table '())
+
+(define-abbrev-table 'mu4e~update-mail-mode-abbrev-table '())
+
+(define-abbrev-table 'objc-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'occur-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'occur-mode-abbrev-table '())
+
+(define-abbrev-table 'org-brain-visualize-mode-abbrev-table '())
+
+(define-abbrev-table 'org-drill-response-mode-abbrev-table '())
+
+(define-abbrev-table 'org-export-stack-mode-abbrev-table '())
+
+(define-abbrev-table 'org-journal-mode-abbrev-table '())
+
+(define-abbrev-table 'org-mode-abbrev-table '())
+
+(define-abbrev-table 'outline-mode-abbrev-table '())
+
+(define-abbrev-table 'package-menu-mode-abbrev-table '())
+
+(define-abbrev-table 'pike-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'plstore-mode-abbrev-table '())
+
+(define-abbrev-table 'poly-fallback-mode-abbrev-table '())
+
+(define-abbrev-table 'poly-head-tail-mode-abbrev-table '())
+
+(define-abbrev-table 'process-menu-mode-abbrev-table '())
+
+(define-abbrev-table 'prog-mode-abbrev-table '())
+
+(define-abbrev-table 'ranger-mode-abbrev-table '())
+
+(define-abbrev-table 'reb-lisp-mode-abbrev-table '())
+
+(define-abbrev-table 'reb-mode-abbrev-table '())
+
+(define-abbrev-table 'sbt-mode-abbrev-table '())
+
+(define-abbrev-table 'scala-mode-abbrev-table '())
+
+(define-abbrev-table 'select-tags-table-mode-abbrev-table '())
+
+(define-abbrev-table 'sgml-mode-abbrev-table '())
+
+(define-abbrev-table 'sh-mode-abbrev-table '())
+
+(define-abbrev-table 'shell-mode-abbrev-table '())
+
+(define-abbrev-table 'simple-mpc-mode-abbrev-table '())
+
+(define-abbrev-table 'sldb-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-compiler-notes-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-connection-list-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-fuzzy-completions-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-inspector-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-thread-control-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-trace-dialog--detail-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-trace-dialog-mode-abbrev-table '())
+
+(define-abbrev-table 'slime-xref-mode-abbrev-table '())
+
+(define-abbrev-table 'smime-mode-abbrev-table '())
+
+(define-abbrev-table 'snippet-mode-abbrev-table '())
+
+(define-abbrev-table 'special-mode-abbrev-table '())
+
+(define-abbrev-table 'speedbar-mode-abbrev-table '())
+
+(define-abbrev-table 'tabulated-list-mode-abbrev-table '())
+
+(define-abbrev-table 'tar-mode-abbrev-table '())
+
+(define-abbrev-table 'telega-chat-mode-abbrev-table '())
+
+(define-abbrev-table 'telega-root-mode-abbrev-table '())
+
+(define-abbrev-table 'telega-webpage-mode-abbrev-table '())
+
+(define-abbrev-table 'text-mode-abbrev-table '())
+
+(define-abbrev-table 'text-translator-window-mode-abbrev-table '())
+
+(define-abbrev-table 'url-cookie-mode-abbrev-table '())
+
+(define-abbrev-table 'use-package-statistics-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-log-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-log-view-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-region-history-mode-abbrev-table '())
+
+(define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'youtube-dl-list-mode-abbrev-table '())
+

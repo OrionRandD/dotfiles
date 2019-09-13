@@ -1,0 +1,399 @@
+alias
+rm testdude
+clear
+(eshell/alias "ls" "ls -F $1")
+alias
+clear
+clear
+unalias ls
+alias
+(eshell/unalias "ls" "ls -F $1")
+clear
+cd /tmp
+rm test
+tm testdude
+rm testgp
+clear
+(eshell/alias "ls" "ls --color $1")
+cd
+alias
+(eshell/alias "ls" "ls -F color auto $1")
+alias
+(eshell/alias "ls" "ls --color=auto $1")
+cd /tmp
+alias
+ls ~ 
+alias
+cd ~/.emacs.d/eshell
+less alias
+vim alias
+cd org\~/
+touch work.org studies.org home.org
+clear
+clear
+clear
+touch
+touch test
+rm test
+clear
+rm test
+clear
+clear
+cd
+sudo
+sudo
+sudo su
+sudo pip install python3-pypandoc
+sudo apt install python3-opencv
+npm install -g sass
+sudo npm install -g sass
+cd Downloads/
+~/Download
+clear
+cd
+cd org\~/
+hugo new site blog
+cd blog
+git init
+cd themes/
+gitc https://github.com/budparr/gohugo-theme-ananke.git ananke
+git clone  https://github.com/budparr/gohugo-theme-ananke.git ananke
+cd ..
+  echo 'theme = "ananke"' >> config.toml 
+hugo new posts/my-first-post.org
+cd posts
+la
+ls a
+ls -a
+cd ..
+cd -
+cd content/
+cd posts/
+mv my-first-post.org posts.org
+mv posts.org my-post.org
+less my-post.org 
+clear
+cd /tmp
+vagner_lea-pet.sh
+vagner_lea-pet.sh 
+cd /tmp
+scp -P2401 -r _.emacs_cyber vagner@dinosaur.local:/tmp
+clear
+cd /tmp
+clear
+ls color_themess 
+scp -P2401 -r color_themess vagner@dinosaur.local:/tmp
+clear
+cd /tmp
+babel-Ts09rb
+cd ..
+ls bite
+ls *bi*
+whoami
+cd /tmp
+ls bite_comp 
+scp -P2401 -r bite_comp vagner@dinosaur.local:/tmp
+scp -P2401 -r speed_dirs   vagner@dinosaur.local:/tmp
+cd /tmp
+youtube-dl https://www.youtube.com/watch?v=aD_Jn60npgM
+r
+clear
+cclive  https://www.youtube.com/watch?v=aD_Jn60npgM  
+clear
+clear
+cclive https://www.youtube.com/watch?v=aD_Jn60npgM
+clear
+which youtube-dl 
+youtube-dl -c https://www.youtube.com/watch?v=aD_Jn60npgM
+jump orion
+cd orion
+cd OrionRandD/
+clear
+sudo ./dot_files.sh 
+clear
+cd /tmp
+cd anki_flashcards/
+cd youtube_viewer/
+cd /tmp
+youtube-dl https://www.invidio.us/watch?v=wlR5gYd6um0
+clear  
+clear
+ls /tmp
+cd /tmp
+lp w3m_keys 
+cd
+cd anki_flashcards/
+cd 
+cd /tmp
+scp -P2401 -r w3m_keys vagner@dinosaur.local:/tmp
+jump anki
+cd
+cd anki_flashcards/
+cd printer_cli/
+less printer_cli_hto.md 
+which pinentry
+which gpg2
+pinentry start
+cp .bbdb  .bbdb_bak
+cd
+cp .bbdb_bak .bbdb 
+t
+jump orion
+cd
+cd orion
+cd OrionRandD
+sudo ./dotfiles.sh
+clear
+sudo ./dot_files.sh
+cd /home/vagner/.emacs.d/elpa
+cd slime-20190627.1608
+clear
+cd ~/.stumpwm.d
+less init.lisp 
+clear
+which grsync
+ip a 
+cd
+cd
+clear
+cd
+mbsync gmail
+mbsync gmail
+sudo system-config-printer
+cd /tmp
+ls larp.org.gpg
+lp larp.org.gpg
+sudo systemctl restart cups
+[sudo] password for vagner: 
+system-config-printer
+cd /tmp
+less ipp.el
+cd ~vagner
+cd .emacs.d/elpa
+mkd ipp_printer
+mkdir ipp_printer
+cd ipp_printer
+mv /tmp/ipp.el .emacs.d/elpa
+ls /tmp 
+ls *ipp*
+ls /tmp
+cd /tmp
+ls *ipp*
+ll ipp.el
+ls -l ipp.el
+prw-r--r-- 1 vagner vagner     0 jul  3 08:03 mpd.fifo
+cp ipp.el /home/vagner/.emacs.d/elpa/ipp_printer/
+cd /home/vagner/.emacs.d/elpa/ipp_printer/
+lpinfo
+which lpinfo
+sudo lpstat -s
+lpstat -t 
+cd /home/va 
+whoami
+sudo 
+sudo -s
+cd
+cd bin
+ls *.pdf
+cp emacs_huge_cheat_sheet.pdf /tmp
+cd /tmp
+cd ~vagner/bin 
+ls *.pdf 
+cp orgMode_card.pdf /tmp 
+which espeak 
+cd /tmp
+wget -c https://github.com/DebianDog/DevuanDog/releases/download/v1.0/DevuanDog-2019-03-29_64-bit.iso 
+find -iname "*.iso"
+cd 
+cd Downloads 
+ls *.iso  
+cd 
+find . -iname "*.iso*" 
+find . -iname "*DevuanDog*" 
+cd ~vagner
+cd OrionRandD 
+sudo ./dot_files.sh 
+mkdir Sermons_2019_July_on
+ls
+dict behoove 
+ll 
+ls -l 
+trans en:pt trance 
+trans en:pt gird 
+dict cingir
+trans en:pt wool 
+trans el:en ῥομφαία 
+cd OrionRandD/
+ls
+sudo ./dot_files.sh 
+ls
+cd /home/vagner/Downloads 
+cd livros
+cd livros-de-humanas/
+pwd 
+pwd 
+~/Music/songs/gospel_internacional/kim_walker
+ls
+cd ../Video 
+ls
+cd ~vagner
+ls
+cd Videos
+ls
+cd songs
+ls
+cd ellel_video_songs
+ls
+pwd
+emacs -Q /tmp/test/test.org -eval '(describe-key (kbd "C-c ."))'
+qbible
+clear 
+qbible 
+alias |grep quickblibe 
+clear 
+cd bin 
+cd quickblibe
+cd qbible
+ls
+cd qbible 
+ls *qb* 
+ls
+pwd  
+cd qbible
+ls
+ls|less 
+cd bin/quickbible 
+ls
+cat qb_app.md
+cd
+qbible
+ping 8.8.8.8
+pwd
+'#email_neide.org#'   email_neide.org~   email_neide.tex  'proposta at 2019-08-23 13-53-29.png'
+ls
+mv 'proposta at 2019-08-23 13-53-29.png' proposta-at-2019-08-23_13-53-29.png
+ls
+sudo 
+clear
+sudo su 
+diatheke -b PorAR -f plain -k eph 4:11
+(PorAR)
+diatheke -b PorAR -f plain eph 4:11,12
+diatheke -b PorAR -f plain -k eph 4:11,12
+certezaEphesians 4:12: para o aperfeiçoamento dos santos, para a obra do ministério, para edificação do corpo de Cristo;
+cd ~vagner/Downloads/livros-de-humanas
+ls *Read*
+exist 
+ln -s /home/vagner/Music/reading_now/Readme.org  /home/vagner/Downloads/livros-de-humanas/
+file /home/vagner/Downloads/livros-de-humanas/Readme.org 
+ls
+clear
+ls
+cd
+bookm -s xah 
+quit
+qbible
+which qbible 
+cd bin
+cd qbible
+cd quickbible/
+ls
+clear
+qb "melhor in na casa"|grep Prov
+qb "melhor ir  na casa"|grep Prov
+qb "better to go to the house"
+ls
+clear
+ls
+which stumpwm 
+mv /home/vagner/quicklisp/ /home/vagner/quicklisp_old
+ls /home/vagner/quicklisp_old/
+ls
+which stumpwm
+apt purge stumpwm
+apt purge stumpwm 
+sudo apt purge stumpwm
+gitc https://github.com/stumpwm/stumpwm.git 
+git clone https://github.com/stumpwm/stumpwm.git 
+ls
+mv quicklisp.lisp Readme.org stumpwm/
+cd stumpwm/
+ls
+sbcl --load quicklisp.lisp 
+cp -r /home/vagner/quicklisp_old/local-projects/cl-base16/ /home/vagner/quicklisp/local-projects/
+cd /home/vagner/quicklisp/local-projects/cl-base16/
+ls
+cd - 
+autoconf 
+./configure 
+make 
+cd /tmp
+jump stw 
+ls
+cd
+cd .stumpwm.d/
+ls
+cd contrib/util/stumptray/ls
+cd contrib 
+ls
+cd util 
+ls
+cd stumptray
+ls
+sbcl 
+ls
+ll
+ls -l 
+ls
+cd ..
+ls
+cd ..
+ls
+less update-readme.sh
+ls
+clear
+ls
+ls util
+cd stumptray
+cd stumptray 
+ld
+ls
+cd util
+ls
+cd stumptray
+ls
+cd
+sbcl
+ls 
+cd /usr/lib/fwupd
+ls 
+ls efi 
+ls
+less fwupdate 
+ls
+clear
+ls
+exit 
+sudo apt install p7zip-full 
+sudo apt install cabextract 
+cd /tmp
+ls 
+7zr e windows.exe
+ls
+7zr e windows.exe
+du windows.exe
+mkdir backups autosave undo
+ls
+ls history
+cd /home/vagner/Downloads/
+ls
+convertall                    houaiss                       pidgin_plugins                      vim-orgmode-0.6.0.tar.gz
+exit
+ls
+mv githu github_projects
+cd github_projects
+ls
+ls -a 
+ls
+mv githu cyberwarrior/emacs.org
+exit

@@ -1,0 +1,95 @@
+text-translator は、インターネット上に存在するテキスト翻訳サービスを利用
+して Emacs 上で文字列の翻訳を行う elisp パッケージです。
+
+* インストール
+
+以下の elisp ファイルをロードパスの通った場所に置く。
+
+ - text-translator.el
+ - text-translator-vars.el
+ - text-translator-sites.el
+ - text-translator-window.el
+ - text-translator-site-excite-cojp.el
+ - text-translator-site-freetranslation-com.el
+ - text-translator-site-fresheye-com.el
+ - text-translator-site-google-com.el
+ - text-translator-site-livedoor-com.el
+ - text-translator-site-lou5-jp.el
+ - text-translator-site-tatoeba-org.el
+ - text-translator-site-traduku-net.el
+ - text-translator-site-yahoo-cojp.el
+ - text-translator-site-yahoo-com.el
+
+Makefile も使えます。
+
+ $ make
+ $ make install
+
+popup.el と pos-tip.el サポートを使うなら、以下のコマンドが使えます。
+
+ $ make install-ext
+
+** autoload を使う
+
+(require 'text-translator-load)
+
+** require を使う
+
+;;;; autoload ではなく、require を使う場合
+(require 'text-translator)
+
+** グローバルキーを設定する
+
+;; グローバルキーの設定例
+(global-set-key "\C-x\M-t" 'text-translator)
+(global-set-key "\C-x\M-T" 'text-translator-all)
+
+\C-x\M-t で選択した文字列を選択した言語で翻訳できます。
+\C-x\M-T で選択した文字列を選択した言語で翻訳可能な全てのエンジンを使って
+翻訳できます。
+
+** プロキシを使用する
+
+url library の設定を見るので、基本的には設定不要です。
+
+;; ;; プロキシを使用する場合の設定例
+;; ;; 環境変数 HTTP_PROXY を設定してある場合は、設定不要。
+;; (setq text-translator-proxy-server "proxy.hogehoge.com")
+;; (setq text-translator-proxy-port   8080)
+
+** HTTP リクエストのタイムアウト設定
+
+url-queue-timeout に設定します。デフォルトは5秒です。
+
+;; (setq url-queue-timeout 10)
+
+** 自動選択を使用する(日本語/英語のみ)
+
+;; 自動選択に使用する関数を設定
+(setq text-translator-auto-selection-func
+      'text-translator-translate-by-auto-selection-enja)
+;; グローバルキーを設定
+(global-set-key "\C-xt" 'text-translator-translate-by-auto-selection)
+
+* 翻訳サイト
+
+- google.com
+- freetranslation.com
+- livedoor.com
+- fresheye.com
+- excite.co.jp
+- yahoo.co.jp (現在利用不能)
+- lou5.jp
+- traduku.net
+
+* 謝辞
+
+この text-translator.el を作成するにあたり、ブログのコメントやメールで多
+数のアドバイスを頂きました。ありがとうございます。
+
+# README.ja ends here
+
+# Local Variables:
+# mode: outline
+# mode: auto-fill
+# End:

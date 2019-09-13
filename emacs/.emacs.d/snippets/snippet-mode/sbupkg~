@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: src-block-use-package
+# key: <sbupkg
+# --
+#+begin_src emacs-lisp
+  (use-package $pkg-name
+   :ensure t
+   :config  )
+#+end_src
