@@ -28,3 +28,8 @@ https://www.w3docs.com/snippets/git/how-to-generate-ssh-key-for-git.html
 and change the access to ssh:
 https://help.github.com/em/articles/changing-a-remotes-url
 
+Workflow
+1. git add
+2. git commit -m "any message"
+3. git status
+4. git push
