@@ -19,13 +19,13 @@
 
 " Vim minimal setup {
 " How to use this basic config:
-" (g)vim -u /home/vagner/.vimrc_vanilla
+" (g)vim -u ~/.vimrc_vanilla
 " You can make an alias to that and put in your
 " $HOME/.bashrc
-" alias vimmin="vim -u /home/vagner/.vimrc_vanilla"
-" alias gvimmin="vim -u /home/vagner/.vimrc_vanilla"
-" alias svimmin="sudo vim -u /home/vagner/.vimrc_vanilla"
-" alias sgvimmin="sudo vim -u /home/vagner/.vimrc_vanilla"
+" alias vimmin="vim -u ~/.vimrc_vanilla"
+" alias gvimmin="vim -u ~/.vimrc_vanilla"
+" alias svimmin="sudo vim -u ~/.vimrc_vanilla"
+" alias sgvimmin="sudo vim -u ~/.vimrc_vanilla"
 
 " For loading naked vim vanilla you can do:
 " vim -u NONE
@@ -259,7 +259,7 @@ set thesaurus+=$HOME/thesaurus/brazilian-synonyms.txt
 "
 "" Plugins {
 "
-"" for all configuration using ".vimrc" with PlugInstall, see: "/home/vagner/OrionRandD/vim-files_mine/_.vimrc" - note that thera are hidden files there
+"" for all configuration using ".vimrc" with PlugInstall, see: "~/OrionRandD/vim-files_mine/_.vimrc" - note that thera are hidden files there
 "
 "" Plugins will be downloaded under the specified directory.
 "
