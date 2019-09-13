@@ -3,7 +3,7 @@ How to manage your dotfiles on github
 
 1. Go to your github account and create a "dotfiles" repository and initialize it with a Readme.md
 2. Clone it to your $HOME
-3. Intall gnu stow
+3. Install gnu stow
 4. cd ~/dotfiles
 5. Test it with:
 6. echo "This is a dotfile." > mydotfile
