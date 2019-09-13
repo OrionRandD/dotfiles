@@ -1,9 +1,9 @@
 ;;; -*- coding: utf-8 -*-
-(("/home/vagner/.dotfiles/vimmin/.vimrc_minimal" . 7266)
- ("/home/vagner/.dotfiles/bash/.bashrc_bak" . 32026)
- ("/home/vagner/.emacs.d/recentf" . 1711)
- ("/home/vagner/org~/studies.org" . 2)
+(("/home/vagner/org~/studies.org" . 2)
  ("/home/vagner/org~/home.org" . 2)
+ ("/home/vagner/.emacs.d/recentf" . 1711)
+ ("/home/vagner/.dotfiles/vimmin/.vimrc_minimal" . 7266)
+ ("/home/vagner/.dotfiles/bash/.bashrc_bak" . 32026)
  ("/tmp/"
   (dired-filename . "/tmp/bash-fc.NjwX4k"))
  ("/home/vagner/.emacs.d/emacs.org" . 133380)
