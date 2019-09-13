@@ -1,6 +1,6 @@
 # My Gitignore
 
-#  Emacs tmp files & Misc
+# Emacs tmp files & Misc
 # Backup or temporary files #
 # Build results
 # Compiled source #
@@ -15,6 +15,12 @@
 # git has its own built in compression methods
 # it's better to unpack these files and commit the raw source
 ## Eclipse
+##################
+
+# https://help.github.com/en/articles/ignoring-files
+# https://stackoverflow.com/questions/10744305/how-to-create-a-gitignore-file/44329001#44329001
+
+##################
 
 *#
 # *.
@@ -169,3 +175,4 @@ undo/
 url/
 var/
 x64/
+
