@@ -1,0 +1,171 @@
+# My Gitignore
+
+#  Emacs tmp files & Misc
+# Backup or temporary files #
+# Build results
+# Compiled source #
+# Emacs packages
+# Git has its own built in compression methods.
+# Gitignore file
+# Logs and databases #
+# OS generated files #
+# Output Folders #
+# Packages #
+# Remove backup files
+# git has its own built in compression methods
+# it's better to unpack these files and commit the raw source
+## Eclipse
+
+*#
+# *.
+*.7z
+*.bak
+*.class
+*.com
+*.dll
+*.dmg
+*.elc
+*.exe
+*.gz
+*.iso
+*.jar
+*.last
+*.log
+*.o
+*.pyc
+*.pydevproject
+*.pyo
+*.rar
+*.rel
+*.so
+*.sql
+*.sqlite
+*.swo
+*.swp
+*.tar
+*.tmp
+*.zip
+*_archive
+*_flymake.*
+*~
+*~.nib
+.#*
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+.\#*
+._*
+.cask/
+.classpath
+.gradle
+.loadpath
+.metadata
+.org-id-locations
+.project
+.settings/
+.trashes
+/.DS_Store
+/.emacs.desktop
+/.emacs.desktop.lock
+/.mc-lists.el
+/.python-environments/
+/.watsonresults
+/ac-comphist.dat
+/auto-save-list
+/auto/
+/bookmarks
+/eshell/history
+/eshell/lastdir
+/games/
+/ido.last
+/newsticker/feeds/
+/places
+/private.el
+/projectile-bookmarks.eld
+/projectile.cache
+/snippets/
+/tramp
+/url/cookies
+README.md
+Readme.org
+Thumbs.db
+[Bb]in/
+[Dd]ebug/
+[Oo]bj/
+[Rr]elease/
+\#*\#
+_.emacs_vagner_Cyberwarrior
+_.emacs_vanilla
+_.emacs_vanilla~
+abbrev_defs
+abbrev_defs_bak
+ac-comphist.dat
+asound.state
+auto-install/
+auto-save-list
+auto-save-list/
+autosave/
+backups/
+bbdb
+bbdb-vcard/
+bin/
+bookmarks
+build/
+diary
+dtk-preserve/
+ehthumbs.db
+el-get/
+elpa/
+emacs-dot-files/
+emacs.org_archive
+emacs.service
+emacs_bak.el
+emacs_bak.org
+emacs_bugged_packages.org
+emacs_config-framagit/
+emacs_config-zamansky/
+emacs_debugged.org
+emacs_sysd_init-daemons/
+emms/
+eshell/
+evil-tab_noGui.md
+eww-bookmarks
+games/
+history
+ido.last
+ido.last~
+image-dired/
+irony/
+jabber-avatar-cache/
+jabber-history/
+jabber-otr/
+local.properties
+logos_emacs/
+network-security.data
+obj/
+org-article/
+out/
+persist/
+persistent/
+places
+preceding-sexp_fix/
+projectile-bookmarks.eld
+quelpa/
+recentf
+recentf~
+request/
+rs_emacs.sh*
+smex-items
+snippets/
+srecode-map.el
+target/
+text-translator/
+thumbs/
+tmp/
+tramp
+transient/
+undo/
+url/
+var/
+x64/
