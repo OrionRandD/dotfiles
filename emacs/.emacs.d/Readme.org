@@ -1,9 +1,0 @@
- 
- Note: Do not make symbolic links to other users for emacs. Just copy
- ".emacs" and ".emacs.d" to their $HOME. Like so:
-
-sudo cp ~vagner/.emacs* ~lea/
-sudo chown -R lea.lea ~lea/.emacs*
-
-:)
-

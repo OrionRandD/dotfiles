@@ -1,1 +1,0 @@
-((el-get) (memrise :fetcher github :repo "SavchenkoValeriy/memrise.el") (quelpa :url "https://framagit.org/steckerhalter/quelpa.git" :fetcher git) (sauron-circe :repo "seblemaguer/sauron-circe" :fetcher github) (telega :fetcher github :repo "zevlg/telega.el" :branch "master" :files (:defaults "README.md" "etc" "server" "Makefile" "test.el")))

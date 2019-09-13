@@ -1,3 +1,0 @@
-alias ls ls --color=auto $1
-alias rm rm -i $1
-alias ff find-file $1

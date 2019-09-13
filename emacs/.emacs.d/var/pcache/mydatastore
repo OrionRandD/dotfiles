@@ -1,8 +1,0 @@
-;; Object mydatastore
-;; EIEIO PERSISTENT OBJECT
-(pcache-repository "mydatastore"
-  :file "mydatastore"
-  :object-name "mydatastore"
-  :version "26.1/0.4"
-  :entries #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data (hundred (pcache-entry "pcache-entry" :timestamp 1568397842.7713957 :ttl 7776000 :value 100)))
-  :timestamp 1568405019.5559406)

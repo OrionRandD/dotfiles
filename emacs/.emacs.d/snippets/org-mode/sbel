@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: source-block_elisp
-# key: <sbel
-# --
-#+begin_src emacs-lisp
-$1
-#+end_src
-$0
-\FloatBarrier

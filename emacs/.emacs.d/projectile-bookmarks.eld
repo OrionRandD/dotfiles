@@ -1,1 +1,0 @@
-("~/.emacs.d/" "~/.stumpwm.d/" "~/bin/" "~/.spf13-vim-3/")
