@@ -192,7 +192,7 @@ export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"                  # $EDITOR should open in terminal
 export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI with non-daemon as alternate
 
-[ -s "/home/vagner/.dnx/dnvm/dnvm.sh" ] && . "/home/vagner/.dnx/dnvm/dnvm.sh" # Load dnvm
+[ -s "~/.dnx/dnvm/dnvm.sh" ] && . "~/.dnx/dnvm/dnvm.sh" # Load dnvm
 
 #####################################################
 
@@ -283,7 +283,7 @@ set editing-mode vi
 
 #####################################################
 
-# PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/vagner/bin/"
+# PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:~/bin/"
 
     alias g="grep --color=always"
     alias gi="grep -i --color=always"
@@ -711,7 +711,7 @@ alias chat="weechat"
 #alias audio="ncpamixer"
 alias audio="alsamixer"
 alias calender="calcurse"
-alias qbible='cd /home/vagner/bin/quickbible'
+alias qbible='cd ~/bin/quickbible'
 
 # System Maintainence
 #alias atltime="sudo timedatectl set-timezone America/New_York && i3 restart" # Eastcoast time
@@ -728,10 +728,10 @@ alias vimva="vim -u NONE"
 alias gvimva="vim -u NONE"
 alias svimva="sudo vim -u NONE"
 alias sgvimva="sudo vim -u NONE"
-alias vimmin="vim -u /home/vagner/.vimrc_minimal"
-alias gvimmin="vim -u /home/vagner/.vimrc_minimal"
-alias svimmin="sudo vim -u /home/vagner/.vimrc_minimal"
-alias sgvimmin="sudo vim -u /home/vagner/.vimrc_minimal"
+alias vimmin="vim -u ~/.vimrc_minimal"
+alias gvimmin="vim -u ~/.vimrc_minimal"
+alias svimmin="sudo vim -u ~/.vimrc_minimal"
+alias sgvimmin="sudo vim -u ~/.vimrc_minimal"
 
 # vim-everywhere --> win(Super)-v keybinding in stumpwm
 # vim-everywhere --> Ctrl-Alt-v keybinding in stumpwm
@@ -904,7 +904,7 @@ source /etc/bash_completion.d/climate_completion
 alias gg='https://google.com'
 
 alias songs='mpc playlist |cat -n |less'
-source /home/vagner/.vim/bundle/gruvbox/gruvbox_256palette.sh
+source ~/.vim/bundle/gruvbox/gruvbox_256palette.sh
 eval 
             function fixComm () {
                 TF_PYTHONIOENCODING=$PYTHONIOENCODING;
@@ -945,4 +945,3 @@ quvi-stream() {
 ctrl2esc.sh
 
 #####################################################
-
