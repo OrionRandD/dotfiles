@@ -177,7 +177,7 @@ var/
 x64/
 .emacs.desktop
 .emacs.desktop.lock 
-.last-packages-update-day
+.last-package-update-day
 .mc-lists.el
 .tutor
 
