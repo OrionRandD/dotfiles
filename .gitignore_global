@@ -175,4 +175,9 @@ undo/
 url/
 var/
 x64/
+.emacs.desktop
+.emacs.desktop.lock 
+.last-packages-update-day
+.mc-lists.el
+.tutor
 
