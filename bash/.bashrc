@@ -250,6 +250,8 @@ alias rsync='rsync -v'
 alias ls='ls -hNF --color=auto --group-directories-first'
 alias ll='ls -lhF --color=auto --group-directories-first'
 alias la='ls -aF --color=auto --group-directories-first'
+alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
+alias lsda="ls -alF ${colorflag} | grep --color=never '^d'"
 alias sl='ls -F --color=auto --group-directories-first'
 
 alias su='su -'
@@ -740,15 +742,27 @@ alias r="ranger"
 alias sranger="sudo ranger"
 alias ka="killall"
 #alias g="git"
-alias gitup="git push origin master"
+alias gi="git init"
+alias gra="git remote add"
+alias gs="git status"
+alias gipom="git push origin master"
 alias gitpass="git config --global credential.helper cache"
 alias tr="transmission-remote"
 alias mkd="mkdir -pv"
+alias nr="npm run"
+alias ni="nmp install"
+alias nid="nmp install -D"
 alias refb="source ~/.bashrc"
 # alias ref="shortcuts.sh && source ~/.bashrc" # Refresh shortcuts manually and reload bashrc
 alias bars="bash ~/.config/polybar/launch.sh" # Run Polybar relaunch script
 #alias bw="wal -i ~/.config/wall.png" # Rerun pywal
 weather() { curl wttr.in/$1 ; } # Check the weather (give city or leave blank).
+
+# functions
+# create a folder and enter into it
+function mkcd () {
+    mkdir -pv "$@" && cd "$_";
+}
 
 # Adding color
 alias ls='ls -hNF --color=auto --group-directories-first'
