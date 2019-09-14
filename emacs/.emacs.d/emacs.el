@@ -1,32 +1,32 @@
-;; [[file:~/.emacs.d/emacs.org::*Emacspeak][Emacspeak:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Emacspeak][Emacspeak:1]]
 
 ;; Emacspeak:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Bind%20M-(Alt)-x%20to%20"C-x%20C-m"][Bind M-(Alt)-x to "C-x C-m":1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Bind%20M-(Alt)-x%20to%20"C-x%20C-m"][Bind M-(Alt)-x to "C-x C-m":1]]
 ;; Bind M-(Alt)-x to "C-x C-m" 
 
 ;; (global-set-key "\C-x\C-m" 'execute-extended-command) (global-set-key "\C-c\C-m" 'execute-extended-command)
 ;; Bind M-(Alt)-x to "C-x C-m":1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Package][Package:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Package][Package:1]]
 ;;(require 'package)
 ;;(package-initialize)
 ;; Package:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Use-package][Use-package:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Use-package][Use-package:1]]
 (use-package use-package-ensure-system-package :ensure t)
 ;; (setq use-package-always-ensure t)
 ;; Use-package:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Speed%20up%20Emacs][Speed up Emacs:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Speed%20up%20Emacs][Speed up Emacs:1]]
 (setq gc-cons-threshold (* 100 1024 1024))
 ;; Speed up Emacs:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Buffer][Buffer:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Buffer][Buffer:1]]
 (setq frame-title-format (list (format "%s %%S: %%j " (system-name)) '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 ;; Buffer:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Auto-complete%20-%20global][Auto-complete - global:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Auto-complete%20-%20global][Auto-complete - global:1]]
 ;;(require 'auto-complete)
 ;;(global-auto-complete-mode t) 
   (ac-config-default)
@@ -40,7 +40,7 @@
     (ac-flyspell-workaround))
 ;; Auto-complete - global:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Company-mode][Company-mode:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Company-mode][Company-mode:1]]
 ;;   (require 'company)
 
 ;;   (add-hook 'after-init-hook 'global-company-mode)
@@ -135,18 +135,18 @@
 ;;       (add-to-list 'company-backends 'company-irony))
 ;; Company-mode:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-mode][Org-mode:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-mode][Org-mode:1]]
 (require 'org)
 (require 'org-ac)
 (require 'org-tempo)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 ;; Org-mode:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*TAB%20completion%20on%20emacs%20console][TAB completion on emacs console:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*TAB%20completion%20on%20emacs%20console][TAB completion on emacs console:1]]
 (setq evil-want-C-i-jump nil)
 ;; TAB completion on emacs console:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Evil%20collection][Evil collection:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Evil%20collection][Evil collection:1]]
 ;; (use-package evil-collection
 ;;  :after evil
 ;;  :config
@@ -158,7 +158,7 @@
        :init (evil-collection-init))
 ;; Evil collection:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Evil%20mode][Evil mode:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Evil%20mode][Evil mode:1]]
 ;; for using TAB with emacs -nw in terminal 
   ;; you have to load it before calling evil-mode
 
@@ -249,7 +249,7 @@
      ;;     	    (evil-insert 1)))
 ;; Evil mode:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Eyebrowse][Eyebrowse:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Eyebrowse][Eyebrowse:1]]
 (use-package eyebrowse 
   :ensure t
   :config 
@@ -258,14 +258,14 @@
     (add-to-list 'window-persistent-parameters '(window-slot . writable)))
 ;; Eyebrowse:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Yasnippets][Yasnippets:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Yasnippets][Yasnippets:1]]
 ;; yasnippet code 'optional', before auto-complete
 
 (require 'yasnippet)
 (yas-global-mode 1)
 ;; Yasnippets:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Counsel%20Ivy%20and%20Swiper][Counsel Ivy and Swiper:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Counsel%20Ivy%20and%20Swiper][Counsel Ivy and Swiper:1]]
 (use-package counsel
  :ensure t
  :bind
@@ -299,7 +299,7 @@
   ))
 ;; Counsel Ivy and Swiper:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*El-get][El-get:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*El-get][El-get:1]]
 (add-to-list 'load-path "/home/vagner/.emacs.d/el-get/el-get")
    (require 'el-get)
 
@@ -307,13 +307,13 @@
 ;; (add-to-list 'el-get-recipe-path "~/.emacs.d/elpa/el-get-20181006.225/recipes")
 ;; El-get:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Auto-package-update][Auto-package-update:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Auto-package-update][Auto-package-update:1]]
 ;; (require 'auto-package-update)  
 ;; (setq auto-package-update-prompt-before-update t)
 ;; (setq auto-package-update-delete-old-versions t)
 ;; Auto-package-update:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Abbreviations][Abbreviations:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Abbreviations][Abbreviations:1]]
 (setq-default abbrev-mode t)
      (read-abbrev-file "~/.emacs.d/abbrev_defs")
      (setq save-abbrevs t)
@@ -363,7 +363,7 @@ file with `edit-abbrevs`"
       (user-error "No typo at or before point"))))
 ;; Abbreviations:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*All-the-icons][All-the-icons:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*All-the-icons][All-the-icons:1]]
 (use-package all-the-icons
  :ensure t)
 
@@ -389,12 +389,12 @@ file with `edit-abbrevs`"
 (add-hook 'org-brain-after-resource-button-functions #'org-brain-insert-resource-icon)
 ;; All-the-icons:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Bug-hunter][Bug-hunter:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Bug-hunter][Bug-hunter:1]]
 (use-package bug-hunter
  :ensure t)
 ;; Bug-hunter:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Eshell][Eshell:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Eshell][Eshell:1]]
 (use-package eshell
   :commands eshell
   :init
@@ -429,7 +429,7 @@ file with `edit-abbrevs`"
               (eshell/export "NODE_NO_READLINE=1"))))
 ;; Eshell:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Helm][Helm:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Helm][Helm:1]]
 ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa/helm-3.0/")
   ;; (require 'helm-config)
 
@@ -449,20 +449,20 @@ file with `edit-abbrevs`"
 ;;(global-set-key (kbd "C-x C-f") 'helm-find-files)
 ;; Helm:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Helm-org-rifle][Helm-org-rifle:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Helm-org-rifle][Helm-org-rifle:1]]
 (defun helm-org-rifle-brain ()
 "Rifle files in `org-brain-path'."
 (interactive)
 (helm-org-rifle-directories (list org-brain-path)))
 ;; Helm-org-rifle:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Beacon][Beacon:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Beacon][Beacon:1]]
 (use-package beacon
  :config
  (beacon-mode 1))
 ;; Beacon:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Bidi%20-%20bidirectional%20text][Bidi - bidirectional text:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Bidi%20-%20bidirectional%20text][Bidi - bidirectional text:1]]
 (setq-default bidi-display-reordering nil)
 
  (defun bidi-reordering-toggle ()
@@ -490,7 +490,7 @@ file with `edit-abbrevs`"
  (message "%s" bidi-paragraph-direction))
 ;; Bidi - bidirectional text:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Byte-compiling][Byte-compiling:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Byte-compiling][Byte-compiling:1]]
 (setq byte-compile-warnings '(not nresolved
 				 free-vars
 				 callargs
@@ -502,14 +502,14 @@ file with `edit-abbrevs`"
 				 ))
 ;; Byte-compiling:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Bullets][Bullets:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Bullets][Bullets:1]]
 (use-package org-bullets
  :ensure t
  :config
    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 ;; Bullets:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Auctex][Auctex:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Auctex][Auctex:1]]
 (setq TeX-parse-self t); Enable parse on load.
   (setq TeX-auto-save t); Enable parse on save.
   (setq-default TeX-master nil)
@@ -645,7 +645,7 @@ file with `edit-abbrevs`"
 	  ("restartlist" "{")))
 ;; Auctex:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Auto-install][Auto-install:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Auto-install][Auto-install:1]]
 ;; If you have no internet access and emacs refuses to load properly - with "evil-mode" on,
 ;; comment the lines bellow 
 
@@ -654,7 +654,7 @@ file with `edit-abbrevs`"
 ;; (auto-install-compatibility-setup)
 ;; Auto-install:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*_.emacs%20(init.el)][_.emacs (init.el):1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*_.emacs%20(init.el)][_.emacs (init.el):1]]
 (defun find-user-init-file ()
   "Edit the `user-init-file', in another window."
   (interactive)
@@ -664,23 +664,23 @@ file with `edit-abbrevs`"
 (global-set-key (kbd "C-c I") 'find-user-init-file)
 ;; _.emacs (init.el):1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Avy%20navegation][Avy navegation:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Avy%20navegation][Avy navegation:1]]
 (use-package avy
   :ensure t
   :config
   (avy-setup-default))
 ;; Avy navegation:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Agressive%20indent%20mode][Agressive indent mode:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Agressive%20indent%20mode][Agressive indent mode:1]]
 (global-aggressive-indent-mode 1)
 ;; Agressive indent mode:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Atomic%20chrome][Atomic chrome:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Atomic%20chrome][Atomic chrome:1]]
 ;;  (require 'atomic-chrome)
 ;;  (atomic-chrome-start-server)
 ;; Atomic chrome:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Babel%20languages][Babel languages:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Babel%20languages][Babel languages:1]]
 ;; active Babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -712,15 +712,15 @@ file with `edit-abbrevs`"
  ))
 ;; Babel languages:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Bind-chord][Bind-chord:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Bind-chord][Bind-chord:1]]
 ;;  (require 'bind-chord)
 ;; Bind-chord:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Brazilian-holidays][Brazilian-holidays:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Brazilian-holidays][Brazilian-holidays:1]]
 (load "~/.emacs.d/elpa/emacs-brazilian-holidays/brazilian-holidays.el")
 ;; Brazilian-holidays:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Cedilha%20in%20emacs%20and%20xemacs][Cedilha in emacs and xemacs:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Cedilha%20in%20emacs%20and%20xemacs][Cedilha in emacs and xemacs:1]]
 (set-input-method "portuguese-prefix")
 
 (defadvice switch-to-buffer (after activate-input-method activate)
@@ -730,7 +730,7 @@ file with `edit-abbrevs`"
   (lambda () (set-input-method "portuguese-prefix")))
 ;; Cedilha in emacs and xemacs:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*C++][C++:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*C++][C++:1]]
 ;; (use-package ggtags
 ;; :ensure t 
 ;; :config 
@@ -741,7 +741,7 @@ file with `edit-abbrevs`"
 ;; )
 ;; C++:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Compay-emoji][Compay-emoji:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Compay-emoji][Compay-emoji:1]]
 ;;    (require 'company-emoji)
 ;;    (add-to-list 'company-backends 'company-emoji)
 
@@ -769,7 +769,7 @@ file with `edit-abbrevs`"
     (add-hook 'after-make-frame-functions '--set-emoji-font)
 ;; Compay-emoji:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Centered-window][Centered-window:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Centered-window][Centered-window:1]]
 ;; (use-package centered-window)
 
   ;;  (require 'centered-window)
@@ -781,7 +781,7 @@ file with `edit-abbrevs`"
    (centered-window-mode))
 ;; Centered-window:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Csharp%20mode][Csharp mode:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Csharp%20mode][Csharp mode:1]]
 (autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
 (setq auto-mode-alist
    (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
@@ -792,7 +792,7 @@ file with `edit-abbrevs`"
 ;; (add-hook 'csharp-mode-hook 'my-csharp-mode-hook)
 ;; Csharp mode:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Custom%20themes][Custom themes:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Custom%20themes][Custom themes:1]]
 (use-package color-theme-modern :ensure color-theme-modern)
   (use-package doom-themes :ensure doom-themes)
   (use-package theme-looper :ensure theme-looper)
@@ -827,11 +827,11 @@ file with `edit-abbrevs`"
 ;; (add-hook 'after-init-hook (lambda () (load-theme 'poet)))
 ;; Custom themes:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Custom-set-faces][Custom-set-faces:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Custom-set-faces][Custom-set-faces:1]]
 
 ;; Custom-set-faces:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Dired][Dired:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Dired][Dired:1]]
 (add-to-list 'load-path "~/.emacs.d/el-get/dired+")
  (require 'dired+)
 
@@ -847,7 +847,7 @@ file with `edit-abbrevs`"
   :hook (dired-mode . all-the-icons-dired-mode))
 ;; Dired:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Dired-ranger][Dired-ranger:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Dired-ranger][Dired-ranger:1]]
 ;;  (use-package dired-ranger
 ;;    :ensure t
 ;;    :bind (:map dired-mode-map
@@ -856,7 +856,7 @@ file with `edit-abbrevs`"
 ;;		("Y" . dired-ranger-paste)))
 ;; Dired-ranger:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Ranger][Ranger:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Ranger][Ranger:1]]
 ;; (use-package ranger 
 ;;   :ensure t 
 ;;   :config 
@@ -882,18 +882,18 @@ file with `edit-abbrevs`"
 ;;       (setq ranger-dont-show-binary t))
 ;; Ranger:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Default%20pdf-viwer][Default pdf-viwer:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Default%20pdf-viwer][Default pdf-viwer:1]]
 
 ;; Default pdf-viwer:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Default%20web-browser][Default web-browser:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Default%20web-browser][Default web-browser:1]]
 (setq browse-url-browser-function 'browse-url-generic
 
  ;; browse-url-generic-program "chromium-browser")
  browse-url-generic-program "firefox")
 ;; Default web-browser:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Dpaste][Dpaste:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Dpaste][Dpaste:1]]
 ;; (require 'dpaste nil)  ; Not needed if you use package.el
 (global-set-key (kbd "C-c y") 'dpaste-region-or-buffer)
 (setq dpaste-poster "Achylles")
@@ -901,7 +901,7 @@ file with `edit-abbrevs`"
 (setq user-full-name "Achylles")
 ;; Dpaste:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Diatheke][Diatheke:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Diatheke][Diatheke:1]]
 (require 'diatheke)
 
 (setq diatheke-bible "KJVA -f plain")
@@ -919,19 +919,19 @@ file with `edit-abbrevs`"
 ;; C-c C-r: search by regex
 ;; Diatheke:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Pcre2el%20-%20fix%20regex][Pcre2el - fix regex:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Pcre2el%20-%20fix%20regex][Pcre2el - fix regex:1]]
 ;;   (use-package pcre2el
 ;;    :ensure t
 ;;    :config (pcre-mode))
 ;; Pcre2el - fix regex:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Wgrep%20for%20fuzy%20dired][Wgrep for fuzy dired:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Wgrep%20for%20fuzy%20dired][Wgrep for fuzy dired:1]]
 (use-package wgrep
  :ensure t)
 (setq counsel-fzf-cmd "/home/vagner/.fzf/bin/fzf -f %s")
 ;; Wgrep for fuzy dired:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Dtk%20-%20another%20better%20diatheke][Dtk - another better diatheke:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Dtk%20-%20another%20better%20diatheke][Dtk - another better diatheke:1]]
 ;; (add-to-list 'load-path "~/.emacs.d/elpa/dtk")
 ;; (require 'dtk)
 
@@ -944,13 +944,13 @@ file with `edit-abbrevs`"
      )
 ;; Dtk - another better diatheke:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Disable%20Emacs-splash-screen][Disable Emacs-splash-screen:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Disable%20Emacs-splash-screen][Disable Emacs-splash-screen:1]]
 ;; Disable Emacs-splash-screen
 
  (setq inhibit-splash-screen t)
 ;; Disable Emacs-splash-screen:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*edit-server][edit-server:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*edit-server][edit-server:1]]
 ;; (require 'edit-server) 
       ;; (edit-server-start)
 
@@ -977,11 +977,11 @@ file with `edit-abbrevs`"
      ;;    (add-hook 'edit-server-done-hook  'edit-server-maybe-htmlize-buffer)
 ;; edit-server:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Eldoc][Eldoc:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Eldoc][Eldoc:1]]
 
 ;; Eldoc:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*elfeed][elfeed:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*elfeed][elfeed:1]]
 ;;shortcut functions
 
     (defun bjm/elfeed-show-all ()
@@ -1024,14 +1024,14 @@ file with `edit-abbrevs`"
 		("q" . bjm/elfeed-save-db-and-bury)))
 ;; elfeed:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*elfeed-goodies][elfeed-goodies:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*elfeed-goodies][elfeed-goodies:1]]
 (use-package elfeed-goodies
   :ensure t
   :config
   (elfeed-goodies/setup))
 ;; elfeed-goodies:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*elfeed-org][elfeed-org:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*elfeed-org][elfeed-org:1]]
 ;; use an org file to organise feeds
 
 (use-package elfeed-org
@@ -1041,11 +1041,11 @@ file with `edit-abbrevs`"
   (setq rmh-elfeed-org-files (list "~vagner/org~/elfeed.org")))
 ;; elfeed-org:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Emacs%20edit%20firefox-chromium%20plugin][Emacs edit firefox-chromium plugin:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Emacs%20edit%20firefox-chromium%20plugin][Emacs edit firefox-chromium plugin:1]]
 
 ;; Emacs edit firefox-chromium plugin:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Emacspeak][Emacspeak:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Emacspeak][Emacspeak:1]]
 (when (featurep 'emacspeak)
   (require 'emacspeak-aumix)
   (setq emacspeak-auditory-icon-function 'emascpeak-play-auditory-icon)
@@ -1053,7 +1053,7 @@ file with `edit-abbrevs`"
   (emacspeak-toggle-auditory-icons 1))
 ;; Emacspeak:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Engine-mode%20for%20search%20the%20internet][Engine-mode for search the internet:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Engine-mode%20for%20search%20the%20internet][Engine-mode for search the internet:1]]
 (use-package engine-mode
   :config (engine-mode t))
 
@@ -1105,7 +1105,7 @@ file with `edit-abbrevs`"
     "http://www.youtube.com/results?aq=f&oq=&search_query=%s")
 ;; Engine-mode for search the internet:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Ensime][Ensime:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Ensime][Ensime:1]]
 ;;We have "sbt" and "scala" in /usr/bin so we add this path to the PATH environment
 
   (setq exec-path (append exec-path '("/usr/bin")))
@@ -1119,7 +1119,7 @@ file with `edit-abbrevs`"
  (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 ;; Ensime:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Erc%20-%20irc%20client][Erc - irc client:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Erc%20-%20irc%20client][Erc - irc client:1]]
 (require 'erc)
 
 (defun irc-maybe ()
@@ -1133,11 +1133,11 @@ file with `edit-abbrevs`"
       (erc :server "irc.oftc.net" :port 6667 :nick "Achylles")))
 ;; Erc - irc client:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Bitlbee][Bitlbee:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Bitlbee][Bitlbee:1]]
 
 ;; Bitlbee:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Eshell][Eshell:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Eshell][Eshell:1]]
 ;; run this script in terminal
     ;; alias | sed -E "s/^alias ([^=]+)='(.*)'$/alias \1 \2 \$*/g; s/'\\\''/'/g;" >~/.emacs.d/eshell/alias 
     ;; or better yet,
@@ -1150,22 +1150,22 @@ file with `edit-abbrevs`"
   :config )
 ;; Eshell:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Expand%20region][Expand region:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Expand%20region][Expand region:1]]
 ;;  (require 'expand-region)
 ;;  (global-set-key (kbd "C-=") 'er/expand-region)
 ;; Expand region:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Figwheel-clojure][Figwheel-clojure:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Figwheel-clojure][Figwheel-clojure:1]]
 
 ;; Figwheel-clojure:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Flycheck][Flycheck:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Flycheck][Flycheck:1]]
 (use-package flycheck
  :init
  (global-flycheck-mode t))
 ;; Flycheck:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Flyspell][Flyspell:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Flyspell][Flyspell:1]]
 (defun my-turn-spell-checking-on ()
   "Turn flyspell-mode on."
   (flyspell-mode 1))
@@ -1176,21 +1176,21 @@ file with `edit-abbrevs`"
  ;; (add-hook 'text-mode-hook 'flyspell-mode)
 ;; Flyspell:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Fountain-mode%20-%20Screenwriting%20-%20plays,%20films,%20sop-operas,%20etc][Fountain-mode - Screenwriting - plays, films, sop-operas, etc:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Fountain-mode%20-%20Screenwriting%20-%20plays,%20films,%20sop-operas,%20etc][Fountain-mode - Screenwriting - plays, films, sop-operas, etc:1]]
 ;; (require 'fountain-mode)
 
 (use-package fountain-mode
  :ensure t)
 ;; Fountain-mode - Screenwriting - plays, films, sop-operas, etc:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Gitlab][Gitlab:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Gitlab][Gitlab:1]]
 (use-package gitlab
  :ensure t)
    (setq gitlab-host "https://gitlab.com"
 	 gitlab-token-id "OrionRandD")
 ;; Gitlab:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*GGtags][GGtags:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*GGtags][GGtags:1]]
 ;; (use-package ggtags
  
 ;;  :config 
@@ -1200,7 +1200,7 @@ file with `edit-abbrevs`"
 ;;              (ggtags-mode 1)))))
 ;; GGtags:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Google-contacts][Google-contacts:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Google-contacts][Google-contacts:1]]
 ;; (use-package plstore
 ;;     :defer t
 ;;     :config (setq plstore-cache-passphrase-for-symmetric-encryption t))
@@ -1218,7 +1218,7 @@ file with `edit-abbrevs`"
 ;; q to quit.
 ;; Google-contacts:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Ob-translate][Ob-translate:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Ob-translate][Ob-translate:1]]
 ;; https://github.com/alphapapa/ob-translate  
   ;; M-x package-install RET ob-translate
   ;; enclose your code between source and call
@@ -1244,7 +1244,7 @@ file with `edit-abbrevs`"
 (setq org-babel-no-eval-on-ctrl-c-ctrl-c t)
 ;; Ob-translate:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Google-translate][Google-translate:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Google-translate][Google-translate:1]]
 (use-package google-translate
 :ensure t
 :config
@@ -1256,11 +1256,11 @@ file with `edit-abbrevs`"
       (list 432928 274893998))
 ;; Google-translate:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Grasp%20-%20org-capture][Grasp - org-capture:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Grasp%20-%20org-capture][Grasp - org-capture:1]]
 
 ;; Grasp - org-capture:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Hippie-expand][Hippie-expand:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Hippie-expand][Hippie-expand:1]]
 (fset 'my-complete-file-name
    (make-hippie-expand-function '(try-complete-file-name-partially
 					try-complete-file-name)))
@@ -1268,7 +1268,7 @@ file with `edit-abbrevs`"
    (global-set-key "\M-\\" 'comint-dynamic-complete-filename)
 ;; Hippie-expand:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Helm-mu][Helm-mu:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Helm-mu][Helm-mu:1]]
 (use-package helm-mu
   :ensure t)
 
@@ -1277,12 +1277,12 @@ file with `edit-abbrevs`"
 (define-key mu4e-view-mode-map "s" 'helm-mu)
 ;; Helm-mu:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Icicles][Icicles:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Icicles][Icicles:1]]
 (require 'icicles)
 (icy-mode 1) ;; turn on Icicle mode each time you start Emacs
 ;; Icicles:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Image-magick][Image-magick:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Image-magick][Image-magick:1]]
 (autoload 'eimp-mode "eimp" "Emacs Image Manipulation Package." t)
       (add-hook 'image-mode-hook 'eimp-mode)
 
@@ -1313,12 +1313,12 @@ file with `edit-abbrevs`"
    ;; then M-x thumbs
 ;; Image-magick:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Imaxima][Imaxima:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Imaxima][Imaxima:1]]
 (defvar imaxima-fnt-size "Large")
 (defvar imaxima-use-maxima-mode-flag t)
 ;; Imaxima:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Indenting%20lisp%20code%20blocks][Indenting lisp code blocks:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Indenting%20lisp%20code%20blocks][Indenting lisp code blocks:1]]
 (setq org-src-tab-acts-natively t)
 
   (defun my/org-cleanup ()
@@ -1332,22 +1332,22 @@ file with `edit-abbrevs`"
   (indent-region (point-min) (point-max)))
 ;; Indenting lisp code blocks:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Input%20method%20portuguese-prefix][Input method portuguese-prefix:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Input%20method%20portuguese-prefix][Input method portuguese-prefix:1]]
 
 ;; Input method portuguese-prefix:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Iso-accents][Iso-accents:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Iso-accents][Iso-accents:1]]
 ;; (load-library "iso-acc")
 ;; Iso-accents:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Jabber-chat-with][Jabber-chat-with:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Jabber-chat-with][Jabber-chat-with:1]]
 ;; (require 'jabber)
 
 (use-package jabber 
  :ensure t)
 ;; Jabber-chat-with:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*JavaScript][JavaScript:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*JavaScript][JavaScript:1]]
 ;; js2-mode
 
 ;;     (use-package js2-mode
@@ -1432,14 +1432,14 @@ file with `edit-abbrevs`"
 ;;       (add-hook 'html-mode-hook 'skewer-html-mode))
 ;; JavaScript:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Key-chord][Key-chord:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Key-chord][Key-chord:1]]
 ;; (require 'key-chord)
 ;; (key-chord-mode 1)
 
 ;; (key-chord-define evil-insert-state-map "ee" 'evil-normal-state)
 ;; Key-chord:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Languagetool][Languagetool:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Languagetool][Languagetool:1]]
 ;; (setq langtool-java-bin "/usr/bin/java")
 
 ;;    (require 'langtool)
@@ -1459,11 +1459,11 @@ file with `edit-abbrevs`"
 ;;    (global-set-key "\C-x4c" 'langtool-correct-buffer)
 ;; Languagetool:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Link-hint][Link-hint:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Link-hint][Link-hint:1]]
 
 ;; Link-hint:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Linum-mode][Linum-mode:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Linum-mode][Linum-mode:1]]
 ;; linum-mode
 
 ;; (require 'linum)
@@ -1492,12 +1492,12 @@ file with `edit-abbrevs`"
 ;; (advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
 ;; Linum-mode:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Lyrics][Lyrics:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Lyrics][Lyrics:1]]
 (use-package lyrics
  :ensure t)
 ;; Lyrics:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Lispy][Lispy:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Lispy][Lispy:1]]
 (use-package lispy
    :ensure t)
 
@@ -1509,7 +1509,7 @@ file with `edit-abbrevs`"
   (add-hook 'minibuffer-setup-hook 'conditionally-enable-lispy)
 ;; Lispy:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*lorem%20ipsum][lorem ipsum:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*lorem%20ipsum][lorem ipsum:1]]
 (use-package lorem-ipsum
     :ensure t)
 
@@ -1524,19 +1524,19 @@ file with `edit-abbrevs`"
 ;;				  Lorem-ipsum-list-end "</ul>\n")))
 ;; lorem ipsum:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Magit-setup][Magit-setup:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Magit-setup][Magit-setup:1]]
 (use-package magit 
  :ensure t
  :config
 (global-set-key (kbd "C-c g") 'magit-status))
 ;; Magit-setup:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Mplayer-mode][Mplayer-mode:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Mplayer-mode][Mplayer-mode:1]]
 (add-to-list 'load-path "~/.emacs.d/elpa/mplayer-mode/")
 (require 'mplayer-mode)
 ;; Mplayer-mode:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Maximise%20emacs%20on%20startup][Maximise emacs on startup:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Maximise%20emacs%20on%20startup][Maximise emacs on startup:1]]
 (custom-set-variables
 
  ;; custom-set-variables was added by Custom.
@@ -1615,7 +1615,7 @@ file with `edit-abbrevs`"
    (unspecified "#272822" "#49483E" "#A20C41" "#F92672" "#67930F" "#A6E22E" "#968B26" "#E6DB74" "#21889B" "#66D9EF" "#A41F99" "#FD5FF0" "#349B8D" "#A1EFE4" "#F8F8F2" "#F8F8F0")))
 ;; Maximise emacs on startup:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Message-mode][Message-mode:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Message-mode][Message-mode:1]]
 ;; colorizing multiply-quoted lines
 
 (add-hook 'message-mode-hook
@@ -1689,12 +1689,12 @@ file with `edit-abbrevs`"
  ;; C-c C-z	kill text from point until end of buffer
 ;; Message-mode:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Mingus][Mingus:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Mingus][Mingus:1]]
 (use-package mingus
  :ensure t)
 ;; Mingus:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Misc-1][Misc-1:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Misc-1][Misc-1:1]]
 ;; Tmux interaction
 (use-package emamux
   :ensure t
@@ -1725,7 +1725,7 @@ To get the frame's current cursor type, use `frame-parameters'."
   (modify-frame-parameters (selected-frame) (list (cons 'cursor-type cursor-type))))
 ;; Misc-1:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Misc-2][Misc-2:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Misc-2][Misc-2:1]]
 ;; (global-set-key (kbd "C-x t") 'truncate-line-mode)
 
 (global-set-key (kbd "C-c .") 'org-time-stamp)
@@ -1743,7 +1743,7 @@ To get the frame's current cursor type, use `frame-parameters'."
 (global-set-key (kbd "C-M-{") 'mc/mark-previous-like-this)
 ;; Misc-2:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Misc-3][Misc-3:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Misc-3][Misc-3:1]]
 ;; Brent.Longborough's .emacs
 
 (scroll-bar-mode -1) ; Disable hide scroll-bar
@@ -1760,7 +1760,7 @@ To get the frame's current cursor type, use `frame-parameters'."
 (mapc 'global-unset-key [[up] [down] [left] [right]])
 ;; Misc-3:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Multiple-cursors][Multiple-cursors:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Multiple-cursors][Multiple-cursors:1]]
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -1768,7 +1768,7 @@ To get the frame's current cursor type, use `frame-parameters'."
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 ;; Multiple-cursors:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*mu4e][mu4e:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*mu4e][mu4e:1]]
 ;;	(eval-when-compile
 ;;	      (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e/")
 ;;	  (require 'use-package))
@@ -1922,7 +1922,7 @@ To get the frame's current cursor type, use `frame-parameters'."
     (setq mu4e-view-show-addresses 't)
 ;; mu4e:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*My-save-word][My-save-word:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*My-save-word][My-save-word:1]]
 (global-set-key (kbd "<f5>") 'my-save-word)
      (defun my-save-word ()
     (interactive)
@@ -1932,7 +1932,7 @@ To get the frame's current cursor type, use `frame-parameters'."
 	(flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
 ;; My-save-word:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Oauth2][Oauth2:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Oauth2][Oauth2:1]]
 ;;    (use-package oauth2 
     
 ;;	   :config
@@ -1940,7 +1940,7 @@ To get the frame's current cursor type, use `frame-parameters'."
 ;;	     (defvar oauth--token-data ())))
 ;; Oauth2:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-agenda][Org-agenda:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-agenda][Org-agenda:1]]
 (require 'org)
       (setq org-directory "~/~org/")
       (define-key global-map "\C-cl" 'org-store-link)
@@ -1953,7 +1953,7 @@ To get the frame's current cursor type, use `frame-parameters'."
 			     "~/org~/work.org"))
 ;; Org-agenda:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-brain][Org-brain:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-brain][Org-brain:1]]
 ;;  (use-package org-brain  
 ;;    :init
 ;;    (setq org-brain-path "/home/vagner/org~/brain")
@@ -1971,7 +1971,7 @@ To get the frame's current cursor type, use `frame-parameters'."
 ;;    (setq org-brain-title-max-length 12))
 ;; Org-brain:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-capture%20with%20W3m/EWW][Org-capture with W3m/EWW:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-capture%20with%20W3m/EWW][Org-capture with W3m/EWW:1]]
 ;; org-eww and org-w3m should be in your org distribution, but see
 ;; note below on patch level of org-eww.
 
@@ -2023,7 +2023,7 @@ To get the frame's current cursor type, use `frame-parameters'."
   (forward-line -1))
 ;; Org-capture with W3m/EWW:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-cliplink][Org-cliplink:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-cliplink][Org-cliplink:1]]
 (use-package org-cliplink
  :ensure t)
 
@@ -2040,12 +2040,12 @@ Suggest the URL title as a description for resource."
 ;; (define-key org-brain-visualize-mode-map (kbd "L") #'org-brain-cliplink-resource)
 ;; Org-cliplink:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Origami%20folding][Origami folding:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Origami%20folding][Origami folding:1]]
 ;; (use-package origami
 ;; :ensure t)
 ;; Origami folding:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Ascii-art-to-unicode][Ascii-art-to-unicode:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Ascii-art-to-unicode][Ascii-art-to-unicode:1]]
 (defface aa2u-face '((t . nil))
   "Face for aa2u box drawing characters")
 (advice-add #'aa2u-1c :filter-return
@@ -2060,7 +2060,7 @@ Suggest the URL title as a description for resource."
   (add-hook 'org-brain-after-visualize-hook #'aa2u-org-brain-buffer))
 ;; Ascii-art-to-unicode:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-journal][Org-journal:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-journal][Org-journal:1]]
 ;; https://github.com/bastibe/org-journal
 
     (customize-set-variable 'org-journal-dir "~/org~/journal/")
@@ -2083,16 +2083,16 @@ Suggest the URL title as a description for resource."
 (global-set-key (kbd "C-c j") 'org-journal-new-entry)
 ;; Org-journal:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-mac-link][Org-mac-link:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-mac-link][Org-mac-link:1]]
 (add-hook 'org-mode-hook (lambda () 
   (define-key org-mode-map (kbd "C-c g") 'omlg-grab-link)))
 ;; Org-mac-link:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-protocol][Org-protocol:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-protocol][Org-protocol:1]]
 (require 'org-protocol)
 ;; Org-protocol:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Orca][Orca:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Orca][Orca:1]]
 ;;    (require 'orca)
 
     (setq orca-handler-list
@@ -2131,7 +2131,7 @@ Suggest the URL title as a description for resource."
             (string :tag "Heading")))))
 ;; Orca:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-present][Org-present:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-present][Org-present:1]]
 (use-package org-present
  :ensure t
  :config
@@ -2146,12 +2146,12 @@ Suggest the URL title as a description for resource."
   (org-present-read-write))))
 ;; Org-present:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-present-remote][Org-present-remote:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-present-remote][Org-present-remote:1]]
 (use-package org-present-remote
  :ensure t)
 ;; Org-present-remote:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org%20reveal][Org reveal:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org%20reveal][Org reveal:1]]
 (require 'org)
 ;; (require 'ox-reveal)
 
@@ -2181,7 +2181,7 @@ Suggest the URL title as a description for resource."
     ;; Open the generated “Readme.html” in your browser and enjoy the cool slides.
 ;; Org reveal:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-tree-slide][Org-tree-slide:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-tree-slide][Org-tree-slide:1]]
 (use-package org-tree-slide
      :ensure t
      :config
@@ -2206,7 +2206,7 @@ Suggest the URL title as a description for resource."
        (makeunbound wolfe--enable-transient-map)))
 ;; Org-tree-slide:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Persistent-soft][Persistent-soft:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Persistent-soft][Persistent-soft:1]]
 (require 'persistent-soft)
 (persistent-soft-store 'hundred 100 "mydatastore")
 (persistent-soft-fetch 'hundred "mydatastore")    ; 100
@@ -2217,27 +2217,27 @@ Suggest the URL title as a description for resource."
 (persistent-soft-fetch 'hundred "mydatastore")    ; 100
 ;; Persistent-soft:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Polymode][Polymode:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Polymode][Polymode:1]]
 (require 'poly-markdown)
 (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 ;; Polymode:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Poetry-mode][Poetry-mode:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Poetry-mode][Poetry-mode:1]]
 ;; (require 'poetry)
 
   (load-library "~/.emacs.d/elpa/poetry/poetry.el")
 ;; Poetry-mode:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*People%20with%20nice%20emacs%20config%20files][People with nice emacs config files:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*People%20with%20nice%20emacs%20config%20files][People with nice emacs config files:1]]
 
 ;; People with nice emacs config files:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Perspective][Perspective:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Perspective][Perspective:1]]
 ;; (use-package perspective
 ;;   :ensure t)
 ;; Perspective:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Powerline][Powerline:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Powerline][Powerline:1]]
 (use-package powerline 
  :ensure t
  :config
@@ -2245,7 +2245,7 @@ Suggest the URL title as a description for resource."
  (setq powerline-center-default-separator 'wave))
 ;; Powerline:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Prolog][Prolog:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Prolog][Prolog:1]]
 (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
 (autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
 (autoload 'mercury-mode "prolog" "Major mode for editing Mercury programs." t)
@@ -2255,21 +2255,21 @@ Suggest the URL title as a description for resource."
 			       auto-mode-alist))
 ;; Prolog:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Quelpa][Quelpa:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Quelpa][Quelpa:1]]
 (use-package quelpa-use-package
     :ensure t
     :init
     (setq quelpa-update-melpa-p nil))
 ;; Quelpa:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Re-builder%20for%20Regexp][Re-builder for Regexp:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Re-builder%20for%20Regexp][Re-builder for Regexp:1]]
 (use-package re-builder
  :ensure t
  :config
  (setq reb-re-syntax 'string))
 ;; Re-builder for Regexp:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Slime][Slime:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Slime][Slime:1]]
 ;; Set your lisp system and, optionally, some contribs
 
   (slime-setup '(slime-repl))
@@ -2298,12 +2298,12 @@ Suggest the URL title as a description for resource."
       (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)))
 ;; Slime:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Smex][Smex:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Smex][Smex:1]]
 ;;    (global-set-key (kbd "M-x") 'smex)
 ;;    (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 ;; Smex:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Speed%20directories%20and%20files][Speed directories and files:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Speed%20directories%20and%20files][Speed directories and files:1]]
 (defvar vagner-filelist nil "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
 
 (setq vagner-filelist
@@ -2327,7 +2327,7 @@ Version 2015-04-23"
     (find-file (cdr (assoc ξabbrevCode vagner-filelist)))))
 ;; Speed directories and files:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Splash-screen][Splash-screen:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Splash-screen][Splash-screen:1]]
 ;;(display-splash-screen)
 
      (use-package dashboard
@@ -2370,11 +2370,11 @@ Version 2015-04-23"
  ;;  }	Next section
 ;; Splash-screen:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Scheme][Scheme:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Scheme][Scheme:1]]
 
 ;; Scheme:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Shackle][Shackle:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Shackle][Shackle:1]]
 (setq shackle-rules
      '(((svg-2048-mode circe-query-mode) :same t)
        ("*Help*" :align t :select t)
@@ -2388,7 +2388,7 @@ Version 2015-04-23"
       shackle-inhibit-window-quit-on-same-windows t)
 ;; Shackle:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Synonyms%20and%20Thesaurus][Synonyms and Thesaurus:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Synonyms%20and%20Thesaurus][Synonyms and Thesaurus:1]]
 (use-package synonyms
   :disabled
   :ensure t
@@ -2420,12 +2420,12 @@ Version 2015-04-23"
   (evil-leader/set-key "S" 'powerthesaurus-lookup-word))
 ;; Synonyms and Thesaurus:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Sword-to-org][Sword-to-org:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Sword-to-org][Sword-to-org:1]]
 (add-to-list 'load-path "~/.emacs.d/elpa/sword-to-org/")
 (require 'sword-to-org)
 ;; Sword-to-org:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Telega][Telega:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Telega][Telega:1]]
 ;; (add-to-list 'load-path "~/.emacs.d/elpa/telega.el")
 ;; (require 'telega)
 
@@ -2480,7 +2480,7 @@ Version 2015-04-23"
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Telega:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Text-translation][Text-translation:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Text-translation][Text-translation:1]]
 (add-to-list 'load-path "~/.emacs.d/elpa/text-translator/")
 (require 'text-translator)
 (require 'text-translator-load)
@@ -2489,21 +2489,21 @@ Version 2015-04-23"
 (global-set-key "\C-x\M-t" 'text-translator)
 ;; Text-translation:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Text-scale][Text-scale:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Text-scale][Text-scale:1]]
 ;; Text-scale
 
 (global-set-key (kbd "C-M-=") 'default-text-scale-increase)
 (global-set-key (kbd "C-M--") 'default-text-scale-decrease)
 ;; Text-scale:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Tramp][Tramp:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Tramp][Tramp:1]]
 (custom-set-variables
  '(tramp-default-method "ssh")
  '(tramp-default-user "vagner")
  '(tramp-default-host "lea-pet.local:2401"))
 ;; Tramp:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Treemacs][Treemacs:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Treemacs][Treemacs:1]]
 (use-package treemacs
   :ensure t
   :defer t
@@ -2524,7 +2524,7 @@ Version 2015-04-23"
 	  treemacs-goto-tag-strategy          'refetch-index)))
 ;; Treemacs:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Trident%20convert%20lisp%202%20javascript][Trident convert lisp 2 javascript:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Trident%20convert%20lisp%202%20javascript][Trident convert lisp 2 javascript:1]]
 (add-to-list 'auto-mode-alist (cons "\\.paren\\'" 'lisp-mode))
 (add-hook 'lisp-mode-hook
 	  #'(lambda ()
@@ -2542,14 +2542,14 @@ Version 2015-04-23"
     ;; etc...
 ;; Trident convert lisp 2 javascript:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Unicode-fonts][Unicode-fonts:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Unicode-fonts][Unicode-fonts:1]]
 (use-package unicode-fonts
  :ensure t
  :config
  (unicode-fonts-setup))
 ;; Unicode-fonts:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Visual-regexp-steroids][Visual-regexp-steroids:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Visual-regexp-steroids][Visual-regexp-steroids:1]]
 ;; you have to issue: Ctrl-x m RET vr/  to see the command
 ;; if the files are not already in the load path
 
@@ -2566,7 +2566,7 @@ Version 2015-04-23"
 (define-key esc-map (kbd "C-s") 'vr/isearch-forward) ;; C-M-s
 ;; Visual-regexp-steroids:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Emacs-w3m][Emacs-w3m:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Emacs-w3m][Emacs-w3m:1]]
 (add-to-list 'load-path "~/.emacs.d/elpa/emacs-w3m/")
 
   (require 'w3m-load)
@@ -2577,7 +2577,7 @@ Version 2015-04-23"
      (setq w3m-default-save-directory "~/Downloads")
 ;; Emacs-w3m:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Wanderlust%20email-client][Wanderlust email-client:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Wanderlust%20email-client][Wanderlust email-client:1]]
 (autoload 'wl "wl" "Wanderlust" t)
 
 ;; apt install bbdb 
@@ -2630,22 +2630,22 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
  (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
 ;; Wanderlust email-client:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Winner-mode][Winner-mode:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Winner-mode][Winner-mode:1]]
 (when (fboundp 'winner-mode)
      (winner-mode 1))
 ;; Winner-mode:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Wrap%20lines][Wrap lines:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Wrap%20lines][Wrap lines:1]]
 ;; Wrap lines without breaking the last word
 (add-hook 'org-mode-hook #'toggle-word-wrap)
 ;; Wrap lines:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Youtube-dl][Youtube-dl:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Youtube-dl][Youtube-dl:1]]
 (add-to-list 'load-path "~/.emacs.d/elpa/youtube-dl-emacs")
 (require 'youtube-dl)
 ;; Youtube-dl:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Elisp][Elisp:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Elisp][Elisp:1]]
 ;;    (use-package elisp
 ;;      :hook
 ;;      (after-save . check-parens)
@@ -2709,7 +2709,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
        (dash-enable-fontlock t))
 ;; Elisp:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Network][Network:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Network][Network:1]]
 (use-package net-utils
   :ensure-system-package traceroute
   :bind
@@ -2729,14 +2729,14 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 	("t" . traceroute)))
 ;; Network:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Save-place][Save-place:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Save-place][Save-place:1]]
 ;; Keep point position between re-opening files with recentf/ido  
 
    (require 'saveplace)
    (save-place-mode 1)
 ;; Save-place:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*shell-pop][shell-pop:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*shell-pop][shell-pop:1]]
 (use-package shell-pop
 :ensure t
   :bind (("C-t" . shell-pop))
@@ -2747,18 +2747,18 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
   (shell-pop--set-shell-type 'shell-pop-shell-type shell-pop-shell-type))
 ;; shell-pop:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Simple-mpc][Simple-mpc:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Simple-mpc][Simple-mpc:1]]
 (use-package simple-mpc
  :ensure t)
 ;; Simple-mpc:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Command-log-mode][Command-log-mode:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Command-log-mode][Command-log-mode:1]]
 (use-package command-log-mode
    :commands (command-log-mode global-command-log-mode)
    :bind ("C-c o" . clm/toggle-command-log-buffer))
 ;; Command-log-mode:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Circe][Circe:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Circe][Circe:1]]
 (use-package circe
     :ensure t
     :bind ("<S-f2>" . circe-init))
@@ -2794,7 +2794,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
        :nickserv-password my-nickserv-password)))
 ;; Circe:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Emms-get-lyrics][Emms-get-lyrics:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Emms-get-lyrics][Emms-get-lyrics:1]]
 (use-package emms
  :ensure t)
 
@@ -2802,7 +2802,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 (require 'emms-get-lyrics)
 ;; Emms-get-lyrics:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*MPV%20as%20a%20player][MPV as a player:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*MPV%20as%20a%20player][MPV as a player:1]]
 (use-package emms-player-simple-mpv
    :ensure t
    :after emms
@@ -2831,35 +2831,35 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
   (use-package emms-mark-ext :ensure t)
 ;; MPV as a player:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*memacs][memacs:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*memacs][memacs:1]]
 
 ;; memacs:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Genealogy][Genealogy:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Genealogy][Genealogy:1]]
 (add-to-list 'load-path "~/.emacs.d/elpa/gedcom")
 
 (autoload 'gedcom-mode "gedcom")
 (setq auto-mode-alist (cons '("\\.ged$" . gedcom-mode) auto-mode-alist))
 ;; Genealogy:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Defaults%20apps][Defaults apps:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Defaults%20apps][Defaults apps:1]]
 (setcdr (assq 'system org-file-apps-defaults-gnu ) "xdg-open %s")
 ;; Defaults apps:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*org-chef][org-chef:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*org-chef][org-chef:1]]
 (use-package org-chef
   :ensure t)
 ;; org-chef:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Blogging%20with%20emacs][Blogging with emacs:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Blogging%20with%20emacs][Blogging with emacs:1]]
 
 ;; Blogging with emacs:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org2blog][Org2blog:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org2blog][Org2blog:1]]
 
 ;; Org2blog:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Ox-hugo][Ox-hugo:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Ox-hugo][Ox-hugo:1]]
 (use-package ox-hugo
   :ensure t   
   :after ox)
@@ -2896,7 +2896,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 ;; 	       (function org-hugo-new-subtree-post-capture-template))))
 ;; Ox-hugo:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Easy-hugo][Easy-hugo:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Easy-hugo][Easy-hugo:1]]
 ;; (use-package easy-hugo
 ;;   :custom
 ;;   (easy-hugo-basedir "~/Personal/devel/zzamboni.org/zzamboni.org/")
@@ -2906,18 +2906,18 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 ;;   )
 ;; Easy-hugo:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Lazyblorg][Lazyblorg:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Lazyblorg][Lazyblorg:1]]
 
 ;; Lazyblorg:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-refile][Org-refile:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-refile][Org-refile:1]]
 (setq org-refile-targets '((nil :maxlevel . 9)
                                 (org-agenda-files :maxlevel . 9)))
 (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
 (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
 ;; Org-refile:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-capture][Org-capture:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-capture][Org-capture:1]]
 ;; https://cestlaz.github.io/posts/using-emacs-24-capture-2/
   ;; This function pops up Capture templates options in a new emacs frame
   ;; You have to bound it to a desktop key to make it pops up wherever you 
@@ -3010,29 +3010,29 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
      ("w" "Website" plain (function org-website-clipper) "* %a\n%T\n" :immediate-finish t)))
 ;; Org-capture:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Hyperbole][Hyperbole:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Hyperbole][Hyperbole:1]]
 (unless (package-installed-p 'hyperbole)
   (package-refresh-contents)	
   (package-install 'hyperbole))
 (require 'hyperbole)
 ;; Hyperbole:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Eww][Eww:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Eww][Eww:1]]
 
 ;; Eww:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Printer][Printer:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Printer][Printer:1]]
 (setq lpr-command "gtklp")
 (setq ps-lpr-command "gtklp")
 ;; Printer:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Emacs%20server][Emacs server:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Emacs%20server][Emacs server:1]]
 (load "server")
  (unless (server-running-p)
  (server-start))
 ;; Emacs server:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*epg-gpg2][epg-gpg2:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*epg-gpg2][epg-gpg2:1]]
 (setq epg-gpg-program "usr/bin/gpg2")
 (require 'epa-file)
 (epa-file-enable)
@@ -3041,7 +3041,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 (pinentry-start)
 ;; epg-gpg2:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*bbdb-database][bbdb-database:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*bbdb-database][bbdb-database:1]]
 (require 'bbdb)
       (bbdb-initialize 'gnus 'message 'mu4e 'w3)
     ;; (bbdb-initialize 'gnus 'message 'reportmail 'sc 'sendmail 'w3)
@@ -3061,28 +3061,28 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
     )
 ;; bbdb-database:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*ipp%20Printer][ipp Printer:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*ipp%20Printer][ipp Printer:1]]
 (add-to-list 'load-path "/home/vagner/.emacs.d/elpa/ipp")
 
 (require 'ipp)
 ;; ipp Printer:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Linguistics][Linguistics:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Linguistics][Linguistics:1]]
 (use-package linguistic 
  :ensure t)
 ;; Linguistics:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-drill][Org-drill:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-drill][Org-drill:1]]
 (use-package org-drill
   :ensure t)
 ;; Org-drill:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Org-drill-table][Org-drill-table:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-drill-table][Org-drill-table:1]]
 (use-package org-drill-table
   :ensure t)
 ;; Org-drill-table:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Memrise][Memrise:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Memrise][Memrise:1]]
 (use-package memrise
   :quelpa (memrise
 	   :fetcher github
@@ -3091,13 +3091,13 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 (setq memrise-sync-requests t)
 ;; Memrise:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Gnutls-fix-bug][Gnutls-fix-bug:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Gnutls-fix-bug][Gnutls-fix-bug:1]]
 ;;   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3/")
      (setq gnutls-verify-error t)
      (setq tls-checktrust t)
 ;; Gnutls-fix-bug:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*emacs-wget][emacs-wget:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*emacs-wget][emacs-wget:1]]
 ;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/emacs-wget")
 
   ;; (require 'w3m-wget)
@@ -3111,7 +3111,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 ;;  (setq wget-command "/usr/bin/wget")
 ;; emacs-wget:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*More%20niceties][More niceties:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*More%20niceties][More niceties:1]]
 ;; Mouse scrolling
   (setq mouse-wheel-scroll-amount '(1)
 	mouse-wheel-progressive-speed nil 
@@ -3173,14 +3173,14 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
       (which-key-mode t))
 ;; More niceties:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Better%20shell][Better shell:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Better%20shell][Better shell:1]]
 (use-package better-shell
 :ensure t
 :bind (("C-'" . better-shell-shell)
 ("C-;" . better-shell-remote-open)))
 ;; Better shell:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Virtualenv][Virtualenv:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Virtualenv][Virtualenv:1]]
 (use-package virtualenvwrapper
 :ensure t
 :config
@@ -3188,9 +3188,13 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 (venv-initialize-eshell))
 ;; Virtualenv:1 ends here
 
-;; [[file:~/.emacs.d/emacs.org::*Time%20in%20mode-line][Time in mode-line:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Time%20in%20mode-line][Time in mode-line:1]]
 (setq display-time-default-load-average nil)
 (setq display-time-interval 1)
 (setq display-time-format "%d|%m-%a|%r")
 (display-time-mode +1)
 ;; Time in mode-line:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Long%20lines][Long lines:1]]
+(setq toggle-truncate-lines t)
+;; Long lines:1 ends here
