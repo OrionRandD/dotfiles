@@ -1594,9 +1594,9 @@ C-c C-m customize-variable RET org-file-apps RET (Extension pdf) under it Choose
 
 ;; (require 'dpaste nil)  ; Not needed if you use package.el
 (global-set-key (kbd "C-c y") 'dpaste-region-or-buffer)
-(setq dpaste-poster "Achylles")
+(setq dpaste-poster "")
 ;; or the preferred method of adding your `user-full-name variable
-(setq user-full-name "Achylles")
+(setq user-full-name "")
 
 #+END_SRC
 
@@ -1921,10 +1921,10 @@ M-x diatheke-mode or
       (interactive)
       (when (y-or-n-p "IRC? ")
 	(erc :server "irc.freenode.net" :port 6667
-	     :nick "Achylles" :full-name "Achylles")
+	     :nick "" :full-name "")
 	(erc :server "irc.dalnet.net" :port 6667
-	     :nick "Achylles" :full-name "Achylles")
-	(erc :server "irc.oftc.net" :port 6667 :nick "Achylles")))
+	     :nick "" :full-name "")
+	(erc :server "irc.oftc.net" :port 6667 :nick "")))
 
    #+END_SRC
    
@@ -2042,12 +2042,14 @@ M-x RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc..
 
 * TODO Gitlab
 
+  gitlab-token-id is your username
+
 #+BEGIN_SRC emacs-lisp
 
       (use-package gitlab
        :ensure t)
 	 (setq gitlab-host "https://gitlab.com"
-	       gitlab-token-id "OrionRandD")
+	       gitlab-token-id "")
 
 #+END_SRC
 
@@ -4219,11 +4221,11 @@ Windows with Cygwin tools installed, assuming no password is required
 	(error "Password not found for %S" params))))
 
   (defun my-nickserv-password (server)
-    (my-fetch-password :login "Achylles" :machine "irc.freenode.net"))
+    (my-fetch-password :login "" :machine "irc.freenode.net"))
 
   (setq circe-network-options
       '(("Freenode"
-	 :nick "Achylles"
+	 :nick ""
 
        ;;  :channels ("#alsa" "#bash" "#badrock" "#c" "#clnoobs" "#clojure" "#clojure-beginners" "#clschool" "#coreboot" "#debian" "#debian-offtopic" "#devuan" "#emacs" "#emacs-es" "#erc" "#evil-mode" "#filmsbykris" "#freebsd" "#freedos" "#git" "#gitlab" "#guix" "#hardware" "#haskell" "#i3" "#javascript" "#julia" "#latex" "#libreoffice" "#lisp" "#lisp-es" "#lispcafe" "#lispweb" "#maria" "#math" "#matrix"  "#maxima" "#mpd" "#mysql" "#neomutt" "#oauth" "#org-mode" "#pcbsd" "#physics" "#plasma" "#prolog" "#python" "#qtox" "#ranger" "#regex" "#ring" "#sbcl" "#scala" "#slime" "#startups" "#sword" "#tmux" "#trueos" "#vim" "#vimus" "#wanderlust" "#weechat" "#xfce" "#xiphos")
 
