@@ -8,6 +8,8 @@
 
 * TODO Emacs commands
 
+  #+begin_verse
+
 Commands 
 
 Important note	do NOT run emacs in terminal inside tmux
@@ -141,6 +143,8 @@ Tutorial workflow
 M-s ! inv_Win.sh	for compton compositor 
 M-s ! screenkey	for showing keys
 Then you can record your screen
+
+  #+end_verse
 
 * Emacspeak
 https://tvraman.github.io/emacspeak/manual/Emacspeak-Commands-And-Options.html#Emacspeak-Commands-And-Options
@@ -4918,3 +4922,13 @@ https://ivanmalison.github.io/dotfiles/#about
 
 #+END_SRC
 
+* TODO Zoom-frm
+
+  required  by hycontrol-frame  
+  
+  #+BEGIN_SRC
+  
+  (add-to-list 'load-path "~/.emacs.d/el-get/zoom-frm")
+  (require 'zoom-frm)
+  
+  #+END_SRC

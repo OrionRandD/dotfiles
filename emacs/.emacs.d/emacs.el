@@ -3220,3 +3220,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 
   (evil-define-key 'visual 'global "Q" #'my-norm@q)
 ;; evil-macros keys:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*emacros][emacros:1]]
+
+;; emacros:1 ends here

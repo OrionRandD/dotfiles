@@ -744,6 +744,7 @@ alias ka="killall"
 alias tr="transmission-remote"
 
 #alias g="git"
+alias gita="git add"
 alias gitcm="git commit -m "
 alias gitrmrc="git rm -r --cached . "
 alias gi="git init"
@@ -836,7 +837,6 @@ alias bigfor="mpc seek +120"
 #hello-larbs() { sed -i -e '/LARBS/,$d' ~/.config/i3/config ;}
 
 # More good stuff
-alias gitc='git clone'
 alias sucp='sudo cp -urv'
 alias tmuxks='tmux kill-session' # it will kill the running session
 # if you want to kill other session, do: "tmux kill-session $sessionName"
