@@ -741,26 +741,33 @@ alias sgvimmin="sudo vim -u ~/.vimrc_minimal"
 alias r="ranger"
 alias sranger="sudo ranger"
 alias ka="killall"
-#alias g="git"
-alias gi="git init"
-alias gra="git remote add"
-alias gs="git status"
-alias gipom="git push origin master"
-alias gitpass="git config --global credential.helper cache"
 alias tr="transmission-remote"
-alias mkd="mkdir -pv"
+
+#alias g="git"
+alias gitcm="git commit -m "
+alias gitrmrc="git rm -r --cached . "
+alias gi="git init"
+alias gipom="git push origin master"
+alias gitc="git clone"
+alias gitpass="git config --global credential.helper cache"
+alias gra="git remote add"
+alias gsst="git status"
+
 alias nr="npm run"
 alias ni="nmp install"
 alias nid="nmp install -D"
+
 alias refb="source ~/.bashrc"
 # alias ref="shortcuts.sh && source ~/.bashrc" # Refresh shortcuts manually and reload bashrc
 alias bars="bash ~/.config/polybar/launch.sh" # Run Polybar relaunch script
 #alias bw="wal -i ~/.config/wall.png" # Rerun pywal
 weather() { curl wttr.in/$1 ; } # Check the weather (give city or leave blank).
 
+alias mkd="mkdir -pv"
+
 # functions
 # create a folder and enter into it
-function mkcd () {
+function mkc () {
     mkdir -pv "$@" && cd "$_";
 }
 

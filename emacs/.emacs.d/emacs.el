@@ -300,7 +300,7 @@
 ;; Counsel Ivy and Swiper:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*El-get][El-get:1]]
-(add-to-list 'load-path "/home/vagner/.emacs.d/el-get/el-get")
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
    (require 'el-get)
 
 ;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get/el-get/recipes")
@@ -553,7 +553,7 @@ file with `edit-abbrevs`"
        ;; can't use $HOME in path for \addbibresource but that "~"
        ;; works.
        (setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
-;;     (setq reftex-default-bibliography '("/home/vagner/latex_projects/references.bib/")); So that RefTeX in Org-mode knows bibliography
+;;     (setq reftex-default-bibliography '("~/latex_projects/references.bib/")); So that RefTeX in Org-mode knows bibliography
 ;;     (setq reftex-default-bibliography '("UNCOMMENT LINE AND INSERT PATH TO YOUR BIBLIOGRAPHY HERE")); So that RefTeX in Org-mode knows bibliography
        (setcdr (assoc 'caption reftex-default-context-regexps) "\\\\\\(rot\\|sub\\)?caption\\*?[[{]"); Recognize \subcaptions, e.g. reftex-citation
        (setq reftex-cite-format; Get ReTeX with biblatex, see https://tex.stackexchange.com/questions/31966/setting-up-reftex-with-biblatex-citation-commands/31992#31992
@@ -896,9 +896,9 @@ file with `edit-abbrevs`"
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Dpaste][Dpaste:1]]
 ;; (require 'dpaste nil)  ; Not needed if you use package.el
 (global-set-key (kbd "C-c y") 'dpaste-region-or-buffer)
-(setq dpaste-poster "Achylles")
+(setq dpaste-poster "")
 ;; or the preferred method of adding your `user-full-name variable
-(setq user-full-name "Achylles")
+(setq user-full-name "")
 ;; Dpaste:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Diatheke][Diatheke:1]]
@@ -928,7 +928,7 @@ file with `edit-abbrevs`"
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Wgrep%20for%20fuzy%20dired][Wgrep for fuzy dired:1]]
 (use-package wgrep
  :ensure t)
-(setq counsel-fzf-cmd "/home/vagner/.fzf/bin/fzf -f %s")
+(setq counsel-fzf-cmd "~/.fzf/bin/fzf -f %s")
 ;; Wgrep for fuzy dired:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Dtk%20-%20another%20better%20diatheke][Dtk - another better diatheke:1]]
@@ -1038,7 +1038,7 @@ file with `edit-abbrevs`"
   :ensure t
   :config
   (elfeed-org)
-  (setq rmh-elfeed-org-files (list "~vagner/org~/elfeed.org")))
+  (setq rmh-elfeed-org-files (list "~/org~/elfeed.org")))
 ;; elfeed-org:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Emacs%20edit%20firefox-chromium%20plugin][Emacs edit firefox-chromium plugin:1]]
@@ -1127,10 +1127,10 @@ file with `edit-abbrevs`"
     (interactive)
     (when (y-or-n-p "IRC? ")
       (erc :server "irc.freenode.net" :port 6667
-	   :nick "Achylles" :full-name "Achylles")
+	   :nick "" :full-name "")
       (erc :server "irc.dalnet.net" :port 6667
-	   :nick "Achylles" :full-name "Achylles")
-      (erc :server "irc.oftc.net" :port 6667 :nick "Achylles")))
+	   :nick "" :full-name "")
+      (erc :server "irc.oftc.net" :port 6667 :nick "")))
 ;; Erc - irc client:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Bitlbee][Bitlbee:1]]
@@ -1187,7 +1187,7 @@ file with `edit-abbrevs`"
 (use-package gitlab
  :ensure t)
    (setq gitlab-host "https://gitlab.com"
-	 gitlab-token-id "OrionRandD")
+	 gitlab-token-id "")
 ;; Gitlab:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*GGtags][GGtags:1]]
@@ -1869,7 +1869,7 @@ To get the frame's current cursor type, use `frame-parameters'."
 
 		     ;; https://github.com/bandresen/mu4e-send-delay
 
-	     (add-to-list 'load-path "/home/vagner/.emacs.d/elpa/mu4e-send-delay")
+	     (add-to-list 'load-path "~/.emacs.d/elpa/mu4e-send-delay")
 
 ;;	     (require 'mu4e-send-delay)
 
@@ -1956,14 +1956,14 @@ To get the frame's current cursor type, use `frame-parameters'."
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-brain][Org-brain:1]]
 ;;  (use-package org-brain  
 ;;    :init
-;;    (setq org-brain-path "/home/vagner/org~/brain")
+;;    (setq org-brain-path "~/org~/brain")
 ;;    ;; For Evil users
 ;;    (with-eval-after-load 'evil
 ;;      (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
 ;;    :config
 ;;    (setq org-id-track-globally t)
 ;;    (setq org-brain-file-entries-use-title nil)
-   ;; (setq org-id-locations-file "/home/vagner/org~/brain/.org-id-locations")
+   ;; (setq org-id-locations-file "~/org~/brain/.org-id-locations")
    ;;  (push '("b" "Brain" plain (function org-brain-goto-end)
 ;;	     "* %i%?" :empty-lines 1)
 ;;	   org-capture-templates)
@@ -2164,7 +2164,7 @@ Suggest the URL title as a description for resource."
 ;; if it does not load, do:
 ;; Alt-x load-library RET ox-reveal
 
-  (setq org-reveal-root "file:/home/vagner/reveal-slides/reveal.js")
+  (setq org-reveal-root "file:~/reveal-slides/reveal.js")
 
  ;; (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
 
@@ -2304,9 +2304,9 @@ Suggest the URL title as a description for resource."
 ;; Smex:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Speed%20directories%20and%20files][Speed directories and files:1]]
-(defvar vagner-filelist nil "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
+(defvar cyber-filelist nil "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
 
-(setq vagner-filelist
+(setq cyber-filelist
       '(
 	("emacs.org" . "~/.emacs.d/emacs.org" )
 	("Documents" . "~/Documents/" )
@@ -2317,14 +2317,14 @@ Suggest the URL title as a description for resource."
 	;; more here
 	) )
 
-(defun vagner-open-file-fast ()
-  "Prompt to open a file from `vagner-filelist'.
+(defun cyber-open-file-fast ()
+  "Prompt to open a file from `cyber-filelist'.
 URL 'http://ergoemacs.org/emacs/emacs_hotkey_open_file_fast.html'
 Version 2015-04-23"
   (interactive)
   (let ((ξabbrevCode
-	 (ido-completing-read "Open:" (mapcar (lambda (ξx) (car ξx)) vagner-filelist))))
-    (find-file (cdr (assoc ξabbrevCode vagner-filelist)))))
+	 (ido-completing-read "Open:" (mapcar (lambda (ξx) (car ξx)) cyber-filelist))))
+    (find-file (cdr (assoc ξabbrevCode cyber-filelist)))))
 ;; Speed directories and files:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Splash-screen][Splash-screen:1]]
@@ -2499,8 +2499,8 @@ Version 2015-04-23"
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Tramp][Tramp:1]]
 (custom-set-variables
  '(tramp-default-method "ssh")
- '(tramp-default-user "vagner")
- '(tramp-default-host "lea-pet.local:2401"))
+ '(tramp-default-user "")
+ '(tramp-default-host ""))
 ;; Tramp:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Treemacs][Treemacs:1]]
@@ -2553,8 +2553,8 @@ Version 2015-04-23"
 ;; you have to issue: Ctrl-x m RET vr/  to see the command
 ;; if the files are not already in the load path
 
-(add-to-list 'load-path "/home/vagner/.emacs.d/elpa/visual-regexp-20170301.116/")
-(add-to-list 'load-path "/home/vagner/.emacs.d/elpa/visual-regexp-steroids-20170222.253")
+(add-to-list 'load-path "~/.emacs.d/elpa/visual-regexp-20170301.116/")
+(add-to-list 'load-path "~/.emacs.d/elpa/visual-regexp-steroids-20170222.253")
 (require 'visual-regexp)
 (require 'visual-regexp-steroids)
 (define-key global-map (kbd "C-c r") 'vr/replace)
@@ -2783,11 +2783,11 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
       (error "Password not found for %S" params))))
 
 (defun my-nickserv-password (server)
-  (my-fetch-password :login "Achylles" :machine "irc.freenode.net"))
+  (my-fetch-password :login "" :machine "irc.freenode.net"))
 
 (setq circe-network-options
     '(("Freenode"
-       :nick "Achylles"
+       :nick ""
 
      ;;  :channels ("#alsa" "#bash" "#badrock" "#c" "#clnoobs" "#clojure" "#clojure-beginners" "#clschool" "#coreboot" "#debian" "#debian-offtopic" "#devuan" "#emacs" "#emacs-es" "#erc" "#evil-mode" "#filmsbykris" "#freebsd" "#freedos" "#git" "#gitlab" "#guix" "#hardware" "#haskell" "#i3" "#javascript" "#julia" "#latex" "#libreoffice" "#lisp" "#lisp-es" "#lispcafe" "#lispweb" "#maria" "#math" "#matrix"  "#maxima" "#mpd" "#mysql" "#neomutt" "#oauth" "#org-mode" "#pcbsd" "#physics" "#plasma" "#prolog" "#python" "#qtox" "#ranger" "#regex" "#ring" "#sbcl" "#scala" "#slime" "#startups" "#sword" "#tmux" "#trueos" "#vim" "#vimus" "#wanderlust" "#weechat" "#xfce" "#xiphos")
 
@@ -2987,7 +2987,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
    "* TODO %^{Description} %^g\n%?\nAdded: %U")
 
      ;; example is in:
-     ;; /home/vagner/.emacs.d/elpa/org-plus-contrib-20190520/org-contacts.el
+     ;; ~/.emacs.d/elpa/org-plus-contrib-20190520/org-contacts.el
      ("c" "Contacts" entry (file "~/org~/contacts.org")
 	"* %(org-contacts-template-name)
 
@@ -3062,7 +3062,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 ;; bbdb-database:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*ipp%20Printer][ipp Printer:1]]
-(add-to-list 'load-path "/home/vagner/.emacs.d/elpa/ipp")
+(add-to-list 'load-path "~/.emacs.d/elpa/ipp")
 
 (require 'ipp)
 ;; ipp Printer:1 ends here
@@ -3198,3 +3198,25 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Long%20lines][Long lines:1]]
 (setq toggle-truncate-lines t)
 ;; Long lines:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*evil-macros%20keys][evil-macros keys:1]]
+(evil-define-key 'normal 'global
+  ;; select the previously pasted text
+  "gp" "`[v`]"
+  ;; run the macro in the q register
+  "Q" "@q")
+
+(evil-define-key 'visual 'global
+  ;; run macro in the q register on all selected lines
+  "Q" (kbd ":norm @q RET")
+  ;; repeat on all selected lines
+  "." (kbd ":norm . RET"))
+
+;; alternative command version
+(defun my-norm@q ()
+  "Apply macro in q register on selected lines."
+  (interactive)
+  (evil-ex-normal (region-beginning) (region-end) "@q"))
+
+  (evil-define-key 'visual 'global "Q" #'my-norm@q)
+;; evil-macros keys:1 ends here

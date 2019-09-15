@@ -210,7 +210,7 @@ eloud-mode is a good option for emacspeak
 (require 'eloud)
 
 ;; you have to setup eloud-speech-rate and eloud-voice in
-;; "/home/vagner/.emacs.d/elpa/eloud-20190706.1707/eloud.el"
+;; "~/.emacs.d/elpa/eloud-20190706.1707/eloud.el"
 ;; file and compile that - eloud-speech-rate was setup to 269
 
 (setq eloud-espeak-path "/usr/bin/espeak")
@@ -725,7 +725,7 @@ M-x package-install yasnippet-classic-snippets
   
 #+BEGIN_SRC emacs-lisp
 
-     (add-to-list 'load-path "/home/vagner/.emacs.d/el-get/el-get")
+     (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
      (require 'el-get)
 
   ;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get/el-get/recipes")
@@ -1073,7 +1073,7 @@ Customary Customization, p. 1 and 16 in the manual, and http://www.emacswiki.org
 	 ;; can't use $HOME in path for \addbibresource but that "~"
 	 ;; works.
 	 (setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
-  ;;     (setq reftex-default-bibliography '("/home/vagner/latex_projects/references.bib/")); So that RefTeX in Org-mode knows bibliography
+  ;;     (setq reftex-default-bibliography '("~/latex_projects/references.bib/")); So that RefTeX in Org-mode knows bibliography
   ;;     (setq reftex-default-bibliography '("UNCOMMENT LINE AND INSERT PATH TO YOUR BIBLIOGRAPHY HERE")); So that RefTeX in Org-mode knows bibliography
 	 (setcdr (assoc 'caption reftex-default-context-regexps) "\\\\\\(rot\\|sub\\)?caption\\*?[[{]"); Recognize \subcaptions, e.g. reftex-citation
 	 (setq reftex-cite-format; Get ReTeX with biblatex, see https://tex.stackexchange.com/questions/31966/setting-up-reftex-with-biblatex-citation-commands/31992#31992
@@ -1645,7 +1645,7 @@ M-x diatheke-mode or
 
     (use-package wgrep
      :ensure t)
-    (setq counsel-fzf-cmd "/home/vagner/.fzf/bin/fzf -f %s")
+    (setq counsel-fzf-cmd "~/.fzf/bin/fzf -f %s")
 
   #+END_SRC
 
@@ -1799,7 +1799,7 @@ M-x diatheke-mode or
       :ensure t
       :config
       (elfeed-org)
-      (setq rmh-elfeed-org-files (list "~vagner/org~/elfeed.org")))
+      (setq rmh-elfeed-org-files (list "~/org~/elfeed.org")))
 
   #+end_src
 
@@ -2125,7 +2125,7 @@ M-x RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc..
   CLOSED: [2019-05-21 ter 12:53]
   
   https://github.com/atykhonov/google-translate/issues/52#issuecomment-423870290
-  Use /home/vagner/bin/tkk_gg_transl_emacs.sh to get the 
+  Use ~/bin/tkk_gg_transl_emacs.sh to get the 
   ;; (list 427110 1469889687) <--> list tkk correct number
 
 #+BEGIN_SRC emacs-lisp 
@@ -2160,7 +2160,7 @@ M-x RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc..
   Then install the extensions - addons
   https://github.com/karlicoss/grasp/releases
   and start the server:
-  Instructions are in /home/vagner/org~/grasp
+  Instructions are in ~/org~/grasp
 
   #+BEGIN_SRC emacs-lisp
 
@@ -2949,7 +2949,7 @@ Ctrl-x m package-install RET langtool
 
 			 ;; https://github.com/bandresen/mu4e-send-delay
 
-		 (add-to-list 'load-path "/home/vagner/.emacs.d/elpa/mu4e-send-delay")
+		 (add-to-list 'load-path "~/.emacs.d/elpa/mu4e-send-delay")
 
     ;;	     (require 'mu4e-send-delay)
 
@@ -3059,14 +3059,14 @@ Ctrl-x m package-install RET langtool
 
 ;;  (use-package org-brain  
 ;;    :init
-;;    (setq org-brain-path "/home/vagner/org~/brain")
+;;    (setq org-brain-path "~/org~/brain")
 ;;    ;; For Evil users
 ;;    (with-eval-after-load 'evil
 ;;      (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
 ;;    :config
 ;;    (setq org-id-track-globally t)
 ;;    (setq org-brain-file-entries-use-title nil)
-   ;; (setq org-id-locations-file "/home/vagner/org~/brain/.org-id-locations")
+   ;; (setq org-id-locations-file "~/org~/brain/.org-id-locations")
    ;;  (push '("b" "Brain" plain (function org-brain-goto-end)
 ;;	     "* %i%?" :empty-lines 1)
 ;;	   org-capture-templates)
@@ -3339,7 +3339,7 @@ http://www.bobnewell.net/publish/35years/webclipper.html
   ;; if it does not load, do:
   ;; Alt-x load-library RET ox-reveal
 
-    (setq org-reveal-root "file:/home/vagner/reveal-slides/reveal.js")
+    (setq org-reveal-root "file:~/reveal-slides/reveal.js")
 
    ;; (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
 
@@ -3433,12 +3433,12 @@ http://www.bobnewell.net/publish/35years/webclipper.html
  http://www.bobnewell.net/filez/poetry.el
 
  Install w3m on debian and emacs
- Put poetry.el inside /home/vagner/.emacs.d/elpa/poetry/
+ Put poetry.el inside ~/.emacs.d/elpa/poetry/
  Byte compile it with:
 
  Instrall rhyme - ~/Downloads/rhyme 
 
- emacs --batch --eval '(byte-compile-file "/home/vagner/.emacs.d/elpa/poetry/poetry.el")'
+ emacs --batch --eval '(byte-compile-file "~/.emacs.d/elpa/poetry/poetry.el")'
 
 #+BEGIN_SRC emacs-lisp 
 
@@ -3574,9 +3574,9 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
 #+BEGIN_SRC emacs-lisp
 
-   (defvar vagner-filelist nil "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
+   (defvar cyber-filelist nil "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
 
-  (setq vagner-filelist
+  (setq cyber-filelist
 	'(
 	  ("emacs.org" . "~/.emacs.d/emacs.org" )
 	  ("Documents" . "~/Documents/" )
@@ -3587,14 +3587,14 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 	  ;; more here
 	  ) )
 
-  (defun vagner-open-file-fast ()
-    "Prompt to open a file from `vagner-filelist'.
+  (defun cyber-open-file-fast ()
+    "Prompt to open a file from `cyber-filelist'.
   URL 'http://ergoemacs.org/emacs/emacs_hotkey_open_file_fast.html'
   Version 2015-04-23"
     (interactive)
     (let ((ξabbrevCode
-	   (ido-completing-read "Open:" (mapcar (lambda (ξx) (car ξx)) vagner-filelist))))
-      (find-file (cdr (assoc ξabbrevCode vagner-filelist)))))
+	   (ido-completing-read "Open:" (mapcar (lambda (ξx) (car ξx)) cyber-filelist))))
+      (find-file (cdr (assoc ξabbrevCode cyber-filelist)))))
 
 #+END_SRC
 
@@ -3849,8 +3849,8 @@ Windows with Cygwin tools installed, assuming no password is required
 
   (custom-set-variables
    '(tramp-default-method "ssh")
-   '(tramp-default-user "vagner")
-   '(tramp-default-host "lea-pet.local:2401"))
+   '(tramp-default-user "")
+   '(tramp-default-host ""))
 
 #+END_SRC
 
@@ -3925,8 +3925,8 @@ Windows with Cygwin tools installed, assuming no password is required
   ;; you have to issue: Ctrl-x m RET vr/  to see the command
   ;; if the files are not already in the load path
 
-  (add-to-list 'load-path "/home/vagner/.emacs.d/elpa/visual-regexp-20170301.116/")
-  (add-to-list 'load-path "/home/vagner/.emacs.d/elpa/visual-regexp-steroids-20170222.253")
+  (add-to-list 'load-path "~/.emacs.d/elpa/visual-regexp-20170301.116/")
+  (add-to-list 'load-path "~/.emacs.d/elpa/visual-regexp-steroids-20170222.253")
   (require 'visual-regexp)
   (require 'visual-regexp-steroids)
   (define-key global-map (kbd "C-c r") 'vr/replace)
@@ -4577,7 +4577,7 @@ You have to install org-plus-contrib
      "* TODO %^{Description} %^g\n%?\nAdded: %U")
 
        ;; example is in:
-       ;; /home/vagner/.emacs.d/elpa/org-plus-contrib-20190520/org-contacts.el
+       ;; ~/.emacs.d/elpa/org-plus-contrib-20190520/org-contacts.el
        ("c" "Contacts" entry (file "~/org~/contacts.org")
 	  "* %(org-contacts-template-name)
 
@@ -4683,7 +4683,7 @@ You have to install org-plus-contrib
 
 #+BEGIN_SRC emacs-lisp 
 
-   (add-to-list 'load-path "/home/vagner/.emacs.d/elpa/ipp")
+   (add-to-list 'load-path "~/.emacs.d/elpa/ipp")
 
    (require 'ipp)
 
@@ -4865,12 +4865,56 @@ https://ivanmalison.github.io/dotfiles/#about
   (display-time-mode +1)
 
 #+END_SRC
+
 * Long lines 
 
   you can use: auto-fill-mode, truncate-lines, line ending, long-lines, visual-line-mode, format=flowed, fill-paragraph [unfill-paragraph] - most of them for displaying purpose 
 
   https://www.emacswiki.org/emacs/LineWrap#searchlang
 
-  #+begin_src emacs-lisp :tangle yes
-  (setq toggle-truncate-lines t)
-  #+end_src
+#+BEGIN_SRC emacs-lisp 
+
+    (setq toggle-truncate-lines t)
+
+#+END_SRC
+
+* evil-macros keys 
+
+#+BEGIN_SRC emacs-lisp 
+
+(evil-define-key 'normal 'global
+  ;; select the previously pasted text
+  "gp" "`[v`]"
+  ;; run the macro in the q register
+  "Q" "@q")
+
+(evil-define-key 'visual 'global
+  ;; run macro in the q register on all selected lines
+  "Q" (kbd ":norm @q RET")
+  ;; repeat on all selected lines
+  "." (kbd ":norm . RET"))
+
+;; alternative command version
+(defun my-norm@q ()
+  "Apply macro in q register on selected lines."
+  (interactive)
+  (evil-ex-normal (region-beginning) (region-end) "@q"))
+
+  (evil-define-key 'visual 'global "Q" #'my-norm@q)
+
+#+END_SRC
+
+* TODO emacros 
+  
+  http://thbecker.net/free_software_utilities/emacs_lisp/emacros/emacros.html
+
+  For making macros in emacs you have to:
+  turn-off-evil-mode
+  global-auto-complete-mode
+  fundamental-mode
+
+#+BEGIN_SRC emacs-lisp 
+
+
+#+END_SRC
+
