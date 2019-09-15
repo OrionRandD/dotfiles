@@ -22,8 +22,8 @@
 
 ##################
 
-*#
 # *.
+*#
 *.7z
 *.bak
 *.class
@@ -64,13 +64,18 @@
 ._*
 .cask/
 .classpath
+.emacs.desktop
+.emacs.desktop.lock 
 .gradle
+.last-package-update-day
 .loadpath
+.mc-lists.el
 .metadata
 .org-id-locations
 .project
 .settings/
 .trashes
+.tutor
 /.DS_Store
 /.emacs.desktop
 /.emacs.desktop.lock
@@ -101,9 +106,12 @@ Thumbs.db
 [Oo]bj/
 [Rr]elease/
 \#*\#
+_.emacs.org_lea_Cyberwarrior
+_.emacs.org_vagner_Cyberwarrior
+_.emacs_vagner_Cyberwarrior
+_.emacs_vagner_Cyberwarrior_bak
 _.emacs_vanilla
 _.emacs_vanilla~
-emacs_ok.org
 abbrev_defs
 abbrev_defs_bak
 ac-comphist.dat
@@ -125,6 +133,8 @@ el-get/
 elpa/
 emacs-dot-files/
 emacs.org_archive
+emacs.org_lea_Cyberwarrior,
+emacs.service
 emacs.service
 emacs_bak.el
 emacs_bak.org
@@ -132,6 +142,7 @@ emacs_bugged_packages.org
 emacs_config-framagit/
 emacs_config-zamansky/
 emacs_debugged.org
+emacs_ok.org
 emacs_sysd_init-daemons/
 emms/
 eshell/
@@ -175,9 +186,3 @@ undo/
 url/
 var/
 x64/
-.emacs.desktop
-.emacs.desktop.lock 
-.last-package-update-day
-.mc-lists.el
-.tutor
-
