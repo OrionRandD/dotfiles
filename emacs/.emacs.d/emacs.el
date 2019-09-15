@@ -1726,8 +1726,6 @@ To get the frame's current cursor type, use `frame-parameters'."
 ;; Misc-1:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Misc-2][Misc-2:1]]
-;; (global-set-key (kbd "C-x t") 'truncate-line-mode)
-
 (global-set-key (kbd "C-c .") 'org-time-stamp)
 
 (global-set-key (kbd "M-/") 'undo-tree-visualize)
@@ -3196,7 +3194,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 ;; Time in mode-line:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Long%20lines][Long lines:1]]
-(setq toggle-truncate-lines t)
+(local-set-key (kbd "C-x w") 'toggle-truncate-lines)
 ;; Long lines:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*evil-macros%20keys][evil-macros keys:1]]

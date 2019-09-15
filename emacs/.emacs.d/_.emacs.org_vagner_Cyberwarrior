@@ -2780,20 +2780,21 @@ Ctrl-x m package-install RET langtool
 
 #+BEGIN_SRC emacs-lisp
 
+   ;; (global-set-key (kbd "C-x t") 'truncate-line-mode)
 
-    (global-set-key (kbd "C-c .") 'org-time-stamp)
+  (global-set-key (kbd "C-c .") 'org-time-stamp)
 
-    (global-set-key (kbd "M-/") 'undo-tree-visualize)
+  (global-set-key (kbd "M-/") 'undo-tree-visualize)
 
-    (global-set-key (kbd "C-M-z") 'switch-window)
+  (global-set-key (kbd "C-M-z") 'switch-window)
 
-    (global-set-key (kbd "C->") 'ace-jump-mode)
+  (global-set-key (kbd "C->") 'ace-jump-mode)
 
-    (global-set-key (kbd "C-M-)") 'transparency-increase)
-    (global-set-key (kbd "C-M-(") 'transparency-decrease)
+  (global-set-key (kbd "C-M-)") 'transparency-increase)
+  (global-set-key (kbd "C-M-(") 'transparency-decrease)
 
-    (global-set-key (kbd "C-M-}") 'mc/mark-next-like-this)
-    (global-set-key (kbd "C-M-{") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-M-}") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-M-{") 'mc/mark-previous-like-this)
 
 #+END_SRC
 
@@ -4047,8 +4048,7 @@ Windows with Cygwin tools installed, assuming no password is required
 
 #+END_SRC
 
-* DONE Youtube-dl
-  CLOSED: [2019-09-15 dom 16:15]
+* Youtube-dl
 
  This youtube-dl is different from the CLI one
  Because only downloads videos from YT site itself
@@ -4062,8 +4062,7 @@ Windows with Cygwin tools installed, assuming no password is required
 
 #+END_SRC
 
-* DONE Elisp
-  CLOSED: [2019-09-15 dom 16:15]
+* Elisp
   
   https://github.com/a13/emacs.d
 
@@ -4133,8 +4132,7 @@ Windows with Cygwin tools installed, assuming no password is required
 
   #+END_SRC
 
-* DONE Network 
-  CLOSED: [2019-09-15 dom 16:15]
+* Network 
 
   #+BEGIN_SRC emacs-lisp 
     (use-package net-utils
@@ -4157,8 +4155,7 @@ Windows with Cygwin tools installed, assuming no password is required
 
   #+END_SRC
 
-* DONE Save-place
-  CLOSED: [2019-09-15 dom 16:15]
+* Save-place
 
 #+BEGIN_SRC emacs-lisp
 
@@ -4169,8 +4166,7 @@ Windows with Cygwin tools installed, assuming no password is required
 
 #+END_SRC
 
-* DONE shell-pop 
-  CLOSED: [2019-09-15 dom 16:15]
+* shell-pop 
 
 #+BEGIN_SRC emacs-lisp
 
@@ -4887,7 +4883,7 @@ https://ivanmalison.github.io/dotfiles/#about
 
 #+BEGIN_SRC emacs-lisp 
 
-  (local-set-key (kbd "C-x w") 'toggle-truncate-lines)
+    (setq toggle-truncate-lines t)
 
 #+END_SRC
 

@@ -8,11 +8,8 @@
 
 * TODO Emacs commands
 
-#+BEGIN_VERSE
-
 Commands 
 
-Important note	do NOT run emacs in terminal inside tmux
 http://ergoemacs.org/emacs/emacs_package_system.html - for melpa, see this link
 http://www.ergoemacs.org/emacs/emacs_basics.html - emacs tutorial 
 
@@ -49,7 +46,7 @@ Ctrl-h i	opens the /usr/share/info file and show all documentation available
 Ctrl-h k Ctrl-x b	shows the help about "Ctrl-x b" keybinding
 Ctrl-h t	opens up a tutorial window
 Ctrl-space Ctrt-space	sets a mark (position) on the text - Ctrl-u Ctrl-space goes back to the mark (position)
-Ctrl-u Ctrl-c . for getting date and time - you can configure it on the minibuffer as you like and you can edit other dates with it - if this does not work, you have to set it manually in your "init.el" with "(global-set-key (kbd "C-c .") 'org-time-stamp)"
+Ctrl-u Ctrl-c . for getting date and time - you can configure it on the minibuffer as you like and you can edit other dates with it
 Ctrl-x 2	split frame horizontally 
 Ctrl-x 3	split frame vertically
 Ctrl-x b	switches back to the previous buffer
@@ -66,27 +63,27 @@ Ctrl-x n s	focus to a section
 Ctrl-x n w	unfocus the section
 Ctrl-x s	save file
 Ctrl-x u or Ctrl-x /	undo
-Alt-x auto-complete-mode
-Alt-x count-words
-Alt-x eval-buffer - evaluates the buffer, so that you do not need to restart emacs
-Alt-x global-auto-complete-mode
-Alt-x linum-mode
-Alt-x linum-relative-mode
-Alt-x linum-relative-toggle
-Alt-x list-packages C-s packageName i x
-Alt-x list-packages - then install with "i-x"
-Alt-x load-theme <RET> name-of-theme
-Alt-x package-install RET package-name
-Alt-x package-refresh-content
-Alt-x package-safe-delete RET package-name
-Alt-x RET slime 
-Alt-x RET speedbar
+C-x C-m auto-complete-mode
+C-x C-m count-words
+C-x C-m eval-buffer - evaluates the buffer, so that you do not need to restart emacs
+C-x C-m global-auto-complete-mode
+C-x C-m linum-mode
+C-x C-m linum-relative-mode
+C-x C-m linum-relative-toggle
+C-x C-m list-packages C-s packageName i x
+C-x C-m list-packages - then install with "i-x"
+C-x C-m load-theme <RET> name-of-theme
+C-x C-m package-install RET package-name
+C-x C-m package-refresh-content
+C-x C-m package-safe-delete RET package-name
+C-x C-m RET slime 
+C-x C-m RET speedbar
 M-x w3m-print-this-url	prints the current url. Then you can paste on email messages 
 C-x m	compose-mail
 C-x 5 m	compose-mail-other-frame
 C-x 4 m	compose-mail-other window
-Alt-x electric-pair-mode	regulates the ugly parens in emacs
-Alt-x set-frame-font RET (font name, font size, etc...) 
+C-x C-m electric-pair-mode	regulates the ugly parens in emacs
+C-x C-m set-frame-font RET (font name, font size, etc...) 
 C-x m RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc...)
 C-x m RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc...)
 C-x r j r	Jump to the position (a mark) and buffer saved in register r (jump-to-register)
@@ -117,50 +114,10 @@ M-x org-insert-structure-template RET TAB or (C-c C-,)	then write the template y
 org-insert-link	if you want to insert images
 org-toggle-inline-images	if you want to toogle them 
 
-Vim-like completion inside buffers
-
-Call them with "M-x"
-commint-dynamic-complete
-commint-dynamic-complete-filename
-commint-completion-at-point
-icicle-commint-dynamic-complete-filename
-helm-commint-prompts
-C-u M! diatheke -b $BibleVersion -f plain -k John 3:15	insert a Bible text inside a buffer (emacs normal-mode)
-:r!diatheke -b $BibleVersion -f plain -k John 3:15	insert a Bible text inside a buffer (evil-mode)
-w3m-browser-url	opens a url in w3m
-
-Snippets
-sbel	source-block-emacs-lisp
-sbupkg	source-block-use-package
-time	insert current time and date in the buffer
-C-u C-c .	insert current time and date in the buffer
-C-q TAB	insert a TAB in the buffer
-M-x calculator	opens a calculator in emacs
-M-x calendar	opens a calendar in emacs 
-M-x butterfly	unleashes the power of the butterfly
-
-Installed packages
-
-in evil-mode:
-M-x list-packages; /installed (they will be highlighted); v (for visual-mode); j (to select them); y (to copy them); open a new buffer and paste them.
-
 Tutorial workflow 
 M-s ! inv_Win.sh	for compton compositor 
 M-s ! screenkey	for showing keys
 Then you can record your screen
-
-#+END_VERSE
-
-* Emacspeak
-https://tvraman.github.io/emacspeak/manual/Emacspeak-Commands-And-Options.html#Emacspeak-Commands-And-Options
-see https://tvraman.github.io/emacspeak/manual/emacspeak_002dwizards.html#emacspeak_002dwizards
-M-x emacs-learn-emacs-mode	asks and speaks commands for you to hear
-
-eloud-mode is a good option for emacspeak
-
-#+BEGIN_SRC emacs-lisp 
-
-#+END_SRC
 
 * Bind M-(Alt)-x to "C-x C-m"
   
@@ -174,78 +131,30 @@ eloud-mode is a good option for emacspeak
 
 * Emacs Config
 
-;;;;;;;;;;;;;;;;;;;;;;;;;
+See package "auto-install" bellow, if you have no internet access
 
-;; $HOME/.emacs file
-;; Create a file with this content to your $HOME/.emacs
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-;; See package "auto-install" bellow, if you have no internet access
-
-;; Speed up emacs
-   (setq gc-cons-threshold (* 100 1024 1024))
-
-;; use-package
-
-(package-initialize)
-
-;; (require 'package)
-
-(setq package-enable-at-startup nil)
-;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("gnu" . "http://mirrors.163.com/elpa/gnu/"))
-(add-to-list 'package-archives
- 	     '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives
- 	     '("melpa2" . "http://www.mirrorservice.org/sites/melpa.org/packages/"))
-(add-to-list 'package-archives
- 	     '("melpa3" . "http://www.mirrorservice.org/sites/stable.melpa.org/packages/"))
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-
-;; Bootstrap `use-package'
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(org-babel-load-file (expand-file-name "~/.emacs.d/emacs.org"))
-
-;; Ace-windown
-(global-set-key (kbd "M-p") 'ace-window)
-
-;; eloud
-(add-to-list 'load-path "~/.emacs.d/elpa/eloud-20190706.1707")
-(require 'eloud)
-
-;; you have to setup eloud-speech-rate and eloud-voice in
-;; "~/.emacs.d/elpa/eloud-20190706.1707/eloud.el"
-;; file and compile that - eloud-speech-rate was setup to 269
-
-(setq eloud-espeak-path "/usr/bin/espeak")
-;;(setq eloud-espeak-path "/usr/bin/espeak-ng -ven-gb -s 160")
-;;(setq eloud-espeak-path "/usr/bin/espeak -vpt -s 150")
-
-;; if you want to set espeak voice default pitch, you have to
-;; edit the file "/usr/lib/x86_64-linux-gnu/espeak-data/voices/en"
-;; and other voices
+Add this file to your $HOME/.emacs.d/ directory
+And create a $HOME/.emacs file with contents: 
 
 (package-initialize)
 (org-babel-load-file "~/.emacs.d/emacs.org")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;
+Great emacs course [[https://cestlaz.github.io/stories/emacs/]] 
+
+Great tuto and dotfiles  http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html
+
+Zzamboni init.el https://zzamboni.org/post/my-emacs-configuration-with-commentary/
 
 * Emacs tutorials
 
 C-h t	emacs tutorial
-http://ergoemacs.org/emacs/elisp.html#float98228  - Xah Lee
 https://cestlaz.github.io/stories/emacs/
 https://github.com/zamansky/using-emacs/blob/master/myinit.org
 http://www.jesshamrick.com/2012/09/10/absolute-beginners-guide-to-emacs/
 
 * Org-mode tutorials 
 
-  https://orgmode.org/worg/org-tutorials/
+https://orgmode.org/worg/org-tutorials/
 
 #+BEGIN_SRC 
 
@@ -253,12 +162,10 @@ http://www.jesshamrick.com/2012/09/10/absolute-beginners-guide-to-emacs/
   
 * Package 
   
- this config is already in $HOME/.emacs
-  
 #+BEGIN_SRC emacs-lisp 
 
-;;(require 'package)
-;;(package-initialize)
+(require 'package)
+(package-initialize)
 
 #+END_SRC
 
@@ -275,7 +182,7 @@ http://www.jesshamrick.com/2012/09/10/absolute-beginners-guide-to-emacs/
 
 #+BEGIN_SRC emacs-lisp
 
-  (setq gc-cons-threshold (* 100 1024 1024))
+ (setq gc-cons-threshold (* 100 1024 1024))
 
 #+END_SRC
 
@@ -291,14 +198,14 @@ path of the buffer your currently editing :
 #+END_SRC
 
 * Auto-completion
-** TODO Auto-complete - global
+* TODO Auto-complete - global
   
    Use auto-complete or company-mode, but NOT the two of them
 
  #+BEGIN_SRC emacs-lisp 
 
- ;;(require 'auto-complete)
- ;;(global-auto-complete-mode t) 
+   (require 'auto-complete)
+   (global-auto-complete-mode t) 
    (ac-config-default)
    (defun auto-complete-mode-maybe ()
     "No maybe for you. Only AC!"
@@ -311,7 +218,7 @@ path of the buffer your currently editing :
 
  #+END_SRC
 
-** DONE Completion 
+* DONE Completion 
     CLOSED: [2019-05-19 dom 16:01]
 
 	    (global-set-key [tab] 'indent-or-expand)
@@ -328,7 +235,7 @@ path of the buffer your currently editing :
 
   #+END_SRC
 
-** Company-mode
+* Company-mode
 
  Use company-mode or auto-complete, but NOT the two of them
  apt install clang8 libclang1-8
@@ -436,7 +343,7 @@ https://github.com/company-mode/company-mode/wiki/Switching-from-AC
 
  #+END_SRC
 
-* Org-mode 
+* Org-mode
 
 https://orgmode.org/worg/org-tutorials/orgtutorial_dto-pt.html
 https://orgmode.org/manual/index.html
@@ -444,17 +351,24 @@ https://orgmode.org/manual/index.html
 The new way of adding easy-templates is by calling them with
 C-c C-,	org-insert-structure-template
 
-org-auto-complete
-M-x org-ac/setup-current-buffer
+# #+BEGIN_SRC emacs-lisp
 
- #+BEGIN_SRC emacs-lisp
+ (require 'org)
+ (require 'org-tempo)
 
-   (require 'org)
-   (require 'org-ac)
-   (require 'org-tempo)
-   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+# #+END_SRC
 
- #+END_SRC
+* Org-ac - org-auto-complete
+
+  M-x org-ac/setup-current-buffer
+
+#+BEGIN_SRC emacs-lisp 
+
+  (require 'org)
+  (require 'org-ac)
+  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+
+#+END_SRC
 
 * TAB completion on emacs console
   
@@ -608,9 +522,7 @@ M-x org-ac/setup-current-buffer
 
 M-x package-install yasnippet-snippets
 M-x package-install yasnippet-classic-snippets
-    you can see their abbrevs with:
-    M-x yas/describe-tables
-    or you can access YASnippet <-> insert at point
+    then you can access YASnippet <-> insert at point
 
 #+BEGIN_SRC emacs-lisp 
 
@@ -734,7 +646,7 @@ M-x package-install yasnippet-classic-snippets
   
 #+BEGIN_SRC emacs-lisp
 
-     (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+     (add-to-list 'load-path "/home/lea/.emacs.d/el-get/el-get")
      (require 'el-get)
 
   ;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get/el-get/recipes")
@@ -816,8 +728,7 @@ M-x package-install yasnippet-classic-snippets
 
   #+BEGIN_SRC emacs-lisp
 
-    (use-package all-the-icons
-     :ensure t)
+    (use-package all-the-icons)
 
     (defun org-brain-insert-resource-icon (link)
       "Insert an icon, based on content of org-mode LINK."
@@ -847,8 +758,7 @@ M-x package-install yasnippet-classic-snippets
 
   #+BEGIN_SRC emacs-lisp
 
-  (use-package bug-hunter
-   :ensure t)
+  (use-package bug-hunter)
 
   #+END_SRC
 
@@ -900,21 +810,16 @@ C-c M-m	(eshell-display-modifier-help)
 
 * DONE Helm 
   CLOSED: [2019-05-19 dom 15:58]
-
-NOTE: REMOVE "~/.emacs.d/elpa/helm-201908(sth)" package, because it will yield an error:
-
-"Symbol's value as variable is void: helm-left-margin-width"
-
-So that, install helm with:
-
+  
+Install helm with:
 apt install elpa-helm elpa-helm-ag elpa-helm-projectile elpa-helm-rtags
-    and its suggestions
+            and its suggestions
 
 https://tuhdo.github.io/helm-intro.html
 
 #+BEGIN_SRC emacs-lisp
 
-      ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa/helm-3.0/")
+;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa/helm-3.0/")
 	;; (require 'helm-config)
 
 	   (helm-mode 1)
@@ -961,9 +866,6 @@ https://tuhdo.github.io/helm-intro.html
   CLOSED: [2019-05-19 dom 15:59]
 
 you have to install "emacs-bidi" in elpa
-from github - it is not in MELPA
-https://github.com/emacsmirror/bidi
-
 Emacs Is Great - Ep 40, Hebrew/ Bidirectional text
 https://invidio.us/watch?v=LxuNmeCNnqU
 Emacs Is Great - Ep 40 pt 2, Hebrew/ Bidirectional
@@ -1026,8 +928,7 @@ Ignore byte-compile warnings
 #+BEGIN_SRC emacs-lisp 
 
      (use-package org-bullets
-      :ensure t
-      :config
+        :config
         (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 #+END_SRC
@@ -1082,7 +983,7 @@ Customary Customization, p. 1 and 16 in the manual, and http://www.emacswiki.org
 	 ;; can't use $HOME in path for \addbibresource but that "~"
 	 ;; works.
 	 (setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
-  ;;     (setq reftex-default-bibliography '("~/latex_projects/references.bib/")); So that RefTeX in Org-mode knows bibliography
+  ;;     (setq reftex-default-bibliography '("/home/lea/latex_projects/references.bib/")); So that RefTeX in Org-mode knows bibliography
   ;;     (setq reftex-default-bibliography '("UNCOMMENT LINE AND INSERT PATH TO YOUR BIBLIOGRAPHY HERE")); So that RefTeX in Org-mode knows bibliography
 	 (setcdr (assoc 'caption reftex-default-context-regexps) "\\\\\\(rot\\|sub\\)?caption\\*?[[{]"); Recognize \subcaptions, e.g. reftex-citation
 	 (setq reftex-cite-format; Get ReTeX with biblatex, see https://tex.stackexchange.com/questions/31966/setting-up-reftex-with-biblatex-citation-commands/31992#31992
@@ -1217,7 +1118,6 @@ https://www.emacswiki.org/emacs/TextTranslator
 #+BEGIN_SRC emacs-lisp 
 
    (use-package avy
-     :ensure t
      :config
      (avy-setup-default))
 
@@ -1315,7 +1215,7 @@ and "C-\" to toogle between input-methods
 But for typing cedilla system-wide, you need  "English international with dead keys"
 
 Then customize-variable 
-Or "Alt-x customize-variable RET default-input-method
+Or "C-x C-m customize-variable RET default-input-method
 Value Menu String portuguese-prefix -> state - for future "
 
 Per buffer
@@ -1341,7 +1241,7 @@ C-c C-m describe-input-method
 #+BEGIN_SRC emacs-lisp
 
 ;; (use-package ggtags
-;; :ensure t 
+ 
 ;; :config 
 ;; (add-hook 'c-mode-common-hook
 ;;           (lambda ()
@@ -1389,15 +1289,10 @@ C-c C-m describe-input-method
 
 #+BEGIN_SRC emacs-lisp
 
-    ;; (use-package centered-window)
+  (use-package centered-window)
 
-    ;;  (require 'centered-window)
-    ;;  (centered-window-mode t)
-
-  (use-package centered-window 
-    :ensure t
-    :config
-     (centered-window-mode))
+    (require 'centered-window)
+    (centered-window-mode t)
 
 #+END_SRC
 
@@ -1421,7 +1316,7 @@ C-c C-m describe-input-method
    
    Console themes:  charcoal-black cobalt dark-blue
    dark-erc dark-font-lock dark-gnus dark-blue2
-   dark-laptop doom-vibrant goldenrod graham granger gray30 green-phosphor  
+   dark-laptop goldenrod graham granger gray30 green-phosphor  
    heroku hickey hober jonadabian jonadabian-slate
    jsc-dark late-night lavender lethe mano-dark matrix midnight
    misterioso mistyday occidental odersky oswald pierson pok-wob
@@ -1429,45 +1324,53 @@ C-c C-m describe-input-method
    robin-hood ryerson salmon-diff salmon-font-lock simple1 sitaramv-solaris
    slime spolsky subdued subtle-blue suscolors tango-dark tsdh-dark zenburn  
    
-   Also install "doom-themes" "color-theme-modern" and "theme-looper"
+   Also install "doom-themes" "color-theme-modern"
 
    you can use "theme-looper-enable-random-theme"
-   use theme-looper to change emacs themes
+  
 
 #+BEGIN_SRC emacs-lisp 
 
-    (use-package color-theme-modern :ensure color-theme-modern)
-    (use-package doom-themes :ensure doom-themes)
-    (use-package theme-looper :ensure theme-looper)
-    (use-package base16-theme :ensure base16-theme)
-    (use-package moe-theme :ensure moe-theme)
-    (use-package alect-themes :ensure alect-themes)
-    (use-package powerline
-     :ensure t
-     :config
-     (powerline-moe-theme))
+	(setq custom-safe-themes t)
 
-     (setq custom-safe-themes t)
+	(global-set-key (kbd "<f8>") 'theme-looper-enable-random-theme)
 
-     (global-set-key (kbd "<f8>") 'theme-looper-enable-random-theme)
+	;;(load-theme 'monokai t)
+	;;(load-theme 'hydandata-light t)
+	;;(load-theme 'anti-zenburn t)
+	;; (add-hook 'after-init-hook (lambda () (load-theme 'zenburn)))
+	;;(add-hook 'after-init-hook (lambda () (load-theme 'anti-zenburn)))
+	;;(add-hook 'after-init-hook (lambda () (load-theme 'hydandata-light)))
+	;;(add-hook 'after-init-hook (lambda () (load-theme 'heroku-theme)))
+	;;(add-hook 'after-init-hook (lambda () (load-theme 'lavender-theme)))
+	;;(add-hook 'after-init-hook (lambda () (load-theme 'solarized-theme)))
+	;;(add-hook 'after-init-hook (lambda () (load-theme 'sanityinc-solarized-dark)))
+	;;(add-hook 'after-init-hook (lambda () (load-theme 'base16-mexico-light)))
+	;; (add-hook 'after-init-hook (lambda () (load-theme 'monokai)))
+	  (add-hook 'after-init-hook (lambda () (load-theme 'doom-opera)))
+	;;(add-hook 'after-init-hook (lambda () (load-theme 'poet)))
 
-  ;;(load-theme 'base16-flat t)
-  ;;(load-theme 'monokai t)
-  ;;(load-theme 'hydandata-light t)
-  ;;(load-theme 'anti-zenburn t)
-  ;; (add-hook 'after-init-hook (lambda () (load-theme 'julie)))
-    (add-hook 'after-init-hook (lambda () (load-theme 'doom-vibrant)))
-  ;;(add-hook 'after-init-hook (lambda () (load-theme 'zenburn)))
-  ;;(add-hook 'after-init-hook (lambda () (load-theme 'anti-zenburn)))
-  ;;(add-hook 'after-init-hook (lambda () (load-theme 'hydandata-light)))
-  ;;(add-hook 'after-init-hook (lambda () (load-theme 'heroku-theme)))
-  ;;(add-hook 'after-init-hook (lambda () (load-theme 'lavender-theme)))
-  ;;(add-hook 'after-init-hook (lambda () (load-theme 'solarized-theme)))
-  ;;(add-hook 'after-init-hook (lambda () (load-theme 'sanityinc-solarized-dark)))
-  ;;(add-hook 'after-init-hook (lambda () (load-theme 'base16-mexico-light)))
-  ;; (add-hook 'after-init-hook (lambda () (load-theme 'monokai)))
-  ;; (add-hook 'after-init-hook (lambda () (load-theme 'doom-opera)))
-  ;; (add-hook 'after-init-hook (lambda () (load-theme 'poet)))
+	;; Also install: 
+	;; theme-looper
+	;; color-theme-modern
+	;; and use theme-looper to change emacs themes
+
+        ;; (use-package base16-theme
+        ;;     :ensure t)
+
+        ;;    (use-package moe-theme
+        ;;    :ensure t)
+
+        ;;     (use-package alect-themes
+        ;;     :ensure t)
+
+        ;; (load-theme 'base16-flat t)
+
+        ;;      (moe-dark)
+        ;;      (use-package powerline
+        ;;      :ensure t
+        ;;      :config
+        ;;      (powerline-moe-theme))
 
 #+END_SRC
 
@@ -1531,51 +1434,6 @@ https://github.com/zamansky/using-emacs
 
 #+END_SRC
 
-* TODO Dired-ranger
-
-  These bindings are not working
-
-#+BEGIN_SRC emacs-lisp
-
-;;  (use-package dired-ranger
-;;    :ensure t
-;;    :bind (:map dired-mode-map
-;;		("W" . dired-ranger-copy)
-;;		("X" . dired-ranger-move)
-;;		("Y" . dired-ranger-paste)))
-
-#+END_SRC
-
-* Ranger 
-
-#+BEGIN_SRC emacs-lisp
-
-  ;; (use-package ranger 
-  ;;   :ensure t 
-  ;;   :config 
-  ;;     (ranger-override-dired-mode nil)
-  ;;       (setq helm-descbinds-window-style 'same-window)
-  ;;       (setq ranger-cleanup-eagerly t)
-  ;;       (setq ranger-show-dotfiles t)
-  ;;       (setq ranger-modify-header t)
-  ;;       (setq ranger-header-func 'ranger-header-line)
-  ;;       (setq ranger-parent-header-func 'ranger-parent-header-line)
-  ;;       (setq ranger-preview-header-func 'ranger-preview-header-line)
-  ;;       (setq ranger-hide-cursor nil)
-  ;;       (setq ranger-footer-delay 0.2)
-  ;;       (setq ranger-preview-delay 0.040)
-  ;;       (setq ranger-parent-depth 2)
-  ;;       (setq ranger-width-parents 0.12)
-  ;;       (setq ranger-max-parent-width 0.12)
-  ;;       (setq ranger-preview-file t)
-  ;;       (setq ranger-show-literal t)
-  ;;       (setq ranger-width-preview 0.55)
-  ;;       (setq ranger-excluded-extensions '("mkv" "iso" "mp4"))
-  ;;       (setq ranger-max-preview-size 10)
-  ;;       (setq ranger-dont-show-binary t))
-
-#+END_SRC
-
 * Default pdf-viwer
 
 Default pdf-viwer
@@ -1603,16 +1461,15 @@ C-c C-m customize-variable RET org-file-apps RET (Extension pdf) under it Choose
 
 ;; (require 'dpaste nil)  ; Not needed if you use package.el
 (global-set-key (kbd "C-c y") 'dpaste-region-or-buffer)
-(setq dpaste-poster "")
+(setq dpaste-poster "Achylles")
 ;; or the preferred method of adding your `user-full-name variable
-(setq user-full-name "")
+(setq user-full-name "Achylles")
 
 #+END_SRC
 
 * DONE Diatheke
   CLOSED: [2019-05-19 dom 16:31]
 
-Install diatheke from here:
 https://github.com/emacsmirror/diatheke
 diatheke command-line
 M-x diatheke-mode or
@@ -1654,7 +1511,7 @@ M-x diatheke-mode or
 
     (use-package wgrep
      :ensure t)
-    (setq counsel-fzf-cmd "~/.fzf/bin/fzf -f %s")
+    (setq counsel-fzf-cmd "/home/lea/.fzf/bin/fzf -f %s")
 
   #+END_SRC
 
@@ -1730,19 +1587,11 @@ M-x diatheke-mode or
 
  #+END_SRC
 
-* TODO Eldoc  
-
-  https://www.emacswiki.org/emacs/ElDoc
-
- #+begin_src emacs-lisp 
-
- #+end_src
-
-* TODO elfeed 
+* elfeed 
 
   http://pragmaticemacs.com/category/elfeed/
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp :tangle yes
 
       ;;shortcut functions
 
@@ -1789,7 +1638,7 @@ M-x diatheke-mode or
 
 ** elfeed-goodies
 
-  #+begin_src emacs-lisp 
+  #+begin_src emacs-lisp :tangle yes
 
     (use-package elfeed-goodies
       :ensure t
@@ -1800,7 +1649,7 @@ M-x diatheke-mode or
 
 ** elfeed-org
 
-  #+begin_src emacs-lisp 
+  #+begin_src emacs-lisp :tangle yes
 
     ;; use an org file to organise feeds
 
@@ -1808,7 +1657,7 @@ M-x diatheke-mode or
       :ensure t
       :config
       (elfeed-org)
-      (setq rmh-elfeed-org-files (list "~/org~/elfeed.org")))
+      (setq rmh-elfeed-org-files (list "~lea/org~/elfeed.org")))
 
   #+end_src
 
@@ -1930,10 +1779,10 @@ M-x diatheke-mode or
       (interactive)
       (when (y-or-n-p "IRC? ")
 	(erc :server "irc.freenode.net" :port 6667
-	     :nick "" :full-name "")
+	     :nick "Achylles" :full-name "Achylles")
 	(erc :server "irc.dalnet.net" :port 6667
-	     :nick "" :full-name "")
-	(erc :server "irc.oftc.net" :port 6667 :nick "")))
+	     :nick "Achylles" :full-name "Achylles")
+	(erc :server "irc.oftc.net" :port 6667 :nick "Achylles")))
 
    #+END_SRC
    
@@ -1952,16 +1801,14 @@ https://emacs-fu.blogspot.com/2012/03/social-networking-with-bitlbee-and-erc.htm
 
   #+BEGIN_SRC emacs-lisp
 
-	;; run this script in terminal
-	;; alias | sed -E "s/^alias ([^=]+)='(.*)'$/alias \1 \2 \$*/g; s/'\\\''/'/g;" >~/.emacs.d/eshell/alias 
-	;; or better yet,
-	;; (eshell/alias "$command" "$command_instructions $1") <-> run this in your eshell session
-	;; (eshell/alias "rm" "rm -iv $1")
-	;; then it will be saved in "~/.emacs.d/eshell/alias"
+    ;; run this script in terminal
+    ;; alias | sed -E "s/^alias ([^=]+)='(.*)'$/alias \1 \2 \$*/g; s/'\\\''/'/g;" >~/.emacs.d/eshell/alias 
+    ;; or better yet,
+    ;; (eshell/alias "$command" "$command_instructions $1") <-> run this in your eshell session
+    ;; (eshell/alias "rm" "rm -iv $1")
+    ;; then it will be saved in "~/.emacs.d/eshell/alias"
 
-    (use-package eshell 
-      :ensure t
-      :config )
+    (require 'eshell)
 
   #+END_SRC
 
@@ -2006,11 +1853,6 @@ https://markhudnall.com/2016/04/25/starting-figwheel-in-emacs/
 
 * TODO Flycheck
 
-      use flycheck-disable-checker (C-c ! x) 
-      for disabling per buffer syntax checker
-      RET "emacs-lisp" and "emacs-lisp-checkdoc"
-      or set "global-flycheck-mode nil"
-
 #+BEGIN_SRC emacs-lisp
 
     (use-package flycheck
@@ -2051,14 +1893,14 @@ M-x RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc..
 
 * TODO Gitlab
 
-  gitlab-token-id is your username
-
 #+BEGIN_SRC emacs-lisp
+
+  ;;  (require 'gitlab)
 
       (use-package gitlab
        :ensure t)
 	 (setq gitlab-host "https://gitlab.com"
-	       gitlab-token-id "")
+	       gitlab-token-id "OrionRandD")
 
 #+END_SRC
 
@@ -2129,12 +1971,11 @@ M-x RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc..
 (setq org-babel-no-eval-on-ctrl-c-ctrl-c t)
 
 #+END_SRC
-
 * DONE Google-translate
   CLOSED: [2019-05-21 ter 12:53]
   
   https://github.com/atykhonov/google-translate/issues/52#issuecomment-423870290
-  Use ~/bin/tkk_gg_transl_emacs.sh to get the 
+  Use /home/vagner/bin/tkk_gg_transl_emacs.sh to get the 
   ;; (list 427110 1469889687) <--> list tkk correct number
 
 #+BEGIN_SRC emacs-lisp 
@@ -2169,7 +2010,7 @@ M-x RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc..
   Then install the extensions - addons
   https://github.com/karlicoss/grasp/releases
   and start the server:
-  Instructions are in ~/org~/grasp
+  Instructions are in /home/vagner/org~/grasp
 
   #+BEGIN_SRC emacs-lisp
 
@@ -2199,6 +2040,8 @@ M-x RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc..
  Usage - prefix helm-mu-contacts
 
 #+BEGIN_SRC emacs-lisp
+
+  ;;  (require 'helm-mu)
 
       (use-package helm-mu
        :ensure t)
@@ -2255,6 +2098,7 @@ M-x RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc..
      ;; then M-x thumbs
 
 #+END_SRC
+
 
 * DONE Imaxima
   CLOSED: [2019-05-20 seg 11:44]
@@ -2499,9 +2343,6 @@ Ctrl-x m package-install RET langtool
 
 #+BEGIN_SRC emacs-lisp
 
-  (use-package lyrics
-   :ensure t)
-
 #+END_SRC
 
 * DONE Lispy
@@ -2511,15 +2352,12 @@ Ctrl-x m package-install RET langtool
 
 #+BEGIN_SRC emacs-lisp 
 
-   (use-package lispy
-      :ensure t)
+  (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
 
-     (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-
-     (defun conditionally-enable-lispy ()
-       (when (eq this-command 'eval-expression)
-         (lispy-mode 1)))
-     (add-hook 'minibuffer-setup-hook 'conditionally-enable-lispy)
+  (defun conditionally-enable-lispy ()
+    (when (eq this-command 'eval-expression)
+      (lispy-mode 1)))
+  (add-hook 'minibuffer-setup-hook 'conditionally-enable-lispy)
 
 #+END_SRC
 
@@ -2527,8 +2365,10 @@ Ctrl-x m package-install RET langtool
 
 #+BEGIN_SRC emacs-lisp 
    
-    (use-package lorem-ipsum
-      :ensure t)
+  ;;  (use-package lorem-ipsum
+  ;;    :ensure t)
+
+  ;; (require 'lorem-ipsum)
 
   ;;(lorem-ipsum-use-default-bindings)
 
@@ -2543,19 +2383,15 @@ Ctrl-x m package-install RET langtool
 #+END_SRC
 
 * TODO Magit-setup 
- 
+
 #+BEGIN_SRC emacs-lisp 
 
-  (use-package magit 
-   :ensure t
-   :config
-  (global-set-key (kbd "C-c g") 'magit-status))
+  (global-set-key (kbd "C-c g") 'magit-status)
 
 #+END_SRC
 
 * TODO Mplayer-mode
 
- download Mplayer.el from here:
  https://github.com/markhepburn/mplayer-mode
 
 #+BEGIN_SRC emacs-lisp
@@ -2665,8 +2501,8 @@ Ctrl-x m package-install RET langtool
                   (0 'message-double-quoted-text-face))))))
 
  ;; email address
-(setq user-mail-address "vagnerrener@gmail.com"
-        user-full-name "Vagner Rener")
+(setq user-mail-address "leacna@gmail.com"
+        user-full-name "Lea GdS")
 
  ;; add Cc and Bcc headers to the message buffer
   (setq message-default-mail-headers "Cc: \nBcc: \n")
@@ -2774,26 +2610,25 @@ Ctrl-x m package-install RET langtool
 		       (mapcar 'list '("box" "hollow" "bar" "hbar" nil))))))
       (modify-frame-parameters (selected-frame) (list (cons 'cursor-type cursor-type))))
 
-  #+END_SRC
+#+END_SRC
 
 * TODO Misc-2
 
 #+BEGIN_SRC emacs-lisp
 
+ ;; (global-set-key (kbd "C-x t") 'truncate-line-mode)
 
-    (global-set-key (kbd "C-c .") 'org-time-stamp)
+(global-set-key (kbd "M-/") 'undo-tree-visualize)
 
-    (global-set-key (kbd "M-/") 'undo-tree-visualize)
+(global-set-key (kbd "C-M-z") 'switch-window)
 
-    (global-set-key (kbd "C-M-z") 'switch-window)
+(global-set-key (kbd "C->") 'ace-jump-mode)
 
-    (global-set-key (kbd "C->") 'ace-jump-mode)
+(global-set-key (kbd "C-M-)") 'transparency-increase)
+(global-set-key (kbd "C-M-(") 'transparency-decrease)
 
-    (global-set-key (kbd "C-M-)") 'transparency-increase)
-    (global-set-key (kbd "C-M-(") 'transparency-decrease)
-
-    (global-set-key (kbd "C-M-}") 'mc/mark-next-like-this)
-    (global-set-key (kbd "C-M-{") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-M-}") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-M-{") 'mc/mark-previous-like-this)
 
 #+END_SRC
 
@@ -2837,7 +2672,7 @@ Ctrl-x m package-install RET langtool
  https://www.reddit.com/r/emacs/comments/bfsck6/mu4e_for_dummies/
  https://zmalltalker.com/linux/mu.html
  http://pragmaticemacs.com/mu4e-tutorials/
-  http://tech.memoryimprintstudio.com/the-ultimate-emailing-agent-with-mu4e-and-emacs/
+ http://tech.memoryimprintstudio.com/the-ultimate-emailing-agent-with-mu4e-and-emacs/
 
  apt install mu4e
  If you get sentinel error:
@@ -2911,13 +2746,13 @@ Ctrl-x m package-install RET langtool
 		;; (setq mu4e-get-mail-command "offlineimap")
 		;; (setq mu4e-get-mail-command "mbsync ~/gmail")
 
-		(setq mu4e-get-mail-command "mbsync -aV ~/gmail")
+		   (setq mu4e-get-mail-command "mbsync -aV ~/gmail")
 
 		     ;; something about ourselves
 
 		     (setq
-		      user-mail-address "vagnerrener@gmail.com"
-		      user-full-name  "Vagner Rener"
+		      user-mail-address "leacna@gmail.com"
+		      user-full-name  "Lea GdS"
 		      message-signature
 		      (concat
 		       ;;"任文山 (Ren Wenshan)\n"
@@ -2957,7 +2792,7 @@ Ctrl-x m package-install RET langtool
 
 			 ;; https://github.com/bandresen/mu4e-send-delay
 
-		 (add-to-list 'load-path "~/.emacs.d/elpa/mu4e-send-delay")
+		 (add-to-list 'load-path "/home/lea/.emacs.d/elpa/mu4e-send-delay")
 
     ;;	     (require 'mu4e-send-delay)
 
@@ -3067,14 +2902,14 @@ Ctrl-x m package-install RET langtool
 
 ;;  (use-package org-brain  
 ;;    :init
-;;    (setq org-brain-path "~/org~/brain")
+;;    (setq org-brain-path "/home/lea/org~/brain")
 ;;    ;; For Evil users
 ;;    (with-eval-after-load 'evil
 ;;      (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
 ;;    :config
 ;;    (setq org-id-track-globally t)
 ;;    (setq org-brain-file-entries-use-title nil)
-   ;; (setq org-id-locations-file "~/org~/brain/.org-id-locations")
+   ;; (setq org-id-locations-file "/home/lea/org~/brain/.org-id-locations")
    ;;  (push '("b" "Brain" plain (function org-brain-goto-end)
 ;;	     "* %i%?" :empty-lines 1)
 ;;	   org-capture-templates)
@@ -3147,20 +2982,17 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
   #+BEGIN_SRC emacs-lisp
 
-    (use-package org-cliplink
-     :ensure t)
+(defun org-brain-cliplink-resource ()
+  "Add a URL from the clipboard as an org-brain resource.
+Suggest the URL title as a description for resource."
+  (interactive)
+  (let ((url (org-cliplink-clipboard-content)))
+    (org-brain-add-resource
+     url
+     (org-cliplink-retrieve-title-synchronously url)
+     t)))
 
-    (defun org-brain-cliplink-resource ()
-      "Add a URL from the clipboard as an org-brain resource.
-    Suggest the URL title as a description for resource."
-      (interactive)
-      (let ((url (org-cliplink-clipboard-content)))
-	(org-brain-add-resource
-	 url
-	 (org-cliplink-retrieve-title-synchronously url)
-	 t)))
-
-    ;; (define-key org-brain-visualize-mode-map (kbd "L") #'org-brain-cliplink-resource)
+;; (define-key org-brain-visualize-mode-map (kbd "L") #'org-brain-cliplink-resource)
 
   #+END_SRC
 
@@ -3247,7 +3079,6 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
 * TODO Orca
 
-  Install orca from here:
   https://github.com/abo-abo/orca
   https://oremacs.com/2017/10/28/orca/
   
@@ -3296,7 +3127,7 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
 * TODO Org-present
 
-  #+begin_src emacs-lisp 
+  #+begin_src emacs-lisp :tangle yes
 
     (use-package org-present
      :ensure t
@@ -3315,7 +3146,7 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
 ** Org-present-remote
 
-  #+begin_src emacs-lisp 
+  #+begin_src emacs-lisp :tangle yes
 
     (use-package org-present-remote
      :ensure t)
@@ -3324,7 +3155,6 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
 * Org reveal
 
- https://orgmode.org/worg/org-tutorials/non-beamer-presentations.html
  https://github.com/yjwen/org-reveal
  https://github.com/hakimel/reveal.js/
  http://scottnesbitt.io/2017/01/24/org-reveal/
@@ -3345,15 +3175,15 @@ http://www.bobnewell.net/publish/35years/webclipper.html
    ;; )
 
   ;; if it does not load, do:
-  ;; Alt-x load-library RET ox-reveal
+  ;; C-x C-m load-library RET ox-reveal
 
-    (setq org-reveal-root "file:~/reveal-slides/reveal.js")
+    (setq org-reveal-root "file:/home/lea/reveal-slides/reveal.js")
 
    ;; (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
 
    (setq org-reveal-mathjax t)
 
-      ;; To load Org-reveal, type “Alt-x load-library”, then type “ox-reveal”.
+      ;; To load Org-reveal, type “C-x C-m load-library”, then type “ox-reveal”.
 
       ;; ~/reveal-slides/reveal.js$ npm start - you have to start the server
 
@@ -3377,7 +3207,7 @@ http://www.bobnewell.net/publish/35years/webclipper.html
   org-insert-link	if you want to insert images
   org-toggle-inline-images	if you want to toogle them 
 
-  #+begin_src emacs-lisp 
+  #+begin_src emacs-lisp :tangle yes
 
        (use-package org-tree-slide
          :ensure t
@@ -3403,7 +3233,7 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 	   (makeunbound wolfe--enable-transient-map)))
 
   #+end_src
-  
+
 * Persistent-soft
 
  https://github.com/rolandwalker/persistent-soft
@@ -3441,12 +3271,12 @@ http://www.bobnewell.net/publish/35years/webclipper.html
  http://www.bobnewell.net/filez/poetry.el
 
  Install w3m on debian and emacs
- Put poetry.el inside ~/.emacs.d/elpa/poetry/
+ Put poetry.el inside /home/lea/.emacs.d/elpa/poetry/
  Byte compile it with:
 
  Instrall rhyme - ~/Downloads/rhyme 
 
- emacs --batch --eval '(byte-compile-file "~/.emacs.d/elpa/poetry/poetry.el")'
+ emacs --batch --eval '(byte-compile-file "/home/lea/.emacs.d/elpa/poetry/poetry.el")'
 
 #+BEGIN_SRC emacs-lisp 
 
@@ -3458,45 +3288,21 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
 * People with nice emacs config files
 
- List of people with nice emacs dotfiles files
- and some video tutorials:
-
- https://github.com/valignatev/dotfiles
- https://invidio.us/latest_version?id=FYPE0dIoq1I&itag=43
-
- [[https://cestlaz.github.io/stories/emacs/]] 
-
- http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html
-
- https://zzamboni.org/post/my-emacs-configuration-with-commentary/
-
+ List of people with nice emacs config files
  https://github.com/caisah/emacs.dz
  https://github.com/DiegoVicen/my-emacs#my-blog-publishing-configuration
- https://github.com/myTerminal/super-emacs
-
+ 
 #+BEGIN_SRC emacs-lisp 
 
 #+END_SRC
 
-* TODO Perspective
-  https://github.com/nex3/perspective-el 
-  call it with "persp-mode"
-
- #+begin_src emacs-lisp 
-
-   ;; (use-package perspective
-   ;;   :ensure t)
-
- #+end_src
- 
 * Powerline 
 
  #+BEGIN_SRC emacs-lisp 
-   (use-package powerline 
-    :ensure t
-    :config
+
+    (require 'powerline)
     (powerline-center-theme)
-    (setq powerline-center-default-separator 'wave))
+    (setq powerline-center-default-separator 'wave)
 
  #+END_SRC
 
@@ -3511,7 +3317,6 @@ http://www.bobnewell.net/publish/35years/webclipper.html
   (setq auto-mode-alist (append '(("\\.pl$" . prolog-mode)
 				  ("\\.m$" . mercury-mode))
 				 auto-mode-alist))
-
 #+END_SRC
 
 * Quelpa
@@ -3529,10 +3334,8 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
 #+BEGIN_SRC emacs-lisp
 
-  (use-package re-builder
-   :ensure t
-   :config
-   (setq reb-re-syntax 'string))
+  (require 're-builder)
+  (setq reb-re-syntax 'string)
 
 #+END_SRC
 
@@ -3543,9 +3346,9 @@ http://www.bobnewell.net/publish/35years/webclipper.html
   ;; Set your lisp system and, optionally, some contribs
 
   (slime-setup '(slime-repl))
-;; (setq inferior-lisp-program "/usr/bin/sbcl")
-;; Install sbcl from github sources and NOT with apt
-    (setq inferior-lisp-program "/usr/local/bin/sbcl")
+  ;; (setq inferior-lisp-program "/usr/bin/sbcl")
+  ;; Install sbcl from github sources and NOT with apt
+  (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
   ;; update this path to the correct location.
 
@@ -3582,28 +3385,27 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
 #+BEGIN_SRC emacs-lisp
 
-   (defvar cyber-filelist nil "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
+     (defvar lea-filelist nil "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
 
-  (setq cyber-filelist
-	'(
-	  ("emacs.org" . "~/.emacs.d/emacs.org" )
-	  ("Documents" . "~/Documents/" )
-	  ("org~" . "~/org~/" )
-	  ("Download" . "~/Downloads/" )
-	  ("Music" . "~/Music/")
-	  ("Pictures" . "~/Pictures/" )
-	  ;; more here
-	  ) )
+    (setq lea-filelist
+	  '(
+	    ("emacs.org" . "~/.emacs.d/emacs.org" )
+	    ("Documents" . "~/Documents/" )
+	    ("org~" . "~/org~/" )
+	    ("Download" . "~/Downloads/" )
+	    ("Pictures" . "~/Pictures/" )
+	    ;; more here
+	    ) )
 
-  (defun cyber-open-file-fast ()
-    "Prompt to open a file from `cyber-filelist'.
-  URL 'http://ergoemacs.org/emacs/emacs_hotkey_open_file_fast.html'
-  Version 2015-04-23"
-    (interactive)
-    (let ((ξabbrevCode
-	   (ido-completing-read "Open:" (mapcar (lambda (ξx) (car ξx)) cyber-filelist))))
-      (find-file (cdr (assoc ξabbrevCode cyber-filelist)))))
-
+    (defun lea-open-file-fast ()
+      "Prompt to open a file from `lea-filelist'.
+    URL 'http://ergoemacs.org/emacs/emacs_hotkey_open_file_fast.html'
+    Version 2015-04-23"
+      (interactive)
+      (let ((ξabbrevCode
+	     (ido-completing-read "Open:" (mapcar (lambda (ξx) (car ξx)) lea-filelist))))
+	(find-file (cdr (assoc ξabbrevCode lea-filelist)))))
+ 
 #+END_SRC
 
 * Splash-screen
@@ -3614,18 +3416,16 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
 
   ;;(display-splash-screen)
-       
-       (use-package dashboard
-        :ensure t
-        :config
-       (dashboard-setup-startup-hook))
+
+       (require 'dashboard)
+       (dashboard-setup-startup-hook)
 
        ;; Set the title
 
        ;;(setq dashboard-banner-logo-title "*Welcome to vagner@lea-pet.local Emacs Dashboard*")
        ;;(setq dashboard-banner-logo-title "*Welcome to lea@lea-pet.local Emacs Dashboard*")
-       (setq dashboard-banner-logo-title "*Welcome to vagner@Cyberwarrior.local Emacs Dashboard*")
-       ;;(setq dashboard-banner-logo-title "*Welcome to lea@Cyberwarrior.local Emacs Dashboard*")
+       ;;(setq dashboard-banner-logo-title "*Welcome to vagner@Cyberwarrior.local Emacs Dashboard*")
+       (setq dashboard-banner-logo-title "*Welcome to lea@Cyberwarrior.local Emacs Dashboard*")
 
        ;; Set the banner
        ;; (setq dashboard-startup-banner [VALUE])
@@ -3661,12 +3461,12 @@ http://www.bobnewell.net/publish/35years/webclipper.html
  Set the Scheme environment in emacs
 
  1. apt install racket guile
- 2. Alt-x package-install RET geiser
- 3. Alt-x package-install RET scheme-complete
+ 2. M-x package-install RET geiser
+ 3. M-x package-install RET scheme-complete
 
  Then in emacs to get the REPL, do: 
 
- Alt-x run-geiser
+ M-x run-geiser
 
  you can save scheme files as: $file.ss our $file.scm
 
@@ -3698,8 +3498,9 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
   (use-package synonyms
     :disabled
-    :ensure t
+    :ensure
     :init
+    (require 'synonyms)
     :config
     (setq synonyms-file "~/thesaurus/mthesaur.txt")
     (setq synonyms-file "~/thesaurus/brazilian-synonyms.txt")
@@ -3708,7 +3509,7 @@ http://www.bobnewell.net/publish/35years/webclipper.html
     (evil-leader/set-key "sy" 'synonyms))
 
   (use-package powerthesaurus
-    :ensure t
+    :ensure
     :config
     (defun powerthesaurus-lookup-word-at-point ()
       "Find the word at point synonyms at powerthesaurus.org."
@@ -3734,6 +3535,7 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
 #+BEGIN_SRC emacs-lisp
 
+
     (add-to-list 'load-path "~/.emacs.d/elpa/sword-to-org/")
     (require 'sword-to-org)
 
@@ -3752,15 +3554,13 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
     ;; This is the receipt to install telega
     ;; After installation, comment it
-  
-     (use-package telega
-          :quelpa (telega
-          :fetcher github
-          :repo "zevlg/telega.el"
-          :branch "telega-with-inserters"))
+    ;; (use-package telega
+    ;;      :quelpa (telega
+    ;;      :fetcher github
+    ;;      :repo "zevlg/telega.el"
+    ;;      :branch "telega-with-inserters"))
 
     ;; (add-to-list 'load-path "~/.emacs.d/quelpa/build/telega")
-
     (use-package telega
       :quelpa (telega
 	       :fetcher github
@@ -3857,11 +3657,10 @@ Windows with Cygwin tools installed, assuming no password is required
 
   (custom-set-variables
    '(tramp-default-method "ssh")
-   '(tramp-default-user "")
-   '(tramp-default-host ""))
+   '(tramp-default-user "lea")
+   '(tramp-default-host "lea-pet.local:2401"))
 
 #+END_SRC
-
 * Treemacs
   
   Treemacs requires at leaste emacs 25.2
@@ -3889,11 +3688,11 @@ Windows with Cygwin tools installed, assuming no password is required
 
 #+END_SRC
 
-* TODO Trident convert lisp 2 javascript
+* Trident convert lisp 2 javascript
 
  https://github.com/johnmastro/trident-mode.el
 
- Install packages dash, slime and trident  
+ Install packager dash, slime and trident  
 
 #+BEGIN_SRC emacs-lisp
 
@@ -3919,10 +3718,8 @@ Windows with Cygwin tools installed, assuming no password is required
   
 #+BEGIN_SRC emacs-lisp
 
-  (use-package unicode-fonts
-   :ensure t
-   :config
-   (unicode-fonts-setup))
+    (require 'unicode-fonts)
+    (unicode-fonts-setup)
 
 #+END_SRC
 
@@ -3933,8 +3730,8 @@ Windows with Cygwin tools installed, assuming no password is required
   ;; you have to issue: Ctrl-x m RET vr/  to see the command
   ;; if the files are not already in the load path
 
-  (add-to-list 'load-path "~/.emacs.d/elpa/visual-regexp-20170301.116/")
-  (add-to-list 'load-path "~/.emacs.d/elpa/visual-regexp-steroids-20170222.253")
+  (add-to-list 'load-path "/home/lea/.emacs.d/elpa/visual-regexp-20170301.116/")
+  (add-to-list 'load-path "/home/lea/.emacs.d/elpa/visual-regexp-steroids-20170222.253")
   (require 'visual-regexp)
   (require 'visual-regexp-steroids)
   (define-key global-map (kbd "C-c r") 'vr/replace)
@@ -3957,7 +3754,7 @@ Windows with Cygwin tools installed, assuming no password is required
  Install apel --> with package-install
  Install flim --> with package-install
  http://emacs-w3m.namazu.org/info/emacs-w3m.html#SEC_Top
- Just type Alt-x w3m, and you can use emacs-w3m
+ Just type M-x w3m, and you can use emacs-w3m
  
 #+BEGIN_SRC emacs-lisp
 
@@ -3996,7 +3793,7 @@ Windows with Cygwin tools installed, assuming no password is required
       bbdb-offer-save 1                        ;; 1 means save-without-asking
 
   bbdb-use-pop-up t                        ;; allow popups for addresses
-  ;; bbdb-electric-p t                        ;; be disposable with SPC
+  bbdb-electric-p t                        ;; be disposable with SPC
   bbdb-popup-target-lines  1               ;; very small
 
   bbdb-dwim-net-address-allow-redundancy t ;; always use full name
@@ -4047,8 +3844,7 @@ Windows with Cygwin tools installed, assuming no password is required
 
 #+END_SRC
 
-* DONE Youtube-dl
-  CLOSED: [2019-09-15 dom 16:15]
+* Youtube-dl
 
  This youtube-dl is different from the CLI one
  Because only downloads videos from YT site itself
@@ -4062,68 +3858,95 @@ Windows with Cygwin tools installed, assuming no password is required
 
 #+END_SRC
 
-* DONE Elisp
-  CLOSED: [2019-09-15 dom 16:15]
+* Ranger 
+
+#+BEGIN_SRC emacs-lisp
+
+  ;; (use-package ranger 
+  ;;  :ensure t 
+  ;;  :config 
+  ;;     (ranger-override-dired-mode nil)
+  ;;       (setq helm-descbinds-window-style 'same-window)
+  ;;       (setq ranger-cleanup-eagerly t)
+  ;;       (setq ranger-show-dotfiles t)
+  ;;       (setq ranger-modify-header t)
+  ;;       (setq ranger-header-func 'ranger-header-line)
+  ;;       (setq ranger-parent-header-func 'ranger-parent-header-line)
+  ;;       (setq ranger-preview-header-func 'ranger-preview-header-line)
+  ;;       (setq ranger-hide-cursor nil)
+  ;;       (setq ranger-footer-delay 0.2)
+  ;;       (setq ranger-preview-delay 0.040)
+  ;;       (setq ranger-parent-depth 2)
+  ;;       (setq ranger-width-parents 0.12)
+  ;;       (setq ranger-max-parent-width 0.12)
+  ;;       (setq ranger-preview-file t)
+  ;;       (setq ranger-show-literal t)
+  ;;       (setq ranger-width-preview 0.55)
+  ;;       (setq ranger-excluded-extensions '("mkv" "iso" "mp4"))
+  ;;       (setq ranger-max-preview-size 10)
+  ;;       (setq ranger-dont-show-binary t))
+
+#+END_SRC
+
+* Elisp
   
   https://github.com/a13/emacs.d
 
-  #+BEGIN_SRC emacs-lisp 
+  #+BEGIN_SRC emacs-lisp :tangle yes
 
-    ;;    (use-package elisp
-    ;;      :hook
-    ;;      (after-save . check-parens)
-    ;;      )
+;;    (use-package lisp
+;;      :hook
+;;      (after-save . check-parens))
 
-	(use-package highlight-defined
-	  :ensure t
-	  :custom
-	  (highlight-defined-face-use-itself t)
-	  :hook
-	  (emacs-lisp-mode . highlight-defined-mode))
+    (use-package highlight-defined
+      :ensure t
+      :custom
+      (highlight-defined-face-use-itself t)
+      :hook
+      (emacs-lisp-mode . highlight-defined-mode))
 
-	(use-package highlight-quoted
-	  :ensure t
-	  :hook
-	  (emacs-lisp-mode . highlight-quoted-mode))
+    (use-package highlight-quoted
+      :ensure t
+      :hook
+      (emacs-lisp-mode . highlight-quoted-mode))
 
-	(use-package eros
-	  :ensure t
-	  :hook
-	  (emacs-lisp-mode . eros-mode))
+    (use-package eros
+      :ensure t
+      :hook
+      (emacs-lisp-mode . eros-mode))
 
-	(use-package suggest
-	  :ensure t
-	  :defer t)
+    (use-package suggest
+      :ensure t
+      :defer t)
 
-	(use-package ipretty
-	  :ensure t
-	  :config
-	  (ipretty-mode 1))
+    (use-package ipretty
+      :ensure t
+      :config
+      (ipretty-mode 1))
 
-	(use-package nameless
-	  :ensure t
-	  :hook
-	  (emacs-lisp-mode .  nameless-mode)
-	  :custom
-	  (nameless-global-aliases '())
-	  (nameless-private-prefix t))
+    (use-package nameless
+      :ensure t
+      :hook
+      (emacs-lisp-mode .  nameless-mode)
+      :custom
+      (nameless-global-aliases '())
+      (nameless-private-prefix t))
 
-	;; bind-key can't bind to keymaps
-	(use-package erefactor
-	  :ensure t
-	  :defer t)
+    ;; bind-key can't bind to keymaps
+    (use-package erefactor
+      :ensure t
+      :defer t)
 
-	(use-package flycheck-package
-	  :ensure t
-	  :defer t
-	  :after flycheck
-	  (flycheck-package-setup))
-
+    (use-package flycheck-package
+      :ensure t
+      :defer t
+      :after flycheck
+      (flycheck-package-setup))
 
       ;; If emacs does not work because of 
       ;; Dash package complaint, install it with
       ;; apt install dash-el - then install it with
-      ;; Alt-x package-reinstall RET dash RET and remove 
+      ;; M-x package-reinstall RET dash RET and remove 
       ;; it again with "apt purge dash" 
 
 	 (use-package dash
@@ -4133,10 +3956,9 @@ Windows with Cygwin tools installed, assuming no password is required
 
   #+END_SRC
 
-* DONE Network 
-  CLOSED: [2019-09-15 dom 16:15]
+* Network 
 
-  #+BEGIN_SRC emacs-lisp 
+  #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package net-utils
       :ensure-system-package traceroute
       :bind
@@ -4157,8 +3979,7 @@ Windows with Cygwin tools installed, assuming no password is required
 
   #+END_SRC
 
-* DONE Save-place
-  CLOSED: [2019-09-15 dom 16:15]
+* Save-place
 
 #+BEGIN_SRC emacs-lisp
 
@@ -4169,8 +3990,7 @@ Windows with Cygwin tools installed, assuming no password is required
 
 #+END_SRC
 
-* DONE shell-pop 
-  CLOSED: [2019-09-15 dom 16:15]
+* shell-pop 
 
 #+BEGIN_SRC emacs-lisp
 
@@ -4189,8 +4009,7 @@ Windows with Cygwin tools installed, assuming no password is required
 
 #+BEGIN_SRC emacs-lisp
 
-  (use-package simple-mpc
-   :ensure t)
+(require 'simple-mpc)
 
 #+END_SRC
 
@@ -4234,11 +4053,11 @@ Windows with Cygwin tools installed, assuming no password is required
 	(error "Password not found for %S" params))))
 
   (defun my-nickserv-password (server)
-    (my-fetch-password :login "" :machine "irc.freenode.net"))
+    (my-fetch-password :login "Achylles" :machine "irc.freenode.net"))
 
   (setq circe-network-options
       '(("Freenode"
-	 :nick ""
+	 :nick "Achylles"
 
        ;;  :channels ("#alsa" "#bash" "#badrock" "#c" "#clnoobs" "#clojure" "#clojure-beginners" "#clschool" "#coreboot" "#debian" "#debian-offtopic" "#devuan" "#emacs" "#emacs-es" "#erc" "#evil-mode" "#filmsbykris" "#freebsd" "#freedos" "#git" "#gitlab" "#guix" "#hardware" "#haskell" "#i3" "#javascript" "#julia" "#latex" "#libreoffice" "#lisp" "#lisp-es" "#lispcafe" "#lispweb" "#maria" "#math" "#matrix"  "#maxima" "#mpd" "#mysql" "#neomutt" "#oauth" "#org-mode" "#pcbsd" "#physics" "#plasma" "#prolog" "#python" "#qtox" "#ranger" "#regex" "#ring" "#sbcl" "#scala" "#slime" "#startups" "#sword" "#tmux" "#trueos" "#vim" "#vimus" "#wanderlust" "#weechat" "#xfce" "#xiphos")
 
@@ -4590,7 +4409,7 @@ You have to install org-plus-contrib
      "* TODO %^{Description} %^g\n%?\nAdded: %U")
 
        ;; example is in:
-       ;; ~/.emacs.d/elpa/org-plus-contrib-20190520/org-contacts.el
+       ;; /home/lea/.emacs.d/elpa/org-plus-contrib-20190520/org-contacts.el
        ("c" "Contacts" entry (file "~/org~/contacts.org")
 	  "* %(org-contacts-template-name)
 
@@ -4616,7 +4435,7 @@ You have to install org-plus-contrib
 
 * Hyperbole
 
-#+BEGIN_SRC emacs-lisp 
+#+BEGIN_SRC emacs-lisp :tangle yes
 
   (unless (package-installed-p 'hyperbole)
     (package-refresh-contents)	
@@ -4627,16 +4446,16 @@ You have to install org-plus-contrib
 
 * Eww
 
-#+BEGIN_SRC emacs-lisp 
+#+BEGIN_SRC emacs-lisp :tangle yes
   
 #+END_SRC
 
 * Printer
   
-  Use Alt-x lpr-* and Alt-x pr-*
+  Use M-x lpr-* and M-x pr-*
   Commands for printing 
 
- #+BEGIN_SRC emacs-lisp 
+ #+BEGIN_SRC emacs-lisp :tangle yes
 
    (setq lpr-command "gtklp")
    (setq ps-lpr-command "gtklp")
@@ -4654,8 +4473,8 @@ You have to install org-plus-contrib
 #+END_SRC
 
 * epg-gpg2
-   
-  you have to Alt-x package-install RET pinentry
+
+  you have to M-x package-install RET pinentry
 
   #+begin_src emacs-lisp
 
@@ -4692,28 +4511,18 @@ You have to install org-plus-contrib
 
   #+end_src
 
-* ipp Printer
+* Linguistics 
+  
+#+BEGIN_SRC emacs-lisp :tangle yes
 
-#+BEGIN_SRC emacs-lisp 
-
-   (add-to-list 'load-path "~/.emacs.d/elpa/ipp")
-
-   (require 'ipp)
+  (use-package linguistic 
+    :ensure t)
 
 #+END_SRC
 
-* Linguistics  
-
-  #+BEGIN_SRC emacs-lisp 
-
-   (use-package linguistic 
-    :ensure t)
-
-  #+END_SRC
-
 * Org-drill 
 
-  #+begin_src emacs-lisp 
+  #+begin_src emacs-lisp :tangle yes
 
   (use-package org-drill
     :ensure t)
@@ -4722,7 +4531,7 @@ You have to install org-plus-contrib
 
 * Org-drill-table 
 
-  #+begin_src emacs-lisp 
+  #+begin_src emacs-lisp :tangle yes
 
   (use-package org-drill-table
     :ensure t)
@@ -4731,7 +4540,7 @@ You have to install org-plus-contrib
 
 * Memrise 
   
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp :tangle yes
 
   (use-package memrise
     :quelpa (memrise
@@ -4740,40 +4549,21 @@ You have to install org-plus-contrib
 
   (setq memrise-sync-requests t)
 
-#+end_src 
+#+end_src
 
-* Gnutls-fix-bug 
+* gnutls-fix-bug 
 
- fix the gnutls bug for emacs26.1 
+  fix the gnutls bug for emacs26.1 
 
-#+BEGIN_SRC emacs-lisp 
+ #+begin_src emacs-lisp :tangle yes
 
-;;   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3/")
-     (setq gnutls-verify-error t)
-     (setq tls-checktrust t)
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
- #+END_SRC
-
-* emacs-wget
-
-  https://github.com/ataka/emacs-wget
-  see also the file $HOME/.wgetrc
-
- #+begin_src emacs-lisp 
-
-  ;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/emacs-wget")
-
-  ;; (require 'w3m-wget)
-;;   (load "w3m-wget")
-;;  (autoload 'wget "wget" "wget interface for Emacs." t)
-;;  (autoload 'wget-web-page "wget" "wget interface to download whole web page." t)
-;;  (autoload 'w3-wget "w3-wget" "wget interface for Emacs/W3." t)
-;;  (setq wget-basic-options (cons "-equiet=off" wget-basic-options))
-;;  (setq wget-basic-options (cons "-P." wget-basic-options))
-;;  (setq wget-process-buffer nil)
-;;  (setq wget-command "/usr/bin/wget")
+    (setq gnutls-verify-error t)
+    (setq tls-checktrust t)
 
  #+end_src
+
 * More niceties 
 
  More nice stuff
@@ -4782,57 +4572,56 @@ You have to install org-plus-contrib
 
 #+BEGIN_SRC emacs-lisp
 
-  ;; Mouse scrolling
-    (setq mouse-wheel-scroll-amount '(1)
-	  mouse-wheel-progressive-speed nil 
-	  scroll-conservatively 101
-	  hscroll-margin 1
-	  hscroll-step 1
-	  scroll-preserve-screen-position t) 
+    ;; Mouse scrolling
+      (setq mouse-wheel-scroll-amount '(1)
+	    mouse-wheel-progressive-speed nil 
+	    scroll-conservatively 101
+	    hscroll-margin 1
+	    hscroll-step 1
+	    scroll-preserve-screen-position t) 
 
-    (defalias 'yes-or-no-p 'y-or-n-p)
-    (setq confirm-kill-processes nil)
+      (defalias 'yes-or-no-p 'y-or-n-p)
+      (setq confirm-kill-processes nil)
 
-  ;; gtk-tooltipos
-	(setq x-gtk-use-system-tooltips nil
-	      use-dialog-box nil)
+    ;; gtk-tooltipos
+	  (setq x-gtk-use-system-tooltips nil
+		use-dialog-box nil)
 
-     ;; Desktop mode
-     ;; (desktop-save-mode t)
+	;; (desktop-save-mode t)
 
-      ;; Save minibuffer history.
+	;; Save minibuffer history.
+	(savehist-mode 1)
+
+	;; Each file in a new window.
+	;; (setq pop-up-frames t)
+
+      ;; Disk space is cheap. Save lots. (c) Sacha Chua
+      ;; Backups
+
+      (setq backup-directory-alist '(("." . "~/.emacs.d/backups"))
+	    delete-old-versions -1
+	    version-control t
+	    vc-make-backup-files t
+	    auto-save-list-file-prefix "~/.emacs.d/autosave/"
+	    auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t))
+	    undo-tree-auto-save-history t
+	    undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo/")))
+
+      ;; But don't create stupid lockfiles
+      (setq create-lockfiles nil)
+
+      ;; History
+      (setq savehist-file "~/.emacs.d/history"
+	    history-length t
+	    history-delete-duplicates t
+	    savehist-save-minibuffer-history 1
+	    savehist-additional-variables
+	    '(kill-ring
+	      search-ring
+	      regexp-search-ring)
+	    recentf-max-saved-items 50)
       (savehist-mode 1)
-
-      ;; Each file in a new window.
-      ;; (setq pop-up-frames t)
-
-    ;; Disk space is cheap. Save lots. (c) Sacha Chua
-    ;; Backups
-
-    (setq backup-directory-alist '(("." . "~/.emacs.d/backups"))
-	  delete-old-versions -1
-	  version-control t
-	  vc-make-backup-files t
-	  auto-save-list-file-prefix "~/.emacs.d/autosave/"
-	  auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t))
-	  undo-tree-auto-save-history t
-	  undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo/")))
-
-    ;; But don't create stupid lockfiles
-    (setq create-lockfiles nil)
-
-    ;; History
-    (setq savehist-file "~/.emacs.d/history"
-	  history-length t
-	  history-delete-duplicates t
-	  savehist-save-minibuffer-history 1
-	  savehist-additional-variables
-	  '(kill-ring
-	    search-ring
-	    regexp-search-ring)
-	  recentf-max-saved-items 50)
-    (savehist-mode 1)
-    (recentf-mode 1)
+      (recentf-mode 1)
 
   ;; Which-key
   ;; C-x to access it
@@ -4843,7 +4632,6 @@ You have to install org-plus-contrib
 	(which-key-mode t))
 
 #+END_SRC
-
 * Better shell 
 
 #+BEGIN_SRC emacs-lisp
@@ -4866,86 +4654,3 @@ You have to install org-plus-contrib
 (venv-initialize-eshell))
 
 #+END_SRC
-* Time in mode-line
-
-https://ivanmalison.github.io/dotfiles/#about
-  
-#+BEGIN_SRC emacs-lisp 
-
-  (setq display-time-default-load-average nil)
-  (setq display-time-interval 1)
-  (setq display-time-format "%d|%m-%a|%r")
-  (display-time-mode +1)
-
-#+END_SRC
-
-* Long lines 
-
-  you can use: auto-fill-mode, truncate-lines, line ending, long-lines, visual-line-mode, format=flowed, fill-paragraph [unfill-paragraph] - most of them for displaying purpose 
-
-  https://www.emacswiki.org/emacs/LineWrap#searchlang
-
-#+BEGIN_SRC emacs-lisp 
-
-  (local-set-key (kbd "C-x w") 'toggle-truncate-lines)
-
-#+END_SRC
-
-* evil-macros keys 
-
-#+BEGIN_SRC emacs-lisp 
-
-(evil-define-key 'normal 'global
-  ;; select the previously pasted text
-  "gp" "`[v`]"
-  ;; run the macro in the q register
-  "Q" "@q")
-
-(evil-define-key 'visual 'global
-  ;; run macro in the q register on all selected lines
-  "Q" (kbd ":norm @q RET")
-  ;; repeat on all selected lines
-  "." (kbd ":norm . RET"))
-
-;; alternative command version
-(defun my-norm@q ()
-  "Apply macro in q register on selected lines."
-  (interactive)
-  (evil-ex-normal (region-beginning) (region-end) "@q"))
-
-  (evil-define-key 'visual 'global "Q" #'my-norm@q)
-
-#+END_SRC
-
-* TODO emacros 
-  
-  http://thbecker.net/free_software_utilities/emacs_lisp/emacros/emacros.html
-
-  For making macros in emacs you have to:
-  turn-off-evil-mode
-  global-auto-complete-mode
-  fundamental-mode
-
-#+BEGIN_SRC emacs-lisp 
-
-
-#+END_SRC
-
-* TODO Zoom-frm
-  
-  For hycontrol-frame
-  or hycontrol-windows
-  from Hyperbole to have
-  zoom in-out, install
-  zoom-frm, frame-cmds and frame-fns
-  with el-get-install and put all their ".el(c)"
-  files inside the zoom-frm load-path 
-  for using Hyperbole in Stumpwm, your have to
-  "float-this" for emacs
-
-  #+BEGIN_SRC emacs-lisp
-  
-  (add-to-list 'load-path "~/.emacs.d/el-get/zoom-frm")
-  (require 'zoom-frm)
-
-  #+END_SRC
