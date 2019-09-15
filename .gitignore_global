@@ -105,10 +105,6 @@ Thumbs.db
 [Oo]bj/
 [Rr]elease/
 \#*\#
-_.emacs.org_lea_Cyberwarrior
-_.emacs.org_vagner_Cyberwarrior
-_.emacs_vagner_Cyberwarrior
-_.emacs_vagner_Cyberwarrior_bak
 _.emacs_vanilla
 _.emacs_vanilla~
 abbrev_defs
@@ -132,7 +128,6 @@ el-get/
 elpa/
 emacs-dot-files/
 emacs.org_archive
-emacs.org_lea_Cyberwarrior,
 emacs.service
 emacs.service
 emacs_bak.el
