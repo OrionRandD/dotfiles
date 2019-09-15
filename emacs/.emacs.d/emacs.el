@@ -3224,3 +3224,8 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*emacros][emacros:1]]
 
 ;; emacros:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Zoom-frm][Zoom-frm:1]]
+(add-to-list 'load-path "~/.emacs.d/el-get/zoom-frm")
+(require 'zoom-frm)
+;; Zoom-frm:1 ends here

@@ -8,7 +8,7 @@
 
 * TODO Emacs commands
 
-  #+begin_verse
+#+BEGIN_VERSE
 
 Commands 
 
@@ -137,14 +137,19 @@ C-u C-c .	insert current time and date in the buffer
 C-q TAB	insert a TAB in the buffer
 M-x calculator	opens a calculator in emacs
 M-x calendar	opens a calendar in emacs 
+M-x butterfly	unleashes the power of the butterfly
 
+Installed packages
+
+in evil-mode:
+M-x list-packages; /installed (they will be highlighted); v (for visual-mode); j (to select them); y (to copy them); open a new buffer and paste them.
 
 Tutorial workflow 
 M-s ! inv_Win.sh	for compton compositor 
 M-s ! screenkey	for showing keys
 Then you can record your screen
 
-  #+end_verse
+#+END_VERSE
 
 * Emacspeak
 https://tvraman.github.io/emacspeak/manual/Emacspeak-Commands-And-Options.html#Emacspeak-Commands-And-Options
@@ -4923,12 +4928,20 @@ https://ivanmalison.github.io/dotfiles/#about
 #+END_SRC
 
 * TODO Zoom-frm
-
-  required  by hycontrol-frame  
   
-  #+BEGIN_SRC
+  For hycontrol-frame
+  or hycontrol-windows
+  from Hyperbole to have
+  zoom in-out, install
+  zoom-frm, frame-cmds and frame-fns
+  with el-get-install and put all their ".el(c)"
+  files inside the zoom-frm load-path 
+  for using Hyperbole in Stumpwm, your have to
+  "float-this" for emacs
+
+  #+BEGIN_SRC emacs-lisp
   
   (add-to-list 'load-path "~/.emacs.d/el-get/zoom-frm")
   (require 'zoom-frm)
-  
+
   #+END_SRC
