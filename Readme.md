@@ -49,4 +49,3 @@ $ git commit -m "Clean up ignored files"
 
 https://www.git-tower.com/learn/git/faq/ignore-tracked-files-in-git
 
-duh
