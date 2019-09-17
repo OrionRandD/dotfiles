@@ -132,6 +132,7 @@ emacs.service
 emacs.service
 emacs_bak.el
 emacs_bak.org
+_.emacs_vagner_Cyberwarrior
 emacs_bugged_packages.org
 emacs_config-framagit/
 emacs_config-zamansky/
@@ -193,7 +194,7 @@ keybindings.lisp
 keybindings.lisp~
 quicklisp.md
 README.md
-Readme.org
+
 Readme.org~
 sbcl_from_src.org
 sbcl_from_src.org~
@@ -245,7 +246,7 @@ init.lisp~
 init.lisp_usable
 keybindings.lisp
 keybindings.lisp~
-more2ign
+
 quicklisp.md
 README.md
 Readme.org
