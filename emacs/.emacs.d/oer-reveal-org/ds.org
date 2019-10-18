@@ -1,0 +1,2 @@
+# Generated file.  Will be overwritten without warning.
+#+REVEAL_TITLE_SLIDE: /home/vagner/.emacs.d/elpa/oer-reveal-20191016.617/title-slide/ds.html

@@ -160,93 +160,99 @@
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Evil%20mode][Evil mode:1]]
 ;; for using TAB with emacs -nw in terminal 
-  ;; you have to load it before calling evil-mode
+   ;; you have to load it before calling evil-mode
 
-    (unless (display-graphic-p) (setq evil-want-C-i-jump nil))
-    (use-package evil
-      :config (require 'evil)
-      (progn (evil-mode 1)))
+     (unless (display-graphic-p) (setq evil-want-C-i-jump nil))
+     (use-package evil
+       :config (require 'evil)
+       (progn (evil-mode 1)))
 
-     ;; evil-leader 
-	(global-evil-leader-mode)
-	(evil-leader/set-key
-	  "e" 'find-file
-	  "b" 'switch-to-buffer
-	  "k" 'kill-buffer)
+      ;; evil-leader 
+	 (global-evil-leader-mode)
+	 (evil-leader/set-key
+	   "e" 'find-file
+	   "b" 'switch-to-buffer
+	   "k" 'kill-buffer)
 
-     ;;    ;; http://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
-     ;;    ;; http://wikemacs.org/wiki/Evil
+      ;;    ;; http://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
+      ;;    ;; http://wikemacs.org/wiki/Evil
+
+ ;; (use-package evil-surround
+ ;;  :after evil
+ ;;  :hook (evil-mode . global-evil-surround-mode))
 
 (use-package evil-surround
-  :after evil
-  :hook (evil-mode . global-evil-surround-mode))
+ :ensure t
+ :after evil
+ :config
+ (global-evil-surround-mode 1))
 
-(use-package evil-numbers
-  :after evil
-  :bind (
-         :map evil-normal-state-map
-         ("C-c +" . evil-numbers/inc-at-pt)
-         ("C-c -" . evil-numbers/dec-at-pt)))
+ (use-package evil-numbers
+   :after evil
+   :bind (
+	  :map evil-normal-state-map
+	  ("C-c +" . evil-numbers/inc-at-pt)
+	  ("C-c -" . evil-numbers/dec-at-pt)))
 
-(with-eval-after-load 'evil-vars
-  (setq evil-want-C-w-in-emacs-state t))
+ (with-eval-after-load 'evil-vars
+   (setq evil-want-C-w-in-emacs-state t))
 
-(use-package evil-nerd-commenter
-  :ensure t
-  :config
-  (evilnc-default-hotkeys))
+ (use-package evil-nerd-commenter
+   :ensure t
+   :config
+   (evilnc-default-hotkeys))
 
-     ;;    (require 'evil-mark-replace)
+      ;;    (require 'evil-mark-replace)
 
-     ;;    (require 'evil-matchit)
-     ;;    (global-evil-matchit-mode 1)
-     ;;    (require 'evil-exchange)
+      ;;    (require 'evil-matchit)
+      ;;    (global-evil-matchit-mode 1)
+      ;;    (require 'evil-exchange)
 
-     ;;  ;; change default key bindings (if you want) HERE
-     ;;    (setq evil-exchange-key (kbd "zx"))
-     ;;    (evil-exchange-install)
+      ;;  ;; change default key bindings (if you want) HERE
+      ;;    (setq evil-exchange-key (kbd "zx"))
+      ;;    (evil-exchange-install)
 
-     ;;  ;; change default key bindings (if you want) HERE
-     ;;    (setq evil-extra-operator-eval-key (kbd "ge"))
-     ;;    (require 'evil-extra-operator)
-     ;;    (global-evil-extra-operator-mode 1)
-     ;;    (require 'evil-visualstar)
-     ;;    (global-evil-visualstar-mode 1)
+      ;;  ;; change default key bindings (if you want) HERE
+      ;;    (setq evil-extra-operator-eval-key (kbd "ge"))
+      ;;    (require 'evil-extra-operator)
+      ;;    (global-evil-extra-operator-mode 1)
+      ;;    (require 'evil-visualstar)
+      ;;    (global-evil-visualstar-mode 1)
 
-         (require 'evil-org)
+	  (require 'evil-org)
 
-     ;;  ;; evil-minibuffer
-     ;;  ;; https://gist.github.com/ccdunder/5816865
+      ;;  ;; evil-minibuffer
+      ;;  ;; https://gist.github.com/ccdunder/5816865
 
-     ;;  ;; option for enabling vi keys in the minibuffer
-     ;;  ;; Addresses evil-core.el:163 TODO
+      ;;  ;; option for enabling vi keys in the minibuffer
+      ;;  ;; Addresses evil-core.el:163 TODO
 
-     ;;   (mapcar (lambda (keymap)
-     ;;     	 (evil-define-key 'insert (eval keymap) [escape] 'abort-recursive-edit)
-     ;;     	 (evil-define-key 'normal (eval keymap) [escape] 'abort-recursive-edit)
-     ;;     	 (evil-define-key 'insert (eval keymap) [return] 'exit-minibuffer)
-     ;;     	 (evil-define-key 'normal (eval keymap) [return] 'exit-minibuffer)
-     ;;     	 (evil-define-key 'insert (eval keymap) "\C-t" 'evil-normal-state))
+      ;;   (mapcar (lambda (keymap)
+      ;;     	 (evil-define-key 'insert (eval keymap) [escape] 'abort-recursive-edit)
+      ;;     	 (evil-define-key 'normal (eval keymap) [escape] 'abort-recursive-edit)
+      ;;     	 (evil-define-key 'insert (eval keymap) [return] 'exit-minibuffer)
+      ;;     	 (evil-define-key 'normal (eval keymap) [return] 'exit-minibuffer)
+      ;;     	 (evil-define-key 'insert (eval keymap) "\C-t" 'evil-normal-state))
 
-     ;; ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/
-     ;; ;; Text-from-Minibuffer.html#Definition of minibuffer-local-map
+      ;; ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/
+      ;; ;; Text-from-Minibuffer.html#Definition of minibuffer-local-map
 
-     ;;     '(minibuffer-local-map
-     ;;     	 minibuffer-local-ns-map
-     ;;     	 minibuffer-local-completion-map
-     ;;     	 minibuffer-local-must-match-map
-     ;;     	 minibuffer-local-isearch-map))
+      ;;     '(minibuffer-local-map
+      ;;     	 minibuffer-local-ns-map
+      ;;     	 minibuffer-local-completion-map
+      ;;     	 minibuffer-local-must-match-map
+      ;;     	 minibuffer-local-isearch-map))
 
-     ;;    (add-hook 'minibuffer-setup-hook 
-     ;;     	      '(lambda () 
-     ;;     		 (set (make-local-variable 'evil-echo-state) nil)
+      ;;    (add-hook 'minibuffer-setup-hook 
+      ;;     	      '(lambda () 
+      ;;     		 (set (make-local-variable 'evil-echo-state) nil)
 
-     ;;    ;; (evil-set-initial-state 'mode 'insert) is the evil-proper
-     ;;    ;; way to do this, but the minibuffer doesn't have a mode.
-     ;;    ;; The alternative is to create a minibuffer mode (here), but
-     ;;    ;; then it may conflict with other packages' if they do the same.
+      ;;    ;; (evil-set-initial-state 'mode 'insert) is the evil-proper
+      ;;    ;; way to do this, but the minibuffer doesn't have a mode.
+      ;;    ;; The alternative is to create a minibuffer mode (here), but
+      ;;    ;; then it may conflict with other packages' if they do the same.
 
-     ;;     	    (evil-insert 1)))
+      ;;     	    (evil-insert 1)))
 ;; Evil mode:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Eyebrowse][Eyebrowse:1]]
@@ -2129,6 +2135,11 @@ Suggest the URL title as a description for resource."
             (string :tag "Heading")))))
 ;; Orca:1 ends here
 
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Epresent][Epresent:1]]
+(use-package epresent
+ :ensure t)
+;; Epresent:1 ends here
+
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-present][Org-present:1]]
 (use-package org-present
  :ensure t
@@ -2149,35 +2160,77 @@ Suggest the URL title as a description for resource."
  :ensure t)
 ;; Org-present-remote:1 ends here
 
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*emacs-reveal][emacs-reveal:1]]
+(add-to-list 'load-path "/home/vagner/.emacs.d/elpa/emacs-reveal")
+
+   (require 'emacs-reveal)
+;; (setq oer-reveal-plugins nil)
+;;  (setq oer-reveal-plugins t)
+;; emacs-reveal:1 ends here
+
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org%20reveal][Org reveal:1]]
-(require 'org)
-;; (require 'ox-reveal)
+;; Note: give the ABSOLUTE PATH to reveal.js
+;; Otherwise it will not work
 
-;; (use-package ox-reveal
-;; :ensure ox-reveal)
+;; this work only with internet connection
+;; (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+;; (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js")
 
-;; (use-package htmlize
- ;; )
+;; this work without internet connection
+;; (setq org-reveal-root "file:/home/vagner/reveal-slides/reveal.js")
 
 ;; if it does not load, do:
 ;; Alt-x load-library RET ox-reveal
 
-  (setq org-reveal-root "file:~/reveal-slides/reveal.js")
+ (use-package ox-reveal
+  :ensure t
+  :after org
+  :custom
+  (org-reveal-root "file:/home/vagner/reveal-slides/reveal.js"))
 
- ;; (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
-
- (setq org-reveal-mathjax t)
+ (use-package htmlize
+  :ensure t
+  :after ox-reveal
+  :config
+  (setq org-reveal-hlevel 2)
+  (setq org-reveal-mathjax t))
 
     ;; To load Org-reveal, type “Alt-x load-library”, then type “ox-reveal”.
-
     ;; ~/reveal-slides/reveal.js$ npm start - you have to start the server
-
     ;; for viewing your slides and using the remote control
-
-    ;; Now you can export this manual into Reveal.js presentation by typing “C-c C-e R R”.
-
+    ;; Now you can export this manual into Reveal.js presentation by typing “C-c C-e R B”.
     ;; Open the generated “Readme.html” in your browser and enjoy the cool slides.
 ;; Org reveal:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-re-reveal][Org-re-reveal:1]]
+(use-package org-re-reveal 
+   :ensure t
+   :config
+     (setq org-re-reveal-root "file:/home/vagner/reveal-slides/reveal.js")
+     (require 'org-re-reveal)
+;;     (setq oer-reveal-plugins t)
+     (setq org-re-reveal-hlevel 2))
+;; Org-re-reveal:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*org-re-reveal-ref][org-re-reveal-ref:1]]
+(use-package org-re-reveal-ref
+ :ensure t
+ :config
+   (require 'org-re-reveal-ref))
+;; org-re-reveal-ref:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*oer-reveal][oer-reveal:1]]
+(use-package oer-reveal
+ :ensure t
+ :config
+   (require 'oer-reveal) 
+   (setq oer-reveal-plugins t))
+;; oer-reveal:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Spectacle][Spectacle:1]]
+(use-package ox-spectacle
+      :ensure t)
+;; Spectacle:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-tree-slide][Org-tree-slide:1]]
 (use-package org-tree-slide
@@ -2203,6 +2256,11 @@ Suggest the URL title as a description for resource."
 	   (set-transient-map map nil 'wolfe/org-tree-set-transient-map))
        (makeunbound wolfe--enable-transient-map)))
 ;; Org-tree-slide:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Ox-pandoc][Ox-pandoc:1]]
+(use-package ox-pandoc 
+	   :ensure t)
+;; Ox-pandoc:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Persistent-soft][Persistent-soft:1]]
 (require 'persistent-soft)
@@ -2699,7 +2757,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
   ;; Dash package complaint, install it with
   ;; apt install dash-el - then install it with
   ;; Alt-x package-reinstall RET dash RET and remove 
-  ;; it again with "apt purge dash" 
+  ;; it again with "apt purge dash-el" 
 
      (use-package dash
      :ensure t
@@ -3227,3 +3285,10 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 (add-to-list 'load-path "~/.emacs.d/el-get/zoom-frm")
 (require 'zoom-frm)
 ;; Zoom-frm:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*openwith][openwith:1]]
+(use-package openwith
+ :ensure t
+ :config
+(setq openwith-associations '(("\\.mp4\\'" "smplayer" (file)))))
+;; openwith:1 ends here

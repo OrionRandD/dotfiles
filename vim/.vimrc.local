@@ -90,3 +90,4 @@ let g:BASH_Company      = 'Sofia Corporation'
 " vim-stay [cursor,folds,slash,unix] {
  set viewoptions=folds 
 " }
+

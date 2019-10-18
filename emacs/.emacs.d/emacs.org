@@ -492,94 +492,100 @@ M-x org-ac/setup-current-buffer
 
 #+BEGIN_SRC emacs-lisp 
 
-  ;; for using TAB with emacs -nw in terminal 
-  ;; you have to load it before calling evil-mode
+      ;; for using TAB with emacs -nw in terminal 
+      ;; you have to load it before calling evil-mode
 
-    (unless (display-graphic-p) (setq evil-want-C-i-jump nil))
-    (use-package evil
-      :config (require 'evil)
-      (progn (evil-mode 1)))
+	(unless (display-graphic-p) (setq evil-want-C-i-jump nil))
+	(use-package evil
+	  :config (require 'evil)
+	  (progn (evil-mode 1)))
 
-     ;; evil-leader 
-	(global-evil-leader-mode)
-	(evil-leader/set-key
-	  "e" 'find-file
-	  "b" 'switch-to-buffer
-	  "k" 'kill-buffer)
+	 ;; evil-leader 
+	    (global-evil-leader-mode)
+	    (evil-leader/set-key
+	      "e" 'find-file
+	      "b" 'switch-to-buffer
+	      "k" 'kill-buffer)
 
-     ;;    ;; http://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
-     ;;    ;; http://wikemacs.org/wiki/Evil
+	 ;;    ;; http://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
+	 ;;    ;; http://wikemacs.org/wiki/Evil
 
-(use-package evil-surround
-  :after evil
-  :hook (evil-mode . global-evil-surround-mode))
+    ;; (use-package evil-surround
+    ;;  :after evil
+    ;;  :hook (evil-mode . global-evil-surround-mode))
 
-(use-package evil-numbers
-  :after evil
-  :bind (
-         :map evil-normal-state-map
-         ("C-c +" . evil-numbers/inc-at-pt)
-         ("C-c -" . evil-numbers/dec-at-pt)))
+   (use-package evil-surround
+    :ensure t
+    :after evil
+    :config
+    (global-evil-surround-mode 1))
 
-(with-eval-after-load 'evil-vars
-  (setq evil-want-C-w-in-emacs-state t))
+    (use-package evil-numbers
+      :after evil
+      :bind (
+	     :map evil-normal-state-map
+	     ("C-c +" . evil-numbers/inc-at-pt)
+	     ("C-c -" . evil-numbers/dec-at-pt)))
 
-(use-package evil-nerd-commenter
-  :ensure t
-  :config
-  (evilnc-default-hotkeys))
+    (with-eval-after-load 'evil-vars
+      (setq evil-want-C-w-in-emacs-state t))
 
-     ;;    (require 'evil-mark-replace)
+    (use-package evil-nerd-commenter
+      :ensure t
+      :config
+      (evilnc-default-hotkeys))
 
-     ;;    (require 'evil-matchit)
-     ;;    (global-evil-matchit-mode 1)
-     ;;    (require 'evil-exchange)
+	 ;;    (require 'evil-mark-replace)
 
-     ;;  ;; change default key bindings (if you want) HERE
-     ;;    (setq evil-exchange-key (kbd "zx"))
-     ;;    (evil-exchange-install)
+	 ;;    (require 'evil-matchit)
+	 ;;    (global-evil-matchit-mode 1)
+	 ;;    (require 'evil-exchange)
 
-     ;;  ;; change default key bindings (if you want) HERE
-     ;;    (setq evil-extra-operator-eval-key (kbd "ge"))
-     ;;    (require 'evil-extra-operator)
-     ;;    (global-evil-extra-operator-mode 1)
-     ;;    (require 'evil-visualstar)
-     ;;    (global-evil-visualstar-mode 1)
+	 ;;  ;; change default key bindings (if you want) HERE
+	 ;;    (setq evil-exchange-key (kbd "zx"))
+	 ;;    (evil-exchange-install)
 
-         (require 'evil-org)
+	 ;;  ;; change default key bindings (if you want) HERE
+	 ;;    (setq evil-extra-operator-eval-key (kbd "ge"))
+	 ;;    (require 'evil-extra-operator)
+	 ;;    (global-evil-extra-operator-mode 1)
+	 ;;    (require 'evil-visualstar)
+	 ;;    (global-evil-visualstar-mode 1)
 
-     ;;  ;; evil-minibuffer
-     ;;  ;; https://gist.github.com/ccdunder/5816865
+	     (require 'evil-org)
 
-     ;;  ;; option for enabling vi keys in the minibuffer
-     ;;  ;; Addresses evil-core.el:163 TODO
+	 ;;  ;; evil-minibuffer
+	 ;;  ;; https://gist.github.com/ccdunder/5816865
 
-     ;;   (mapcar (lambda (keymap)
-     ;;     	 (evil-define-key 'insert (eval keymap) [escape] 'abort-recursive-edit)
-     ;;     	 (evil-define-key 'normal (eval keymap) [escape] 'abort-recursive-edit)
-     ;;     	 (evil-define-key 'insert (eval keymap) [return] 'exit-minibuffer)
-     ;;     	 (evil-define-key 'normal (eval keymap) [return] 'exit-minibuffer)
-     ;;     	 (evil-define-key 'insert (eval keymap) "\C-t" 'evil-normal-state))
+	 ;;  ;; option for enabling vi keys in the minibuffer
+	 ;;  ;; Addresses evil-core.el:163 TODO
 
-     ;; ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/
-     ;; ;; Text-from-Minibuffer.html#Definition of minibuffer-local-map
+	 ;;   (mapcar (lambda (keymap)
+	 ;;     	 (evil-define-key 'insert (eval keymap) [escape] 'abort-recursive-edit)
+	 ;;     	 (evil-define-key 'normal (eval keymap) [escape] 'abort-recursive-edit)
+	 ;;     	 (evil-define-key 'insert (eval keymap) [return] 'exit-minibuffer)
+	 ;;     	 (evil-define-key 'normal (eval keymap) [return] 'exit-minibuffer)
+	 ;;     	 (evil-define-key 'insert (eval keymap) "\C-t" 'evil-normal-state))
 
-     ;;     '(minibuffer-local-map
-     ;;     	 minibuffer-local-ns-map
-     ;;     	 minibuffer-local-completion-map
-     ;;     	 minibuffer-local-must-match-map
-     ;;     	 minibuffer-local-isearch-map))
+	 ;; ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/
+	 ;; ;; Text-from-Minibuffer.html#Definition of minibuffer-local-map
 
-     ;;    (add-hook 'minibuffer-setup-hook 
-     ;;     	      '(lambda () 
-     ;;     		 (set (make-local-variable 'evil-echo-state) nil)
+	 ;;     '(minibuffer-local-map
+	 ;;     	 minibuffer-local-ns-map
+	 ;;     	 minibuffer-local-completion-map
+	 ;;     	 minibuffer-local-must-match-map
+	 ;;     	 minibuffer-local-isearch-map))
 
-     ;;    ;; (evil-set-initial-state 'mode 'insert) is the evil-proper
-     ;;    ;; way to do this, but the minibuffer doesn't have a mode.
-     ;;    ;; The alternative is to create a minibuffer mode (here), but
-     ;;    ;; then it may conflict with other packages' if they do the same.
+	 ;;    (add-hook 'minibuffer-setup-hook 
+	 ;;     	      '(lambda () 
+	 ;;     		 (set (make-local-variable 'evil-echo-state) nil)
 
-     ;;     	    (evil-insert 1)))
+	 ;;    ;; (evil-set-initial-state 'mode 'insert) is the evil-proper
+	 ;;    ;; way to do this, but the minibuffer doesn't have a mode.
+	 ;;    ;; The alternative is to create a minibuffer mode (here), but
+	 ;;    ;; then it may conflict with other packages' if they do the same.
+
+	 ;;     	    (evil-insert 1)))
 
 #+END_SRC
 
@@ -3294,6 +3300,18 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
   #+END_SRC
 
+* TODO Epresent 
+
+  Epresent does not work with evil-mode
+  You have to disable it
+
+#+begin_src emacs-lisp 
+
+    (use-package epresent
+     :ensure t)
+
+#+end_src
+  
 * TODO Org-present
 
   #+begin_src emacs-lisp 
@@ -3322,6 +3340,20 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 
   #+end_src
 
+* emacs-reveal
+
+https://gitlab.com/oer/emacs-reveal
+
+#+begin_src emacs-lisp 
+
+  (add-to-list 'load-path "/home/vagner/.emacs.d/elpa/emacs-reveal")
+
+   (require 'emacs-reveal)
+;; (setq oer-reveal-plugins nil)
+;;  (setq oer-reveal-plugins t)
+
+#+end_src
+
 * Org reveal
 
  https://orgmode.org/worg/org-tutorials/non-beamer-presentations.html
@@ -3335,35 +3367,101 @@ http://www.bobnewell.net/publish/35years/webclipper.html
    
 #+BEGIN_SRC emacs-lisp 
 
-  (require 'org)
-  ;; (require 'ox-reveal)
+  ;; Note: give the ABSOLUTE PATH to reveal.js
+  ;; Otherwise it will not work
 
-  ;; (use-package ox-reveal
-  ;; :ensure ox-reveal)
+  ;; this work only with internet connection
+  ;; (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+  ;; (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js")
 
-  ;; (use-package htmlize
-   ;; )
+  ;; this work without internet connection
+  ;; (setq org-reveal-root "file:/home/vagner/reveal-slides/reveal.js")
 
   ;; if it does not load, do:
   ;; Alt-x load-library RET ox-reveal
 
-    (setq org-reveal-root "file:~/reveal-slides/reveal.js")
+   (use-package ox-reveal
+    :ensure t
+    :after org
+    :custom
+    (org-reveal-root "file:/home/vagner/reveal-slides/reveal.js"))
 
-   ;; (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
-
-   (setq org-reveal-mathjax t)
+   (use-package htmlize
+    :ensure t
+    :after ox-reveal
+    :config
+    (setq org-reveal-hlevel 2)
+    (setq org-reveal-mathjax t))
 
       ;; To load Org-reveal, type “Alt-x load-library”, then type “ox-reveal”.
-
       ;; ~/reveal-slides/reveal.js$ npm start - you have to start the server
-
       ;; for viewing your slides and using the remote control
-
-      ;; Now you can export this manual into Reveal.js presentation by typing “C-c C-e R R”.
-
+      ;; Now you can export this manual into Reveal.js presentation by typing “C-c C-e R B”.
       ;; Open the generated “Readme.html” in your browser and enjoy the cool slides.
 
 #+END_SRC
+
+* Org-re-reveal
+
+ https://gitlab.com/oer/org-re-reveal
+ Type “M-x load-library”, then “org-re-reveal”
+
+#+BEGIN_SRC emacs-lisp 
+
+  (use-package org-re-reveal 
+   :ensure t
+   :config
+     (setq org-re-reveal-root "file:/home/vagner/reveal-slides/reveal.js")
+     (require 'org-re-reveal)
+;;     (setq oer-reveal-plugins t)
+     (setq org-re-reveal-hlevel 2))
+
+#+END_SRC
+
+* org-re-reveal-ref
+
+  [ https ://gitlab .com/oer/emacs-reveal]
+ type “m-x load-library”, then “org-re-reveal-ref”
+
+#+begin_src emacs-lisp 
+
+  (use-package org-re-reveal-ref
+   :ensure t
+   :config
+     (require 'org-re-reveal-ref))
+
+#+end_src
+
+* oer-reveal
+
+ https://gitlab.com/oer/emacs-reveal
+ type "m-x load-library", then "oer-reveal"
+
+#+begin_src emacs-lisp 
+
+  (use-package oer-reveal
+   :ensure t
+   :config
+     (require 'oer-reveal) 
+     (setq oer-reveal-plugins t))
+
+#+end_src
+
+* Spectacle
+
+https://github.com/lorniu/ox-spectacle/blob/9d3ec9a6326289074d8620e97d65e3105307ff51/spectacle-demo.org
+
+  ox-spectacle for presentations
+  type "M-x load-library", then "ox-spectacle"
+  M-x ox-spectacle-help
+  Ctrl-C Ctrl-E s f	for exporting
+
+#+begin_src emacs-lisp 
+
+  (use-package ox-spectacle
+	:ensure t)
+
+#+end_src
 
 * TODO Org-tree-slide
   
@@ -3403,7 +3501,17 @@ http://www.bobnewell.net/publish/35years/webclipper.html
 	   (makeunbound wolfe--enable-transient-map)))
 
   #+end_src
+ 
+* Ox-pandoc 
+
+  https://pandoc.org/MANUAL.html#producing-slide-shows-with-pandoc
+  M-x load-library RET ox-pandoc
   
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-pandoc 
+	     :ensure t)
+#+END_SRC
+
 * Persistent-soft
 
  https://github.com/rolandwalker/persistent-soft
@@ -4124,7 +4232,7 @@ Windows with Cygwin tools installed, assuming no password is required
       ;; Dash package complaint, install it with
       ;; apt install dash-el - then install it with
       ;; Alt-x package-reinstall RET dash RET and remove 
-      ;; it again with "apt purge dash" 
+      ;; it again with "apt purge dash-el" 
 
 	 (use-package dash
          :ensure t
@@ -4949,3 +5057,17 @@ https://ivanmalison.github.io/dotfiles/#about
   (require 'zoom-frm)
 
   #+END_SRC
+
+* openwith 
+  
+  [[https://stackoverflow.com/questions/51006855/open-mp4-files-from-orgmode][files_assocs]]
+
+ #+BEGIN_SRC emacs-lisp 
+
+     (use-package openwith
+      :ensure t
+      :config
+     (setq openwith-associations '(("\\.mp4\\'" "smplayer" (file)))))
+
+ #+END_SRC
+ 
