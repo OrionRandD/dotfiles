@@ -141,6 +141,8 @@ emacs_debugged.org
 emacs_ok.org
 emacs_sysd_init-daemons/
 oer-reveal-org
+oer-reveal-org
+org-journal.cache
 emms/
 eshell/
 evil-tab_noGui.md
