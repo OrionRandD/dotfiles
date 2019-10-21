@@ -28,6 +28,7 @@ M-x epa-sign-file	encrypts a file with the gpg default password - you have to en
 M-x epa-encrypt-file	encrypts a file with a symmetric password you type
 M-x epa-dencrypt-file	decrepit a file with a symmetric password you gave
 bug-hunter	for debugging emacs.el
+M-x lisp-interaction-mode RET	lisp auto-completion programming   
 (flyspell-mode)	activates automatic spelling 
 \b or Ctrl-x Ctrl-m switch-to-buffer	switches to another buffer
 C-c I	find-user-init-file
@@ -920,7 +921,7 @@ https://tuhdo.github.io/helm-intro.html
 
 #+BEGIN_SRC emacs-lisp
 
-      ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa/helm-3.0/")
+       ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa/helm-3.0/")
 	;; (require 'helm-config)
 
 	   (helm-mode 1)
@@ -1615,19 +1616,21 @@ C-c C-m customize-variable RET org-file-apps RET (Extension pdf) under it Choose
 
 #+END_SRC
 
-* DONE Diatheke
-  CLOSED: [2019-05-19 dom 16:31]
+* TODO Diatheke
 
 Install diatheke from here:
 https://github.com/emacsmirror/diatheke
 diatheke command-line
-M-x diatheke-mode or
+
+Try to evaluate (diatheke-mode) with "C-x e" until it gives "t"
+This package is very stubborn :P 
  
 #+BEGIN_SRC emacs-lisp 
 
+  (add-to-list 'load-path "~/.dotfiles/emacs/.emacs.d/elpa/diatheke-1.0")
   (require 'diatheke)
 
-  (setq diatheke-bible "KJVA -f plain")
+  ;; (setq diatheke-bible "KJVA -f plain")
 
   ;; (setq diatheke-bible "ESV -f plain -o s")
 

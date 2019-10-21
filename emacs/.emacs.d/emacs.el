@@ -908,9 +908,10 @@ file with `edit-abbrevs`"
 ;; Dpaste:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Diatheke][Diatheke:1]]
+(add-to-list 'load-path "~/.dotfiles/emacs/.emacs.d/elpa/diatheke-1.0")
 (require 'diatheke)
 
-(setq diatheke-bible "KJVA -f plain")
+;; (setq diatheke-bible "KJVA -f plain")
 
 ;; (setq diatheke-bible "ESV -f plain -o s")
 

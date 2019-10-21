@@ -1,0 +1,6 @@
+
+* Emacs org-mode Workflow
+  - Open emacs
+  - load libraries
+  - M-x load-library RET (ox-reveal ox-pandoc org-re-reveal oer-reveal)
+  - Then you can work on, using org-mode files
