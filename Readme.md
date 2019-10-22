@@ -34,10 +34,11 @@ and change the access to ssh:
 https://help.github.com/em/articles/changing-a-remotes-url
 
 Workflow
-1. git add
-2. git commit -m "any message"
-3. git status
-4. git push
+1. git add .  or a specific file
+2. git commit -a  or:
+3. git commit -m "any message"
+4. git status
+5. git push
 
 Cleaning Ignored Files
 
