@@ -156,103 +156,99 @@
       (use-package evil-collection
        :custom (evil-collection-setup-minibuffer t)
        :init (evil-collection-init))
+
+;; Alt-j and Alt-k to navigate in the minibuffer
 ;; Evil collection:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Evil%20mode][Evil mode:1]]
 ;; for using TAB with emacs -nw in terminal 
-   ;; you have to load it before calling evil-mode
+  ;; you have to load it before calling evil-mode
 
-     (unless (display-graphic-p) (setq evil-want-C-i-jump nil))
-     (use-package evil
-       :config (require 'evil)
-       (progn (evil-mode 1)))
+    (unless (display-graphic-p) (setq evil-want-C-i-jump nil))
+    (use-package evil
+      :config (require 'evil)
+      (progn (evil-mode 1)))
 
-      ;; evil-leader 
-	 (global-evil-leader-mode)
-	 (evil-leader/set-key
-	   "e" 'find-file
-	   "b" 'switch-to-buffer
-	   "k" 'kill-buffer)
+     ;; evil-leader 
+	(global-evil-leader-mode)
+	(evil-leader/set-key
+	  "e" 'find-file
+	  "b" 'switch-to-buffer
+	  "k" 'kill-buffer)
 
-      ;;    ;; http://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
-      ;;    ;; http://wikemacs.org/wiki/Evil
-
- ;; (use-package evil-surround
- ;;  :after evil
- ;;  :hook (evil-mode . global-evil-surround-mode))
+     ;;    ;; http://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
+     ;;    ;; http://wikemacs.org/wiki/Evil
 
 (use-package evil-surround
- :ensure t
- :after evil
- :config
- (global-evil-surround-mode 1))
+  :after evil
+  :hook (evil-mode . global-evil-surround-mode))
 
- (use-package evil-numbers
-   :after evil
-   :bind (
-	  :map evil-normal-state-map
-	  ("C-c +" . evil-numbers/inc-at-pt)
-	  ("C-c -" . evil-numbers/dec-at-pt)))
+(use-package evil-numbers
+  :after evil
+  :bind (
+         :map evil-normal-state-map
+         ("C-c +" . evil-numbers/inc-at-pt)
+         ("C-c -" . evil-numbers/dec-at-pt)))
 
- (with-eval-after-load 'evil-vars
-   (setq evil-want-C-w-in-emacs-state t))
+(with-eval-after-load 'evil-vars
+  (setq evil-want-C-w-in-emacs-state t))
 
- (use-package evil-nerd-commenter
-   :ensure t
-   :config
-   (evilnc-default-hotkeys))
+(use-package evil-nerd-commenter
+  :ensure t
+  :config
+  (evilnc-default-hotkeys))
 
-      ;;    (require 'evil-mark-replace)
+     ;;    (require 'evil-mark-replace)
 
-      ;;    (require 'evil-matchit)
-      ;;    (global-evil-matchit-mode 1)
-      ;;    (require 'evil-exchange)
+     ;;    (require 'evil-matchit)
+     ;;    (global-evil-matchit-mode 1)
+     ;;    (require 'evil-exchange)
 
-      ;;  ;; change default key bindings (if you want) HERE
-      ;;    (setq evil-exchange-key (kbd "zx"))
-      ;;    (evil-exchange-install)
+     ;;  ;; change default key bindings (if you want) HERE
+     ;;    (setq evil-exchange-key (kbd "zx"))
+     ;;    (evil-exchange-install)
 
-      ;;  ;; change default key bindings (if you want) HERE
-      ;;    (setq evil-extra-operator-eval-key (kbd "ge"))
-      ;;    (require 'evil-extra-operator)
-      ;;    (global-evil-extra-operator-mode 1)
-      ;;    (require 'evil-visualstar)
-      ;;    (global-evil-visualstar-mode 1)
+     ;;  ;; change default key bindings (if you want) HERE
+     ;;    (setq evil-extra-operator-eval-key (kbd "ge"))
+     ;;    (require 'evil-extra-operator)
+     ;;    (global-evil-extra-operator-mode 1)
+     ;;    (require 'evil-visualstar)
+     ;;    (global-evil-visualstar-mode 1)
 
-	  (require 'evil-org)
+         (require 'evil-org)
 
-      ;;  ;; evil-minibuffer
-      ;;  ;; https://gist.github.com/ccdunder/5816865
+     ;;  ;; evil-minibuffer
+     ;;  ;; https://gist.github.com/ccdunder/5816865
 
-      ;;  ;; option for enabling vi keys in the minibuffer
-      ;;  ;; Addresses evil-core.el:163 TODO
+     ;;  ;; option for enabling vi keys in the minibuffer
+     ;;  ;; Addresses evil-core.el:163 TODO
 
-      ;;   (mapcar (lambda (keymap)
-      ;;     	 (evil-define-key 'insert (eval keymap) [escape] 'abort-recursive-edit)
-      ;;     	 (evil-define-key 'normal (eval keymap) [escape] 'abort-recursive-edit)
-      ;;     	 (evil-define-key 'insert (eval keymap) [return] 'exit-minibuffer)
-      ;;     	 (evil-define-key 'normal (eval keymap) [return] 'exit-minibuffer)
-      ;;     	 (evil-define-key 'insert (eval keymap) "\C-t" 'evil-normal-state))
+     ;;   (mapcar (lambda (keymap)
+     ;;     	 (evil-define-key 'insert (eval keymap) [escape] 'abort-recursive-edit)
+     ;;     	 (evil-define-key 'normal (eval keymap) [escape] 'abort-recursive-edit)
+     ;;     	 (evil-define-key 'insert (eval keymap) [return] 'exit-minibuffer)
+     ;;     	 (evil-define-key 'normal (eval keymap) [return] 'exit-minibuffer)
+     ;;     	 (evil-define-key 'insert (eval keymap) "\C-t" 'evil-normal-state))
 
-      ;; ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/
-      ;; ;; Text-from-Minibuffer.html#Definition of minibuffer-local-map
+     ;; ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/
+     ;; ;; Text-from-Minibuffer.html#Definition of minibuffer-local-map
 
-      ;;     '(minibuffer-local-map
-      ;;     	 minibuffer-local-ns-map
-      ;;     	 minibuffer-local-completion-map
-      ;;     	 minibuffer-local-must-match-map
-      ;;     	 minibuffer-local-isearch-map))
+     ;;     '(minibuffer-local-map
+     ;;     	 minibuffer-local-ns-map
+     ;;     	 minibuffer-local-completion-map
+     ;;     	 minibuffer-local-must-match-map
+     ;;     	 minibuffer-local-isearch-map))
 
-      ;;    (add-hook 'minibuffer-setup-hook 
-      ;;     	      '(lambda () 
-      ;;     		 (set (make-local-variable 'evil-echo-state) nil)
+     ;;    (add-hook 'minibuffer-setup-hook 
+     ;;     	      '(lambda () 
+     ;;     		 (set (make-local-variable 'evil-echo-state) nil)
 
-      ;;    ;; (evil-set-initial-state 'mode 'insert) is the evil-proper
-      ;;    ;; way to do this, but the minibuffer doesn't have a mode.
-      ;;    ;; The alternative is to create a minibuffer mode (here), but
-      ;;    ;; then it may conflict with other packages' if they do the same.
+     ;;    ;; (evil-set-initial-state 'mode 'insert) is the evil-proper
+     ;;    ;; way to do this, but the minibuffer doesn't have a mode.
+     ;;    ;; The alternative is to create a minibuffer mode (here), but
+     ;;    ;; then it may conflict with other packages' if they do the same.
 
-      ;;     	    (evil-insert 1)))
+     ;;     	    (evil-insert 1)))
 ;; Evil mode:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Eyebrowse][Eyebrowse:1]]
