@@ -126,6 +126,7 @@ dtk-preserve/
 ehthumbs.db
 el-get/
 elpa/
+emacs.opml
 emacs-dot-files/
 emacs.org_archive
 emacs-reveal-submodules/
