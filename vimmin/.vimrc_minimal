@@ -263,7 +263,7 @@ set thesaurus+=$HOME/thesaurus/brazilian-synonyms.txt
 "
 "" Plugins will be downloaded under the specified directory.
 "
-call plug#begin('~/.vim/plugged/')
+call plug#begin('~/.dotfiles/vim/.vim_minimal/plugged/')
 
 "" Declare the list of plugins.
 "
@@ -337,6 +337,7 @@ call plug#begin('~/.vim/plugged/')
 "        "Plug 'jeffkreeftmeijer/vim-numbertoggle'
 "        "Plug 'falstro/ghost-text-vim'
 "        "Plug 'morhetz/gruvbox'
+        Plug 'ap/vim-buftabline'
 "
 "    " Writing
 "         "Plug 'lifepillar/vim-mucomplete'

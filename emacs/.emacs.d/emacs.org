@@ -31,7 +31,7 @@ M-x epa-dencrypt-file	decrepit a file with a symmetric password you gave
 bug-hunter	for debugging emacs.el
 M-x lisp-interaction-mode RET	lisp auto-completion programming   
 (flyspell-mode)	activates automatic spelling 
-\b or Ctrl-x Ctrl-m switch-to-buffer	switches to another buffer
+\b or M-x switch-to-buffer	switches to another buffer
 C-c I	find-user-init-file
 Ctrl-Alt Alt Shift	for inserting a bullet and changing levels
 Ctrl-c c	org-capture
@@ -56,14 +56,15 @@ Ctrl-x 2	split frame horizontally
 Ctrl-x 3	split frame vertically
 Ctrl-x b	switches back to the previous buffer
 Ctrl-x c	close emacs
-Ctrl-x Ctrl-m customize-themes	customize the themes
+M-x customize-themes	customize the themes
+M-x customize-variable RET org-file-apps	customize browse options and other apps
 Ctrl-h v or describe-variable	custom-enabled-themes - shows the current theme
-Ctrl-x Ctrl-m	helm-google-suggest	finds suggestions on google
-Ctrl-x Ctrl-m load-library RET ox-reveal	loads ox-reveal library
-Ctrl-x Ctrl-m menu-set-font	sets the font to whatever you want
-Ctrl-x Ctrl-m shell	opens up a shell session
-Ctrl-x Ctrl-m	tetris	opens up a game tetris frame
-Ctrl-x Ctrl-m visual-line-mode	adjusts the words to the frame size without breaking words 
+M-x	helm-google-suggest	finds suggestions on google
+M-x load-library RET ox-reveal	loads ox-reveal library
+M-x menu-set-font	sets the font to whatever you want
+M-x shell	opens up a shell session
+M-x	tetris	opens up a game tetris frame
+M-x visual-line-mode	adjusts the words to the frame size without breaking words 
 Ctrl-x n s	focus to a section
 Ctrl-x n w	unfocus the section
 Ctrl-x s	save file
@@ -5071,3 +5072,33 @@ https://ivanmalison.github.io/dotfiles/#about
 
  #+END_SRC
  
+* org-mind-map
+
+https://github.com/theodorewiles/org-mind-map 
+
+This is an Emacs package that creates graphviz directed graphs from
+the headings of an org file
+
+#+BEGIN_SRC lisp
+
+  Usage:
+  M-x org-mind-map-write-current-tree RET
+  You can also export to freemind
+  M-x org-freemind-export-to-freemind 
+
+    (use-package org-mind-map
+      :init
+      (require 'ox-org)
+      :ensure t
+      ;; Uncomment the below if 'ensure-system-packages` is installed
+      :ensure-system-package (gvgen . graphviz)
+      :config
+         (setq org-mind-map-engine "dot")    ; Default. Directed Graph
+      ;; (setq org-mind-map-engine "neato")  ; Undirected Spring Graph
+      ;; (setq org-mind-map-engine "twopi")  ; Radial Layout
+      ;; (setq org-mind-map-engine "fdp")    ; Undirected Spring Force-Directed
+      ;; (setq org-mind-map-engine "sfdp")   ; Multiscale version of fdp for the layout of large graphs
+      ;; (setq org-mind-map-engine "circo")  ; Circular Layout
+      )
+
+#+END_SRC
