@@ -4,3 +4,17 @@
   - load libraries
   - M-x load-library RET (ox-reveal ox-pandoc org-re-reveal oer-reveal org-mind-map)
   - Then you can work on, using org-mode files
+
+* org-mind-map usage
+
+  Usage:
+  M-x org-mind-map-write RET
+  M-x org-mind-map-write-current-tree RET
+
+  If you want to draw your links, you have to
+  M-x load-library org-mind-map RET 
+  and export the file with C-c C-e gO
+
+  You can also export to freemind
+  M-x org-freemind-export-to-freemind 
+

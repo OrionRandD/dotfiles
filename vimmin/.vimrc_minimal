@@ -338,6 +338,7 @@ call plug#begin('~/.dotfiles/vim/.vim_minimal/plugged/')
 "        "Plug 'falstro/ghost-text-vim'
 "        "Plug 'morhetz/gruvbox'
         Plug 'ap/vim-buftabline'
+        Plug 'osamuaoki/vim-spell-under'
 "
 "    " Writing
 "         "Plug 'lifepillar/vim-mucomplete'

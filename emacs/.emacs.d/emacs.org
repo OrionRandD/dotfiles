@@ -18,6 +18,7 @@ http://ergoemacs.org/emacs/emacs_package_system.html - for melpa, see this link
 http://www.ergoemacs.org/emacs/emacs_basics.html - emacs tutorial 
 
 C-h t	emacs tutorial
+C-h a	apropos-command find commands 
 M-x helm-man-women	manpages from within emacs
 org-shifttab	folds everything (non-evil-mode)
 org-cycle	unfolds everything (non-evil-mode)
@@ -5082,7 +5083,13 @@ the headings of an org file
 #+BEGIN_SRC lisp
 
   Usage:
+  M-x org-mind-map-write RET
   M-x org-mind-map-write-current-tree RET
+
+  If you want to draw your links, you have to
+  M-x load-library org-mind-map RET 
+  and export the file with C-c C-e gO
+
   You can also export to freemind
   M-x org-freemind-export-to-freemind 
 
@@ -5093,12 +5100,13 @@ the headings of an org file
       ;; Uncomment the below if 'ensure-system-packages` is installed
       :ensure-system-package (gvgen . graphviz)
       :config
-         (setq org-mind-map-engine "dot")    ; Default. Directed Graph
+	 (setq org-mind-map-engine "dot")    ; Default. Directed Graph
       ;; (setq org-mind-map-engine "neato")  ; Undirected Spring Graph
       ;; (setq org-mind-map-engine "twopi")  ; Radial Layout
-      ;; (setq org-mind-map-engine "fdp")    ; Undirected Spring Force-Directed
+	 (setq org-mind-map-engine "fdp")    ; Undirected Spring Force-Directed
       ;; (setq org-mind-map-engine "sfdp")   ; Multiscale version of fdp for the layout of large graphs
       ;; (setq org-mind-map-engine "circo")  ; Circular Layout
       )
 
 #+END_SRC
+
