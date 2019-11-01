@@ -2,6 +2,12 @@
 * Emacs org-mode Workflow
   - Open emacs
   - load libraries
+
+(require 'ox-pandoc)
+(require 'org-mind-map)
+(require 'org-re-reveal)
+(require 'oer-reveal)
+
   - M-x load-library RET (ox-reveal ox-pandoc org-re-reveal oer-reveal org-mind-map)
   - Then you can work on, using org-mode files
 
@@ -17,4 +23,3 @@
 
   You can also export to freemind
   M-x org-freemind-export-to-freemind 
-

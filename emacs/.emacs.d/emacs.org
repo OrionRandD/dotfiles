@@ -176,69 +176,6 @@ eloud-mode is a good option for emacspeak
 
 #+END_SRC
 
-* Emacs Config
-
-;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; $HOME/.emacs file
-;; Create a file with this content to your $HOME/.emacs
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-;; See package "auto-install" bellow, if you have no internet access
-
-;; Speed up emacs
-   (setq gc-cons-threshold (* 100 1024 1024))
-
-;; use-package
-
-(package-initialize)
-
-;; (require 'package)
-
-(setq package-enable-at-startup nil)
-;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("gnu" . "http://mirrors.163.com/elpa/gnu/"))
-(add-to-list 'package-archives
- 	     '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives
- 	     '("melpa2" . "http://www.mirrorservice.org/sites/melpa.org/packages/"))
-(add-to-list 'package-archives
- 	     '("melpa3" . "http://www.mirrorservice.org/sites/stable.melpa.org/packages/"))
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-
-;; Bootstrap `use-package'
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(org-babel-load-file (expand-file-name "~/.emacs.d/emacs.org"))
-
-;; Ace-windown
-(global-set-key (kbd "M-p") 'ace-window)
-
-;; eloud
-(add-to-list 'load-path "~/.emacs.d/elpa/eloud-20190706.1707")
-(require 'eloud)
-
-;; you have to setup eloud-speech-rate and eloud-voice in
-;; "~/.emacs.d/elpa/eloud-20190706.1707/eloud.el"
-;; file and compile that - eloud-speech-rate was setup to 269
-
-(setq eloud-espeak-path "/usr/bin/espeak")
-;;(setq eloud-espeak-path "/usr/bin/espeak-ng -ven-gb -s 160")
-;;(setq eloud-espeak-path "/usr/bin/espeak -vpt -s 150")
-
-;; if you want to set espeak voice default pitch, you have to
-;; edit the file "/usr/lib/x86_64-linux-gnu/espeak-data/voices/en"
-;; and other voices
-
-(package-initialize)
-(org-babel-load-file "~/.emacs.d/emacs.org")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;
-
 * Emacs tutorials
 
 C-h t	emacs tutorial
@@ -254,7 +191,54 @@ http://www.jesshamrick.com/2012/09/10/absolute-beginners-guide-to-emacs/
 #+BEGIN_SRC 
 
 #+END_SRC
+
+* Secure emacs 
+[[https://glyph.twistedmatrix.com/2015/11/editor-malware.html][your editor is a malware]]
+
+python -m pip install certifi
+
+#+BEGIN_SRC emacs-lisp
   
+  ;;  (if (fboundp 'gnutls-available-p)
+  ;;      (fmakunbound 'gnutls-available-p))
+
+  (require 'cl)
+  (setq tls-checktrust t)
+
+  (setq python (or (executable-find "py.exe")
+		   (executable-find "python")
+		   ))
+
+  (let ((trustfile
+	 (replace-regexp-in-string
+	  "\\\\" "/"
+	  (replace-regexp-in-string
+	   "\n" ""
+	   (shell-command-to-string (concat python " -m certifi"))))))
+    (setq tls-program
+	  (list
+	   (format "gnutls-cli%s --x509cafile %s -p %%p %%h"
+		   (if (eq window-system 'w32) ".exe" "") trustfile)))
+    (setq gnutls-verify-error t)
+    (setq gnutls-trustfiles (list trustfile)))
+
+  ;; Test the settings by using the following code snippet:
+  ;;  (let ((bad-hosts
+  ;;         (loop for bad
+  ;;               in `("https://wrong.host.badssl.com/"
+  ;;                    "https://self-signed.badssl.com/")
+  ;;               if (condition-case e
+  ;;                      (url-retrieve
+  ;;                       bad (lambda (retrieved) t))
+  ;;                    (error nil))
+  ;;               collect bad)))
+  ;;    (if bad-hosts
+  ;;        (error (format "tls misconfigured; retrieved %s ok" bad-hosts))
+  ;;      (url-retrieve "https://badssl.com"
+  ;;                    (lambda (retrieved) t))))
+
+#+END_SRC
+ 
 * Package 
   
  this config is already in $HOME/.emacs
@@ -1249,6 +1233,65 @@ aggressive-indent-mode
 
 #+END_SRC
 
+* Plantuml 
+  
+  Install it with:
+  apt install graphviz plantuml pandoc-plantuml-filter
+  or 
+  M-x plantuml-download-jar
+  or
+  https://www.hiroom2.com/2018/07/02/ubuntu-1804-plantuml-en/
+  
+  you can run plantuml in terminal like so:
+  plantuml test-any-plantuml-file.md (.txt, org) 
+  It will generate a png file
+  the file has to be in the form:
+
+  @startuml
+  contents-here
+  @enduml
+
+  or,for org-mode syntax in any file:
+
+  @startmindmap
+  contents-here
+  @endmindmap
+  
+  or, inside a org file file.org
+
+  # #+begin_src plantuml :file my-diagram.png
+  #   title Authentication Sequence
+  #   Alice->Bob: Authentication Request
+  #   note right of Bob: Bob thinks about it
+  #   Bob->Alice: Authentication Response
+  # #+end_src
+  
+  Then evaluate the code with:
+  M-x org-babel-execute-src-block 
+  or
+  M-x org-babel-exp-src-block 
+  and
+  M-x org-toggle-inline-images (C-c C-x C-v)
+  
+  see - 11 MindMap in the plantuml guide
+  call:
+  tutoPlantuml.sh 
+  
+  Also see:
+  10 Gantt Diagram
+
+ #+BEGIN_SRC emacs-lisp
+
+      (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+
+      (use-package plantuml-mode
+       :ensure t)
+   
+   (use-package flycheck-plantuml
+       :ensure t)
+
+ #+END_SRC
+
 * DONE Babel languages
   CLOSED: [2019-05-19 dom 16:00]
 
@@ -1262,36 +1305,55 @@ to evaluate the code-block use "C-c C-c"
   ;; active Babel languages
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((shell . t)
-  (clojure .t)
-  (C . t)
-  ;;(cpp . t)
-  ;;(csharp . t)
-  (haskell . t)
-  (python . t)
-  (org . t)
-  ;; (scala . t)
-  (scheme . t)
-  (perl . t)
-  (R . t)
-  (gnuplot . t)
-  (java . t)
-  (js . t)
-  ;;(julia . t)
-  (lisp . t)
-  (latex . t)
-  (ruby . t)
-  (emacs-lisp . t)
-  (ditaa . t)
-  (sed .t)
-  (awk .t)
-  (sql .t)
-  (sqlite .t)
-   ))
+   (quote
+    ((vala . t)
+     (stan . t)
+     (octave . t)
+     (shen . t)
+     (screen . t)
+     (scheme . t)
+     (scala . t)
+     (sass . t)
+     (picolisp . t)
+     (perl . t)
+     (ocaml . t)
+     (mscgen . t)
+     (lilypond . t)
+     (J . t)
+     (ledger . t)
+     (io . t)
+     (hledger . t)
+     (haskell . t)
+     (fortran . t)
+     (forth . t)
+     (css . t)
+     (maxima . t)
+     (matlab . t)
+     (emacs-lisp . t)
+     (clojure . t)
+     (awk . t)
+     (makefile . t)
+     (sqlite . t)
+     (sql . t)
+     (ruby . t)
+     (R . t)
+     (js . t)
+     (java . t)
+     (shell . t)
+     (plantuml . t)
+     (lisp . t)
+     (latex . t)
+     (gnuplot . t)
+     (dot . t)
+     (ditaa . t)
+     (org . t)
+     (calc . t)
+     (C . t)
+     (asymptote . t)
+     (python . t)
+     (emacs-lisp . t))))
 
 #+END_SRC
-
-https://github.com/xboard/emacs-brazilian-holidays
 
 * TODO Bind-chord
 
@@ -1302,6 +1364,8 @@ https://github.com/xboard/emacs-brazilian-holidays
   #+END_SRC
 
 * TODO Brazilian-holidays
+
+https://github.com/xboard/emacs-brazilian-holidays
 
 #+BEGIN_SRC emacs-lisp
 
@@ -1492,13 +1556,15 @@ https://github.com/zamansky/using-emacs
 
 #+BEGIN_SRC emacs-lisp
 
-   (use-package pdf-tools
-    :ensure t
-    :config
-     (pdf-tools-install))
+  (use-package pdf-tools
+   :ensure t
+   :config
+    (pdf-tools-install))
 
-   (use-package org-pdfview
-    :ensure t)
+  (use-package org-pdfview
+   :ensure t)
+  
+#+END_SRC
 
 * TODO Deft
 
@@ -1593,13 +1659,20 @@ C-c C-m customize-variable RET org-file-apps RET (Extension pdf) under it Choose
 
 * DONE Default web-browser
   CLOSED: [2019-05-19 dom 16:17]
+  
+M-x engine/search 
+M-x engine/search-stack-overflow (etc)
 
 #+BEGIN_SRC emacs-lisp
 
-  (setq browse-url-browser-function 'browse-url-generic
-
-   ;; browse-url-generic-program "chromium-browser")
-   browse-url-generic-program "firefox")
+  ;; (setq browse-url-browser-function 'browse-url-generic
+   ;; browse-url-generic-program "firefox")
+   ;; browse-url-generic-program "chromium")
+  
+     (setq browse-url-browser-function 'w3m-browse-url)
+      (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+    ;; optional keyboard short-cut
+      (global-set-key "\C-xm" 'browse-url-at-point)
 
 #+END_SRC
 
@@ -3571,6 +3644,7 @@ https://github.com/lorniu/ox-spectacle/blob/9d3ec9a6326289074d8620e97d65e3105307
  List of people with nice emacs dotfiles files
  and some video tutorials:
 
+ https://github.com/dakra/dmacs
  https://github.com/valignatev/dotfiles
  https://invidio.us/latest_version?id=FYPE0dIoq1I&itag=43
 
@@ -4504,6 +4578,7 @@ https://ambrevar.xyz/blog-architecture/
 ** TODO Ox-hugo 
 
    Hugo is better than org2blog
+   https://www.mikedane.com/static-site-generators/hugo/
    https://gohugo.io/getting-started/quick-start/
    https://zzamboni.org/post/my-emacs-configuration-with-commentary/
    How to set up hugo:

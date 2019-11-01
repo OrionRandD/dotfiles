@@ -13,15 +13,17 @@
 ;; (require 'package)
 
 (setq package-enable-at-startup nil)
-;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("gnu" . "http://mirrors.163.com/elpa/gnu/"))
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives
  	     '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives
- 	     '("melpa2" . "http://www.mirrorservice.org/sites/melpa.org/packages/"))
-(add-to-list 'package-archives
- 	     '("melpa3" . "http://www.mirrorservice.org/sites/stable.melpa.org/packages/"))
+	     '("melpa-stable" . "https://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+;; (add-to-list 'package-archives '("gnu" . "http://mirrors.163.com/elpa/gnu/"))
+;; (add-to-list 'package-archives
+;; '("melpa2" . "http://www.mirrorservice.org/sites/melpa.org/packages/"))
+;; (add-to-list 'package-archives
+;; '("melpa3" . "http://www.mirrorservice.org/sites/stable.melpa.org/packages/"))
 
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
@@ -150,6 +152,9 @@ static char *gnus-pointer[] = {
  '(hl-fg-colors
    (quote
     ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
+ '(hl-paren-background-colors
+   (quote
+    ("#00FF99" "#CCFF99" "#FFCC99" "#FF9999" "#FF99CC" "#CC99FF" "#9999FF" "#99CCFF" "#99FFCC" "#7FFF00")))
  '(hl-paren-colors (quote ("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900")))
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(jdee-db-active-breakpoint-face-colors (cons "#000000" "#80A0C2"))
@@ -163,6 +168,54 @@ static char *gnus-pointer[] = {
    (quote
     ("#336c6c" "#205070" "#0f2050" "#806080" "#401440" "#6c1f1c" "#6b400c" "#23733c")))
  '(objed-cursor-color "#C16069")
+ '(org-babel-load-languages
+   (quote
+    ((vala . t)
+     (stan . t)
+     (octave . t)
+     (shen . t)
+     (screen . t)
+     (scheme . t)
+     (scala . t)
+     (sass . t)
+     (picolisp . t)
+     (perl . t)
+     (ocaml . t)
+     (mscgen . t)
+     (lilypond . t)
+     (J . t)
+     (ledger . t)
+     (io . t)
+     (hledger . t)
+     (haskell . t)
+     (fortran . t)
+     (forth . t)
+     (css . t)
+     (maxima . t)
+     (matlab . t)
+     (emacs-lisp . t)
+     (clojure . t)
+     (awk . t)
+     (makefile . t)
+     (sqlite . t)
+     (sql . t)
+     (ruby . t)
+     (R . t)
+     (js . t)
+     (java . t)
+     (shell . t)
+     (plantuml . t)
+     (lisp . t)
+     (latex . t)
+     (gnuplot . t)
+     (dot . t)
+     (ditaa . t)
+     (org . t)
+     (calc . t)
+     (C . t)
+     (asymptote . t)
+     (python . t)
+     (emacs-lisp . t))))
  '(org-export-backends
    (quote
     (ascii beamer html icalendar latex md odt org texinfo)))
@@ -170,7 +223,7 @@ static char *gnus-pointer[] = {
    (quote
     ((auto-mode . emacs)
      ("\\.mm\\'" . default)
-     ("\\.x?html?\\'" . "google-chrome --new-tab %s")
+     ("\\.x?html?\\'" . "chromium --new-tab %s")
      ("\\.pdf\\'" . "evince %s"))))
  '(org-journal-carryover-items nil)
  '(org-journal-date-format "%A, %d %B %Y")
@@ -178,9 +231,15 @@ static char *gnus-pointer[] = {
  '(org-journal-enable-agenda-integration t)
  '(org-odt-preferred-output-format "docx")
  '(org-reveal-root "file:/home/vagner/reveal-slides/reveal.js")
+ '(org-src-block-faces
+   (quote
+    (("emacs-lisp"
+      (:background "#F0FFF0"))
+     ("dot"
+      (:foreground "gray50")))))
  '(package-selected-packages
    (quote
-    (epresent oer-reveal org-re-reveal-ref org-re-reveal openwith htmlize all-the-icons-dired all-the-icons-gnus all-the-icons-ivy virtualenvwrapper better-shell evil-nerd-commenter evil-surround evil-numbers elisp emacs-lisp simple-mpc lisp unicode-fonts org-protocol emacs-bidi bidi bug-hunter elpa-perspective eyebrowse elfeed-goodies org-present-remote org-present org-drill academic-phrases olivetti linguistic bbdb-csv-import bbdb- org-ac helm-eww oauth2 package-safe-delete helm el-get aggressive-indent engine-mode diatheke org-mac-link w3m poetry gnugol keyword-search solarized-theme ## notmuch zenburn-theme white-sand-theme w3 transpose-frame togetherly theme-changer synosaurus synonyms switch-window suscolors-theme sunny-day-theme sublime-themes ssh speechd-el soft-stone-theme soft-morning-theme smex silkworm-theme shell-here seoul256-theme rudel punpun-theme projectile professional-theme powerline popup-switcher popup-kill-ring popup-imenu popup-edit-menu popup-complete pastelmac-theme paren-completer paredit pandoc ox-textile ox-reveal ox-pandoc organic-green-theme oneonone omnisharp occidental-theme nlinum multiple-cursors moz monokai-theme minimap markdown-mode linum-relative lavender-theme latex-unicode-math-mode key-chord idomenu icicles hydandata-light-theme heroku-theme helm-swoop green-phosphor-theme gnugo evil-org evil-leader ensime dracula-theme dictionary default-text-scale company-shell column-enforce-mode clojurescript-mode clojure-snippets clojure-quick-repls clojure-mode-extra-font-locking bash-completion base16-theme autopair aumix-mode anti-zenburn-theme alpha ace-jump-mode ac-math ac-js2 ac-html-csswatcher)))
+    (flycheck-plantuml plantuml-mode plantuml evil-collection epresent oer-reveal org-re-reveal-ref org-re-reveal openwith htmlize all-the-icons-dired all-the-icons-gnus all-the-icons-ivy virtualenvwrapper better-shell evil-nerd-commenter evil-surround evil-numbers elisp emacs-lisp simple-mpc lisp unicode-fonts org-protocol emacs-bidi bidi bug-hunter elpa-perspective eyebrowse elfeed-goodies org-present-remote org-present org-drill academic-phrases olivetti linguistic bbdb-csv-import bbdb- org-ac helm-eww oauth2 package-safe-delete helm el-get aggressive-indent engine-mode diatheke org-mac-link w3m poetry gnugol keyword-search solarized-theme ## notmuch zenburn-theme white-sand-theme w3 transpose-frame togetherly theme-changer synosaurus synonyms switch-window suscolors-theme sunny-day-theme sublime-themes ssh speechd-el soft-stone-theme soft-morning-theme smex silkworm-theme shell-here seoul256-theme rudel punpun-theme projectile professional-theme powerline popup-switcher popup-kill-ring popup-imenu popup-edit-menu popup-complete pastelmac-theme paren-completer paredit pandoc ox-textile ox-reveal ox-pandoc organic-green-theme oneonone omnisharp occidental-theme nlinum multiple-cursors moz monokai-theme minimap markdown-mode linum-relative lavender-theme latex-unicode-math-mode key-chord idomenu icicles hydandata-light-theme heroku-theme helm-swoop green-phosphor-theme gnugo evil-org evil-leader ensime dracula-theme dictionary default-text-scale company-shell column-enforce-mode clojurescript-mode clojure-snippets clojure-quick-repls clojure-mode-extra-font-locking bash-completion base16-theme autopair aumix-mode anti-zenburn-theme alpha ace-jump-mode ac-math ac-js2 ac-html-csswatcher)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")

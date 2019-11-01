@@ -8,6 +8,46 @@
 ;; (global-set-key "\C-x\C-m" 'execute-extended-command) (global-set-key "\C-c\C-m" 'execute-extended-command)
 ;; Bind M-(Alt)-x to "C-x C-m":1 ends here
 
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Secure%20emacs][Secure emacs:1]]
+;;  (if (fboundp 'gnutls-available-p)
+;;      (fmakunbound 'gnutls-available-p))
+
+(require 'cl)
+(setq tls-checktrust t)
+
+(setq python (or (executable-find "py.exe")
+		 (executable-find "python")
+		 ))
+
+(let ((trustfile
+       (replace-regexp-in-string
+	"\\\\" "/"
+	(replace-regexp-in-string
+	 "\n" ""
+	 (shell-command-to-string (concat python " -m certifi"))))))
+  (setq tls-program
+	(list
+	 (format "gnutls-cli%s --x509cafile %s -p %%p %%h"
+		 (if (eq window-system 'w32) ".exe" "") trustfile)))
+  (setq gnutls-verify-error t)
+  (setq gnutls-trustfiles (list trustfile)))
+
+;; Test the settings by using the following code snippet:
+;;  (let ((bad-hosts
+;;         (loop for bad
+;;               in `("https://wrong.host.badssl.com/"
+;;                    "https://self-signed.badssl.com/")
+;;               if (condition-case e
+;;                      (url-retrieve
+;;                       bad (lambda (retrieved) t))
+;;                    (error nil))
+;;               collect bad)))
+;;    (if bad-hosts
+;;        (error (format "tls misconfigured; retrieved %s ok" bad-hosts))
+;;      (url-retrieve "https://badssl.com"
+;;                    (lambda (retrieved) t))))
+;; Secure emacs:1 ends here
+
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Package][Package:1]]
 ;;(require 'package)
 ;;(package-initialize)
@@ -682,36 +722,67 @@ file with `edit-abbrevs`"
 ;;  (atomic-chrome-start-server)
 ;; Atomic chrome:1 ends here
 
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Plantuml][Plantuml:1]]
+(setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+
+   (use-package plantuml-mode
+    :ensure t)
+
+(use-package flycheck-plantuml
+    :ensure t)
+;; Plantuml:1 ends here
+
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Babel%20languages][Babel languages:1]]
 ;; active Babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((shell . t)
-(clojure .t)
-(C . t)
-;;(cpp . t)
-;;(csharp . t)
-(haskell . t)
-(python . t)
-(org . t)
-;; (scala . t)
-(scheme . t)
-(perl . t)
-(R . t)
-(gnuplot . t)
-(java . t)
-(js . t)
-;;(julia . t)
-(lisp . t)
-(latex . t)
-(ruby . t)
-(emacs-lisp . t)
-(ditaa . t)
-(sed .t)
-(awk .t)
-(sql .t)
-(sqlite .t)
- ))
+ (quote
+  ((vala . t)
+   (stan . t)
+   (octave . t)
+   (shen . t)
+   (screen . t)
+   (scheme . t)
+   (scala . t)
+   (sass . t)
+   (picolisp . t)
+   (perl . t)
+   (ocaml . t)
+   (mscgen . t)
+   (lilypond . t)
+   (J . t)
+   (ledger . t)
+   (io . t)
+   (hledger . t)
+   (haskell . t)
+   (fortran . t)
+   (forth . t)
+   (css . t)
+   (maxima . t)
+   (matlab . t)
+   (emacs-lisp . t)
+   (clojure . t)
+   (awk . t)
+   (makefile . t)
+   (sqlite . t)
+   (sql . t)
+   (ruby . t)
+   (R . t)
+   (js . t)
+   (java . t)
+   (shell . t)
+   (plantuml . t)
+   (lisp . t)
+   (latex . t)
+   (gnuplot . t)
+   (dot . t)
+   (ditaa . t)
+   (org . t)
+   (calc . t)
+   (C . t)
+   (asymptote . t)
+   (python . t)
+   (emacs-lisp . t))))
 ;; Babel languages:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Bind-chord][Bind-chord:1]]
@@ -833,6 +904,26 @@ file with `edit-abbrevs`"
 
 ;; Custom-set-faces:1 ends here
 
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*PDF%20tools][PDF tools:1]]
+(use-package pdf-tools
+ :ensure t
+ :config
+  (pdf-tools-install))
+
+(use-package org-pdfview
+ :ensure t)
+;; PDF tools:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Deft][Deft:1]]
+(defun org-brain-deft ()
+  "Use `deft' for files in `org-brain-path'."
+  (interactive)
+  (let ((deft-directory org-brain-path)
+        (deft-recursive t)
+        (deft-extensions '("org")))
+    (deft)))
+;; Deft:1 ends here
+
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Dired][Dired:1]]
 (add-to-list 'load-path "~/.emacs.d/el-get/dired+")
  (require 'dired+)
@@ -889,10 +980,14 @@ file with `edit-abbrevs`"
 ;; Default pdf-viwer:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Default%20web-browser][Default web-browser:1]]
-(setq browse-url-browser-function 'browse-url-generic
+;; (setq browse-url-browser-function 'browse-url-generic
+ ;; browse-url-generic-program "firefox")
+ ;; browse-url-generic-program "chromium")
 
- ;; browse-url-generic-program "chromium-browser")
- browse-url-generic-program "firefox")
+   (setq browse-url-browser-function 'w3m-browse-url)
+    (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+  ;; optional keyboard short-cut
+    (global-set-key "\C-xm" 'browse-url-at-point)
 ;; Default web-browser:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Dpaste][Dpaste:1]]
