@@ -8,6 +8,14 @@
 ;; (global-set-key "\C-x\C-m" 'execute-extended-command) (global-set-key "\C-c\C-m" 'execute-extended-command)
 ;; Bind M-(Alt)-x to "C-x C-m":1 ends here
 
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Emacs%20tutorials][Emacs tutorials:1]]
+
+;; Emacs tutorials:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Org-mode%20tutorials][Org-mode tutorials:1]]
+
+;; Org-mode tutorials:1 ends here
+
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Secure%20emacs][Secure emacs:1]]
 ;;  (if (fboundp 'gnutls-available-p)
 ;;      (fmakunbound 'gnutls-available-p))
@@ -79,6 +87,20 @@
   (with-eval-after-load 'auto-complete
     (ac-flyspell-workaround))
 ;; Auto-complete - global:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Completion][Completion:1]]
+(global-set-key [tab] 'indent-or-expand)
+(defun indent-or-expand ()
+  "Either indent according to mode, or expand the word preceding point."
+  (interactive)
+  (if (or
+       (eq last-command 'self-insert-command)
+       (eq last-command 'dabbrev-expand))
+      (progn
+     (setq this-command 'dabbrev-expand)
+     (dabbrev-expand nil))
+    (indent-according-to-mode)))
+;; Completion:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Company-mode][Company-mode:1]]
 ;;   (require 'company)
@@ -1248,6 +1270,15 @@ file with `edit-abbrevs`"
   :config )
 ;; Eshell:1 ends here
 
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*ESS][ESS:1]]
+(defun rmd-mode ()
+  "ESS Markdown mode for rmd files"
+  (interactive)
+  (require 'poly-R)
+  (require 'poly-markdown)     
+  (poly-markdown+r-mode))
+;; ESS:1 ends here
+
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Expand%20region][Expand region:1]]
 ;;  (require 'expand-region)
 ;;  (global-set-key (kbd "C-=") 'er/expand-region)
@@ -1289,13 +1320,13 @@ file with `edit-abbrevs`"
 ;; Gitlab:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*GGtags][GGtags:1]]
-;; (use-package ggtags
- 
-;;  :config 
-;;   (add-hook 'c-mode-common-hook
-;;          (lambda ()
-;;            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-;;              (ggtags-mode 1)))))
+(use-package ggtags
+:ensure t
+:config 
+ (add-hook 'c-mode-common-hook
+      (lambda ()
+	(when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'php-mode 'web-mode)
+	  (ggtags-mode 1)))))
 ;; GGtags:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Google-contacts][Google-contacts:1]]
@@ -2475,49 +2506,6 @@ Version 2015-04-23"
     (find-file (cdr (assoc ξabbrevCode cyber-filelist)))))
 ;; Speed directories and files:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Splash-screen][Splash-screen:1]]
-;;(display-splash-screen)
-
-     (use-package dashboard
-      :ensure t
-      :config
-     (dashboard-setup-startup-hook))
-
-     ;; Set the title
-
-     ;;(setq dashboard-banner-logo-title "*Welcome to vagner@lea-pet.local Emacs Dashboard*")
-     ;;(setq dashboard-banner-logo-title "*Welcome to lea@lea-pet.local Emacs Dashboard*")
-     (setq dashboard-banner-logo-title "*Welcome to vagner@Cyberwarrior.local Emacs Dashboard*")
-     ;;(setq dashboard-banner-logo-title "*Welcome to lea@Cyberwarrior.local Emacs Dashboard*")
-
-     ;; Set the banner
-     ;; (setq dashboard-startup-banner [VALUE])
-     (setq dashboard-startup-banner 'official)
-     ;; Value can be
-     ;; 'official which displays the official emacs logo
-     ;; 'logo which displays an alternative emacs logo
-     ;; 1, 2 or 3 which displays one of the text banners
-     ;; "path/to/your/image.png which displays whatever image you would prefer
-     (setq dashboard-items '((recents  . 10)
-			   (bookmarks . 5)
-			   (projects . 5)
-			   (agenda . 5)))
-
- ;;  You can use any of the following shortcuts inside Dashboard
-
- ;;  Shortcut	Function
- ;;  Tab Or C-i	Next Item
- ;;  Shift-Tab	Previous Item
- ;;  Return / Mouse Click / C-m	Open
- ;;  r	Recent files
- ;;  m	Bookmarks
- ;;  p	Projects
- ;;  a	Org-Mode Agenda
- ;;  g	Refresh contents
- ;;  {	Previous section
- ;;  }	Next section
-;; Splash-screen:1 ends here
-
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Scheme][Scheme:1]]
 
 ;; Scheme:1 ends here
@@ -2844,17 +2832,16 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
       :after flycheck
       (flycheck-package-setup))
 
-
   ;; If emacs does not work because of 
   ;; Dash package complaint, install it with
   ;; apt install dash-el - then install it with
   ;; Alt-x package-reinstall RET dash RET and remove 
   ;; it again with "apt purge dash-el" 
 
-     (use-package dash
-     :ensure t
-       :custom
-       (dash-enable-fontlock t))
+ (use-package dash
+   :ensure t
+   :custom
+   (dash-enable-fontlock t))
 ;; Elisp:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Network][Network:1]]
@@ -3241,8 +3228,10 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Gnutls-fix-bug][Gnutls-fix-bug:1]]
 ;;   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3/")
-     (setq gnutls-verify-error t)
-     (setq tls-checktrust t)
+;;     (setq gnutls-verify-error t)
+;;     (setq tls-checktrust t)
+
+       (toggle-debug-on-error)
 ;; Gnutls-fix-bug:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*emacs-wget][emacs-wget:1]]
@@ -3384,3 +3373,115 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
  :config
 (setq openwith-associations '(("\\.mp4\\'" "smplayer" (file)))))
 ;; openwith:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*org-mind-map][org-mind-map:1]]
+(use-package org-mind-map
+  :init
+  (require 'ox-org)
+  :ensure t
+  ;; Uncomment the below if 'ensure-system-packages` is installed
+  :ensure-system-package (gvgen . graphviz)
+  :config
+     (setq org-mind-map-engine "dot")    ; Default. Directed Graph
+  ;; (setq org-mind-map-engine "neato")  ; Undirected Spring Graph
+  ;; (setq org-mind-map-engine "twopi")  ; Radial Layout
+     (setq org-mind-map-engine "fdp")    ; Undirected Spring Force-Directed
+  ;; (setq org-mind-map-engine "sfdp")   ; Multiscale version of fdp for the layout of large graphs
+  ;; (setq org-mind-map-engine "circo")  ; Circular Layout
+  )
+;; org-mind-map:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Php-mode][Php-mode:1]]
+(use-package php-mode
+    :ensure t)
+
+  (use-package ac-php
+    :ensure t)
+
+(use-package phpunit  
+    :ensure t
+    :config
+    (setq phpunit-configuration-file "phpnit.xml")
+    (setq phpunit-root-directory "./"))
+
+  (use-package php-auto-yasnippets
+    :ensure t)
+;; Php-mode:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Php-extensions][Php-extensions:1]]
+(setq php-ext-path "~/.dotfiles/emacs/.emacs.d/elpa/php-ext/")
+(load (concat php-ext-path "php-ext.el"))
+
+   ;; (add-to-list 'load-path "~/.dotfiles/emacs/.emacs.d/elpa/php-ext")
+   ;; (require 'php-ext)
+;; Php-extensions:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Web-mode][Web-mode:1]]
+(use-package web-mode
+  :ensure t
+  :mode
+  ("\\.phtml\\'" "\\.tpl\\.php\\'" "\\.[agj]sp\\'" "\\.as[cp]x\\'"
+  "\\.erb\\'" "\\.mustache\\'" "\\.djhtml\\'" "\\.html?\\'")
+
+  :init
+  (setq web-mode-markup-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-css-indent-offset 2
+
+        web-mode-enable-auto-pairing t
+        web-mode-enable-auto-expanding t
+        web-mode-enable-css-colorization t)
+
+  :config
+  ;; Template
+  (setq web-mode-engines-alist
+        '(("php"    . "\\.phtml\\'")
+          ("blade"  . "\\.blade\\."))
+        )
+
+  )
+
+(use-package web-beautify
+  :ensure t
+  :commands (web-beautify-css
+             web-beautify-css-buffer
+             web-beautify-html
+             web-beautify-html-buffer
+             web-beautify-js
+             web-beautify-js-buffer))
+
+(use-package web-completion-data :ensure t)
+(use-package web-mode-edit-element :ensure t)
+;; Web-mode:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Impatient-mode][Impatient-mode:1]]
+(use-package impatient-mode 
+:ensure t)
+;; Impatient-mode:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Emmet-mode][Emmet-mode:1]]
+(use-package emmet-mode 
+:ensure t)
+;; Emmet-mode:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Xah%20modes][Xah modes:1]]
+;;  (use-package xah-lookup 
+  ;;   :ensure t)
+  ;; (use-package xah-elisp-mode 
+  ;;   :ensure t)
+
+(dolist (package '(xah-lookup xah-elisp-mode xah-find xah-get-thing xah-math-input xah-reformat-code xah-replace-pairs xahk-mode xah-css-mode))
+ (unless (package-installed-p package)
+   (package-install package))
+   (require package))
+;; Xah modes:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/emacs.org::*Scratch%20message][Scratch message:1]]
+(setq initial-scratch-message "
+   ;; 'Vagner Rener' @ 'Cyberwarrior',
+   ;; This buffer is for text that is not saved, and for Lisp evaluation.
+   ;; To create a file, visit it with \ e and enter text in its buffer."
+   )
+
+;; (setq initial-scratch-message nil)
+;; Scratch message:1 ends here

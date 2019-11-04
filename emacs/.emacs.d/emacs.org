@@ -184,11 +184,15 @@ https://cestlaz.github.io/stories/emacs/
 https://github.com/zamansky/using-emacs/blob/master/myinit.org
 http://www.jesshamrick.com/2012/09/10/absolute-beginners-guide-to-emacs/
 
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+
 * Org-mode tutorials 
 
   https://orgmode.org/worg/org-tutorials/
 
-#+BEGIN_SRC 
+#+BEGIN_SRC emacs-lisp
 
 #+END_SRC
 
@@ -302,17 +306,19 @@ path of the buffer your currently editing :
 ** DONE Completion 
     CLOSED: [2019-05-19 dom 16:01]
 
-	    (global-set-key [tab] 'indent-or-expand)
-	    (defun indent-or-expand ()
-	      "Either indent according to mode, or expand the word preceding point."
-	      (interactive)
-	      (if (or
-	    	   (eq last-command 'self-insert-command)
-	    	   (eq last-command 'dabbrev-expand))
-	    	  (progn
-	    	 (setq this-command 'dabbrev-expand)
-	    	 (dabbrev-expand nil))
-	     	(indent-according-to-mode)))
+ #+BEGIN_SRC emacs-lisp 
+   
+   (global-set-key [tab] 'indent-or-expand)
+   (defun indent-or-expand ()
+     "Either indent according to mode, or expand the word preceding point."
+     (interactive)
+     (if (or
+	  (eq last-command 'self-insert-command)
+	  (eq last-command 'dabbrev-expand))
+	 (progn
+	(setq this-command 'dabbrev-expand)
+	(dabbrev-expand nil))
+       (indent-according-to-mode)))
 
   #+END_SRC
 
@@ -1815,15 +1821,15 @@ This package is very stubborn :P
 
   https://www.emacswiki.org/emacs/ElDoc
 
- #+begin_src emacs-lisp 
+ #+BEGIN_SRC emacs-lisp 
 
- #+end_src
+ #+END_SRC
 
 * TODO elfeed 
 
   http://pragmaticemacs.com/category/elfeed/
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp 
 
       ;;shortcut functions
 
@@ -1866,22 +1872,22 @@ This package is very stubborn :P
 		  ("D" . bjm/elfeed-show-daily)
 		  ("q" . bjm/elfeed-save-db-and-bury)))
 
-#+end_src
+#+END_SRC
 
 ** elfeed-goodies
 
-  #+begin_src emacs-lisp 
+  #+BEGIN_SRC emacs-lisp 
 
     (use-package elfeed-goodies
       :ensure t
       :config
       (elfeed-goodies/setup))
 
-  #+end_src
+  #+END_SRC
 
 ** elfeed-org
 
-  #+begin_src emacs-lisp 
+  #+BEGIN_SRC emacs-lisp 
 
     ;; use an org file to organise feeds
 
@@ -1891,7 +1897,7 @@ This package is very stubborn :P
       (elfeed-org)
       (setq rmh-elfeed-org-files (list "~/org~/elfeed.org")))
 
-  #+end_src
+  #+END_SRC
 
 * TODO Emacs edit firefox-chromium plugin
 
@@ -2022,9 +2028,9 @@ This package is very stubborn :P
   
 https://emacs-fu.blogspot.com/2012/03/social-networking-with-bitlbee-and-erc.html
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp 
 
-#+end_src
+#+END_SRC
 
 * DONE Eshell
   CLOSED: [2019-05-19 dom 21:17]
@@ -2051,8 +2057,7 @@ https://emacs-fu.blogspot.com/2012/03/social-networking-with-bitlbee-and-erc.htm
 or working with polymode and R code
 Studio and ".Rmd" files for Academics
 
-BEGIN_SRC emacs-lisp
-
+#+BEGIN_SRC emacs-lisp
 
 (defun rmd-mode ()
   "ESS Markdown mode for rmd files"
@@ -2061,7 +2066,7 @@ BEGIN_SRC emacs-lisp
   (require 'poly-markdown)     
   (poly-markdown+r-mode))
 
-END_SRC
+#+END_SRC
 
 * TODO Expand region 
 
@@ -2147,15 +2152,17 @@ M-x RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc..
 
  apt-get install global
 
+ https://github.com/leoliu/ggtags
+
 #+BEGIN_SRC emacs-lisp
 
-;; (use-package ggtags
- 
-;;  :config 
-;;   (add-hook 'c-mode-common-hook
-;;          (lambda ()
-;;            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-;;              (ggtags-mode 1)))))
+  (use-package ggtags
+  :ensure t
+  :config 
+   (add-hook 'c-mode-common-hook
+	(lambda ()
+	  (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'php-mode 'web-mode)
+	    (ggtags-mode 1)))))
 
 #+END_SRC
 
@@ -2918,7 +2925,7 @@ Ctrl-x m package-install RET langtool
  https://www.reddit.com/r/emacs/comments/bfsck6/mu4e_for_dummies/
  https://zmalltalker.com/linux/mu.html
  http://pragmaticemacs.com/mu4e-tutorials/
-  http://tech.memoryimprintstudio.com/the-ultimate-emailing-agent-with-mu4e-and-emacs/
+ http://tech.memoryimprintstudio.com/the-ultimate-emailing-agent-with-mu4e-and-emacs/
 
  apt install mu4e
  If you get sentinel error:
@@ -3380,16 +3387,16 @@ http://www.bobnewell.net/publish/35years/webclipper.html
   Epresent does not work with evil-mode
   You have to disable it
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp 
 
     (use-package epresent
      :ensure t)
 
-#+end_src
+#+END_SRC
   
 * TODO Org-present
 
-  #+begin_src emacs-lisp 
+  #+BEGIN_SRC emacs-lisp 
 
     (use-package org-present
      :ensure t
@@ -3404,22 +3411,22 @@ http://www.bobnewell.net/publish/35years/webclipper.html
       (org-present-small)
       (org-present-read-write)))) 
 
-  #+end_src
+  #+END_SRC
 
 ** Org-present-remote
 
-  #+begin_src emacs-lisp 
+  #+BEGIN_SRC emacs-lisp 
 
     (use-package org-present-remote
      :ensure t)
 
-  #+end_src
+  #+END_SRC
 
 * emacs-reveal
 
 https://gitlab.com/oer/emacs-reveal
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp 
 
   (add-to-list 'load-path "/home/vagner/.emacs.d/elpa/emacs-reveal")
 
@@ -3427,7 +3434,7 @@ https://gitlab.com/oer/emacs-reveal
 ;; (setq oer-reveal-plugins nil)
 ;;  (setq oer-reveal-plugins t)
 
-#+end_src
+#+END_SRC
 
 * Org reveal
 
@@ -3498,21 +3505,21 @@ https://gitlab.com/oer/emacs-reveal
   [ https ://gitlab .com/oer/emacs-reveal]
  type “m-x load-library”, then “org-re-reveal-ref”
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp 
 
   (use-package org-re-reveal-ref
    :ensure t
    :config
      (require 'org-re-reveal-ref))
 
-#+end_src
+#+END_SRC
 
 * oer-reveal
 
  https://gitlab.com/oer/emacs-reveal
  type "m-x load-library", then "oer-reveal"
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp 
 
   (use-package oer-reveal
    :ensure t
@@ -3520,7 +3527,7 @@ https://gitlab.com/oer/emacs-reveal
      (require 'oer-reveal) 
      (setq oer-reveal-plugins t))
 
-#+end_src
+#+END_SRC
 
 * Spectacle
 
@@ -3531,12 +3538,12 @@ https://github.com/lorniu/ox-spectacle/blob/9d3ec9a6326289074d8620e97d65e3105307
   M-x ox-spectacle-help
   Ctrl-C Ctrl-E s f	for exporting
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp 
 
   (use-package ox-spectacle
 	:ensure t)
 
-#+end_src
+#+END_SRC
 
 * TODO Org-tree-slide
   
@@ -3550,7 +3557,7 @@ https://github.com/lorniu/ox-spectacle/blob/9d3ec9a6326289074d8620e97d65e3105307
   org-insert-link	if you want to insert images
   org-toggle-inline-images	if you want to toogle them 
 
-  #+begin_src emacs-lisp 
+  #+BEGIN_SRC emacs-lisp 
 
        (use-package org-tree-slide
          :ensure t
@@ -3575,7 +3582,7 @@ https://github.com/lorniu/ox-spectacle/blob/9d3ec9a6326289074d8620e97d65e3105307
 	       (set-transient-map map nil 'wolfe/org-tree-set-transient-map))
 	   (makeunbound wolfe--enable-transient-map)))
 
-  #+end_src
+  #+END_SRC
  
 * Ox-pandoc 
 
@@ -3666,12 +3673,12 @@ https://github.com/lorniu/ox-spectacle/blob/9d3ec9a6326289074d8620e97d65e3105307
   https://github.com/nex3/perspective-el 
   call it with "persp-mode"
 
- #+begin_src emacs-lisp 
+ #+BEGIN_SRC emacs-lisp 
 
    ;; (use-package perspective
    ;;   :ensure t)
 
- #+end_src
+ #+END_SRC
  
 * Powerline 
 
@@ -3792,51 +3799,53 @@ https://github.com/lorniu/ox-spectacle/blob/9d3ec9a6326289074d8620e97d65e3105307
 
 * Splash-screen
 
- https://github.com/rakanalh/emacs-dashboard
+  https://github.com/rakanalh/emacs-dashboard
+  
+  You can use (helm-mini) - instead
 
-#+BEGIN_SRC emacs-lisp 
+# #+BEGIN_SRC emacs-lisp 
 
 
-  ;;(display-splash-screen)
+#   ;;(display-splash-screen)
        
-       (use-package dashboard
-        :ensure t
-        :config
-       (dashboard-setup-startup-hook))
+#        (use-package dashboard
+#         :ensure t
+#         :config
+#        (dashboard-setup-startup-hook))
 
-       ;; Set the title
+#        ;; Set the title
 
-       ;;(setq dashboard-banner-logo-title "*Welcome to vagner@lea-pet.local Emacs Dashboard*")
-       ;;(setq dashboard-banner-logo-title "*Welcome to lea@lea-pet.local Emacs Dashboard*")
-       (setq dashboard-banner-logo-title "*Welcome to vagner@Cyberwarrior.local Emacs Dashboard*")
-       ;;(setq dashboard-banner-logo-title "*Welcome to lea@Cyberwarrior.local Emacs Dashboard*")
+#        ;;(setq dashboard-banner-logo-title "*Welcome to vagner@lea-pet.local Emacs Dashboard*")
+#        ;;(setq dashboard-banner-logo-title "*Welcome to lea@lea-pet.local Emacs Dashboard*")
+#        (setq dashboard-banner-logo-title "*Welcome to vagner@Cyberwarrior.local Emacs Dashboard*")
+#        ;;(setq dashboard-banner-logo-title "*Welcome to lea@Cyberwarrior.local Emacs Dashboard*")
 
-       ;; Set the banner
-       ;; (setq dashboard-startup-banner [VALUE])
-       (setq dashboard-startup-banner 'official)
-       ;; Value can be
-       ;; 'official which displays the official emacs logo
-       ;; 'logo which displays an alternative emacs logo
-       ;; 1, 2 or 3 which displays one of the text banners
-       ;; "path/to/your/image.png which displays whatever image you would prefer
-       (setq dashboard-items '((recents  . 10)
-			     (bookmarks . 5)
-			     (projects . 5)
-			     (agenda . 5)))
+#        ;; Set the banner
+#        ;; (setq dashboard-startup-banner [VALUE])
+#        (setq dashboard-startup-banner 'official)
+#        ;; Value can be
+#        ;; 'official which displays the official emacs logo
+#        ;; 'logo which displays an alternative emacs logo
+#        ;; 1, 2 or 3 which displays one of the text banners
+#        ;; "path/to/your/image.png which displays whatever image you would prefer
+#        (setq dashboard-items '((recents  . 10)
+# 			     (bookmarks . 5)
+# 			     (projects . 5)
+# 			     (agenda . 5)))
 
-   ;;  You can use any of the following shortcuts inside Dashboard
+#    ;;  You can use any of the following shortcuts inside Dashboard
 
-   ;;  Shortcut	Function
-   ;;  Tab Or C-i	Next Item
-   ;;  Shift-Tab	Previous Item
-   ;;  Return / Mouse Click / C-m	Open
-   ;;  r	Recent files
-   ;;  m	Bookmarks
-   ;;  p	Projects
-   ;;  a	Org-Mode Agenda
-   ;;  g	Refresh contents
-   ;;  {	Previous section
-   ;;  }	Next section
+#    ;;  Shortcut	Function
+#    ;;  Tab Or C-i	Next Item
+#    ;;  Shift-Tab	Previous Item
+#    ;;  Return / Mouse Click / C-m	Open
+#    ;;  r	Recent files
+#    ;;  m	Bookmarks
+#    ;;  p	Projects
+#    ;;  a	Org-Mode Agenda
+#    ;;  g	Refresh contents
+#    ;;  {	Previous section
+#    ;;  }	Next section
 
 #+END_SRC
 
@@ -3929,7 +3938,7 @@ https://github.com/lorniu/ox-spectacle/blob/9d3ec9a6326289074d8620e97d65e3105307
 
    https://github.com/zevlg/telega.el
 
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
 
     ;; (add-to-list 'load-path "~/.emacs.d/elpa/telega.el")
     ;; (require 'telega)
@@ -3984,7 +3993,7 @@ https://github.com/lorniu/ox-spectacle/blob/9d3ec9a6326289074d8620e97d65e3105307
     ;; :defer t)									    ;;
       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  #+end_src
+  #+END_SRC
 
 * Text-translation
 
@@ -4303,17 +4312,16 @@ Windows with Cygwin tools installed, assuming no password is required
 	  :after flycheck
 	  (flycheck-package-setup))
 
-
       ;; If emacs does not work because of 
       ;; Dash package complaint, install it with
       ;; apt install dash-el - then install it with
       ;; Alt-x package-reinstall RET dash RET and remove 
       ;; it again with "apt purge dash-el" 
 
-	 (use-package dash
-         :ensure t
-	   :custom
-	   (dash-enable-fontlock t))
+     (use-package dash
+       :ensure t
+       :custom
+       (dash-enable-fontlock t))
 
   #+END_SRC
 
@@ -4855,7 +4863,7 @@ You have to install org-plus-contrib
 
 * bbdb-database
 
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
 
     (require 'bbdb)
       (bbdb-initialize 'gnus 'message 'mu4e 'w3)
@@ -4875,7 +4883,7 @@ You have to install org-plus-contrib
     bbdb-popup-target-lines  1
     )
 
-  #+end_src
+  #+END_SRC
 
 * ipp Printer
 
@@ -4898,25 +4906,25 @@ You have to install org-plus-contrib
 
 * Org-drill 
 
-  #+begin_src emacs-lisp 
+  #+BEGIN_SRC emacs-lisp 
 
   (use-package org-drill
     :ensure t)
 
-  #+end_src
+  #+END_SRC
 
 * Org-drill-table 
 
-  #+begin_src emacs-lisp 
+  #+BEGIN_SRC emacs-lisp 
 
   (use-package org-drill-table
     :ensure t)
 
-  #+end_src
+  #+END_SRC
 
 * Memrise 
   
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp 
 
   (use-package memrise
     :quelpa (memrise
@@ -4925,7 +4933,7 @@ You have to install org-plus-contrib
 
   (setq memrise-sync-requests t)
 
-#+end_src 
+#+END_SRC 
 
 * Gnutls-fix-bug 
 
@@ -4934,8 +4942,10 @@ You have to install org-plus-contrib
 #+BEGIN_SRC emacs-lisp 
 
 ;;   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3/")
-     (setq gnutls-verify-error t)
-     (setq tls-checktrust t)
+;;     (setq gnutls-verify-error t)
+;;     (setq tls-checktrust t)
+
+       (toggle-debug-on-error)
 
  #+END_SRC
 
@@ -4944,7 +4954,7 @@ You have to install org-plus-contrib
   https://github.com/ataka/emacs-wget
   see also the file $HOME/.wgetrc
 
- #+begin_src emacs-lisp 
+ #+BEGIN_SRC emacs-lisp 
 
   ;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/emacs-wget")
 
@@ -4958,7 +4968,8 @@ You have to install org-plus-contrib
 ;;  (setq wget-process-buffer nil)
 ;;  (setq wget-command "/usr/bin/wget")
 
- #+end_src
+ #+END_SRC
+
 * More niceties 
 
  More nice stuff
@@ -5051,6 +5062,7 @@ You have to install org-plus-contrib
 (venv-initialize-eshell))
 
 #+END_SRC
+
 * Time in mode-line
 
 https://ivanmalison.github.io/dotfiles/#about
@@ -5136,7 +5148,6 @@ https://ivanmalison.github.io/dotfiles/#about
   #+END_SRC
 
 * openwith 
-  
   [[https://stackoverflow.com/questions/51006855/open-mp4-files-from-orgmode][files_assocs]]
 
  #+BEGIN_SRC emacs-lisp 
@@ -5155,7 +5166,6 @@ https://github.com/theodorewiles/org-mind-map
 This is an Emacs package that creates graphviz directed graphs from
 the headings of an org file
 
-#+BEGIN_SRC lisp
 
   Usage:
   M-x org-mind-map-write RET
@@ -5168,20 +5178,172 @@ the headings of an org file
   You can also export to freemind
   M-x org-freemind-export-to-freemind 
 
-    (use-package org-mind-map
-      :init
-      (require 'ox-org)
-      :ensure t
-      ;; Uncomment the below if 'ensure-system-packages` is installed
-      :ensure-system-package (gvgen . graphviz)
-      :config
-	 (setq org-mind-map-engine "dot")    ; Default. Directed Graph
-      ;; (setq org-mind-map-engine "neato")  ; Undirected Spring Graph
-      ;; (setq org-mind-map-engine "twopi")  ; Radial Layout
-	 (setq org-mind-map-engine "fdp")    ; Undirected Spring Force-Directed
-      ;; (setq org-mind-map-engine "sfdp")   ; Multiscale version of fdp for the layout of large graphs
-      ;; (setq org-mind-map-engine "circo")  ; Circular Layout
-      )
+#+BEGIN_SRC emacs-lisp
+  
+  (use-package org-mind-map
+    :init
+    (require 'ox-org)
+    :ensure t
+    ;; Uncomment the below if 'ensure-system-packages` is installed
+    :ensure-system-package (gvgen . graphviz)
+    :config
+       (setq org-mind-map-engine "dot")    ; Default. Directed Graph
+    ;; (setq org-mind-map-engine "neato")  ; Undirected Spring Graph
+    ;; (setq org-mind-map-engine "twopi")  ; Radial Layout
+       (setq org-mind-map-engine "fdp")    ; Undirected Spring Force-Directed
+    ;; (setq org-mind-map-engine "sfdp")   ; Multiscale version of fdp for the layout of large graphs
+    ;; (setq org-mind-map-engine "circo")  ; Circular Layout
+    )
 
 #+END_SRC
 
+* Php-mode
+
+https://github.com/emacs-php/php-mode
+  http://www.blogbyben.com/2016/08/emacs-php-modern-and-far-more-complete.html 
+https://www.philnewton.net/guides/emacs-as-a-php-editor/
+
+you can use YASnippets in the php/html files like so:
+e.g. p hit TAB. It will suggest <p></p> or other snippet that starts with "p"
+  
+#+BEGIN_SRC emacs-lisp 
+
+    (use-package php-mode
+      :ensure t)
+
+    (use-package ac-php
+      :ensure t)
+
+  (use-package phpunit  
+      :ensure t
+      :config
+      (setq phpunit-configuration-file "phpnit.xml")
+      (setq phpunit-root-directory "./"))
+
+    (use-package php-auto-yasnippets
+      :ensure t)
+  
+#+END_SRC
+
+* Php-extensions
+
+#+BEGIN_SRC emacs-lisp
+
+  (setq php-ext-path "~/.dotfiles/emacs/.emacs.d/elpa/php-ext/")
+  (load (concat php-ext-path "php-ext.el"))
+
+     ;; (add-to-list 'load-path "~/.dotfiles/emacs/.emacs.d/elpa/php-ext")
+     ;; (require 'php-ext)
+
+#+END_SRC  
+
+* Web-mode
+
+http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html 
+http://www.blogbyben.com/2016/08/emacs-php-modern-and-far-more-complete.html
+
+#+BEGIN_SRC emacs-lisp
+
+(use-package web-mode
+  :ensure t
+  :mode
+  ("\\.phtml\\'" "\\.tpl\\.php\\'" "\\.[agj]sp\\'" "\\.as[cp]x\\'"
+  "\\.erb\\'" "\\.mustache\\'" "\\.djhtml\\'" "\\.html?\\'")
+
+  :init
+  (setq web-mode-markup-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-css-indent-offset 2
+
+        web-mode-enable-auto-pairing t
+        web-mode-enable-auto-expanding t
+        web-mode-enable-css-colorization t)
+
+  :config
+  ;; Template
+  (setq web-mode-engines-alist
+        '(("php"    . "\\.phtml\\'")
+          ("blade"  . "\\.blade\\."))
+        )
+
+  )
+
+(use-package web-beautify
+  :ensure t
+  :commands (web-beautify-css
+             web-beautify-css-buffer
+             web-beautify-html
+             web-beautify-html-buffer
+             web-beautify-js
+             web-beautify-js-buffer))
+
+(use-package web-completion-data :ensure t)
+(use-package web-mode-edit-element :ensure t)
+
+#+END_SRC
+
+* Impatient-mode
+  
+  usage: 
+  Write your php/html files
+  M-x httpd-start
+  M-x impatient-mode
+  and open
+  http://localhost:8080/imp/
+  
+  #+BEGIN_SRC emacs-lisp
+
+    (use-package impatient-mode 
+    :ensure t)
+
+  #+END_SRC
+
+* Emmet-mode
+  
+  https://github.com/smihica/emmet-mode
+  usage:
+  M-x ggtags
+  etags *.php *.html etc... in the working directory
+  M-x emmet-mode
+  M-x emmet-mode-preview
+  
+  #+BEGIN_SRC emacs-lisp
+
+    (use-package emmet-mode 
+    :ensure t)
+
+  #+END_SRC
+  
+* Xah modes
+
+  http://ergoemacs.org/emacs/xah_emacs_modes.html
+
+  #+BEGIN_SRC emacs-lisp
+
+      ;;  (use-package xah-lookup 
+      ;;   :ensure t)
+      ;; (use-package xah-elisp-mode 
+      ;;   :ensure t)
+    
+    (dolist (package '(xah-lookup xah-elisp-mode xah-find xah-get-thing xah-math-input xah-reformat-code xah-replace-pairs xahk-mode xah-css-mode))
+     (unless (package-installed-p package)
+       (package-install package))
+       (require package))
+
+  #+END_SRC
+
+
+
+* Scratch message
+
+ #+BEGIN_SRC emacs-lisp
+
+      (setq initial-scratch-message "
+      ;; 'Vagner Rener' @ 'Cyberwarrior',
+      ;; This buffer is for text that is not saved, and for Lisp evaluation.
+      ;; To create a file, visit it with \ e and enter text in its buffer."
+      )
+   
+   ;; (setq initial-scratch-message nil)
+   
+  #+END_SRC

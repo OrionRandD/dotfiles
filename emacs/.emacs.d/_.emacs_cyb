@@ -5,12 +5,13 @@
 ;; You may delete these explanatory comments.
 
 ;; Speed up emacs
- (setq gc-cons-threshold (* 100 1024 1024))
+(setq gc-cons-threshold (* 100 1024 1024))
 
 ;; use-package
 
- (package-initialize)
-;; (require 'package)
+(require 'package)
+(package-initialize)
+(toggle-debug-on-error)
 
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
@@ -239,7 +240,7 @@ static char *gnus-pointer[] = {
       (:foreground "gray50")))))
  '(package-selected-packages
    (quote
-    (flycheck-plantuml plantuml-mode plantuml evil-collection epresent oer-reveal org-re-reveal-ref org-re-reveal openwith htmlize all-the-icons-dired all-the-icons-gnus all-the-icons-ivy virtualenvwrapper better-shell evil-nerd-commenter evil-surround evil-numbers elisp emacs-lisp simple-mpc lisp unicode-fonts org-protocol emacs-bidi bidi bug-hunter elpa-perspective eyebrowse elfeed-goodies org-present-remote org-present org-drill academic-phrases olivetti linguistic bbdb-csv-import bbdb- org-ac helm-eww oauth2 package-safe-delete helm el-get aggressive-indent engine-mode diatheke org-mac-link w3m poetry gnugol keyword-search solarized-theme ## notmuch zenburn-theme white-sand-theme w3 transpose-frame togetherly theme-changer synosaurus synonyms switch-window suscolors-theme sunny-day-theme sublime-themes ssh speechd-el soft-stone-theme soft-morning-theme smex silkworm-theme shell-here seoul256-theme rudel punpun-theme projectile professional-theme powerline popup-switcher popup-kill-ring popup-imenu popup-edit-menu popup-complete pastelmac-theme paren-completer paredit pandoc ox-textile ox-reveal ox-pandoc organic-green-theme oneonone omnisharp occidental-theme nlinum multiple-cursors moz monokai-theme minimap markdown-mode linum-relative lavender-theme latex-unicode-math-mode key-chord idomenu icicles hydandata-light-theme heroku-theme helm-swoop green-phosphor-theme gnugo evil-org evil-leader ensime dracula-theme dictionary default-text-scale company-shell column-enforce-mode clojurescript-mode clojure-snippets clojure-quick-repls clojure-mode-extra-font-locking bash-completion base16-theme autopair aumix-mode anti-zenburn-theme alpha ace-jump-mode ac-math ac-js2 ac-html-csswatcher)))
+    (xah-css-mode xahk-mode xah-replace-pairs xah-reformat-code xah-math-input xah-get-thing xah-find xah-elisp-mode xah-lookup emmet-mode impatient-mode php-auto-yasnippets phpunit web-mode-edit-element ac-php web-mode php-mode flycheck-plantuml plantuml-mode plantuml evil-collection epresent oer-reveal org-re-reveal-ref org-re-reveal openwith htmlize all-the-icons-dired all-the-icons-gnus all-the-icons-ivy virtualenvwrapper better-shell evil-nerd-commenter evil-surround evil-numbers elisp emacs-lisp simple-mpc lisp unicode-fonts org-protocol emacs-bidi bidi bug-hunter elpa-perspective eyebrowse elfeed-goodies org-present-remote org-present org-drill academic-phrases olivetti linguistic bbdb-csv-import bbdb- org-ac helm-eww oauth2 package-safe-delete helm el-get aggressive-indent engine-mode diatheke org-mac-link w3m poetry gnugol keyword-search solarized-theme ## notmuch zenburn-theme white-sand-theme w3 transpose-frame togetherly theme-changer synosaurus synonyms switch-window suscolors-theme sunny-day-theme sublime-themes ssh speechd-el soft-stone-theme soft-morning-theme smex silkworm-theme shell-here seoul256-theme rudel punpun-theme projectile professional-theme powerline popup-switcher popup-kill-ring popup-imenu popup-edit-menu popup-complete pastelmac-theme paren-completer paredit pandoc ox-textile ox-reveal ox-pandoc organic-green-theme oneonone omnisharp occidental-theme nlinum multiple-cursors moz monokai-theme minimap markdown-mode linum-relative lavender-theme latex-unicode-math-mode key-chord idomenu icicles hydandata-light-theme heroku-theme helm-swoop green-phosphor-theme gnugo evil-org evil-leader ensime dracula-theme dictionary default-text-scale company-shell column-enforce-mode clojurescript-mode clojure-snippets clojure-quick-repls clojure-mode-extra-font-locking bash-completion base16-theme autopair aumix-mode anti-zenburn-theme alpha ace-jump-mode ac-math ac-js2 ac-html-csswatcher)))
  '(pdf-view-midnight-colors (quote ("#232333" . "#c7c7c7")))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
