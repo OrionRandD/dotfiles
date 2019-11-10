@@ -24,6 +24,7 @@
     (load bootstrap-file nil 'nomessage))
 
   (straight-use-package 'use-package)
+
   (use-package use-package-ensure-system-package
     :straight t)
 ;; straight:1 ends here
@@ -33,320 +34,322 @@
   (unless pred (error "predicated failed; skipping package")))
 
 (advice-add 'use-package-handler/:if :before 'cyber/use-package-if-prehook)
+
+(use-package f
+  :ensure t)  ;; this will force use package keyword ":ensure" when using "use-package"
 ;; use-package:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacspeak][emacspeak:1]]
-(use-package eloud
- :straight t)
-;; emacspeak:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Emacs tutos][Emacs tutos:1]]
-
-;; Emacs tutos:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-mode tutos][org-mode tutos:1]]
-
-;; org-mode tutos:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Emacs security][Emacs security:1]]
-;;  (if (fboundp 'gnutls-available-p)
-;;      (fmakunbound 'gnutls-available-p))
-
-(require 'cl)
-(setq tls-checktrust t)
-
-(setq python (or (executable-find "py.exe")
-		 (executable-find "python")
-		 ))
-
-(let ((trustfile
-       (replace-regexp-in-string
-	"\\\\" "/"
-	(replace-regexp-in-string
-	 "\n" ""
-	 (shell-command-to-string (concat python " -m certifi"))))))
-  (setq tls-program
-	(list
-	 (format "gnutls-cli%s --x509cafile %s -p %%p %%h"
-		 (if (eq window-system 'w32) ".exe" "") trustfile)))
-  (setq gnutls-verify-error t)
-  (setq gnutls-trustfiles (list trustfile)))
-;; Emacs security:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*speed up Emacs][speed up Emacs:1]]
 (setq gc-cons-threshold (* 100 1024 1024))
 ;; speed up Emacs:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*buffers][buffers:1]]
-(setq frame-title-format (list (format "%s %%S: %%j " (system-name)) '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
-;; buffers:1 ends here
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*small configs][small configs:1]]
+(setq inhibit-startup-screen t)
+  (global-visual-line-mode 1)
+  (load-theme 'misterioso)
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0)
+  (show-paren-mode 1)
+  (toggle-truncate-lines 1)
+  (ido-mode 1) ;; this shows minibuffer options
+  (blink-cursor-mode 0)
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*auto-complete][auto-complete:1]]
-;;(require 'auto-complete)
-;;(global-auto-complete-mode t) 
-  (ac-config-default)
-  (defun auto-complete-mode-maybe ()
-   "No maybe for you. Only AC!"
-   (auto-complete-mode 1))
+ (defalias 'yes-or-no-p 'y-or-n-p)
+     (setq confirm-kill-processes nil)
 
-  (ac-set-trigger-key "RET")
+(add-hook 'prog-mode-hook 'turn-on-auto-fill)
+   (add-hook 'text-mode-hook 'turn-on-auto-fill)
+;; small configs:1 ends here
 
-  (with-eval-after-load 'auto-complete
-    (ac-flyspell-workaround))
-;; auto-complete:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*completion][completion:1]]
-(global-set-key [tab] 'indent-or-expand)
-(defun indent-or-expand ()
-  "Either indent according to mode, or expand the word preceding point."
-  (interactive)
-  (if (or
-       (eq last-command 'self-insert-command)
-       (eq last-command 'dabbrev-expand))
-      (progn
-     (setq this-command 'dabbrev-expand)
-     (dabbrev-expand nil))
-    (indent-according-to-mode)))
-;; completion:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*company-mode][company-mode:1]]
-;;   (require 'company)
-
-;;   (add-hook 'after-init-hook 'global-company-mode)
-
-;;   (setq company-minimum-prefix-length 3)
-;;   (setq company-idle-delay 0.1)
-
-
-;;    (defun company-ac-setup ()
-;;      "Sets up `company-mode' to behave similarly to `auto-complete-mode'."
-;;      (setq company-require-match nil)
-;;      (setq company-auto-complete #'my-company-visible-and-explicit-action-p)
-;;      (setq company-frontends '(company-echo-metadata-frontend
-;;       			 company-pseudo-tooltip-unless-just-one-frontend-with-delay
-;;       			 company-preview-frontend))
-;;      (define-key company-active-map [tab]
-;;        'company-select-next-if-tooltip-visible-or-complete-selection)
-;;      (define-key company-active-map (kbd "TAB")
-;;        'company-select-next-if-tooltip-visible-or-complete-selection))
-
-;; (eval-after-load 'company
-;;      '(progn
-;;       	(define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
-;;       	(define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)))
-
-;;        (eval-after-load 'company
-;;    '(progn
-;;       (define-key company-active-map (kbd "S-TAB") 'company-select-previous)
-;;       (define-key company-active-map (kbd "<backtab>") 'company-select-previous)))
-
-;;        (setq company-frontends
-;;      '(company-pseudo-tooltip-unless-just-one-frontend
-;;        company-preview-frontend
-;;        company-echo-metadata-frontend))
-
-;;        (setq company-require-match 'never)
-
-;;        (defun my-company-visible-and-explicit-action-p ()
-;;       (and (company-tooltip-visible-p)
-;;       (company-explicit-action-p)))
-
-;;        (company-ac-setup)
-
-;;        (eval-after-load 'company
-;;     (lambda ()
-;;       (set-face-attribute
-;;        'company-preview
-;;       	nil
-;;       	:background (face-attribute 'company-preview-common :background))))
-
-;;        (custom-set-faces
-;;      '(company-preview
-;;        ((t (:foreground "darkgray" :underline t))))
-;;      '(company-preview-common
-;;        ((t (:inherit company-preview))))
-;;      '(company-tooltip
-;;        ((t (:background "lightgray" :foreground "black"))))
-;;      '(company-tooltip-selection
-;;        ((t (:background "steelblue" :foreground "white"))))
-;;      '(company-tooltip-common
-;;        ((((type x)) (:inherit company-tooltip :weight bold))
-;;       	(t (:inherit company-tooltip))))
-;;      '(company-tooltip-common-selection
-;;        ((((type x)) (:inherit company-tooltip-selection :weight bold))
-;;       	(t (:inherit company-tooltip-selection)))))
-
-;; ;; If you use Company, uncomment the upper bit OR the down bit 
-
-;;     (add-hook 'after-init-hook 'global-company-mode)
-
-;;       (use-package company
-;;       :straight t
-;;       :config
-;;       (setq company-idle-delay 0)
-;;       (setq company-minimum-prefix-length 3))
-;;       (with-eval-after-load 'company
-;;       (add-hook 'c-mode-hook 'company-mode)
-;;       (add-hook 'c++-mode-hook 'company-mode))
-
-;;       (use-package irony
-;;       :straight t
-;;       :config
-;;       (add-hook 'c-mode-hook 'irony-mode)
-;;       (add-hook 'c++-mode-hook 'irony-mode)
-;;       (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
-
-;;       (use-package company-irony
-;;       :straight t
-;;       :config
-;;       (require 'company)
-;;       (add-to-list 'company-backends 'company-irony))
-;; company-mode:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-mode][org-mode:1]]
-(use-package org
- :straight t)
-
-(use-package org-ac
- :straight t)
-
-(use-package org-tempo
- :after org)
-
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-;; org-mode:1 ends here
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*initial-scratch-message][initial-scratch-message:1]]
+;; 'Vagner Rener' @ 'Cyberwarrior',
+;; This buffer is for text that is not saved, and for Lisp evaluation.
+;; To create a file, visit it with \ e and enter text in its buffer. ")
+;; initial-scratch-message:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*scratch org-mode][scratch org-mode:1]]
 (setq initial-major-mode 'org-mode)
 ;; scratch org-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*tab completion on console][tab completion on console:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*centered-window][centered-window:1]]
+(straight-use-package 'centered-window)
+  (centered-window-mode 1)
+;; centered-window:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*portuguese-prefix][portuguese-prefix:1]]
+(set-input-method "portuguese-prefix")
+
+(defadvice switch-to-buffer (after activate-input-method activate)
+(activate-input-method "portuguese-prefix"))
+
+(add-hook 'text-mode-hook
+  (lambda () (set-input-method "portuguese-prefix")))
+;; portuguese-prefix:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*theme and theme-looper][theme and theme-looper:1]]
+(straight-use-package 'theme-looper)
+   (global-set-key (kbd "<f8>") 'theme-looper-enable-random-theme)
+
+(straight-use-package 'alect-themes)
+(straight-use-package 'base16-theme)
+(straight-use-package 'color-theme-modern)
+(straight-use-package 'doom-themes)
+(straight-use-package 'moe-theme)
+;; theme and theme-looper:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*wrap lines][wrap lines:1]]
+;; Wrap lines without breaking the last word
+(add-hook 'org-mode-hook #'toggle-word-wrap)
+;; wrap lines:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*brazilian-holidays][brazilian-holidays:1]]
+(load "~/.emacs.d/elpa/emacs-brazilian-holidays/brazilian-holidays.el")
+;; brazilian-holidays:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*tab on console][tab on console:1]]
 (setq evil-want-keybinding nil)
-(setq evil-want-C-i-jump nil)
-;; tab completion on console:1 ends here
+ ;; (setq evil-want-C-i-jump nil)
+    (unless (display-graphic-p) (setq evil-want-C-i-jump nil))
+    
+;; (when evil-want-C-i-jump
+  ;; (define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward))
+;; tab on console:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*evil-mode][evil-mode:1]]
-(unless (display-graphic-p) (setq evil-want-C-i-jump nil))
-
-   (use-package evil
-   :straight t
-   :defines evil-normal-state-map
-   :init
-   (setq evil-esc-delay 0)
-
-;;      ;; evil-leader 
-;; 	(global-evil-leader-mode)
-;; 	(evil-leader/set-key
-;; 	  "e" 'find-file
-;; 	  "b" 'switch-to-buffer
-;; 	  "k" 'kill-buffer)
-
-;;      ;;    ;; http://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
-;;      ;;    ;; http://wikemacs.org/wiki/Evil
-
-;; (use-package evil-surround
-;;   :straight t
-;;   :after evil
-;;   :hook (evil-mode . global-evil-surround-mode))
-
-;; (use-package evil-numbers
-;;   :straight t
-;;   :after evil
-;;   :bind (
-;; 	 :map evil-normal-state-map
-;; 	 ("C-c +" . evil-numbers/inc-at-pt)
-;; 	 ("C-c -" . evil-numbers/dec-at-pt)))
-
-;; (with-eval-after-load 'evil-vars
-;;   (setq evil-want-C-w-in-emacs-state t))
-
-;; (use-package evil-nerd-commenter
-;;   :straight t
-;;   :config
-;;   (evilnc-default-hotkeys))
-
-;;      ;;    (require 'evil-mark-replace)
-
-;;      ;;    (require 'evil-matchit)
-;;      ;;    (global-evil-matchit-mode 1)
-;;      ;;    (require 'evil-exchange)
-
-;;      ;;  ;; change default key bindings (if you want) HERE
-;;      ;;    (setq evil-exchange-key (kbd "zx"))
-;;      ;;    (evil-exchange-install)
-
-;;      ;;  ;; change default key bindings (if you want) HERE
-;;      ;;    (setq evil-extra-operator-eval-key (kbd "ge"))
-;;      ;;    (require 'evil-extra-operator)
-;;      ;;    (global-evil-extra-operator-mode 1)
-;;      ;;    (require 'evil-visualstar)
-;;      ;;    (global-evil-visualstar-mode 1)
-
-;; (use-package evil-org
-;;   :straight t)
-
-;;      ;;  ;; evil-minibuffer
-;;      ;;  ;; https://gist.github.com/ccdunder/5816865
-
-;;      ;;  ;; option for enabling vi keys in the minibuffer
-;;      ;;  ;; Addresses evil-core.el:163 TODO
-
-;;      ;;   (mapcar (lambda (keymap)
-;;      ;;     	 (evil-define-key 'insert (eval keymap) [escape] 'abort-recursive-edit)
-;;      ;;     	 (evil-define-key 'normal (eval keymap) [escape] 'abort-recursive-edit)
-;;      ;;     	 (evil-define-key 'insert (eval keymap) [return] 'exit-minibuffer)
-;;      ;;     	 (evil-define-key 'normal (eval keymap) [return] 'exit-minibuffer)
-;;      ;;     	 (evil-define-key 'insert (eval keymap) "\C-t" 'evil-normal-state))
-
-;;      ;; ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/
-;;      ;; ;; Text-from-Minibuffer.html#Definition of minibuffer-local-map
-
-;;      ;;     '(minibuffer-local-map
-;;      ;;     	 minibuffer-local-ns-map
-;;      ;;     	 minibuffer-local-completion-map
-;;      ;;     	 minibuffer-local-must-match-map
-;;      ;;     	 minibuffer-local-isearch-map))
-
-;;      ;;    (add-hook 'minibuffer-setup-hook 
-;;      ;;     	      '(lambda () 
-;;      ;;     		 (set (make-local-variable 'evil-echo-state) nil)
-
-;;      ;;    ;; (evil-set-initial-state 'mode 'insert) is the evil-proper
-;;      ;;    ;; way to do this, but the minibuffer doesn't have a mode.
-;;      ;;    ;; The alternative is to create a minibuffer mode (here), but
-;;      ;;    ;; then it may conflict with other packages' if they do the same.
-
-;;      ;;     	    (evil-insert 1)))
-;; evil-mode:1 ends here
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*evil][evil:1]]
+(straight-use-package 'evil)
+  (evil-mode 1)
+;; evil:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*evil-collection][evil-collection:1]]
-;; (use-package evil-collection
-;;  :after evil
-;;  :config
-;;  (evil-collection-init))
-
-      (use-package evil-collection
-       :straight t
-       :custom (evil-collection-setup-minibuffer t)
-       :init (evil-collection-init))
-
-;; Alt-j and Alt-k to navigate in the minibuffer
+(straight-use-package 'evil-collection)
+(evil-collection-init t)
 ;; evil-collection:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*eyebrowse][eyebrowse:1]]
-(use-package eyebrowse 
-  :straight t
-  :config 
-   (eyebrowse-setup-opinionated-keys)
-    (add-to-list 'window-persistent-parameters '(window-side . writable))
-    (add-to-list 'window-persistent-parameters '(window-slot . writable)))
-;; eyebrowse:1 ends here
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*evil-org][evil-org:1]]
+(straight-use-package 'evil-org)
+;; evil-org:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*evil-leader][evil-leader:1]]
+(global-evil-leader-mode)
+(evil-leader/set-key
+  "e" 'find-file
+  "b" 'switch-to-buffer
+  "k" 'kill-buffer)
+
+ ;; Configure leader key
+
+ (evil-leader/set-key-for-mode 'org-mode
+	"." 'hydra-org-state/body
+	"t" 'org-todo
+	"T" 'org-show-todo-tree
+	"v" 'org-mark-element
+	"a" 'org-agenda
+	"c" 'org-archive-subtree
+	"l" 'evil-org-open-links
+	"C" 'org-resolve-clocks)
+;; evil-leader:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-evil][org-evil:1]]
+(straight-use-package 'org-evil)
+;; org-evil:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*flyspell][flyspell:1]]
+(defun my-turn-spell-checking-on ()
+  "Turn flyspell-mode on."
+  (flyspell-mode 1))
+(add-hook 'text-mode-hook 'my-turn-spell-checking-on)
+;; flyspell:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*icicles][icicles:1]]
+;; (require 'icicles)
+;; (icy-mode 1)
+;; icicles:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*company][company:1]]
+(straight-use-package 'company)
+  (require 'company)
+  (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-minimum-prefix-length 3)
+  (setq company-idle-delay 0.1)
+
+(eval-after-load 'company
+  '(progn
+     (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+     (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)))
+
+(eval-after-load 'company
+  '(progn
+     (define-key company-active-map (kbd "S-TAB") 'company-select-previous)
+     (define-key company-active-map (kbd "<backtab>") 'company-select-previous)))
+
+(setq company-frontends
+      '(company-pseudo-tooltip-unless-just-one-frontend
+        company-preview-frontend
+        company-echo-metadata-frontend))
+
+(setq company-require-match 'never)
+
+(setq company-auto-complete t)
+
+ (defun my-company-visible-and-explicit-action-p ()
+    (and (company-tooltip-visible-p)
+         (company-explicit-action-p)))
+
+  (defun company-ac-setup ()
+    "Sets up `company-mode' to behave similarly to `auto-complete-mode'."
+    (setq company-require-match nil)
+    (setq company-auto-complete #'my-company-visible-and-explicit-action-p)
+    (setq company-frontends '(company-echo-metadata-frontend
+                              company-pseudo-tooltip-unless-just-one-frontend-with-delay
+                              company-preview-frontend))
+    (define-key company-active-map [tab]
+      'company-select-next-if-tooltip-visible-or-complete-selection)
+    (define-key company-active-map (kbd "TAB")
+      'company-select-next-if-tooltip-visible-or-complete-selection))
+
+   (company-ac-setup)
+
+ (custom-set-faces
+     '(company-preview
+       ((t (:foreground "darkgray" :underline t))))
+     '(company-preview-common
+       ((t (:inherit company-preview))))
+     '(company-tooltip
+       ((t (:background "lightgray" :foreground "black"))))
+     '(company-tooltip-selection
+       ((t (:background "steelblue" :foreground "white"))))
+     '(company-tooltip-common
+       ((((type x)) (:inherit company-tooltip :weight bold))
+        (t (:inherit company-tooltip))))
+     '(company-tooltip-common-selection
+       ((((type x)) (:inherit company-tooltip-selection :weight bold))
+        (t (:inherit company-tooltip-selection)))))
+;; company:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-bullets][org-bullets:1]]
+(straight-use-package 'org-bullets)
+ (org-bullets-mode 1)
+ (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+;; (use-package org-bullets
+;;  :straight t
+;;  :config
+;;    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+;; org-bullets:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacs-w3m][emacs-w3m:1]]
+(add-to-list 'load-path "~/.emacs.d/elpa/emacs-w3m/")
+
+  (require 'w3m-load)
+  (require 'mime-w3m)
+
+  ;; (setq w3m-display-inline-images t) 
+     (setq w3m-fill-column 80) ;; if this does not work, modify the file w3m.el itself
+     (setq w3m-default-display-inline-images t) 
+     (setq w3m-default-save-directory "~/Downloads")
+;; emacs-w3m:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*bug-hunter][bug-hunter:1]]
+(straight-use-package 'bug-hunter)
+;; bug-hunter:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacspeak][emacspeak:1]]
+(straight-use-package 'eloud)
+
+;;(setq eloud-espeak-path "/usr/bin/espeak")
+;;(setq eloud-espeak-path "/usr/bin/espeak-ng -ven-gb -s 160")
+;;(setq eloud-espeak-path "/usr/bin/espeak -vpt -s 150")
+
+;; if you want to set espeak voice default pitch, you have to
+;; edit the file "/usr/lib/x86_64-linux-gnu/espeak-data/voices/en"
+;; emacspeak:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Dired][Dired:1]]
+(add-to-list 'load-path "~/.emacs.d/local-repo/dired+")
+ (require 'dired+)
+
+(setq dired-dwim-target t)
+;; Hide details by default
+(add-hook 'dired-mode-hook 'dired-hide-details-mode)
+;; Not spawn endless amount of dired buffers
+(with-eval-after-load 'dired
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+
+(use-package all-the-icons-dired
+  :after all-the-icons
+  :hook (dired-mode . all-the-icons-dired-mode))
+;; Dired:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Emacs security][Emacs security:1]]
+;;   (if (fboundp 'gnutls-available-p)
+;;       (fmakunbound 'gnutls-available-p))
+
+;; (require 'cl)
+;; (setq tls-checktrust t)
+
+;; (setq python (or (executable-find "py.exe")
+;; 		 (executable-find "python")
+;; 		 ))
+;; Emacs security:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*hydra][hydra:1]]
+(straight-use-package 'hydra)
+;; hydra:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*cyber hydra][cyber hydra:1]]
+(defhydra cyber-hydra-window (global-map "C-c w")
+       "Commands relating to window manipulation"
+       ("h" windmove-left "move left")
+       ("l" windmove-right "move right")
+       ("j" windmove-down "move down")
+       ("k" windmove-up "move up")
+       ("q" delete-window "delete window")
+       ("Q" kill-buffer-and-window "kill buffer, delete window")
+       ("H" cyber-move-splitter-left "move splitter left")
+       ("L" cyber-move-splitter-right "move splitter right")
+       ("J" cyber-move-splitter-down "move splitter down")
+       ("K" cyber-move-splitter-up "move splitter up")
+       ("b" balance-windows)
+       ("|" cyber-window-toggle-split-direction)
+       ("s" split-window-below "split window (below)")
+       ("v" split-window-right "split window (right)")
+       (";" ace-window "select window" :exit t))
+;; cyber hydra:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org hydra][org hydra:1]]
+(defhydra hydra-org-state ()
+	 ;; basic navigation
+	 ("i" org-cycle)
+	 ("I" org-shifttab)
+	 ("h" org-up-element)
+	 ("l" org-down-element)
+	 ("j" org-forward-element)
+	 ("k" org-backward-element)
+	 ;; navigating links
+	 ("n" org-next-link)
+	 ("p" org-previous-link)
+	 ("o" org-open-at-point)
+	 ;; navigation blocks
+	 ("N" org-next-block)
+	 ("P" org-previous-block)
+	 ;; updates
+	 ("." org-ctrl-c-ctrl-c)
+	 ("*" org-ctrl-c-star)
+	 ("-" org-ctrl-c-minus)
+	 ;; change todo state
+	 ("H" org-shiftleft)
+	 ("L" org-shiftright)
+	 ("J" org-shiftdown)
+	 ("K" org-shiftup)
+	 ("t" org-todo))
+;; org hydra:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*yasnippets][yasnippets:1]]
-(use-package yasnippet
-  :straight t
-  :config
-(yas-global-mode 1))
+(straight-use-package 'snippet)
+(straight-use-package 'yasnippet)
+(straight-use-package 'yasnippet-snippets)
+(straight-use-package 'yasnippet-classic-snippets)
+(yas-global-mode 1)
 ;; yasnippets:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*counsel - ivy - swiper][counsel - ivy - swiper:1]]
@@ -356,6 +359,8 @@
  (("M-y" . counsel-yank-pop)
  :map ivy-minibuffer-map
  ("M-y" . ivy-next-line)))
+
+ (setq counsel-fzf-cmd "~/.fzf/bin/fzf -f %s")
 
 (use-package ivy
 :straight t
@@ -382,17 +387,6 @@
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
   ))
 ;; counsel - ivy - swiper:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*el-get][el-get:1]]
-;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
- ;; (require 'el-get)
-
-(use-package el-get
-  :straight t)
-
-;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get/el-get/recipes")
-;; (add-to-list 'el-get-recipe-path "~/.emacs.d/elpa/el-get-20181006.225/recipes")
-;; el-get:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*abbreviations][abbreviations:1]]
 (setq-default abbrev-mode t)
@@ -446,69 +440,53 @@ file with `edit-abbrevs`"
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*all-the-icons][all-the-icons:1]]
 (use-package all-the-icons
- :straight t)
+     :ensure t)
 
-(defun org-brain-insert-resource-icon (link)
-  "Insert an icon, based on content of org-mode LINK."
-  (insert (format "%s "
-		  (cond ((string-prefix-p "http" link)
-			 (cond ((string-match "wikipedia\\.org" link)
-				(all-the-icons-faicon "wikipedia-w"))
-			       ((string-match "github\\.com" link)
-				(all-the-icons-octicon "mark-github"))
-			       ((string-match "vimeo\\.com" link)
-				(all-the-icons-faicon "vimeo"))
-			       ((string-match "youtube\\.com" link)
-				(all-the-icons-faicon "youtube"))
-			       (t
-				(all-the-icons-faicon "globe"))))
-			((string-prefix-p "brain:" link)
-			 (all-the-icons-fileicon "brain"))
-			(t
-			 (all-the-icons-icon-for-file link))))))
+   ;; (use-package all-the-icons
+   ;;  :straight t)
 
-(add-hook 'org-brain-after-resource-button-functions #'org-brain-insert-resource-icon)
+  ;; (unless (member "all-the-icons" (font-family-list))
+    ;;   (all-the-icons-install-fonts t))
+
+       ;; (straight-use-package 'all-the-icons-gnus)
+    ;; (straight-use-package 'all-the-icons-dired)
+    ;; (all-the-icons-dired-mode 1)
+    ;; (straight-use-package 'all-the-icons-ivy)
+    ;; (straight-use-package 'spaceline-all-the-icons)
+
+(use-package dired-rainbow
+     :ensure t)
+
+    (defun org-brain-insert-resource-icon (link)
+      "Insert an icon, based on content of org-mode LINK."
+      (insert (format "%s "
+		      (cond ((string-prefix-p "http" link)
+			     (cond ((string-match "wikipedia\\.org" link)
+				    (all-the-icons-faicon "wikipedia-w"))
+				   ((string-match "github\\.com" link)
+				    (all-the-icons-octicon "mark-github"))
+				   ((string-match "vimeo\\.com" link)
+				    (all-the-icons-faicon "vimeo"))
+				   ((string-match "youtube\\.com" link)
+				    (all-the-icons-faicon "youtube"))
+				   (t
+				    (all-the-icons-faicon "globe"))))
+			    ((string-prefix-p "brain:" link)
+			     (all-the-icons-fileicon "brain"))
+			    (t
+			     (all-the-icons-icon-for-file link))))))
+
+    (add-hook 'org-brain-after-resource-button-functions #'org-brain-insert-resource-icon)
 ;; all-the-icons:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*bug-hunter][bug-hunter:1]]
-(use-package bug-hunter
- :straight t)
-;; bug-hunter:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*eshell][eshell:1]]
-(use-package eshell
-  :commands eshell
-  :init
-  (setq
-   eshell-cmpl-ignore-case t
-   eshell-cmpl-cycle-completions nil
-   eshell-history-size 10000
-   eshell-hist-ignoredups t
-   eshell-error-if-no-glob t
-   eshell-glob-case-insensitive t
-   eshell-scroll-to-bottom-on-input 'all)
-  :config
-  (defun jcf-eshell-here ()
-    (interactive)
-    (eshell "here"))
-
-  (defun pcomplete/sudo ()
-    (let ((prec (pcomplete-arg 'last -1)))
-      (cond ((string= "sudo" prec)
-             (while (pcomplete-here*
-                     (funcall pcomplete-command-completion-function)
-                     (pcomplete-arg 'last) t))))))
-
-  (add-hook 'eshell-mode-hook
-            (lambda ()
-              (define-key eshell-mode-map
-                [remap eshell-pcomplete]
-                'helm-esh-pcomplete)
-              (define-key eshell-mode-map
-                (kbd "M-p")
-                'helm-eshell-history)
-              (eshell/export "NODE_NO_READLINE=1"))))
-;; eshell:1 ends here
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*eyebrowse][eyebrowse:1]]
+(use-package eyebrowse 
+  :straight t
+  :config 
+   (eyebrowse-setup-opinionated-keys)
+    (add-to-list 'window-persistent-parameters '(window-side . writable))
+    (add-to-list 'window-persistent-parameters '(window-slot . writable)))
+;; eyebrowse:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*helm][helm:1]]
 ;; (require 'helm-config)
@@ -535,37 +513,6 @@ file with `edit-abbrevs`"
 ;;(global-set-key (kbd "Ctrl-x Ctrl-m") 'helm-M-x)
 ;;(global-set-key (kbd "C-x C-f") 'helm-find-files)
 ;; helm:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Helm-org-rifle][Helm-org-rifle:1]]
-(defun helm-org-rifle-brain ()
-"Rifle files in `org-brain-path'."
-(interactive)
-(helm-org-rifle-directories (list org-brain-path)))
-;; Helm-org-rifle:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*hydra][hydra:1]]
-(use-package hydra
-  :commands defhydra
-  :straight t
-  :config
-  (defhydra cyber-hydra-window (global-map "C-c w")
-    "Commands relating to window manipulation"
-    ("h" windmove-left "move left")
-    ("l" windmove-right "move right")
-    ("j" windmove-down "move down")
-    ("k" windmove-up "move up")
-    ("q" delete-window "delete window")
-    ("Q" kill-buffer-and-window "kill buffer, delete window")
-    ("H" cyber-move-splitter-left "move splitter left")
-    ("L" cyber-move-splitter-right "move splitter right")
-    ("J" cyber-move-splitter-down "move splitter down")
-    ("K" cyber-move-splitter-up "move splitter up")
-    ("b" balance-windows)
-    ("|" cyber-window-toggle-split-direction)
-    ("s" split-window-below "split window (below)")
-    ("v" split-window-right "split window (right)")
-    (";" ace-window "select window" :exit t)))
-;; hydra:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*beacon][beacon:1]]
 (use-package beacon
@@ -601,25 +548,6 @@ file with `edit-abbrevs`"
  (setq bidi-paragraph-direction 'right-to-left))
  (message "%s" bidi-paragraph-direction))
 ;; bidi:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*byte-compiling][byte-compiling:1]]
-(setq byte-compile-warnings '(not nresolved
-				 free-vars
-				 callargs
-				 redefine
-				 obsolete
-				 noruntime
-				 cl-functions
-				 interactive-only
-				 ))
-;; byte-compiling:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-bullets][org-bullets:1]]
-(use-package org-bullets
- :straight t
- :config
-   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-;; org-bullets:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*auctex][auctex:1]]
 (setq TeX-parse-self t); Enable parse on load.
@@ -777,11 +705,6 @@ file with `edit-abbrevs`"
   (avy-setup-default))
 ;; avy:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*atomic chrome][atomic chrome:1]]
-;;  (require 'atomic-chrome)
-;;  (atomic-chrome-start-server)
-;; atomic chrome:1 ends here
-
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*plantuml][plantuml:1]]
 (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
 
@@ -848,24 +771,6 @@ file with `edit-abbrevs`"
    (setq org-export-use-babel t)
 ;; org-babel:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*bind-chord][bind-chord:1]]
-;;  (require 'bind-chord)
-;; bind-chord:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*brazilian-holidays][brazilian-holidays:1]]
-(load "~/.emacs.d/elpa/emacs-brazilian-holidays/brazilian-holidays.el")
-;; brazilian-holidays:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*portuguese-prefix][portuguese-prefix:1]]
-(set-input-method "portuguese-prefix")
-
-(defadvice switch-to-buffer (after activate-input-method activate)
-(activate-input-method "portuguese-prefix"))
-
-(add-hook 'text-mode-hook
-  (lambda () (set-input-method "portuguese-prefix")))
-;; portuguese-prefix:1 ends here
-
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*c++ and ggtags][c++ and ggtags:1]]
 (use-package ggtags
 :straight t 
@@ -905,67 +810,6 @@ file with `edit-abbrevs`"
     (add-hook 'after-make-frame-functions '--set-emoji-font)
 ;; company-emoji:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*centered-window][centered-window:1]]
-;; (use-package centered-window)
-
-  ;;  (require 'centered-window)
-  ;;  (centered-window-mode t)
-
-(use-package centered-window 
-  :straight t
-  :config
-   (centered-window-mode))
-;; centered-window:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*csharp][csharp:1]]
-(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
-(setq auto-mode-alist
-   (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
-
-;;(defun my-csharp-mode-hook ()
-;; enable the stuff you want for C# here
-;;  (electric-pair-mode 1))
-;; (add-hook 'csharp-mode-hook 'my-csharp-mode-hook)
-;; csharp:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*custom themes][custom themes:1]]
-(use-package color-theme-modern :straight color-theme-modern)
-  (use-package doom-themes :straight t doom-themes)
-  (use-package theme-looper :straight t theme-looper)
-  (use-package base16-theme :straight t base16-theme)
-  (use-package moe-theme :straight t moe-theme)
-  (use-package alect-themes :straight t alect-themes)
-
-  (use-package powerline
-   :straight t)
-
-  (setq custom-safe-themes t)
-
-   (global-set-key (kbd "<f8>") 'theme-looper-enable-random-theme)
-
-;;(load-theme 'base16-flat t)
-;;(load-theme 'monokai t)
-;;(load-theme 'hydandata-light t)
-;;(load-theme 'anti-zenburn t)
-;; (add-hook 'after-init-hook (lambda () (load-theme 'julie)))
-  (add-hook 'after-init-hook (lambda () (load-theme 'doom-vibrant)))
-;;(add-hook 'after-init-hook (lambda () (load-theme 'zenburn)))
-;;(add-hook 'after-init-hook (lambda () (load-theme 'anti-zenburn)))
-;;(add-hook 'after-init-hook (lambda () (load-theme 'hydandata-light)))
-;;(add-hook 'after-init-hook (lambda () (load-theme 'heroku-theme)))
-;;(add-hook 'after-init-hook (lambda () (load-theme 'lavender-theme)))
-;;(add-hook 'after-init-hook (lambda () (load-theme 'solarized-theme)))
-;;(add-hook 'after-init-hook (lambda () (load-theme 'sanityinc-solarized-dark)))
-;;(add-hook 'after-init-hook (lambda () (load-theme 'base16-mexico-light)))
-;; (add-hook 'after-init-hook (lambda () (load-theme 'monokai)))
-;; (add-hook 'after-init-hook (lambda () (load-theme 'doom-opera)))
-;; (add-hook 'after-init-hook (lambda () (load-theme 'poet)))
-;; custom themes:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*custom-set-faces][custom-set-faces:1]]
-
-;; custom-set-faces:1 ends here
-
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*pdf-tools][pdf-tools:1]]
 (use-package pdf-tools
  :straight t
@@ -975,68 +819,6 @@ file with `edit-abbrevs`"
 (use-package org-pdfview
  :straight t)
 ;; pdf-tools:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*deft][deft:1]]
-(defun org-brain-deft ()
-  "Use `deft' for files in `org-brain-path'."
-  (interactive)
-  (let ((deft-directory org-brain-path)
-        (deft-recursive t)
-        (deft-extensions '("org")))
-    (deft)))
-;; deft:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*dired][dired:1]]
-(add-to-list 'load-path "~/.emacs.d/el-get/dired+")
-  (require 'dired+)
-
-(setq dired-dwim-target t)
-;; Hide details by default
-(add-hook 'dired-mode-hook 'dired-hide-details-mode)
-;; Not spawn endless amount of dired buffers
-(with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
-
-(use-package all-the-icons-dired
-  :straight t
-  :after all-the-icons
-  :hook (dired-mode . all-the-icons-dired-mode))
-;; dired:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*dired-ranger][dired-ranger:1]]
-;;  (use-package dired-ranger
-;;    :straight t
-;;    :bind (:map dired-mode-map
-;;		("W" . dired-ranger-copy)
-;;		("X" . dired-ranger-move)
-;;		("Y" . dired-ranger-paste)))
-;; dired-ranger:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*ranger][ranger:1]]
-;; (use-package ranger 
-;;   :straight t 
-;;   :config 
-;;     (ranger-override-dired-mode nil)
-;;       (setq helm-descbinds-window-style 'same-window)
-;;       (setq ranger-cleanup-eagerly t)
-;;       (setq ranger-show-dotfiles t)
-;;       (setq ranger-modify-header t)
-;;       (setq ranger-header-func 'ranger-header-line)
-;;       (setq ranger-parent-header-func 'ranger-parent-header-line)
-;;       (setq ranger-preview-header-func 'ranger-preview-header-line)
-;;       (setq ranger-hide-cursor nil)
-;;       (setq ranger-footer-delay 0.2)
-;;       (setq ranger-preview-delay 0.040)
-;;       (setq ranger-parent-depth 2)
-;;       (setq ranger-width-parents 0.12)
-;;       (setq ranger-max-parent-width 0.12)
-;;       (setq ranger-preview-file t)
-;;       (setq ranger-show-literal t)
-;;       (setq ranger-width-preview 0.55)
-;;       (setq ranger-excluded-extensions '("mkv" "iso" "mp4"))
-;;       (setq ranger-max-preview-size 10)
-;;       (setq ranger-dont-show-binary t))
-;; ranger:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*default browser][default browser:1]]
 ;; (setq browse-url-browser-function 'browse-url-generic
@@ -1049,15 +831,87 @@ file with `edit-abbrevs`"
     (global-set-key "\C-xm" 'browse-url-at-point)
 ;; default browser:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*dpaste][dpaste:1]]
-;; (require 'dpaste nil)  ; Not needed if you use package.el
-(global-set-key (kbd "C-c y") 'dpaste-region-or-buffer)
-(setq dpaste-poster "")
-;; or the preferred method of adding your `user-full-name variable
-(setq user-full-name "")
-;; dpaste:1 ends here
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*dtk][dtk:1]]
+;; (add-to-list 'load-path "~/.emacs.d/elpa/dtk")
+;; (require 'dtk)
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*diatheke][diatheke:1]]
+   (use-package dtk
+     :bind (("C-c B" . dtk-bible))
+     :custom
+     (dtk-default-module "KJVA")
+     (dtk-default-module-category "Biblical Texts")
+     (dtk-word-wrap t)
+     )
+;; dtk:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*sword-to-org][sword-to-org:1]]
+(add-to-list 'load-path "~/.emacs.d/elpa/sword-to-org/")
+(require 'sword-to-org)
+;; sword-to-org:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*telega][telega:1]]
+(straight-use-package 'telega)
+
+;; (add-to-list 'load-path "~/.emacs.d/elpa/telega.el")
+;; (require 'telega)
+
+;; This is the receipt to install telega
+;; After installation, comment it
+
+;;  (use-package telega
+;;       :quelpa (telega
+;;       :fetcher github
+;;       :repo "zevlg/telega.el"
+;;       :branch "telega-with-inserters"))
+
+;; ;; (add-to-list 'load-path "~/.emacs.d/quelpa/build/telega")
+
+;; (use-package telega
+;;   :quelpa (telega
+;; 	   :fetcher github
+;; 	   :repo "zevlg/telega.el"
+;; 	   :branch "master"
+;; 	   :files (:defaults "README.md" "etc" "server" "Makefile"
+;; 			     "test.el"))
+;;   :load-path "~/.emacs.d/quelpa/build/telega"
+;;   :bind 
+;;   (:map telega-msg-button-map
+;; 	("j" . nil)
+;; 	("k" . nil)
+;; 	("h" . nil)
+;; 	("l" . nil))
+;;   :custom (telega-use-notifications t))  
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;     :custom								    ;;
+;; (telega-use-notifications t)						    ;;
+;; (telega-completing-read-function #'ivy-completing-read)			    ;;
+;; (telega-symbol-msg-succeeded "○")						    ;;
+;; (telega-symbol-msg-viewed "●")						    ;;
+;; :custom-face								    ;;
+;; (telega-chat-inline-reply ((t (:inherit 'font-lock-comment-face))))	    ;;
+;; (telega-chat-user-title ((t (:inherit 'font-lock-function-name-face))))	    ;;
+;; (telega-chat-timestamp ((t (:inherit 'org-agenda-date))))			    ;;
+;; (telega-msg-status ((t (:inherit 'font-lock-constant-face))))		    ;;
+;; :hook									    ;;
+;; (telega-root-mode . telega-notifications-mode)				    ;;
+;; :config									    ;;
+;; (setenv "LD_LIBRARY_PATH"							    ;;
+;; 	  (concat								    ;;
+;; 	   (expand-file-name "~/.telega/:")					    ;;
+;; 	   (getenv "LD_LIBRARY_PATH")))						    ;;
+;; (require 'telega-notifications)						    ;;
+;; :commands (telega)								    ;;
+;; :defer t)									    ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; telega:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*text-scale][text-scale:1]]
+(global-set-key (kbd "C-M-=") 'default-text-scale-increase)
+(global-set-key (kbd "C-M--") 'default-text-scale-decrease)
+;; text-scale:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*text-scale][text-scale:2]]
 ;;  (add-to-list 'load-path "~/.dotfiles/emacs/.emacs.d/elpa/diatheke-1.0")
 ;;  (require 'diatheke)
 
@@ -1077,133 +931,12 @@ file with `edit-abbrevs`"
   ;; C-c C-p: search for a phrase
   ;; C-c C-m: search for multiple words
   ;; C-c C-r: search by regex
-;; diatheke:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*pcre2el][pcre2el:1]]
-;;   (use-package pcre2el
-;;    :straight t
-;;    :config (pcre-mode))
-;; pcre2el:1 ends here
+;; text-scale:2 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*wgrep][wgrep:1]]
 (use-package wgrep
  :straight t)
-(setq counsel-fzf-cmd "~/.fzf/bin/fzf -f %s")
 ;; wgrep:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*dtk][dtk:1]]
-;; (add-to-list 'load-path "~/.emacs.d/elpa/dtk")
-;; (require 'dtk)
-
-   (use-package dtk
-     :bind (("C-c B" . dtk-bible))
-     :custom
-     (dtk-default-module "KJVA")
-     (dtk-default-module-category "Biblical Texts")
-     (dtk-word-wrap t)
-     )
-;; dtk:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*splash-screen][splash-screen:1]]
-;; Disable Emacs-splash-screen
-
- (setq inhibit-splash-screen t)
-;; splash-screen:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*edit-server][edit-server:1]]
-;; (require 'edit-server) 
-      ;; (edit-server-start)
-
-      ;; Chromium/Chrome integration to edit text areas
-
-;; (use-package edit-server
-;;   :if window-system
-;;   :init
-;;   (add-hook 'after-init-hook 'server-start t)
-;;   (add-hook 'after-init-hook 'edit-server-start t))
-;; 	 (when (and (daemonp) (locate-library "edit-server"))
-
-     ;;    (require '
-     ;;      edit-server)
-     ;;    (edit-server-start))
-
-     ;;    (add-hook 'edit-server-start-hook 'markdown-mode)
-
-      ;; Integrate with Gmail
-
-     ;;    (autoload 'edit-server-maybe-dehtmlize-buffer "edit-server-htmlize" "edit-server-htmlize" t)
-     ;;    (autoload 'edit-server-maybe-htmlize-buffer   "edit-server-htmlize" "edit-server-htmlize" t)
-     ;;    (add-hook 'edit-server-start-hook 'edit-server-maybe-dehtmlize-buffer)
-     ;;    (add-hook 'edit-server-done-hook  'edit-server-maybe-htmlize-buffer)
-;; edit-server:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*elfeed][elfeed:1]]
-;;shortcut functions
-
-    (defun bjm/elfeed-show-all ()
-      (interactive)
-      (bookmark-maybe-load-default-file)
-      (bookmark-jump "elfeed-all"))
-    (defun bjm/elfeed-show-emacs ()
-      (interactive)
-      (bookmark-maybe-load-default-file)
-      (bookmark-jump "elfeed-emacs"))
-    (defun bjm/elfeed-show-daily ()
-      (interactive)
-      (bookmark-maybe-load-default-file)
-      (bookmark-jump "elfeed-daily"))
-
-;;functions to support syncing .elfeed between machines
-;;makes sure elfeed reads index from disk before launching
-
-(defun bjm/elfeed-load-db-and-open ()
-  "Wrapper to load the elfeed db from disk before opening"
-  (interactive)
-  (elfeed-db-load)
-  (elfeed)
-  (elfeed-search-update--force))
-
-;;write to disk when quiting
-
-(defun bjm/elfeed-save-db-and-bury ()
-  "Wrapper to save the elfeed db to disk before burying buffer"
-  (interactive)
-  (elfeed-db-save)
-  (quit-window))
-
-  (use-package elfeed
-    :straight t
-    :bind (:map elfeed-search-mode-map
-		("A" . bjm/elfeed-show-all)
-		("E" . bjm/elfeed-show-emacs)
-		("D" . bjm/elfeed-show-daily)
-		("q" . bjm/elfeed-save-db-and-bury)))
-;; elfeed:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*elfeed-goodies][elfeed-goodies:1]]
-(use-package elfeed-goodies
-  :straight t
-  :config
-  (elfeed-goodies/setup))
-;; elfeed-goodies:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*elfeed-org][elfeed-org:1]]
-;; use an org file to organise feeds
-
-(use-package elfeed-org
-  :straight t
-  :config
-  (elfeed-org)
-  (setq rmh-elfeed-org-files (list "~/org~/elfeed.org")))
-;; elfeed-org:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacspeak][emacspeak:1]]
-(when (featurep 'emacspeak)
-  (require 'emacspeak-aumix)
-  (setq emacspeak-auditory-icon-function 'emascpeak-play-auditory-icon)
-  (setq emacspeak-aumix-multichannel-capable-p t)
-  (emacspeak-toggle-auditory-icons 1))
-;; emacspeak:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*engine-mode][engine-mode:1]]
 (use-package engine-mode
@@ -1258,20 +991,6 @@ file with `edit-abbrevs`"
     "http://www.youtube.com/results?aq=f&oq=&search_query=%s")
 ;; engine-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*ensime][ensime:1]]
-;;We have "sbt" and "scala" in /usr/bin so we add this path to the PATH environment
-
-  (setq exec-path (append exec-path '("/usr/bin")))
-  (setq exec-path (append exec-path '("/usr/bin")))
-  (setenv "PATH" (shell-command-to-string "/bin/bash -c 'echo -n $PATH'"))
-
-(use-package ensime
-  :straight t)
-
-;;  (require 'ensime)
- (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-;; ensime:1 ends here
-
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*erc][erc:1]]
 (require 'erc)
 
@@ -1286,47 +1005,6 @@ file with `edit-abbrevs`"
       (erc :server "irc.oftc.net" :port 6667 :nick "")))
 ;; erc:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*bitlbee][bitlbee:1]]
-
-;; bitlbee:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*eshell][eshell:1]]
-;; run this script in terminal
-    ;; alias | sed -E "s/^alias ([^=]+)='(.*)'$/alias \1 \2 \$*/g; s/'\\\''/'/g;" >~/.emacs.d/eshell/alias 
-    ;; or better yet,
-    ;; (eshell/alias "$command" "$command_instructions $1") <-> run this in your eshell session
-    ;; (eshell/alias "rm" "rm -iv $1")
-    ;; then it will be saved in "~/.emacs.d/eshell/alias"
-
-(use-package eshell 
-  :straight t
-  :config )
-;; eshell:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*ess][ess:1]]
-(defun rmd-mode ()
-  "ESS Markdown mode for rmd files"
-  (interactive)
-  (require 'poly-R)
-  (require 'poly-markdown)     
-  (poly-markdown+r-mode))
-;; ess:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*expand region][expand region:1]]
-;;  (require 'expand-region)
-;;  (global-set-key (kbd "C-=") 'er/expand-region)
-;; expand region:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*figwheel-clojure][figwheel-clojure:1]]
-
-;; figwheel-clojure:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*flycheck][flycheck:1]]
-(use-package flycheck
- :init
- (global-flycheck-mode t))
-;; flycheck:1 ends here
-
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*flyspell][flyspell:1]]
 (defun my-turn-spell-checking-on ()
   "Turn flyspell-mode on."
@@ -1337,13 +1015,6 @@ file with `edit-abbrevs`"
  ;; enable flyspell in text mode (and derived modes)
  ;; (add-hook 'text-mode-hook 'flyspell-mode)
 ;; flyspell:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*fountain-mode][fountain-mode:1]]
-;; (require 'fountain-mode)
-
-(use-package fountain-mode
- :straight t)
-;; fountain-mode:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*gitlab][gitlab:1]]
 (use-package gitlab
@@ -1361,24 +1032,6 @@ file with `edit-abbrevs`"
 	(when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'php-mode 'web-mode)
 	  (ggtags-mode 1)))))
 ;; ggtags:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*google contacts][google contacts:1]]
-;; (use-package plstore
-;;     :defer t
-;;     :config (setq plstore-cache-passphrase-for-symmetric-encryption t))
-
-;; (require 'google-contacts)
-;; (require 'google-contacts-gnus)
-;; (require 'google-contacts-message)
-
-;; shortcuts
-
-;; n or p to go the next or previous record;
-;; g to refresh the result, bypassing the cache;
-;; m to send an e-mail to a contact;
-;; s to make a new search;
-;; q to quit.
-;; google contacts:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*ob-translate][ob-translate:1]]
 (use-package ob-translate
@@ -1402,6 +1055,15 @@ file with `edit-abbrevs`"
       (list 432928 274893998))
 ;; google-translate:1 ends here
 
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*text-translation][text-translation:1]]
+;; (add-to-list 'load-path "~/.emacs.d/elpa/text-translator/")
+;; (require 'text-translator)
+;; (require 'text-translator-load)
+;; (require 'text-translator-vars)
+
+;; (global-set-key "\C-x\M-t" 'text-translator)
+;; text-translation:1 ends here
+
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*grasp][grasp:1]]
 
 ;; grasp:1 ends here
@@ -1418,17 +1080,10 @@ file with `edit-abbrevs`"
 (use-package helm-mu
   :straight t)
 
-(define-key mu4e-main-mode-map "s" 'helm-mu)
-(define-key mu4e-headers-mode-map "s" 'helm-mu)
-(define-key mu4e-view-mode-map "s" 'helm-mu)
+;; (define-key mu4e-main-mode-map "s" 'helm-mu)
+;; (define-key mu4e-headers-mode-map "s" 'helm-mu)
+;; (define-key mu4e-view-mode-map "s" 'helm-mu)
 ;; helm-mu:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*icicles][icicles:1]]
-;; (use-package icicles)
-;;  :straight t)
-
-;;(icy-mode 1) ;; turn on Icicle mode each time you start Emacs
-;; icicles:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*image-magick][image-magick:1]]
 (autoload 'eimp-mode "eimp" "Emacs Image Manipulation Package." t)
@@ -1480,132 +1135,12 @@ file with `edit-abbrevs`"
   (indent-region (point-min) (point-max)))
 ;; indent lisp:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*isso-accents][isso-accents:1]]
-;; (load-library "iso-acc")
-;; isso-accents:1 ends here
-
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*jabber][jabber:1]]
 ;; (require 'jabber)
 
 (use-package jabber 
  :straight t)
 ;; jabber:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*javascript][javascript:1]]
-;; js2-mode
-
-;;     (use-package js2-mode
-;;       :interpreter (("node" . js2-mode))
-;;       :bind (:map js2-mode-map ("C-c C-p" . js2-print-json-path))
-;;       :mode "\\.\\(js\\|json\\)$"
-;;       :config
-;;       (add-hook 'js-mode-hook 'js2-minor-mode)
-;;       (setq js2-basic-offset 2
-;;	     js2-highlight-level 3
-;;	     js2-mode-show-parse-errors nil
-;;	     js2-mode-show-strict-warnings nil))
-
-  ;; js2-refactor
-
-;;     (use-package js2-refactor
-;;       :defer t
-;;       :diminish js2-refactor-mode
-;;       :commands js2-refactor-mode
-;;       :init
-;;       (add-hook 'js2-mode-hook #'js2-refactor-mode)
-;;       :config
-;;       (js2r-add-keybindings-with-prefix "C-c C-m"))
-
-  ;; auto-complete and ac-js2
-
-;;     (use-package auto-complete
-;;       :diminish auto-complete-mode
-;;       :config
-;;       (use-package auto-complete-config)
-;;       (ac-config-default)
-;;       (add-to-list 'ac-modes 'html-mode)
-;;       (setq ac-use-menu-map t)
-;;       (ac-set-trigger-key "TAB")
-;;       (ac-set-trigger-key "<tab>"))
-
-;;     (use-package ac-js2
-;;       :defer t
-
-;;       :init
-;;       (add-hook 'js2-mode-hook 'ac-js2-mode)
-;;       (setq ac-js2-evaluate-calls t))
-
-  ;; json-snatcher
-
-;;     (use-package json-snatcher
-;;       :after js2-mode
-;;       :config
-;;       (bind-key "C-c C-g" 'jsons-print-path js2-mode-map))
-
-  ;; web-beautify
-
-  ;; also do `npm install -g js-beautify' in your shell
- ;;    (use-package web-beautify
-  ;;     :after js2-mode
-   ;;    :config
-    ;;   (bind-key "C-c C-b" 'web-beautify-js js2-mode-map))
-
-  ;; tern (with auto-complete)
-  ;; sudo npm install -g tern
-
-;;     (use-package tern
-;;       :defer t
-;;       :diminish tern-mode
-;;       :init
-;;       (add-hook 'js2-mode-hook 'tern-mode))
-
-  ;; auto-completion for Tern
-;;     (use-package tern-auto-complete
-;;       :after tern
-;;       :config
-;;       (tern-ac-setup))
-
-  ;; skewer-mode
-
-;;     (use-package skewer-mode
-;;       :bind (("C-c K" . run-skewer))
-;;       :diminish skewer-mode
-;;       :init
-;;       (add-hook 'js2-mode-hook 'skewer-mode)
-;;       (add-hook 'css-mode-hook 'skewer-css-mode)
-;;       (add-hook 'html-mode-hook 'skewer-html-mode))
-;; javascript:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*key-chord][key-chord:1]]
-;; (require 'key-chord)
-;; (key-chord-mode 1)
-
-;; (key-chord-define evil-insert-state-map "ee" 'evil-normal-state)
-;; key-chord:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*languagage-tool][languagage-tool:1]]
-;; (setq langtool-java-bin "/usr/bin/java")
-
-;;    (require 'langtool)
-
-;;    (setq langtool-language-tool-jar "/opt/LanguageTool-4.4/languagetool-commandline.jar")
-;;    (setq langtool-default-language "en-GB")
-
- ;; (setq langtool-language-tool-jar "/opt//LanguageTool-4.4/languagetool-server.jar")
- ;; (setq langtool-server-user-arguments '("-p" "8082"))
-
- ;; keybindings
-
-;;    (global-set-key "\C-x4w" 'langtool-check)
-;;    (global-set-key "\C-x4W" 'langtool-check-done)
-;;    (global-set-key "\C-x4l" 'langtool-switch-default-language)
-;;    (global-set-key "\C-x44" 'langtool-show-message-at-point)
-;;    (global-set-key "\C-x4c" 'langtool-correct-buffer)
-;; languagage-tool:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*link-hint][link-hint:1]]
-
-;; link-hint:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*linum][linum:1]]
 ;; (require 'linum)
@@ -1772,70 +1307,54 @@ file with `edit-abbrevs`"
   :defer t)
 ;; debian stuff:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*more stuff][more stuff:1]]
-;;  (setq frame-title-format "emacs")
- ;;  (set-default 'cursor-type 'hbar)
-     (ido-mode 1)
-     (column-number-mode 1)
-     (show-paren-mode 1)
-     (global-hl-line-mode 0)
-     (delete-selection-mode +1)
-     (electric-pair-mode 1)
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*debian stuff][debian stuff:2]]
+;;  ;;  (setq frame-title-format "emacs")
+;;  ;;  (set-default 'cursor-type 'hbar)
+;;      (ido-mode 1)
+;;      (column-number-mode 1)
+;;      (show-paren-mode 1)
+;;      (global-hl-line-mode 0)
+;;      (delete-selection-mode +1)
+;;      (electric-pair-mode 1)
 
-     (defalias 'yes-or-no-p 'y-or-n-p)
-     (setq confirm-kill-processes nil)
+;;      (defalias 'yes-or-no-p 'y-or-n-p)
+;;      (setq confirm-kill-processes nil)
 
-   (add-hook 'prog-mode-hook 'turn-on-auto-fill)
-   (add-hook 'text-mode-hook 'turn-on-auto-fill)
+;;    (add-hook 'prog-mode-hook 'turn-on-auto-fill)
+;;    (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-;; Brent.Longborough's .emacs
+;; ;; Brent.Longborough's .emacs
 
-(scroll-bar-mode -1) ; Disable hide scroll-bar
-(tool-bar-mode 0) ; Disable tool bar
-(blink-cursor-mode 0) ; Disable cursor blinking
-(global-visual-line-mode 1); Proper line wrapping
-;; (if (display-graphic-p) (global-hl-line-mode t))
-;; (global-hl-line-mode 1); Highlight current row
-(show-paren-mode 1); Matches parentheses and such in every mode
-;;(set-fringe-mode '(0 . 0)); Disable fringe because I use visual-line-mode
-(set-fringe-mode '(4 . 0)) 
-(set-face-background hl-line-face "#f2f1f0"); Same color as greyness in gtk
-(setq inhibit-splash-screen t); Disable splash screen
-(setq visible-bell t); Flashes on error
-(setq calendar-week-start-day 1); Calender should start on Monday
-(add-to-list 'default-frame-alist '(height . 59)); Default frame height.
-(mapc 'global-unset-key [[up] [down] [left] [right]])
+;; (scroll-bar-mode -1) ; Disable hide scroll-bar
+;; (tool-bar-mode 0) ; Disable tool bar
+;; (blink-cursor-mode 0) ; Disable cursor blinking
+;; (global-visual-line-mode 1); Proper line wrapping
+;; ;; (if (display-graphic-p) (global-hl-line-mode t))
+;; ;; (global-hl-line-mode 1); Highlight current row
+;; (show-paren-mode 1); Matches parentheses and such in every mode
+;; ;;(set-fringe-mode '(0 . 0)); Disable fringe because I use visual-line-mode
+;; (set-fringe-mode '(4 . 0)) 
+;; (set-face-background hl-line-face "#f2f1f0"); Same color as greyness in gtk
+;; (setq inhibit-splash-screen t); Disable splash screen
+;; (setq visible-bell t); Flashes on error
+;; (setq calendar-week-start-day 1); Calender should start on Monday
+;; (add-to-list 'default-frame-alist '(height . 59)); Default frame height.
+;; (mapc 'global-unset-key [[up] [down] [left] [right]])
 
-;; Brent.Longborough upt to here
+;; ;; Brent.Longborough upt to here
 
- ;;;; Uncomment up or down, but not the two parts
+;;  ;;;; Uncomment up or down, but not the two parts
 
- (defun 1on1-set-cursor-type (cursor-type)
-   "Set the cursor type of the selected frame to CURSOR-TYPE.
- When called interactively, prompt for the type to use.
- To get the frame's current cursor type, use `frame-parameters'."
-   (interactive
-    (list (intern (completing-read
-		    "Cursor type: "
-		    (mapcar 'list '("box" "hollow" "bar" "hbar" nil))))))
-   (modify-frame-parameters (selected-frame) (list (cons 'cursor-type cursor-type))))
-;; more stuff:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*misc-2][misc-2:1]]
-(global-set-key (kbd "C-c .") 'org-time-stamp)
-
-(global-set-key (kbd "M-/") 'undo-tree-visualize)
-
-(global-set-key (kbd "C-M-z") 'switch-window)
-
-(global-set-key (kbd "C->") 'ace-jump-mode)
-
-(global-set-key (kbd "C-M-)") 'transparency-increase)
-(global-set-key (kbd "C-M-(") 'transparency-decrease)
-
-(global-set-key (kbd "C-M-}") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-M-{") 'mc/mark-previous-like-this)
-;; misc-2:1 ends here
+;;  (defun 1on1-set-cursor-type (cursor-type)
+;;    "Set the cursor type of the selected frame to CURSOR-TYPE.
+;;  When called interactively, prompt for the type to use.
+;;  To get the frame's current cursor type, use `frame-parameters'."
+;;    (interactive
+;;     (list (intern (completing-read
+;;  		   "Cursor type: "
+;;  		   (mapcar 'list '("box" "hollow" "bar" "hbar" nil))))))
+;;    (modify-frame-parameters (selected-frame) (list (cons 'cursor-type cursor-type))))
+;; debian stuff:2 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*multilple-cursors][multilple-cursors:1]]
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
@@ -2387,18 +1906,11 @@ Suggest the URL title as a description for resource."
 			       auto-mode-alist))
 ;; prolog:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*quelpa][quelpa:1]]
-(use-package quelpa-use-package
-    :straight t
-    :init
-    (setq quelpa-update-melpa-p nil))
-;; quelpa:1 ends here
-
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*re-builder][re-builder:1]]
-(use-package re-builder
- :straight t
- :config
- (setq reb-re-syntax 'string))
+;; (use-package re-builder
+;;  :straight t
+;;  :config
+;;  (setq reb-re-syntax 'string))
 ;; re-builder:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*slime swank][slime swank:1]]
@@ -2413,8 +1925,11 @@ Suggest the URL title as a description for resource."
 
   ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa-src/slime-2.23/")
 
-  (add-to-list 'load-path "~/.emacs.d/elpa/slime-20190319.930")
-  (require 'slime-autoloads)
+  ;; (add-to-list 'load-path "~/.emacs.d/elpa/slime-repl-ansi-color-20190426.1414/")
+
+  (add-to-list 'load-path "~/.emacs.d/straight/repos/slime/")
+
+  ;; (require 'slime-autoloads)
 
   (defun cliki:start-slime ()
 	(unless (slime-connected-p)
@@ -2423,8 +1938,9 @@ Suggest the URL title as a description for resource."
 
   (eval-after-load "slime"
     '(progn
-      ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa-src/slime-2.23/contrib/")
-      (add-to-list 'load-path "~/.emacs.d/elpa/slime-20190319.930/contrib")
+      ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa-src/slime-3.23/contrib/")
+      ;; (add-to-list 'load-path "~/.emacs.d/elpa/slime-20190319.930/contrib")
+      (add-to-list 'load-path "~/.emacs.d/straight/build/slime/contrib/")
        (slime-setup '(slime-fancy slime-banner))
       (setq slime-complete-symbol*-fancy t)
       (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)))
@@ -2440,8 +1956,9 @@ Suggest the URL title as a description for resource."
 
 (setq cyber-filelist
       '(
-	("init.el" . "~/.emacs.d/init.el" )
-	("emacs.org" . "~/.emacs.d/emacs.org" )
+	("init.el" . "~/.dotfiles/emacs/.emacs.d/init.el" )
+	("init.org" . "~/.dotfiles/emacs/.emacs.d/init.org")
+	("dotfiles" . "~/.dotfiles/")
 	("Documents" . "~/Documents/" )
 	("org~" . "~/org~/" )
 	("Download" . "~/Downloads/" )
@@ -2465,17 +1982,17 @@ Version 2015-04-23"
 ;; scheme:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*shackle-rules][shackle-rules:1]]
-(setq shackle-rules
-     '(((svg-2048-mode circe-query-mode) :same t)
-       ("*Help*" :align t :select t)
-       ("\\`\\*helm.*?\\*\\'" :regexp t :align t)
-       ((compilation-mode "\\`\\*firestarter\\*\\'"
-	 "\\`\\*magit-diff: .*?\\'") :regexp t :noselect t)
-       ("\\`\\*cider-repl .*" :regexp t :align t :size 0.2)
-       ((inferior-scheme-mode "*shell*" "*eshell*") :popup t))
-      shackle-default-rule '(:select t)
-      shackle-default-size 0.4
-      shackle-inhibit-window-quit-on-same-windows t)
+;; (setq shackle-rules
+;;      '(((svg-2048-mode circe-query-mode) :same t)
+;;        ("*Help*" :align t :select t)
+;;        ("\\`\\*helm.*?\\*\\'" :regexp t :align t)
+;;        ((compilation-mode "\\`\\*firestarter\\*\\'"
+;; 	 "\\`\\*magit-diff: .*?\\'") :regexp t :noselect t)
+;;        ("\\`\\*cider-repl .*" :regexp t :align t :size 0.2)
+;;        ((inferior-scheme-mode "*shell*" "*eshell*") :popup t))
+;;       shackle-default-rule '(:select t)
+;;       shackle-default-size 0.4
+;;       shackle-inhibit-window-quit-on-same-windows t)
 ;; shackle-rules:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*synonyms and thesaurus][synonyms and thesaurus:1]]
@@ -2510,80 +2027,6 @@ Version 2015-04-23"
   (evil-leader/set-key "S" 'powerthesaurus-lookup-word))
 ;; synonyms and thesaurus:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*sword-to-org][sword-to-org:1]]
-(add-to-list 'load-path "~/.emacs.d/elpa/sword-to-org/")
-(require 'sword-to-org)
-;; sword-to-org:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*telega][telega:1]]
-;; (add-to-list 'load-path "~/.emacs.d/elpa/telega.el")
-;; (require 'telega)
-
-;; This is the receipt to install telega
-;; After installation, comment it
-
- (use-package telega
-      :quelpa (telega
-      :fetcher github
-      :repo "zevlg/telega.el"
-      :branch "telega-with-inserters"))
-
-;; (add-to-list 'load-path "~/.emacs.d/quelpa/build/telega")
-
-(use-package telega
-  :quelpa (telega
-	   :fetcher github
-	   :repo "zevlg/telega.el"
-	   :branch "master"
-	   :files (:defaults "README.md" "etc" "server" "Makefile"
-			     "test.el"))
-  :load-path "~/.emacs.d/quelpa/build/telega"
-  :bind 
-  (:map telega-msg-button-map
-	("j" . nil)
-	("k" . nil)
-	("h" . nil)
-	("l" . nil))
-  :custom (telega-use-notifications t))  
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;     :custom								    ;;
-;; (telega-use-notifications t)						    ;;
-;; (telega-completing-read-function #'ivy-completing-read)			    ;;
-;; (telega-symbol-msg-succeeded "○")						    ;;
-;; (telega-symbol-msg-viewed "●")						    ;;
-;; :custom-face								    ;;
-;; (telega-chat-inline-reply ((t (:inherit 'font-lock-comment-face))))	    ;;
-;; (telega-chat-user-title ((t (:inherit 'font-lock-function-name-face))))	    ;;
-;; (telega-chat-timestamp ((t (:inherit 'org-agenda-date))))			    ;;
-;; (telega-msg-status ((t (:inherit 'font-lock-constant-face))))		    ;;
-;; :hook									    ;;
-;; (telega-root-mode . telega-notifications-mode)				    ;;
-;; :config									    ;;
-;; (setenv "LD_LIBRARY_PATH"							    ;;
-;; 	  (concat								    ;;
-;; 	   (expand-file-name "~/.telega/:")					    ;;
-;; 	   (getenv "LD_LIBRARY_PATH")))						    ;;
-;; (require 'telega-notifications)						    ;;
-;; :commands (telega)								    ;;
-;; :defer t)									    ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; telega:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*text-translation][text-translation:1]]
-(add-to-list 'load-path "~/.emacs.d/elpa/text-translator/")
-(require 'text-translator)
-(require 'text-translator-load)
-(require 'text-translator-vars)
-
-(global-set-key "\C-x\M-t" 'text-translator)
-;; text-translation:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*text-scale][text-scale:1]]
-(global-set-key (kbd "C-M-=") 'default-text-scale-increase)
-(global-set-key (kbd "C-M--") 'default-text-scale-decrease)
-;; text-scale:1 ends here
-
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*tramp][tramp:1]]
 (use-package tramp
       :init
@@ -2616,21 +2059,21 @@ Version 2015-04-23"
 ;; treemacs:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*trident - lisp2javascript][trident - lisp2javascript:1]]
-(add-to-list 'auto-mode-alist (cons "\\.paren\\'" 'lisp-mode))
-(add-hook 'lisp-mode-hook
-	  #'(lambda ()
-	      (when (and buffer-file-name
-			 (string-match-p "\\.paren\\>" buffer-file-name))
-		(unless (slime-connected-p)
-		  (save-excursion (slime)))
-		(trident-mode +1))))
+;; (add-to-list 'auto-mode-alist (cons "\\.paren\\'" 'lisp-mode))
+;; (add-hook 'lisp-mode-hook
+;; 	  #'(lambda ()
+;; 	      (when (and buffer-file-name
+;; 			 (string-match-p "\\.paren\\>" buffer-file-name))
+;; 		(unless (slime-connected-p)
+;; 		  (save-excursion (slime)))
+;; 		(trident-mode +1))))
 
-    ;; (use-package :parenscript)
+;;     ;; (use-package :parenscript)
 
-    ;; issue this command in the REPl:
-    ;; (ql:quickload :parenscript)
-    ;; Then you can use "trident-expand-buffer" 
-    ;; etc...
+;;     ;; issue this command in the REPl:
+;;     ;; (ql:quickload :parenscript)
+;;     ;; Then you can use "trident-expand-buffer" 
+;;     ;; etc...
 ;; trident - lisp2javascript:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Unicode-fonts][Unicode-fonts:1]]
@@ -2654,27 +2097,61 @@ Version 2015-04-23"
 (define-key esc-map (kbd "C-s") 'vr/isearch-forward) ;; C-M-s
 ;; visual-regexp-steroids:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Emacs-w3m][Emacs-w3m:1]]
-(add-to-list 'load-path "~/.emacs.d/elpa/emacs-w3m/")
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*wanderlust email-client][wanderlust email-client:1]]
+(autoload 'wl "wl" "Wanderlust" t)
 
-  (require 'w3m-load)
-  (require 'mime-w3m)
+;; apt install bbdb 
 
-  ;; (setq w3m-display-inline-images t) 
-     (setq w3m-fill-column 80) ;; if this does not work, modify the file w3m.el itself
-     (setq w3m-default-display-inline-images t) 
-     (setq w3m-default-save-directory "~/Downloads")
-;; Emacs-w3m:1 ends here
+;; (require 'bbdb) 
+
+;; (autoload 'wl "wl" "Wanderlust" t)
+
+;;; bbbd for managing address book on wanderlust
+;;; https://emacs-fu.blogspot.com.br/2009/08/managing-e-mail-addresses-with-bbdb.html
+
+(setq bbdb-file "~/.emacs.d/bbdb")           ;; keep ~/ clean; set before loading
+;; (require 'bbdb) 
+;; (bbdb-initialize)
+(setq 
+    bbdb-offer-save 1                        ;; 1 means save-without-asking
+
+bbdb-use-pop-up t                        ;; allow popups for addresses
+;; bbdb-electric-p t                        ;; be disposable with SPC
+bbdb-popup-target-lines  1               ;; very small
+
+bbdb-dwim-net-address-allow-redundancy t ;; always use full name
+bbdb-quiet-about-name-mismatches 2       ;; show name-mismatches 2 secs
+
+bbdb-always-add-address t                ;; add new addresses to existing...
+					 ;; ...contacts automatically
+bbdb-canonicalize-redundant-nets-p t     ;; x@foo.bar.cx => x@bar.cx
+
+bbdb-completion-type nil                 ;; complete on anything
+
+bbdb-complete-name-allow-cycling t       ;; cycle through matches
+					 ;; this only works partially
+
+bbbd-message-caching-enabled t           ;; be fast
+bbdb-use-alternate-names t               ;; use AKA
+
+bbdb-elided-display t                    ;; single-line addresses
+
+;; auto-create addresses from mail
+bbdb/mail-auto-create-p 'bbdb-ignore-some-messages-hook   
+bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
+;; NOTE: there can be only one entry per header (such as To, From)
+;; http://flex.ee.uec.ac.jp/texi/bbdb/bbdb_11.html
+
+'(( "From" . "no.?reply\\|DAEMON\\|daemon\\|facebookmail\\|twitter"))
+)
+
+ (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
+;; wanderlust email-client:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*winner-mode][winner-mode:1]]
 (when (fboundp 'winner-mode)
      (winner-mode 1))
 ;; winner-mode:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*wrap lines][wrap lines:1]]
-;; Wrap lines without breaking the last word
-(add-hook 'org-mode-hook #'toggle-word-wrap)
-;; wrap lines:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*youtube-dl][youtube-dl:1]]
 (add-to-list 'load-path "~/.emacs.d/elpa/youtube-dl-emacs")
@@ -2796,7 +2273,7 @@ Version 2015-04-23"
     :straight t
     :bind ("<S-f2>" . circe-init))
 
-    ;;   (use-package sauron-circe
+    ;; (use-package sauron-circe
     ;; straight t quelpa
     ;; :quelpa (sauron-circe :repo "seblemaguer/sauron-circe" :fetcher github)
     ;; :after sauron
@@ -2822,8 +2299,7 @@ Version 2015-04-23"
     '(("Freenode"
        :nick ""
 
-     ;;  :channels ("#alsa" "#bash" "#badrock" "#c" "#clnoobs" "#clojure" "#clojure-beginners" "#clschool" "#coreboot" "#debian" "#debian-offtopic" "#devuan" "#emacs" "#emacs-es" "#erc" "#evil-mode
-" "#filmsbykris" "#freebsd" "#freedos" "#git" "#gitlab" "#guix" "#hardware" "#haskell" "#i3" "#javascript" "#julia" "#latex" "#libreoffice" "#lisp" "#lisp-es" "#lispcafe" "#lispweb" "#maria" "#math" "#matrix"  "#maxima" "#mpd" "#mysql" "#neomutt" "#oauth" "#org-mode" "#pcbsd" "#physics" "#plasma" "#prolog" "#python" "#qtox" "#ranger" "#regex" "#ring" "#sbcl" "#scala" "#slime" "#startups" "#sword" "#tmux" "#trueos" "#vim" "#vimus" "#wanderlust" "#weechat" "#xfce" "#xiphos")
+     ;;  :channels ("#alsa" "#bash" "#badrock" "#c" "#clnoobs" "#clojure" "#clojure-beginners" "#clschool" "#coreboot" "#debian" "#debian-offtopic" "#devuan" "#emacs" "#emacs-es" "#erc" "#evil-mode " "#filmsbykris" "#freebsd" "#freedos" "#git" "#gitlab" "#guix" "#hardware" "#haskell" "#i3" "#javascript" "#julia" "#latex" "#libreoffice" "#lisp" "#lisp-es" "#lispcafe" "#lispweb" "#maria" "#math" "#matrix"  "#maxima" "#mpd" "#mysql" "#neomutt" "#oauth" "#org-mode" "#pcbsd" "#physics" "#plasma" "#prolog" "#python" "#qtox" "#ranger" "#regex" "#ring" "#sbcl" "#scala" "#slime" "#startups" "#sword" "#tmux" "#trueos" "#vim" "#vimus" "#wanderlust" "#weechat" "#xfce" "#xiphos")
 
        :nickserv-password my-nickserv-password)))
 ;; circe:1 ends here
@@ -3029,10 +2505,10 @@ Version 2015-04-23"
 ;; org-capture:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*hyperbole][hyperbole:1]]
-(unless (package-installed-p 'hyperbole)
-  (package-refresh-contents)	
-  (package-install 'hyperbole))
-(require 'hyperbole)
+;; (unless (package-installed-p 'hyperbole)
+;;   (package-refresh-contents)	
+;;   (package-install 'hyperbole))
+;; (require 'hyperbole)
 ;; hyperbole:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*gtklp printer app][gtklp printer app:1]]
@@ -3055,7 +2531,7 @@ Version 2015-04-23"
 (setq pinentry-start t)
 ;; epg-gpg2:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*epg-gpg2][epg-gpg2:2]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*bbdb-database][bbdb-database:1]]
 (require 'bbdb)
       (bbdb-initialize 'gnus 'message 'mu4e 'w3)
     ;; (bbdb-initialize 'gnus 'message 'reportmail 'sc 'sendmail 'w3)
@@ -3073,7 +2549,7 @@ Version 2015-04-23"
     bbdb-electric-p t
     bbdb-popup-target-lines  1
     )
-;; epg-gpg2:2 ends here
+;; bbdb-database:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*ipp printer][ipp printer:1]]
 (add-to-list 'load-path "~/.emacs.d/elpa/ipp")
@@ -3097,12 +2573,12 @@ Version 2015-04-23"
 ;; Org-drill-table:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*memrise][memrise:1]]
-(use-package memrise
-  :quelpa (memrise
-	   :fetcher github
-	   :repo "SavchenkoValeriy/memrise.el"))
+;; (use-package memrise
+;;   :quelpa (memrise
+;; 	   :fetcher github
+;; 	   :repo "SavchenkoValeriy/memrise.el"))
 
-(setq memrise-sync-requests t)
+;; (setq memrise-sync-requests t)
 ;; memrise:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacs-wget][emacs-wget:1]]
@@ -3205,25 +2681,25 @@ Version 2015-04-23"
 ;; toggle-truncate-lines:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*evil-macro keys][evil-macro keys:1]]
-(evil-define-key 'normal 'global
-  ;; select the previously pasted text
-  "gp" "`[v`]"
-  ;; run the macro in the q register
-  "Q" "@q")
+;; (evil-define-key 'normal 'global
+;;   ;; select the previously pasted text
+;;   "gp" "`[v`]"
+;;   ;; run the macro in the q register
+;;   "Q" "@q")
 
-(evil-define-key 'visual 'global
-  ;; run macro in the q register on all selected lines
-  "Q" (kbd ":norm @q RET")
-  ;; repeat on all selected lines
-  "." (kbd ":norm . RET"))
+;; (evil-define-key 'visual 'global
+;;   ;; run macro in the q register on all selected lines
+;;   "Q" (kbd ":norm @q RET")
+;;   ;; repeat on all selected lines
+;;   "." (kbd ":norm . RET"))
 
-;; alternative command version
-(defun my-norm@q ()
-  "Apply macro in q register on selected lines."
-  (interactive)
-  (evil-ex-normal (region-beginning) (region-end) "@q"))
+;; ;; alternative command version
+;; (defun my-norm@q ()
+;;   "Apply macro in q register on selected lines."
+;;   (interactive)
+;;   (evil-ex-normal (region-beginning) (region-end) "@q"))
 
-  (evil-define-key 'visual 'global "Q" #'my-norm@q)
+;;   (evil-define-key 'visual 'global "Q" #'my-norm@q)
 ;; evil-macro keys:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacros][emacros:1]]
@@ -3231,8 +2707,8 @@ Version 2015-04-23"
 ;; emacros:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*zoom-frm for hycontrol][zoom-frm for hycontrol:1]]
-(add-to-list 'load-path "~/.emacs.d/el-get/zoom-frm")
-(require 'zoom-frm)
+;; (add-to-list 'load-path "~/.emacs.d/local-repo/zoom-frm")
+;; (require 'zoom-frm)
 ;; zoom-frm for hycontrol:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*openwith][openwith:1]]
@@ -3338,21 +2814,11 @@ Version 2015-04-23"
 ;; emmet-mode:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*xah modes][xah modes:1]]
-(dolist (package '(xah-lookup xah-elisp-mode xah-find xah-get-thing xah-math-input xah-reformat-code xah-replace-pairs xahk-mode xah-css-mode))
- (unless (package-installed-p package)
-   (package-install package))
-   (require package))
+;; (dolist (package '(xah-lookup xah-elisp-mode xah-find xah-get-thing xah-math-input xah-reformat-code xah-replace-pairs xahk-mode xah-css-mode))
+;;  (unless (package-installed-p package)
+;;    (package-install package))
+;;    (require package))
 ;; xah modes:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*initial-scratch-message][initial-scratch-message:1]]
-(setq initial-scratch-message "
-   ;; 'Vagner Rener' @ 'Cyberwarrior',
-   ;; This buffer is for text that is not saved, and for Lisp evaluation.
-   ;; To create a file, visit it with \ e and enter text in its buffer."
-   )
-
-;; (setq initial-scratch-message nil)
-;; initial-scratch-message:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Ripgrep][Ripgrep:1]]
 (use-package ripgrep
