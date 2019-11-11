@@ -87,14 +87,16 @@
 ;; portuguese-prefix:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*theme and theme-looper][theme and theme-looper:1]]
-(straight-use-package 'theme-looper)
-   (global-set-key (kbd "<f8>") 'theme-looper-enable-random-theme)
+(dolist (pkgname '(theme-looper
+  alect-themes
+  base16-theme
+  color-theme-modern
+  doom-themes
+  moe-theme
+  ))
+(straight-use-package pkgname))
 
-(straight-use-package 'alect-themes)
-(straight-use-package 'base16-theme)
-(straight-use-package 'color-theme-modern)
-(straight-use-package 'doom-themes)
-(straight-use-package 'moe-theme)
+  (global-set-key (kbd "<f8>") 'theme-looper-enable-random-theme)
 ;; theme and theme-looper:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*wrap lines][wrap lines:1]]
@@ -280,18 +282,6 @@
   :hook (dired-mode . all-the-icons-dired-mode))
 ;; Dired:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Emacs security][Emacs security:1]]
-;;   (if (fboundp 'gnutls-available-p)
-;;       (fmakunbound 'gnutls-available-p))
-
-;; (require 'cl)
-;; (setq tls-checktrust t)
-
-;; (setq python (or (executable-find "py.exe")
-;; 		 (executable-find "python")
-;; 		 ))
-;; Emacs security:1 ends here
-
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*hydra][hydra:1]]
 (straight-use-package 'hydra)
 ;; hydra:1 ends here
@@ -345,11 +335,13 @@
 ;; org hydra:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*yasnippets][yasnippets:1]]
-(straight-use-package 'snippet)
-(straight-use-package 'yasnippet)
-(straight-use-package 'yasnippet-snippets)
-(straight-use-package 'yasnippet-classic-snippets)
-(yas-global-mode 1)
+(dolist (pkgname '(snippet
+yasnippet
+yasnippet-snippets
+yasnippet-classic-snippets))
+  (straight-use-package pkgname))
+
+  (yas-global-mode 1)
 ;; yasnippets:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*counsel - ivy - swiper][counsel - ivy - swiper:1]]
@@ -442,18 +434,6 @@ file with `edit-abbrevs`"
 (use-package all-the-icons
      :ensure t)
 
-   ;; (use-package all-the-icons
-   ;;  :straight t)
-
-  ;; (unless (member "all-the-icons" (font-family-list))
-    ;;   (all-the-icons-install-fonts t))
-
-       ;; (straight-use-package 'all-the-icons-gnus)
-    ;; (straight-use-package 'all-the-icons-dired)
-    ;; (all-the-icons-dired-mode 1)
-    ;; (straight-use-package 'all-the-icons-ivy)
-    ;; (straight-use-package 'spaceline-all-the-icons)
-
 (use-package dired-rainbow
      :ensure t)
 
@@ -489,9 +469,7 @@ file with `edit-abbrevs`"
 ;; eyebrowse:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*helm][helm:1]]
-;; (require 'helm-config)
-
-     (use-package helm
+(use-package helm
       :straight t 
       :config
       (helm-mode 1))
@@ -500,18 +478,9 @@ file with `edit-abbrevs`"
   (use-package helm-swoop
       :straight t)
 
-  ;; (global-set-key (kbd "C-x C-m") 'helm-M-x)
-  ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
-
-  ;; s is super or win
-  ;; (global-set-key (kbd "s-x") 'helm-M-x)
    (global-set-key (kbd "M-x") 'helm-M-x)
    (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
-  ;; (global-set-key (kbd "s-f") 'helm-find-files)
    (global-set-key (kbd "C-x C-f") 'helm-find-files)
-
-;;(global-set-key (kbd "Ctrl-x Ctrl-m") 'helm-M-x)
-;;(global-set-key (kbd "C-x C-f") 'helm-find-files)
 ;; helm:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*beacon][beacon:1]]
@@ -570,16 +539,8 @@ file with `edit-abbrevs`"
   ;; LaTeX-math-mode http://www.gnu.org/s/auctex/manual/auctex/Mathematics.html
   (add-hook 'TeX-mode-hook 'LaTeX-math-mode)
 
-  ;; Org-ref
-  ;; (setq org-ref-completion-library 'org-ref-ivy-cite)
-  ;;(require 'org-ref)
-
 (use-package org-ref
   :straight t)
-
-  ;; Bibtex
-
-  ;; (require 'ox-bibtex)
 
   ;; RefTeX
   ;; Turn on RefTeX for AUCTeX http://www.gnu.org/s/auctex/manual/reftex/reftex_5.html
@@ -708,11 +669,9 @@ file with `edit-abbrevs`"
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*plantuml][plantuml:1]]
 (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
 
-   (use-package plantuml-mode
-    :straight t)
-
-(use-package flycheck-plantuml
-    :straight t)
+  (dolist (pkgname '(plantuml-mode
+flycheck-plantuml))
+  (straight-use-package pkgname))
 ;; plantuml:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-babel][org-babel:1]]
@@ -771,43 +730,29 @@ file with `edit-abbrevs`"
    (setq org-export-use-babel t)
 ;; org-babel:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*c++ and ggtags][c++ and ggtags:1]]
-(use-package ggtags
-:straight t 
-:config 
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-              (ggtags-mode 1))))
-)
-;; c++ and ggtags:1 ends here
-
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*company-emoji][company-emoji:1]]
-;;    (require 'company-emoji)
-;;    (add-to-list 'company-backends 'company-emoji)
+(defun --set-emoji-font (frame)
 
-    (defun --set-emoji-font (frame)
+  "Adjust the font settings of FRAME so Emacs can display emoji properly."
 
-    "Adjust the font settings of FRAME so Emacs can display emoji properly."
+(if (eq system-type 'darwin)
 
-  (if (eq system-type 'darwin)
+    ;; For NS/Cocoa
 
-      ;; For NS/Cocoa
+    (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
 
-      (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)
+  ;; For Linux
 
-    ;; For Linux
+    (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend)))
 
-      (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'prepend)))
+  ;; For when Emacs is started in GUI mode:
 
-    ;; For when Emacs is started in GUI mode:
+  (--set-emoji-font nil)
 
-    (--set-emoji-font nil)
+  ;; Hook for when a frame is created with emacsclient
+  ;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
 
-    ;; Hook for when a frame is created with emacsclient
-    ;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
-
-    (add-hook 'after-make-frame-functions '--set-emoji-font)
+  (add-hook 'after-make-frame-functions '--set-emoji-font)
 ;; company-emoji:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*pdf-tools][pdf-tools:1]]
@@ -831,17 +776,35 @@ file with `edit-abbrevs`"
     (global-set-key "\C-xm" 'browse-url-at-point)
 ;; default browser:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*dtk][dtk:1]]
-;; (add-to-list 'load-path "~/.emacs.d/elpa/dtk")
-;; (require 'dtk)
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*diatheke][diatheke:1]]
+(straight-use-package 'diatheke)
+(setq max-specpdl-size 2000)
 
-   (use-package dtk
-     :bind (("C-c B" . dtk-bible))
-     :custom
-     (dtk-default-module "KJVA")
-     (dtk-default-module-category "Biblical Texts")
-     (dtk-word-wrap t)
-     )
+;;  (use-package diatheke
+;;    :straight t)
+
+;; (setq diatheke-bible "KJVA -f plain")
+
+;; (setq diatheke-bible "ESV -f plain -o s")
+
+;; you can set the Bible inside the buffer with
+;; (diatheke-set-bible) + C-x e
+
+;; Keybindings already automatically loaded
+;; C-c C-b: select a bible translation
+;; C-c C-i: insert a passage
+;; C-c C-p: search for a phrase
+;; C-c C-m: search for multiple words
+;; C-c C-r: search by regex
+;; diatheke:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*dtk][dtk:1]]
+(use-package dtk
+  :bind (("C-c B" . dtk-bible))
+  :custom
+  (dtk-default-module "KJVA")
+  (dtk-default-module-category "Biblical Texts")
+  (dtk-word-wrap t))
 ;; dtk:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*sword-to-org][sword-to-org:1]]
@@ -850,88 +813,21 @@ file with `edit-abbrevs`"
 ;; sword-to-org:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*telega][telega:1]]
-(straight-use-package 'telega)
-
-;; (add-to-list 'load-path "~/.emacs.d/elpa/telega.el")
-;; (require 'telega)
-
-;; This is the receipt to install telega
-;; After installation, comment it
-
-;;  (use-package telega
-;;       :quelpa (telega
-;;       :fetcher github
-;;       :repo "zevlg/telega.el"
-;;       :branch "telega-with-inserters"))
-
-;; ;; (add-to-list 'load-path "~/.emacs.d/quelpa/build/telega")
-
-;; (use-package telega
-;;   :quelpa (telega
-;; 	   :fetcher github
-;; 	   :repo "zevlg/telega.el"
-;; 	   :branch "master"
-;; 	   :files (:defaults "README.md" "etc" "server" "Makefile"
-;; 			     "test.el"))
-;;   :load-path "~/.emacs.d/quelpa/build/telega"
-;;   :bind 
-;;   (:map telega-msg-button-map
-;; 	("j" . nil)
-;; 	("k" . nil)
-;; 	("h" . nil)
-;; 	("l" . nil))
-;;   :custom (telega-use-notifications t))  
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;     :custom								    ;;
-;; (telega-use-notifications t)						    ;;
-;; (telega-completing-read-function #'ivy-completing-read)			    ;;
-;; (telega-symbol-msg-succeeded "○")						    ;;
-;; (telega-symbol-msg-viewed "●")						    ;;
-;; :custom-face								    ;;
-;; (telega-chat-inline-reply ((t (:inherit 'font-lock-comment-face))))	    ;;
-;; (telega-chat-user-title ((t (:inherit 'font-lock-function-name-face))))	    ;;
-;; (telega-chat-timestamp ((t (:inherit 'org-agenda-date))))			    ;;
-;; (telega-msg-status ((t (:inherit 'font-lock-constant-face))))		    ;;
-;; :hook									    ;;
-;; (telega-root-mode . telega-notifications-mode)				    ;;
-;; :config									    ;;
-;; (setenv "LD_LIBRARY_PATH"							    ;;
-;; 	  (concat								    ;;
-;; 	   (expand-file-name "~/.telega/:")					    ;;
-;; 	   (getenv "LD_LIBRARY_PATH")))						    ;;
-;; (require 'telega-notifications)						    ;;
-;; :commands (telega)								    ;;
-;; :defer t)									    ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package telega
+ :straight t
+ :bind 
+  (:map telega-msg-button-map
+    ("j" . nil)
+    ("k" . nil)
+    ("h" . nil)
+    ("l" . nil))
+    :custom (telega-notifications-mode t))
 ;; telega:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*text-scale][text-scale:1]]
 (global-set-key (kbd "C-M-=") 'default-text-scale-increase)
 (global-set-key (kbd "C-M--") 'default-text-scale-decrease)
 ;; text-scale:1 ends here
-
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*text-scale][text-scale:2]]
-;;  (add-to-list 'load-path "~/.dotfiles/emacs/.emacs.d/elpa/diatheke-1.0")
-;;  (require 'diatheke)
-
-    (use-package diatheke
-      :straight t)
-
-  ;; (setq diatheke-bible "KJVA -f plain")
-
-  ;; (setq diatheke-bible "ESV -f plain -o s")
-
-  ;; you can set the Bible inside the buffer with
-  ;; (diatheke-set-bible) + C-x e
-
-  ;; Keybindings already automatically loaded
-  ;; C-c C-b: select a bible translation
-  ;; C-c C-i: insert a passage
-  ;; C-c C-p: search for a phrase
-  ;; C-c C-m: search for multiple words
-  ;; C-c C-r: search by regex
-;; text-scale:2 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*wgrep][wgrep:1]]
 (use-package wgrep
@@ -1055,15 +951,6 @@ file with `edit-abbrevs`"
       (list 432928 274893998))
 ;; google-translate:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*text-translation][text-translation:1]]
-;; (add-to-list 'load-path "~/.emacs.d/elpa/text-translator/")
-;; (require 'text-translator)
-;; (require 'text-translator-load)
-;; (require 'text-translator-vars)
-
-;; (global-set-key "\C-x\M-t" 'text-translator)
-;; text-translation:1 ends here
-
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*grasp][grasp:1]]
 
 ;; grasp:1 ends here
@@ -1079,10 +966,6 @@ file with `edit-abbrevs`"
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*helm-mu][helm-mu:1]]
 (use-package helm-mu
   :straight t)
-
-;; (define-key mu4e-main-mode-map "s" 'helm-mu)
-;; (define-key mu4e-headers-mode-map "s" 'helm-mu)
-;; (define-key mu4e-view-mode-map "s" 'helm-mu)
 ;; helm-mu:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*image-magick][image-magick:1]]
@@ -1136,14 +1019,12 @@ file with `edit-abbrevs`"
 ;; indent lisp:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*jabber][jabber:1]]
-;; (require 'jabber)
-
 (use-package jabber 
  :straight t)
 ;; jabber:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*linum][linum:1]]
-;; (require 'linum)
+(straight-use-package 'linum)
 
 ;; (setq linum-relative-current-symbol "")
 
@@ -1209,11 +1090,8 @@ file with `edit-abbrevs`"
 ;; magit:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*mplayer-mode][mplayer-mode:1]]
-;; (add-to-list 'load-path "~/.emacs.d/elpa/mplayer-mode/")
-;; (require 'mplayer-mode)
-
-  (use-package mplayer-mode
-    :straight t)
+(use-package mplayer-mode
+  :straight t)
 ;; mplayer-mode:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*message-mode][message-mode:1]]
@@ -1307,7 +1185,7 @@ file with `edit-abbrevs`"
   :defer t)
 ;; debian stuff:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*debian stuff][debian stuff:2]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*more stuff][more stuff:1]]
 ;;  ;;  (setq frame-title-format "emacs")
 ;;  ;;  (set-default 'cursor-type 'hbar)
 ;;      (ido-mode 1)
@@ -1354,171 +1232,128 @@ file with `edit-abbrevs`"
 ;;  		   "Cursor type: "
 ;;  		   (mapcar 'list '("box" "hollow" "bar" "hbar" nil))))))
 ;;    (modify-frame-parameters (selected-frame) (list (cons 'cursor-type cursor-type))))
-;; debian stuff:2 ends here
+;; more stuff:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*multilple-cursors][multilple-cursors:1]]
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(straight-use-package 'multiple-cursors)
 
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 ;; multilple-cursors:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*mu4e][mu4e:1]]
-;;	(eval-when-compile
-;;	      (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e/")
-;;	  (require 'use-package))
+(straight-use-package 'mu4e)
 
-;;	  (use-package mu4e)
+	 (global-set-key (kbd "C-<f10>") 'mu4e)
 
-	     (global-set-key (kbd "C-<f10>") 'mu4e)
+	 ;; default
+	 (setq mu4e-maildir "~/gmail/")
+	 (setq mu4e-sent-folder "/Sent")
+	 ;; (setq mu4e-drafts-folder "/Drafts")
+	 (setq mu4e-trash-folder   "/Junk")
+	 (setq mu4e-trash-folder  "/Queue")
+	 (setq mu4e-inbox-folder  "/Inbox")
 
-	     ;; install evil-mu4e
-;;	      (require 'evil-mu4e)
+	 ;; setup some handy shortcuts
+	 ;; you can quickly switch to your Inbox -- press ``ji''
+	 ;; then, when you want archive some messages, move them to
+	 ;; the 'All Mail' folder by pressing ``ma''.
 
-	     ;; default
-	     ;; (setq mu4e-maildir "~/Mail")
-	     ;; (setq mu4e-drafts-folder "/[Gmail].Drafts")
-	     ;; (setq mu4e-sent-folder   "/[Gmail].Sent Mail")
-	     ;; (setq mu4e-trash-folder  "/[Gmail].Trash")
+	 (setq mu4e-maildir-shortcuts
+	  '( ("/Inbox"               . ?i)
+	      ;; ("/Drafts"              . ?d)
+		 ("/Junk"                . ?j)
+		 ("/Sent"                . ?s)
+		 ("/Queue"               . ?q)))
 
-	     ;; default
-		(setq mu4e-maildir "~/gmail/")
-		(setq mu4e-sent-folder "/Sent")
-		;; (setq mu4e-drafts-folder "/Drafts")
-		(setq mu4e-trash-folder   "/Junk")
-		(setq mu4e-trash-folder  "/Queue")
-		(setq mu4e-inbox-folder  "/Inbox")
+	 ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+	 (setq mu4e-sent-messages-behavior 'delete)
 
-	     ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+	 ;; allow for updating mail using 'U' in the main view:
+	 ;; (setq mu4e-get-mail-command "offlineimap")
+	 ;; (setq mu4e-get-mail-command "mbsync ~/gmail")
 
-		(setq mu4e-sent-messages-behavior 'delete)
+	 (setq mu4e-get-mail-command "mbsync -aV ~/gmail")
 
-	     ;; setup some handy shortcuts
-	     ;; you can quickly switch to your Inbox -- press ``ji''
-	     ;; then, when you want archive some messages, move them to
-	     ;; the 'All Mail' folder by pressing ``ma''.
+	 ;; something about ourselves
 
-	     ;; (setq mu4e-maildir-shortcuts
-	     ;;   '( ("/INBOX"               . ?i)
-	    ;;       ("/[Gmail].Sent Mail"   . ?s)
-	    ;;       ("/[Gmail].Trash"       . ?t)
-	    ;;       ("/[Gmail].All Mail"    . ?a)))
+	 (setq
+	  user-mail-address "vagnerrener@gmail.com"
+	  user-full-name  "Vagner Rener"
+	  message-signature
+	 (concat
+	   ;;"任文山 (Ren Wenshan)\n"
+	   ;;"Email: renws1990@gmail.com\n"
+	   ;;"Blog: wenshanren.org\n"
+	   ;;"Douban: www.douban.com/people/renws"
+	   "\n"))
 
-	       (setq mu4e-maildir-shortcuts
-		       '( ("/Inbox"               . ?i)
-		       ;; ("/Drafts"              . ?d)
-			  ("/Junk"                . ?j)
-			  ("/Sent"                . ?s)
-			  ("/Queue"               . ?q)))
+ 	 ;; sending mail -- replace USERNAME with your gmail username
+	 ;; also, make sure the gnutls command line utils are installed
+	 ;; package 'gnutls-bin' in Debian/Ubuntu
 
-	      ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-	      (setq mu4e-sent-messages-behavior 'delete)
+	 (require 'smtpmail)
+	 ;; for sending a message, just hit "C-c C-s"
 
-	    ;; allow for updating mail using 'U' in the main view:
-	    ;; (setq mu4e-get-mail-command "offlineimap")
-	    ;; (setq mu4e-get-mail-command "mbsync ~/gmail")
+        (setq message-send-mail-function 'smtpmail-send-it
+	 starttls-use-gnutls t
+	 smtpmail-stream-type 'starttls
+	 smtpmail-starttls-credentials
+	 '(("smtp.gmail.com" 587 nil nil))
+	 smtpmail-auth-credentials
+	 (expand-file-name "~/.authinfo.gpg")
+	 smtpmail-default-smtp-server "smtp.gmail.com"
+	 smtpmail-smtp-server "smtp.gmail.com"
+	 smtpmail-smtp-service 587
+	 smtpmail-debug-info t)
 
-	    (setq mu4e-get-mail-command "mbsync -aV ~/gmail")
+	;; don't keep message buffers around
+	(setq message-kill-buffer-on-exit t)
 
-		 ;; something about ourselves
+	;; https://github.com/bandresen/mu4e-send-delay
 
-		 (setq
-		  user-mail-address "vagnerrener@gmail.com"
-		  user-full-name  "Vagner Rener"
-		  message-signature
-		  (concat
-		   ;;"任文山 (Ren Wenshan)\n"
-		   ;;"Email: renws1990@gmail.com\n"
-		   ;;"Blog: wenshanren.org\n"
-		   ;;"Douban: www.douban.com/people/renws"
-		   "\n"))
+	(add-to-list 'load-path "~/.emacs.d/elpa/mu4e-send-delay")
 
-		 ;; sending mail -- replace USERNAME with your gmail username
-		 ;; also, make sure the gnutls command line utils are installed
-		 ;; package 'gnutls-bin' in Debian/Ubuntu
+	;; Recommended settings
 
-		 (require 'smtpmail)
-		 ;; for sending a message, just hit "C-c C-s"
+        ;; Assigning the scheduled enabled send to C-c C-c
 
-		 (setq message-send-mail-function 'smtpmail-send-it
-		       starttls-use-gnutls t
-		       smtpmail-stream-type 'starttls
-		       smtpmail-starttls-credentials
-		       '(("smtp.gmail.com" 587 nil nil))
-		       smtpmail-auth-credentials
-		       (expand-file-name "~/.authinfo.gpg")
-		       smtpmail-default-smtp-server "smtp.gmail.com"
-		       smtpmail-smtp-server "smtp.gmail.com"
-		       smtpmail-smtp-service 587
-		       smtpmail-debug-info t)
+	(add-hook 'mu4e-main-mode-hook (lambda ()
+	(define-key mu4e-compose-mode-map
+	  (kbd "C-c C-c") 'mu4e-send-delay-send-and-exit)))
 
-		 ;; alternatively, for emacs-24 you can use:
-		 ;;(setq message-send-mail-function 'smtpmail-send-it
-		     ;;smtpmail-stream-type 'starttls
-		     ;;smtpmail-default-smtp-server "smtp.gmail.com"
-		     ;;smtpmail-smtp-server "smtp.gmail.com"
-		     ;;smtpmail-smtp-service 587)
+      ;; Now you can C-c C-c every mail
+      ;; Defaults
 
-		 ;; don't keep message buffers around
-		 (setq message-kill-buffer-on-exit t)
-
-		     ;; https://github.com/bandresen/mu4e-send-delay
-
-	     (add-to-list 'load-path "~/.emacs.d/elpa/mu4e-send-delay")
-
-;;	     (require 'mu4e-send-delay)
-
-;;		 (mu4e-send-delay-setup)
-
-	;;	 (add-hook 'mu4e-main-mode-hook 'mu4e-send-delay-initialize-send-queue-timer) 
-
-		 ;;    (prefer-coding-system 'utf-8) ;; uncomment this if you notice your mails arriving garbled despite looking okay in the Drafts
-
-		 ;;    (set-language-environment "UTF-8") ;; uncomment this if you notice your mails arriving garbled despite looking okay in the Drafts
-
-		     ;; Recommended settings
-
-		     ;; Assigning the scheduled enabled send to C-c C-c
-
-	     (add-hook 'mu4e-main-mode-hook (lambda ()
-	      (define-key mu4e-compose-mode-map
-		(kbd "C-c C-c") 'mu4e-send-delay-send-and-exit)))
-
-	  ;;Now you can C-c C-c every mail
-	  ;;Defaults
-
-	  ;; mu4e-send-delay-default-delay is set to “3m”
-	  ;; mu4e-send-delay-timer is set to every 2 minutes
-	  ;; mu4e-send-delay-include-header-in-draft is true
-	  ;; mu4e-send-strip-header-before-send is true
+      ;; mu4e-send-delay-default-delay is set to “3m”
+      ;; mu4e-send-delay-timer is set to every 2 minutes
+      ;; mu4e-send-delay-include-header-in-draft is true
+      ;; mu4e-send-strip-header-before-send is true
 
       (setq mu4e-org-contacts-file  "~/org~/contacts.org") 
-      (add-to-list 'mu4e-headers-actions
-      '("org-contact-add" . mu4e-action-add-org-contact) t)
-      (add-to-list 'mu4e-view-actions
-      '("org-contact-add" . mu4e-action-add-org-contact) t)
 
-	 (add-hook 'mu4e-compose-mode-hook (lambda () (use-hard-newlines -1)))
+      (add-hook 'mu4e-compose-mode-hook (lambda () (use-hard-newlines -1)))
 
-	  ;; I want my format=flowed thank you very much
-    ;; mu4e sets up visual-line-mode and also fill (M-q) to do the right thing
-    ;; each paragraph is a single long line; at sending, emacs will add the
-    ;; special line continuation characters.
-    (setq mu4e-compose-format-flowed t)
+      ;; I want my format=flowed thank you very much
+      ;; mu4e sets up visual-line-mode and also fill (M-q) to do the right thing
+      ;; each paragraph is a single long line; at sending, emacs will add the
+      ;; special line continuation characters.
+      (setq mu4e-compose-format-flowed t)
 
-    ;; every new email composition gets its own frame! (window)
-    (setq mu4e-compose-in-new-frame t)
+      ;; every new email composition gets its own frame! (window)
+      (setq mu4e-compose-in-new-frame t)
 
-    ;; give me ISO(ish) format date-time stamps in the header list
-    (setq mu4e-headers-date-format "%d-%m-%Y %H:%M")
+      ;; give me ISO(ish) format date-time stamps in the header list
+      (setq mu4e-headers-date-format "%d-%m-%Y %H:%M")
 
-    ;; show full addresses in view message (instead of just names)
-    ;; toggle per name with M-RET
-    (setq mu4e-view-show-addresses 't)
+      ;; show full addresses in view message (instead of just names)
+      ;; toggle per name with M-RET
+      (setq mu4e-view-show-addresses 't)
 ;; mu4e:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*My-save-word][My-save-word:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*my-save-word][my-save-word:1]]
 (global-set-key (kbd "<f5>") 'my-save-word)
      (defun my-save-word ()
     (interactive)
@@ -1526,22 +1361,23 @@ file with `edit-abbrevs`"
 	   (word (flyspell-get-word)))
       (when (consp word)    
 	(flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
-;; My-save-word:1 ends here
+;; my-save-word:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*oauth2][oauth2:1]]
+;;  (straight-use-package 'oauth2)
+
 ;;    (use-package oauth2 
-    
 ;;	   :config
 ;;	(eval-when-compile
 ;;	     (defvar oauth--token-data ())))
 ;; oauth2:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-agenda][org-agenda:1]]
-(require 'org)
-      (setq org-directory "~/~org/")
-      (define-key global-map "\C-cl" 'org-store-link)
-      (define-key global-map "\C-ca" 'org-agenda)
-      (setq org-log-done t)
+;; (require 'org)
+;;       (setq org-directory "~/~org/")
+;;       (define-key global-map "\C-cl" 'org-store-link)
+;;       (define-key global-map "\C-ca" 'org-agenda)
+;;       (setq org-log-done t)
 
 (setq org-agenda-files (list "~/org~/appointments.org"
 			     "~/org~/home.org"
@@ -1550,21 +1386,20 @@ file with `edit-abbrevs`"
 ;; org-agenda:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-brain][org-brain:1]]
-;;  (use-package org-brain  
-;;    :init
-;;    (setq org-brain-path "~/org~/brain")
-;;    ;; For Evil users
-;;    (with-eval-after-load 'evil
-;;      (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
-;;    :config
-;;    (setq org-id-track-globally t)
-;;    (setq org-brain-file-entries-use-title nil)
-   ;; (setq org-id-locations-file "~/org~/brain/.org-id-locations")
-   ;;  (push '("b" "Brain" plain (function org-brain-goto-end)
-;;	     "* %i%?" :empty-lines 1)
-;;	   org-capture-templates)
-;;    (setq org-brain-visualize-default-choices 'all)
-;;    (setq org-brain-title-max-length 12))
+(straight-use-package 'org-brain)
+  (setq org-brain-path "~/org~/brain")
+
+  ;; For Evil users
+  (with-eval-after-load 'evil
+    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+  (setq org-id-track-globally t)
+  (setq org-brain-file-entries-use-title nil)
+  (setq org-id-locations-file "~/org~/brain/.org-id-locations")
+  ;; (push '("b" "Brain" plain (function org-brain-goto-end)
+  ;;     "* %i%?")
+  ;; 	   org-capture-templates)
+  (setq org-brain-visualize-default-choices 'all)
+  (setq org-brain-title-max-length 12)
 ;; org-brain:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-capture with w3m or eww][org-capture with w3m or eww:1]]
@@ -1632,6 +1467,8 @@ Suggest the URL title as a description for resource."
      url
      (org-cliplink-retrieve-title-synchronously url)
      t)))
+
+(global-set-key (kbd "C-x p i") 'org-cliplink)
 
 ;; (define-key org-brain-visualize-mode-map (kbd "L") #'org-brain-cliplink-resource)
 ;; Org-cliplink:1 ends here
@@ -1757,10 +1594,9 @@ Suggest the URL title as a description for resource."
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacs-reveal][emacs-reveal:1]]
 (add-to-list 'load-path "/home/vagner/.emacs.d/elpa/emacs-reveal")
-   (require 'emacs-reveal)
 
 ;; (setq oer-reveal-plugins nil)
-;;  (setq oer-reveal-plugins t)
+;; (setq oer-reveal-plugins t)
 ;; emacs-reveal:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-reveal][org-reveal:1]]
@@ -1807,12 +1643,12 @@ Suggest the URL title as a description for resource."
      (setq org-re-reveal-hlevel 2))
 ;; org-re-reveal:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Org-re-reveal-ref][Org-re-reveal-ref:1]]
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-re-reveal-ref][org-re-reveal-ref:1]]
 (use-package org-re-reveal-ref
  :straight t
  :config
    (require 'org-re-reveal-ref))
-;; Org-re-reveal-ref:1 ends here
+;; org-re-reveal-ref:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*oer-reveal][oer-reveal:1]]
 (use-package oer-reveal
@@ -1916,7 +1752,6 @@ Suggest the URL title as a description for resource."
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*slime swank][slime swank:1]]
 ;; Set your lisp system and, optionally, some contribs
 
-  (slime-setup '(slime-repl))
 ;; (setq inferior-lisp-program "/usr/bin/sbcl")
 ;; Install sbcl from github sources and NOT with apt
     (setq inferior-lisp-program "/usr/local/bin/sbcl")
@@ -1929,7 +1764,7 @@ Suggest the URL title as a description for resource."
 
   (add-to-list 'load-path "~/.emacs.d/straight/repos/slime/")
 
-  ;; (require 'slime-autoloads)
+  (require 'slime-autoloads)
 
   (defun cliki:start-slime ()
 	(unless (slime-connected-p)
@@ -1944,6 +1779,9 @@ Suggest the URL title as a description for resource."
        (slime-setup '(slime-fancy slime-banner))
       (setq slime-complete-symbol*-fancy t)
       (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)))
+
+  (require 'slime-autoloads)
+  (setq slime-contribs '(slime-repl))
 ;; slime swank:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*smex][smex:1]]
@@ -2102,7 +1940,6 @@ Version 2015-04-23"
 
 ;; apt install bbdb 
 
-;; (require 'bbdb) 
 
 ;; (autoload 'wl "wl" "Wanderlust" t)
 
@@ -2110,7 +1947,6 @@ Version 2015-04-23"
 ;;; https://emacs-fu.blogspot.com.br/2009/08/managing-e-mail-addresses-with-bbdb.html
 
 (setq bbdb-file "~/.emacs.d/bbdb")           ;; keep ~/ clean; set before loading
-;; (require 'bbdb) 
 ;; (bbdb-initialize)
 (setq 
     bbdb-offer-save 1                        ;; 1 means save-without-asking
@@ -2264,6 +2100,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*command-log][command-log:1]]
 (use-package command-log-mode
+   :ensure t
    :commands (command-log-mode global-command-log-mode)
    :bind ("C-c o" . clm/toggle-command-log-buffer))
 ;; command-log:1 ends here
@@ -2468,6 +2305,9 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 
      ("j" "Journal" entry (file+datetree "~/org~/journal.org") "* %?\nEntered on %U\n  %i\n  %a")
 
+     ("k" "Cliplink capture" entry (file "")
+          "* TODO %(org-cliplink-capture) \n  SCHEDULED: %t\n" :empty-lines 1)
+
      ("l" "Log Time" entry (file+datetree "~/org~/timelog.org") "** %U - %^{Activity}  :TIME:")
 
      ("m" "Brain" entry (function org-brain-goto-end) "* %i%?" :empty-lines 1)
@@ -2532,23 +2372,19 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 ;; epg-gpg2:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*bbdb-database][bbdb-database:1]]
-(require 'bbdb)
-      (bbdb-initialize 'gnus 'message 'mu4e 'w3)
-    ;; (bbdb-initialize 'gnus 'message 'reportmail 'sc 'sendmail 'w3)
-    (setq bbdb-north-american-phone-numbers-p nil)
-(bbdb-insinuate-message)
-    (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
-    (setq bbdb-file "~/.emacs.d/bbdb")
-    (setq bbdb-send-mail-style 'gnus)
-    (setq bbdb-complete-name-full-completion t)
-    (setq bbdb-completion-type 'primary-or-name)
-    (setq bbdb-complete-name-allow-cycling t)
-    (setq
-    bbdb-offer-save 1
-    bbdb-use-pop-up t
-    bbdb-electric-p t
-    bbdb-popup-target-lines  1
-    )
+(setq bbdb-north-american-phone-numbers-p nil)
+(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
+(setq bbdb-file "~/.emacs.d/bbdb")
+(setq bbdb-send-mail-style 'gnus)
+(setq bbdb-complete-name-full-completion t)
+(setq bbdb-completion-type 'primary-or-name)
+(setq bbdb-complete-name-allow-cycling t)
+(setq
+bbdb-offer-save 1
+bbdb-use-pop-up t
+bbdb-electric-p t
+bbdb-popup-target-lines  1
+)
 ;; bbdb-database:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*ipp printer][ipp printer:1]]
