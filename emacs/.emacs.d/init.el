@@ -43,6 +43,14 @@
 (setq gc-cons-threshold (* 100 1024 1024))
 ;; speed up Emacs:1 ends here
 
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Org-mode tutorials][Org-mode tutorials:1]]
+
+;; Org-mode tutorials:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*People with great emacs configs][People with great emacs configs:1]]
+
+;; People with great emacs configs:1 ends here
+
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*small configs][small configs:1]]
 (setq inhibit-startup-screen t)
   (global-visual-line-mode 1)
@@ -53,19 +61,187 @@
   (toggle-truncate-lines 1)
   (ido-mode 1) ;; this shows minibuffer options
   (blink-cursor-mode 0)
+  (setq org-src-wind-setup 'current-window)
+  (global-subword-mode 1)
 
- (defalias 'yes-or-no-p 'y-or-n-p)
+  (defalias 'yes-or-no-p 'y-or-n-p)
      (setq confirm-kill-processes nil)
 
 (add-hook 'prog-mode-hook 'turn-on-auto-fill)
    (add-hook 'text-mode-hook 'turn-on-auto-fill)
 ;; small configs:1 ends here
 
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*smart-hungry-delete][smart-hungry-delete:1]]
+(use-package smart-hungry-delete
+  :ensure t
+  :bind (("<backspace>" . smart-hungry-delete-backward-char)
+		 ("C-d" . smart-hungry-delete-forward-char))
+  :defer nil ;; dont defer so we can add our functions to hooks 
+  :config (smart-hungry-delete-add-default-hooks)
+  )
+;; smart-hungry-delete:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*always murder current buffer][always murder current buffer:1]]
+(defun kill-current-buffer ()
+  "Kills the current buffer."
+  (interactive)
+  (kill-buffer (current-buffer)))
+(global-set-key (kbd "C-x k") 'kill-current-buffer)
+;; always murder current buffer:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*kill it now][kill it now:1]]
+(setq kill-buffer-query-functions (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
+;; kill it now:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*ibuffer][ibuffer:1]]
+(global-set-key (kbd "C-x b") 'ibuffer)
+;; ibuffer:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*expert-mode][expert-mode:1]]
+(setq ibuffer-expert t)
+;; expert-mode:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*close-all-buffers][close-all-buffers:1]]
+(defun close-all-buffers ()
+  "Kill all buffers without regard for their origin."
+  (interactive)
+  (mapc 'kill-buffer (buffer-list)))
+(global-set-key (kbd "C-M-s-k") 'close-all-buffers)
+;; close-all-buffers:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*switch-window][switch-window:1]]
+(use-package switch-window
+  :ensure t
+  :config
+    (setq switch-window-input-style 'minibuffer)
+    (setq switch-window-increase 4)
+    (setq switch-window-threshold 2)
+    (setq switch-window-shortcut-style 'qwerty)
+    (setq switch-window-qwerty-shortcuts
+        '("a" "s" "d" "f" "j" "k" "l" "i" "o"))
+  :bind
+    ([remap other-window] . switch-window))
+;; switch-window:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*follow window splits][follow window splits:1]]
+(defun split-and-follow-horizontally ()
+  (interactive)
+  (split-window-below)
+  (balance-windows)
+  (other-window 1))
+(global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
+
+(defun split-and-follow-vertically ()
+  (interactive)
+  (split-window-right)
+  (balance-windows)
+  (other-window 1))
+(global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
+;; follow window splits:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*battery indicator][battery indicator:1]]
+(use-package fancy-battery
+  :ensure t
+  :config
+    (setq fancy-battery-show-percentage t)
+    (setq battery-update-interval 15)
+    (if window-system
+      (fancy-battery-mode)
+      (display-battery-mode)))
+;; battery indicator:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*mark-multiple][mark-multiple:1]]
+(use-package mark-multiple
+  :ensure t
+  :bind ("C-c q" . 'mark-next-like-this))
+;; mark-multiple:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*kill-word improved][kill-word improved:1]]
+(defun cyber/kill-inner-word ()
+  "Kills the entire word your cursor is in. Equivalent to 'ciw' in vim."
+  (interactive)
+  (forward-char 1)
+  (backward-word)
+  (kill-word 1))
+(global-set-key (kbd "C-c w k") 'cyber/kill-inner-word)
+;; kill-word improved:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*copy-word improved][copy-word improved:1]]
+(defun cyber/copy-whole-word ()
+  (interactive)
+  (save-excursion
+    (forward-char 1)
+    (backward-word)
+    (kill-word 1)
+    (yank)))
+(global-set-key (kbd "C-c w c") 'cyber/copy-whole-word)
+;; copy-word improved:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*copy-line][copy-line:1]]
+(defun cyber/copy-whole-line ()
+  "Copies a line without regard for cursor position."
+  (interactive)
+  (save-excursion
+    (kill-new
+     (buffer-substring
+      (point-at-bol)
+      (point-at-eol)))))
+(global-set-key (kbd "C-c l c") 'cyber/copy-whole-line)
+;; copy-line:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*kill-line][kill-line:1]]
+(global-set-key (kbd "C-c l k") 'kill-whole-line)
+;; kill-line:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*pretty-mode][pretty-mode:1]]
+(when window-system
+      (use-package pretty-mode
+      :ensure t
+      :config
+      (global-pretty-mode t)))
+;; pretty-mode:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*rainbow][rainbow:1]]
+(use-package rainbow-mode
+ :ensure t
+ :init
+  (add-hook 'prog-mode-hook 'rainbow-mode))
+;; rainbow:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*rainbow delimiters][rainbow delimiters:1]]
+(use-package rainbow-delimiters
+  :ensure t
+  :init
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+;; rainbow delimiters:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*zapping to char][zapping to char:1]]
+(use-package zzz-to-char
+  :ensure t
+  :bind ("M-z" . zzz-up-to-char))
+;; zapping to char:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*kill-ring][kill-ring:1]]
+(setq kill-ring-max 100)
+;; kill-ring:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*popup-kill-ring][popup-kill-ring:1]]
+(use-package popup-kill-ring
+  :ensure t
+  :bind ("M-y" . popup-kill-ring))
+;; popup-kill-ring:1 ends here
+
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*initial-scratch-message][initial-scratch-message:1]]
 ;; 'Vagner Rener' @ 'Cyberwarrior',
 ;; This buffer is for text that is not saved, and for Lisp evaluation.
 ;; To create a file, visit it with \ e and enter text in its buffer. ")
 ;; initial-scratch-message:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*async][async:1]]
+(use-package async
+  :ensure t
+  :init (dired-async-mode 1))
+;; async:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*scratch org-mode][scratch org-mode:1]]
 (setq initial-major-mode 'org-mode)
@@ -108,6 +284,18 @@
 (load "~/.emacs.d/elpa/emacs-brazilian-holidays/brazilian-holidays.el")
 ;; brazilian-holidays:1 ends here
 
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-mode][org-mode:1]]
+(setq org-ellipsis " ")
+(setq org-src-fontify-natively t)
+(setq org-src-tab-acts-natively t)
+(setq org-confirm-babel-evaluate nil)
+(setq org-export-with-smart-quotes t)
+(setq org-src-window-setup 'current-window)
+(add-hook 'org-mode-hook 'org-indent-mode)
+
+(global-set-key (kbd "C-c '") 'org-edit-src-code)
+;; org-mode:1 ends here
+
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*tab on console][tab on console:1]]
 (setq evil-want-keybinding nil)
  ;; (setq evil-want-C-i-jump nil)
@@ -118,8 +306,8 @@
 ;; tab on console:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*evil][evil:1]]
-(straight-use-package 'evil)
-  (evil-mode 1)
+;;  (straight-use-package 'evil)
+;;    (evil-mode 1)
 ;; evil:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*evil-collection][evil-collection:1]]
@@ -211,21 +399,18 @@
 
    (company-ac-setup)
 
- (custom-set-faces
-     '(company-preview
-       ((t (:foreground "darkgray" :underline t))))
-     '(company-preview-common
-       ((t (:inherit company-preview))))
-     '(company-tooltip
-       ((t (:background "lightgray" :foreground "black"))))
-     '(company-tooltip-selection
-       ((t (:background "steelblue" :foreground "white"))))
-     '(company-tooltip-common
-       ((((type x)) (:inherit company-tooltip :weight bold))
-        (t (:inherit company-tooltip))))
-     '(company-tooltip-common-selection
-       ((((type x)) (:inherit company-tooltip-selection :weight bold))
-        (t (:inherit company-tooltip-selection)))))
+ 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-preview ((t (:foreground "darkgray" :underline t))))
+ '(company-preview-common ((t (:inherit company-preview))))
+ '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
+ '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
+ '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
+ '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))
 ;; company:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-bullets][org-bullets:1]]
@@ -663,10 +848,15 @@ file with `edit-abbrevs`"
 ;; init.el:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*avy][avy:1]]
+;; (use-package avy
+;;   :straight t
+;;   :config
+;;   (avy-setup-default))
+
 (use-package avy
-  :straight t
-  :config
-  (avy-setup-default))
+  :ensure t
+  :bind
+    ("M-s" . avy-goto-char))
 ;; avy:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*plantuml][plantuml:1]]
@@ -902,6 +1092,14 @@ flycheck-plantuml))
       (erc :server "irc.dalnet.net" :port 6667
 	   :nick "" :full-name "")
       (erc :server "irc.oftc.net" :port 6667 :nick "")))
+
+(use-package erc-hl-nicks
+  :ensure t
+  :config
+    (erc-update-modules))
+
+(use-package elcord
+  :ensure t)
 ;; erc:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*flyspell][flyspell:1]]
@@ -1086,10 +1284,18 @@ flycheck-plantuml))
 ;; lorem-ipsum:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*magit][magit:1]]
-(use-package magit 
- :straight t
- :config
-(global-set-key (kbd "C-c g") 'magit-status))
+;; (use-package magit 
+  ;;  :straight t
+  ;;  :config
+  ;; (global-set-key (kbd "C-c g") 'magit-status))
+
+(use-package magit
+  :straight t
+  :config
+  (setq magit-push-always-verify nil)
+  (setq git-commit-summary-max-length 50)
+  :bind
+  ("M-g" . magit-status))
 ;; magit:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*mplayer-mode][mplayer-mode:1]]
@@ -1190,51 +1396,58 @@ flycheck-plantuml))
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*more stuff][more stuff:1]]
 ;;  ;;  (setq frame-title-format "emacs")
-;;  ;;  (set-default 'cursor-type 'hbar)
-;;      (ido-mode 1)
-;;      (column-number-mode 1)
-;;      (show-paren-mode 1)
-;;      (global-hl-line-mode 0)
-;;      (delete-selection-mode +1)
-;;      (electric-pair-mode 1)
+   ;;  ;;  (set-default 'cursor-type 'hbar)
+   ;;      (ido-mode 1)
+   ;;      (column-number-mode 1)
+   ;;      (global-hl-line-mode 0)
+   ;;      (delete-selection-mode +1)
 
-;;      (defalias 'yes-or-no-p 'y-or-n-p)
-;;      (setq confirm-kill-processes nil)
+(setq electric-pair-pairs '(
+			   (?\{ . ?\})
+			   (?\( . ?\))
+			   (?\[ . ?\])
+			   (?\" . ?\")
+			   ))
+(electric-pair-mode 1)
 
-;;    (add-hook 'prog-mode-hook 'turn-on-auto-fill)
-;;    (add-hook 'text-mode-hook 'turn-on-auto-fill)
+   ;;      (defalias 'yes-or-no-p 'y-or-n-p)
+   ;;      (setq confirm-kill-processes nil)
 
-;; ;; Brent.Longborough's .emacs
+   ;;    (add-hook 'prog-mode-hook 'turn-on-auto-fill)
+   ;;    (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-;; (scroll-bar-mode -1) ; Disable hide scroll-bar
-;; (tool-bar-mode 0) ; Disable tool bar
-;; (blink-cursor-mode 0) ; Disable cursor blinking
-;; (global-visual-line-mode 1); Proper line wrapping
-;; ;; (if (display-graphic-p) (global-hl-line-mode t))
-;; ;; (global-hl-line-mode 1); Highlight current row
-;; (show-paren-mode 1); Matches parentheses and such in every mode
-;; ;;(set-fringe-mode '(0 . 0)); Disable fringe because I use visual-line-mode
-;; (set-fringe-mode '(4 . 0)) 
-;; (set-face-background hl-line-face "#f2f1f0"); Same color as greyness in gtk
-;; (setq inhibit-splash-screen t); Disable splash screen
-;; (setq visible-bell t); Flashes on error
-;; (setq calendar-week-start-day 1); Calender should start on Monday
-;; (add-to-list 'default-frame-alist '(height . 59)); Default frame height.
-;; (mapc 'global-unset-key [[up] [down] [left] [right]])
+   ;; ;; Brent.Longborough's .emacs
 
-;; ;; Brent.Longborough upt to here
+   ;; (scroll-bar-mode -1) ; Disable hide scroll-bar
+   ;; (tool-bar-mode 0) ; Disable tool bar
+   ;; (blink-cursor-mode 0) ; Disable cursor blinking
+   ;; (global-visual-line-mode 1); Proper line wrapping
+   ;; (global-visual-line-mode 1); Proper line wrapping
+   ;; ;; (if (display-graphic-p) (global-hl-line-mode t))
+   ;; ;; (global-hl-line-mode 1); Highlight current row
+   ;; (show-paren-mode 1); Matches parentheses and such in every mode
+   ;; ;;(set-fringe-mode '(0 . 0)); Disable fringe because I use visual-line-mode
+   ;; (set-fringe-mode '(4 . 0)) 
+   ;; (set-face-background hl-line-face "#f2f1f0"); Same color as greyness in gtk
+   ;; (setq inhibit-splash-screen t); Disable splash screen
+   ;; (setq visible-bell t); Flashes on error
+   ;; (setq calendar-week-start-day 1); Calender should start on Monday
+   ;; (add-to-list 'default-frame-alist '(height . 59)); Default frame height.
+   ;; (mapc 'global-unset-key [[up] [down] [left] [right]])
 
-;;  ;;;; Uncomment up or down, but not the two parts
+   ;; ;; Brent.Longborough upt to here
 
-;;  (defun 1on1-set-cursor-type (cursor-type)
-;;    "Set the cursor type of the selected frame to CURSOR-TYPE.
-;;  When called interactively, prompt for the type to use.
-;;  To get the frame's current cursor type, use `frame-parameters'."
-;;    (interactive
-;;     (list (intern (completing-read
-;;  		   "Cursor type: "
-;;  		   (mapcar 'list '("box" "hollow" "bar" "hbar" nil))))))
-;;    (modify-frame-parameters (selected-frame) (list (cons 'cursor-type cursor-type))))
+   ;;  ;;;; Uncomment up or down, but not the two parts
+
+   ;;  (defun 1on1-set-cursor-type (cursor-type)
+   ;;    "Set the cursor type of the selected frame to CURSOR-TYPE.
+   ;;  When called interactively, prompt for the type to use.
+   ;;  To get the frame's current cursor type, use `frame-parameters'."
+   ;;    (interactive
+   ;;     (list (intern (completing-read
+   ;;  		   "Cursor type: "
+   ;;  		   (mapcar 'list '("box" "hollow" "bar" "hbar" nil))))))
+   ;;    (modify-frame-parameters (selected-frame) (list (cons 'cursor-type cursor-type))))
 ;; more stuff:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*multilple-cursors][multilple-cursors:1]]
@@ -1753,38 +1966,54 @@ Suggest the URL title as a description for resource."
 ;; re-builder:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*slime swank][slime swank:1]]
-;; Set your lisp system and, optionally, some contribs
+;; ;; Set your lisp system and, optionally, some contribs
 
-;; (setq inferior-lisp-program "/usr/bin/sbcl")
-;; Install sbcl from github sources and NOT with apt
-    (setq inferior-lisp-program "/usr/local/bin/sbcl")
+  ;; ;; (setq inferior-lisp-program "/usr/bin/sbcl")
+  ;; ;; Install sbcl from github sources and NOT with apt
+  ;;     (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
-  ;; update this path to the correct location.
+  ;;   ;; update this path to the correct location.
 
-  ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa-src/slime-2.23/")
+  ;;   ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa-src/slime-2.23/")
 
-  ;; (add-to-list 'load-path "~/.emacs.d/elpa/slime-repl-ansi-color-20190426.1414/")
+  ;;   ;; (add-to-list 'load-path "~/.emacs.d/elpa/slime-repl-ansi-color-20190426.1414/")
 
-  (add-to-list 'load-path "~/.emacs.d/straight/repos/slime/")
+  ;;   (add-to-list 'load-path "~/.emacs.d/straight/repos/slime/")
 
-  (require 'slime-autoloads)
+  ;;   (require 'slime-autoloads)
 
-  (defun cliki:start-slime ()
-	(unless (slime-connected-p)
-	  (save-excursion (slime))))
-  (add-hook 'slime-mode-hook 'cliki:start-slime)
+  ;;   (defun cliki:start-slime ()
+  ;; 	(unless (slime-connected-p)
+  ;; 	  (save-excursion (slime))))
+  ;;   (add-hook 'slime-mode-hook 'cliki:start-slime)
 
-  (eval-after-load "slime"
-    '(progn
-      ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa-src/slime-3.23/contrib/")
-      ;; (add-to-list 'load-path "~/.emacs.d/elpa/slime-20190319.930/contrib")
-      (add-to-list 'load-path "~/.emacs.d/straight/build/slime/contrib/")
-       (slime-setup '(slime-fancy slime-banner))
-      (setq slime-complete-symbol*-fancy t)
-      (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)))
+  ;;   (eval-after-load "slime"
+  ;;     '(progn
+  ;;       ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa-src/slime-3.23/contrib/")
+  ;;       ;; (add-to-list 'load-path "~/.emacs.d/elpa/slime-20190319.930/contrib")
+  ;;       (add-to-list 'load-path "~/.emacs.d/straight/build/slime/contrib/")
+  ;;        (slime-setup '(slime-fancy slime-banner))
+  ;;       (setq slime-complete-symbol*-fancy t)
+  ;;       (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)))
 
-  (require 'slime-autoloads)
-  (setq slime-contribs '(slime-repl))
+  ;;   (require 'slime-autoloads)
+  ;;   (setq slime-contribs '(slime-repl))
+
+(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook 'yas-minor-mode)
+(add-hook 'emacs-lisp-mode-hook 'company-mode)
+
+(use-package slime
+  :ensure t
+  :config
+  (setq inferior-lisp-program "/usr/bin/sbcl")
+  (setq slime-contribs '(slime-fancy)))
+
+(use-package slime-company
+  :ensure t
+  :init
+    (require 'company)
+    (slime-setup '(slime-fancy slime-company)))
 ;; slime swank:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*smex][smex:1]]
@@ -2663,3 +2892,60 @@ bbdb-popup-target-lines  1
 (use-package ripgrep
   :straight t)
 ;; Ripgrep:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*bash][bash:1]]
+(add-hook 'shell-mode-hook 'yas-minor-mode)
+(add-hook 'shell-mode-hook 'flycheck-mode)
+(add-hook 'shell-mode-hook 'company-mode)
+
+(defun shell-mode-company-init ()
+  (setq-local company-backends '((company-shell
+                                  company-shell-env
+                                  company-etags
+                                  company-dabbrev-code))))
+
+(use-package company-shell
+  :ensure t
+  :config
+    (require 'company)
+    (add-hook 'shell-mode-hook 'shell-mode-company-init))
+;; bash:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*sudo-editing][sudo-editing:1]]
+(use-package sudo-edit
+  :ensure t
+  :bind
+    ("s-e" . sudo-edit))
+;; sudo-editing:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*diminishing modes][diminishing modes:1]]
+(use-package diminish
+  :ensure t
+  :init
+  (diminish 'which-key-mode)
+  (diminish 'linum-relative-mode)
+  (diminish 'hungry-delete-mode)
+  (diminish 'visual-line-mode)
+  (diminish 'subword-mode)
+  (diminish 'beacon-mode)
+  (diminish 'irony-mode)
+  (diminish 'page-break-lines-mode)
+  (diminish 'auto-revert-mode)
+  (diminish 'rainbow-delimiters-mode)
+  (diminish 'rainbow-mode)
+  (diminish 'yas-minor-mode)
+  (diminish 'flycheck-mode)
+  (diminish 'helm-mode))
+;; diminishing modes:1 ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(initial-scratch-message
+   "
+;; Hello 'Vagner Rener' @ 'Cyberwarrior'\"
+;; This buffer is for text that is not saved, and for Lisp evaluation.
+;; To create a file, visit it with \\[find-file] and enter text in its buffer.
+
+"))
