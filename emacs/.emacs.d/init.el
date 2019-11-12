@@ -240,15 +240,15 @@
 ;; org-bullets:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacs-w3m][emacs-w3m:1]]
-(add-to-list 'load-path "~/.emacs.d/elpa/emacs-w3m/")
+;;  (add-to-list 'load-path "~/.emacs.d/elpa/emacs-w3m/")
 
-  (require 'w3m-load)
-  (require 'mime-w3m)
+;;  (require 'w3m-load)
+;;  (require 'mime-w3m)
 
-  ;; (setq w3m-display-inline-images t) 
-     (setq w3m-fill-column 80) ;; if this does not work, modify the file w3m.el itself
-     (setq w3m-default-display-inline-images t) 
-     (setq w3m-default-save-directory "~/Downloads")
+      (setq w3m-display-inline-images t) 
+      (setq w3m-fill-column 80) ;; if this does not work, modify the file w3m.el itself
+      (setq w3m-default-display-inline-images t) 
+      (setq w3m-default-save-directory "~/Downloads")
 ;; emacs-w3m:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*bug-hunter][bug-hunter:1]]
@@ -481,6 +481,9 @@ file with `edit-abbrevs`"
    (global-set-key (kbd "M-x") 'helm-M-x)
    (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
    (global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+   (define-key helm-map (kbd "M-j") 'helm-next-line)
+   (define-key helm-map (kbd "M-k") 'helm-previous-line)
 ;; helm:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*beacon][beacon:1]]

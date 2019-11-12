@@ -194,7 +194,7 @@ Note: for removing a package, delete it from the init.el
 
   (straight-use-package 'evil)
     (evil-mode 1)
-  
+
 #+END_SRC
 
 ** evil-collection
@@ -352,12 +352,12 @@ Note: for removing a package, delete it from the init.el
 
  #+BEGIN_SRC emacs-lisp
 
-   (add-to-list 'load-path "~/.emacs.d/elpa/emacs-w3m/")
+  ;;  (add-to-list 'load-path "~/.emacs.d/elpa/emacs-w3m/")
 
-     (require 'w3m-load)
-     (require 'mime-w3m)
+  ;;  (require 'w3m-load)
+  ;;  (require 'mime-w3m)
 
-     ;; (setq w3m-display-inline-images t) 
+        (setq w3m-display-inline-images t) 
 	(setq w3m-fill-column 80) ;; if this does not work, modify the file w3m.el itself
 	(setq w3m-default-display-inline-images t) 
 	(setq w3m-default-save-directory "~/Downloads")
@@ -420,7 +420,7 @@ Note: for removing a package, delete it from the init.el
   
 #+BEGIN_SRC emacs-lisp
 
-(straight-use-package 'hydra)
+    (straight-use-package 'hydra)
 
 #+END_SRC
 
@@ -647,18 +647,21 @@ file with `edit-abbrevs`"
 
 #+BEGIN_SRC emacs-lisp
 
-     (use-package helm
-      :straight t 
-      :config
-      (helm-mode 1))
+       (use-package helm
+	:straight t 
+	:config
+	(helm-mode 1))
 
-;; helm-swoop
-  (use-package helm-swoop
-      :straight t)
+  ;; helm-swoop
+    (use-package helm-swoop
+	:straight t)
 
-   (global-set-key (kbd "M-x") 'helm-M-x)
-   (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
-   (global-set-key (kbd "C-x C-f") 'helm-find-files)
+     (global-set-key (kbd "M-x") 'helm-M-x)
+     (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+     (global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+     (define-key helm-map (kbd "M-j") 'helm-next-line)
+     (define-key helm-map (kbd "M-k") 'helm-previous-line)
 
 #+END_SRC
 
@@ -1045,7 +1048,6 @@ flycheck-plantuml))
 (require 'sword-to-org)
 
 #+END_SRC
-
 
 * telega
 
