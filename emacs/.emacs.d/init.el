@@ -4,29 +4,35 @@
 (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs/.emacs.d/elpa"))
 
 (setq package-archives '(("gnu"           . "http://elpa.gnu.org/packages/")
-			  ("melpa-stable" . "http://stable.melpa.org/packages/")
-			  ("melpa"        . "http://melpa.org/packages/")
-			  ("org"          . "http://orgmode.org/elpa/")))
+                          ("melpa-stable" . "http://stable.melpa.org/packages/")
+                          ("melpa"        . "http://melpa.org/packages/")
+                          ("org"          . "http://orgmode.org/elpa/")))
 
 (package-initialize)
 
 
 (let ((bootstrap-file
-	 (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-	(bootstrap-version 4))
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 4))
     (unless (file-exists-p bootstrap-file)
       (with-current-buffer
-	  (url-retrieve-synchronously
-	   "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	   'silent 'inhibit-cookies)
-	(goto-char (point-max))
-	(eval-print-last-sexp)))
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
     (load bootstrap-file nil 'nomessage))
 
-  (straight-use-package 'use-package)
+(setq straight-enable-use-package-integration t
+  straight-use-package-by-default t
+  use-package-always-defer t)
 
-  (use-package use-package-ensure-system-package
-    :straight t)
+(straight-use-package 'use-package)
+
+ ;; (use-package use-package-ensure-system-package
+  ;; :straight t)
+
+ ;; (straight-use-package 'use-package)
 ;; straight:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*use-package][use-package:1]]
@@ -399,18 +405,21 @@
 
    (company-ac-setup)
 
- 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-preview ((t (:foreground "darkgray" :underline t))))
- '(company-preview-common ((t (:inherit company-preview))))
- '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
- '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
- '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
- '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))
+ (custom-set-faces
+     '(company-preview
+       ((t (:foreground "darkgray" :underline t))))
+     '(company-preview-common
+       ((t (:inherit company-preview))))
+     '(company-tooltip
+       ((t (:background "lightgray" :foreground "black"))))
+     '(company-tooltip-selection
+       ((t (:background "steelblue" :foreground "white"))))
+     '(company-tooltip-common
+       ((((type x)) (:inherit company-tooltip :weight bold))
+        (t (:inherit company-tooltip))))
+     '(company-tooltip-common-selection
+       ((((type x)) (:inherit company-tooltip-selection :weight bold))
+        (t (:inherit company-tooltip-selection)))))
 ;; company:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-bullets][org-bullets:1]]
@@ -654,21 +663,20 @@ file with `edit-abbrevs`"
 ;; eyebrowse:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*helm][helm:1]]
-(use-package helm
-      :straight t 
-      :config
-      (helm-mode 1))
+;;helm
 
-;; helm-swoop
-  (use-package helm-swoop
-      :straight t)
+  (use-package helm)
+       (helm-mode 1)
 
-   (global-set-key (kbd "M-x") 'helm-M-x)
-   (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
-   (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (define-key helm-map (kbd "C-j") 'helm-next-line)
+  (define-key helm-map (kbd "C-k") 'helm-previous-line)
 
-   (define-key helm-map (kbd "M-j") 'helm-next-line)
-   (define-key helm-map (kbd "M-k") 'helm-previous-line)
+ ;; helm-swoop
+  (use-package helm-swoop)
+
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
 ;; helm:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*beacon][beacon:1]]
@@ -1015,6 +1023,15 @@ flycheck-plantuml))
     ("h" . nil)
     ("l" . nil))
     :custom (telega-notifications-mode t))
+
+;; (use-package telega
+;;  :bind (:map telega-msg-button-map
+;;              ("j" . nil)
+;;              ("k" . nil)
+;;              ("h" . nil)
+;;              ("l" . nil))
+;;  :custom
+;;  (telega-use-notifications t))
 ;; telega:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*text-scale][text-scale:1]]
@@ -2928,6 +2945,7 @@ bbdb-popup-target-lines  1
   (diminish 'visual-line-mode)
   (diminish 'subword-mode)
   (diminish 'beacon-mode)
+  (diminish 'centered-window-mode)
   (diminish 'irony-mode)
   (diminish 'page-break-lines-mode)
   (diminish 'auto-revert-mode)
@@ -2935,17 +2953,14 @@ bbdb-popup-target-lines  1
   (diminish 'rainbow-mode)
   (diminish 'yas-minor-mode)
   (diminish 'flycheck-mode)
-  (diminish 'helm-mode))
+  (diminish 'helm-mode)
+  (diminish 'abbrev-mode)
+  (diminish 'text-scale-mode)
+  (diminish 'eldoc-mode)
+  (diminish 'undo-tree-mode)
+  (diminish 'auto-fill-mode)
+  (diminish 'org-indent-mode)
+  (diminish 'company-mode)
+  (diminish 'flycheck-mode)
+  (diminish 'flyspell-mode))
 ;; diminishing modes:1 ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(initial-scratch-message
-   "
-;; Hello 'Vagner Rener' @ 'Cyberwarrior'\"
-;; This buffer is for text that is not saved, and for Lisp evaluation.
-;; To create a file, visit it with \\[find-file] and enter text in its buffer.
-
-"))

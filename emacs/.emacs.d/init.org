@@ -15,34 +15,40 @@ Note: for removing a package, delete it from the init.el
 
 #+BEGIN_SRC emacs-lisp
 
-    ;;; Code:
+      ;;; Code:
 
-    (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs/.emacs.d/elpa"))
+      (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs/.emacs.d/elpa"))
 
-    (setq package-archives '(("gnu"           . "http://elpa.gnu.org/packages/")
-			      ("melpa-stable" . "http://stable.melpa.org/packages/")
-			      ("melpa"        . "http://melpa.org/packages/")
-			      ("org"          . "http://orgmode.org/elpa/")))
+      (setq package-archives '(("gnu"           . "http://elpa.gnu.org/packages/")
+                                ("melpa-stable" . "http://stable.melpa.org/packages/")
+                                ("melpa"        . "http://melpa.org/packages/")
+                                ("org"          . "http://orgmode.org/elpa/")))
 
-    (package-initialize)
+      (package-initialize)
 
 
-    (let ((bootstrap-file
-	     (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-	    (bootstrap-version 4))
-	(unless (file-exists-p bootstrap-file)
-	  (with-current-buffer
-	      (url-retrieve-synchronously
-	       "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	       'silent 'inhibit-cookies)
-	    (goto-char (point-max))
-	    (eval-print-last-sexp)))
-	(load bootstrap-file nil 'nomessage))
+      (let ((bootstrap-file
+               (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+              (bootstrap-version 4))
+          (unless (file-exists-p bootstrap-file)
+            (with-current-buffer
+                (url-retrieve-synchronously
+                 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+                 'silent 'inhibit-cookies)
+              (goto-char (point-max))
+              (eval-print-last-sexp)))
+          (load bootstrap-file nil 'nomessage))
+
+      (setq straight-enable-use-package-integration t
+        straight-use-package-by-default t
+        use-package-always-defer t)
 
       (straight-use-package 'use-package)
 
-      (use-package use-package-ensure-system-package
-	:straight t)
+       ;; (use-package use-package-ensure-system-package
+        ;; :straight t)
+
+       ;; (straight-use-package 'use-package)
 
 #+END_SRC
 
@@ -1122,21 +1128,20 @@ https://github.com/daedreth/UncleDavesEmacs/blob/master/config.org#helm
 
 #+BEGIN_SRC emacs-lisp
 
-       (use-package helm
-	:straight t 
-	:config
-	(helm-mode 1))
+ ;;helm
+
+   (use-package helm)
+    	(helm-mode 1)
+
+   (define-key helm-map (kbd "C-j") 'helm-next-line)
+   (define-key helm-map (kbd "C-k") 'helm-previous-line)
 
   ;; helm-swoop
-    (use-package helm-swoop
-	:straight t)
+   (use-package helm-swoop)
 
-     (global-set-key (kbd "M-x") 'helm-M-x)
-     (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
-     (global-set-key (kbd "C-x C-f") 'helm-find-files)
-
-     (define-key helm-map (kbd "M-j") 'helm-next-line)
-     (define-key helm-map (kbd "M-k") 'helm-previous-line)
+   (global-set-key (kbd "M-x") 'helm-M-x)
+   (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+   (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 #+END_SRC
 
@@ -1547,6 +1552,15 @@ flycheck-plantuml))
     ("h" . nil)
     ("l" . nil))
     :custom (telega-notifications-mode t))
+
+;; (use-package telega
+;;  :bind (:map telega-msg-button-map
+;;              ("j" . nil)
+;;              ("k" . nil)
+;;              ("h" . nil)
+;;              ("l" . nil))
+;;  :custom
+;;  (telega-use-notifications t))
 
 #+END_SRC
 
@@ -3977,6 +3991,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 ** diminishing modes
 
 #+begin_src emacs-lisp
+
 (use-package diminish
   :ensure t
   :init
@@ -3986,6 +4001,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
   (diminish 'visual-line-mode)
   (diminish 'subword-mode)
   (diminish 'beacon-mode)
+  (diminish 'centered-window-mode)
   (diminish 'irony-mode)
   (diminish 'page-break-lines-mode)
   (diminish 'auto-revert-mode)
@@ -3993,5 +4009,15 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
   (diminish 'rainbow-mode)
   (diminish 'yas-minor-mode)
   (diminish 'flycheck-mode)
-  (diminish 'helm-mode))
+  (diminish 'helm-mode)
+  (diminish 'abbrev-mode)
+  (diminish 'text-scale-mode)
+  (diminish 'eldoc-mode)
+  (diminish 'undo-tree-mode)
+  (diminish 'auto-fill-mode)
+  (diminish 'org-indent-mode)
+  (diminish 'company-mode)
+  (diminish 'flycheck-mode)
+  (diminish 'flyspell-mode))
+
 #+end_src
