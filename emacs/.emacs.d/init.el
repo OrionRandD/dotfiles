@@ -1254,8 +1254,6 @@ flycheck-plantuml))
 
 ;; (global-undo-tree-mode)
 
-;; (global-set-key (kbd "C-x l") 'visual-line-mode)
-
 ;; (defun linum-update-window-scale-fix (win)
 ;;   "fix linum for scaled text"
 ;;   (set-window-margins win

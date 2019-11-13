@@ -6,10 +6,10 @@
 #+AUTHOR: Vagner Rener
 #+PROPERTY: header-args:emacs-lisp :exports code :tangle init.el :comments yes :results silent
 
-":tangle yes" will automatically create a better
+the keyword ":tangle yes" will automatically create a better
 "emacs.el" which is good for debugging emacs
-Note: for removing a package, delete it from the init.el
-      and from the org file, delete the build-cache.el file, delete it from the build and repos directories
+
+Note: for removing a package, delete it from the init.el and from the org file, delete the build-cache.el file, delete it from the build and repos directories
 
 * straight
 
@@ -1869,8 +1869,6 @@ you have to issue the command etags in the working directories
   ;; (autopair-global-mode)
 
   ;; (global-undo-tree-mode)
-
-  ;; (global-set-key (kbd "C-x l") 'visual-line-mode)
 
   ;; (defun linum-update-window-scale-fix (win)
   ;;   "fix linum for scaled text"
