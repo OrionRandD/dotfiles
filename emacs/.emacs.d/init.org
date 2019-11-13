@@ -4019,3 +4019,12 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
   (diminish 'flyspell-mode))
 
 #+end_src
+
+** pastbin
+
+#+begin_src emacs-lisp :tangle yes
+
+(straight-use-package 'debpaste)
+(straight-use-package 'ix)
+
+#+end_src

@@ -2962,3 +2962,8 @@ bbdb-popup-target-lines  1
   (diminish 'flycheck-mode)
   (diminish 'flyspell-mode))
 ;; diminishing modes:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*pastbin][pastbin:1]]
+(straight-use-package 'debpaste)
+(straight-use-package 'ix)
+;; pastbin:1 ends here
