@@ -850,22 +850,29 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
   (straight-use-package 'bug-hunter)
 
 #+END_SRC
-** emacspeak 
+** emacspeak eloud
 
-   if you want to use eloud, call it with:
-   M-x eloud-mode RET    
+if you want to use eloud, call it with:
+M-x eloud-mode RET    
 
  you have to setup eloud-speech-rate and eloud-voice in
- "~/.emacs.d/elpa/eloud-20190706.1707/eloud.el"
+ "~/.emacs.d/straight/repos/eloud/eloud.el"
  file and compile that - eloud-speech-rate was setup to 269
 
   #+BEGIN_SRC emacs-lisp
    
-    (straight-use-package 'eloud)
+    (use-package eloud
+     :ensure t
+     :load-path "~/.emacs.d/straight/repos/eloud"
+     :config
+          (setq eloud-espeak-path "/usr/bin/espeak"))
 
-;;(setq eloud-espeak-path "/usr/bin/espeak")
-;;(setq eloud-espeak-path "/usr/bin/espeak-ng -ven-gb -s 160")
-;;(setq eloud-espeak-path "/usr/bin/espeak -vpt -s 150")
+    (require 'eloud)
+
+;; (add-to-list 'load-path "~/.emacs.d/straight/repos/eloud/")
+;; (eloud-espeak-path "/usr/bin/espeak")
+;; (setq eloud-espeak-path "/usr/bin/espeak-ng -ven-gb -s 160")
+;; (setq eloud-espeak-path "/usr/bin/espeak -vpt -s 150")
 
 ;; if you want to set espeak voice default pitch, you have to
 ;; edit the file "/usr/lib/x86_64-linux-gnu/espeak-data/voices/en"

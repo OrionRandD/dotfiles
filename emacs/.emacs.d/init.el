@@ -449,16 +449,23 @@
 (straight-use-package 'bug-hunter)
 ;; bug-hunter:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacspeak][emacspeak:1]]
-(straight-use-package 'eloud)
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacspeak eloud][emacspeak eloud:1]]
+(use-package eloud
+     :ensure t
+     :load-path "~/.emacs.d/straight/repos/eloud"
+     :config
+          (setq eloud-espeak-path "/usr/bin/espeak"))
 
-;;(setq eloud-espeak-path "/usr/bin/espeak")
-;;(setq eloud-espeak-path "/usr/bin/espeak-ng -ven-gb -s 160")
-;;(setq eloud-espeak-path "/usr/bin/espeak -vpt -s 150")
+    (require 'eloud)
+
+;; (add-to-list 'load-path "~/.emacs.d/straight/repos/eloud/")
+;; (eloud-espeak-path "/usr/bin/espeak")
+;; (setq eloud-espeak-path "/usr/bin/espeak-ng -ven-gb -s 160")
+;; (setq eloud-espeak-path "/usr/bin/espeak -vpt -s 150")
 
 ;; if you want to set espeak voice default pitch, you have to
 ;; edit the file "/usr/lib/x86_64-linux-gnu/espeak-data/voices/en"
-;; emacspeak:1 ends here
+;; emacspeak eloud:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Dired][Dired:1]]
 (add-to-list 'load-path "~/.emacs.d/local-repo/dired+")
