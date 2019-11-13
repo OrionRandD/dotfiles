@@ -286,13 +286,17 @@ M-x customize-unsaved
     
  #+BEGIN_SRC emacs-lisp
 
+     (custom-set-variables
+          '(initial-frame-alist (quote ((fullscreen . maximized)))))
+    
      (setq inhibit-startup-screen t)
+     (visual-line-mode 1)
      (global-visual-line-mode 1)
      (load-theme 'misterioso)
      (tool-bar-mode 0)
      (scroll-bar-mode 0)
      (show-paren-mode 1)
-     (toggle-truncate-lines 1)
+     (toggle-truncate-lines nil) ;; you have to set truncate-partial-width-windows to non-nil for this to work
      (ido-mode 1) ;; this shows minibuffer options
      (blink-cursor-mode 0)
      (setq org-src-wind-setup 'current-window)
@@ -548,15 +552,30 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
 
 #+end_src
 
-**** initial-scratch-message
+**** persistent scratch buffer
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp 
 
-     ;; 'Vagner Rener' @ 'Cyberwarrior',
-     ;; This buffer is for text that is not saved, and for Lisp evaluation.
-     ;; To create a file, visit it with \ e and enter text in its buffer. ")
+(use-package persistent-scratch
+  :config
+  (persistent-scratch-setup-default))
 
- #+END_SRC
+;; a function to recreate the scratch buffer
+(defun scratch ()
+   "create a scratch buffer"
+   (interactive)
+   (switch-to-buffer-other-window (get-buffer-create "*scratch*"))
+   (insert initial-scratch-message)
+   (org-mode))
+
+;; https://alhassy.github.io/init/
+;; initial-scratch-message
+(setq initial-scratch-message (concat
+ "#+Title: 'Vagner Rener' @ 'Cyberwarrior"
+    "\n# This buffer is for text that is not saved, and for Lisp evaluation."
+    "\n# To create a file, visit it with 'C-x C-f' e and enter text in its buffer.\n"))
+
+#+end_src
 
 **** async
 
@@ -3762,9 +3781,16 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 
 ** toggle-truncate-lines 
 
+truncate-partial-width-windows is a variable defined in ‘C source
+code’.
+A value of nil means to respect the value of ‘truncate-lines’.
+You can customize this variable
+
 #+BEGIN_SRC emacs-lisp
 
 (local-set-key (kbd "C-x w") 'toggle-truncate-lines)
+(setq truncate-partial-width-windows 1)
+(setq truncate-lines 1)
 
 #+END_SRC
 

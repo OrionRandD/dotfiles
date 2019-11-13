@@ -58,13 +58,17 @@
 ;; People with great emacs configs:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*small configs][small configs:1]]
-(setq inhibit-startup-screen t)
+(custom-set-variables
+       '(initial-frame-alist (quote ((fullscreen . maximized)))))
+
+  (setq inhibit-startup-screen t)
+  (visual-line-mode 1)
   (global-visual-line-mode 1)
   (load-theme 'misterioso)
   (tool-bar-mode 0)
   (scroll-bar-mode 0)
   (show-paren-mode 1)
-  (toggle-truncate-lines 1)
+  (toggle-truncate-lines nil) ;; you have to set truncate-partial-width-windows to non-nil for this to work
   (ido-mode 1) ;; this shows minibuffer options
   (blink-cursor-mode 0)
   (setq org-src-wind-setup 'current-window)
@@ -237,11 +241,26 @@
   :bind ("M-y" . popup-kill-ring))
 ;; popup-kill-ring:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*initial-scratch-message][initial-scratch-message:1]]
-;; 'Vagner Rener' @ 'Cyberwarrior',
-;; This buffer is for text that is not saved, and for Lisp evaluation.
-;; To create a file, visit it with \ e and enter text in its buffer. ")
-;; initial-scratch-message:1 ends here
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*persistent scratch buffer][persistent scratch buffer:1]]
+(use-package persistent-scratch
+  :config
+  (persistent-scratch-setup-default))
+
+;; a function to recreate the scratch buffer
+(defun scratch ()
+   "create a scratch buffer"
+   (interactive)
+   (switch-to-buffer-other-window (get-buffer-create "*scratch*"))
+   (insert initial-scratch-message)
+   (org-mode))
+
+;; https://alhassy.github.io/init/
+;; initial-scratch-message
+(setq initial-scratch-message (concat
+ "#+Title: 'Vagner Rener' @ 'Cyberwarrior"
+    "\n# This buffer is for text that is not saved, and for Lisp evaluation."
+    "\n# To create a file, visit it with 'C-x C-f' e and enter text in its buffer.\n"))
+;; persistent scratch buffer:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*async][async:1]]
 (use-package async
@@ -405,19 +424,21 @@
 
    (company-ac-setup)
 
- 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-preview ((t (:foreground "darkgray" :underline t))))
- '(company-preview-common ((t (:inherit company-preview))))
- '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
- '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
- '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
- '(company-tooltip-selection ((t (:background "steelblue" :foreground "white"))))
- '(fringe ((t (:background "unspecified-bg")))))
+ (custom-set-faces
+     '(company-preview
+       ((t (:foreground "darkgray" :underline t))))
+     '(company-preview-common
+       ((t (:inherit company-preview))))
+     '(company-tooltip
+       ((t (:background "lightgray" :foreground "black"))))
+     '(company-tooltip-selection
+       ((t (:background "steelblue" :foreground "white"))))
+     '(company-tooltip-common
+       ((((type x)) (:inherit company-tooltip :weight bold))
+        (t (:inherit company-tooltip))))
+     '(company-tooltip-common-selection
+       ((((type x)) (:inherit company-tooltip-selection :weight bold))
+        (t (:inherit company-tooltip-selection)))))
 ;; company:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-bullets][org-bullets:1]]
@@ -2766,6 +2787,8 @@ bbdb-popup-target-lines  1
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*toggle-truncate-lines][toggle-truncate-lines:1]]
 (local-set-key (kbd "C-x w") 'toggle-truncate-lines)
+(setq truncate-partial-width-windows 1)
+(setq truncate-lines 1)
 ;; toggle-truncate-lines:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*evil-macro keys][evil-macro keys:1]]
@@ -2972,28 +2995,3 @@ bbdb-popup-target-lines  1
 (straight-use-package 'debpaste)
 (straight-use-package 'ix)
 ;; pastbin:1 ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(dash-enable-fontlock t)
- '(dtk-default-module "KJVA" t)
- '(dtk-default-module-category "Biblical Texts" t)
- '(dtk-word-wrap t t)
- '(highlight-defined-face-use-itself t)
- '(initial-scratch-message
-   "
-;; Hello! 'Vagner Rener' @ 'Cyberwarrior'.
-;; This buffer is for text that is not saved, and for Lisp evaluation.
-;; To create a file, visit it with \\[find-file] and enter text in its buffer.
-
-")
- '(nameless-global-aliases nil)
- '(nameless-private-prefix t)
- '(org-journal-carryover-items nil t)
- '(org-journal-date-format "%A, %d %B %Y" t)
- '(org-journal-dir "~/org~/journal/" t)
- '(org-journal-enable-agenda-integration t t)
- '(org-reveal-root "file:/home/vagner/reveal-slides/reveal.js" t)
- '(telega-notifications-mode t))
