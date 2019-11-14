@@ -1,12 +1,11 @@
 # -*- after-save-hook: (org-babel-tangle); -*-
-
 # Local IspellDict: en
 # Created 2017-07-15 Sat 19:15
 #+TITLE: Emacs init file
 #+AUTHOR: Vagner Rener
 #+PROPERTY: header-args:emacs-lisp :exports code :tangle init.el :comments yes :results silent
 
-the keyword ":tangle yes" will automatically create a better
+The keyword ":tangle yes" will automatically create a better
 "emacs.el" which is good for debugging emacs
 
 Note: for removing a package, delete it from the init.el and from the org file, delete the build-cache.el file, delete it from the build and repos directories
@@ -63,6 +62,10 @@ Note: for removing a package, delete it from the init.el and from the org file, 
 
   (use-package f
     :ensure t)  ;; this will force use package keyword ":ensure" when using "use-package" 
+
+;; https://zzamboni.org/post/my-emacs-configuration-with-commentary/
+
+   (customize-set-variable 'use-package-always-defer t)
 
 #+END_SRC
  
@@ -292,7 +295,7 @@ M-x customize-unsaved
      ;;(setq inhibit-startup-screen t)
      (visual-line-mode 1)
      (global-visual-line-mode 1)
-     (load-theme 'leuven)
+     (load-theme 'misterioso)
      (tool-bar-mode 0)
      (scroll-bar-mode 0)
      (show-paren-mode 1)
@@ -2776,9 +2779,19 @@ you have to issue the command etags in the working directories
 
 #+BEGIN_SRC emacs-lisp
 
+;; It is not the same poetry package for writing poetry
+
    (use-package poetry
     :straight t)
-  ;; (load-library "~/.emacs.d/elpa/poetry/poetry.el")
+
+;; This is the poetry-rhyme for writing poetry
+;; you need to install the rhyme cli 
+;; you have to install "~/Downloand/rhyme_4_poetry.el
+
+(add-to-list 'load-path "~/.dotfiles/emacs/.emacs.d/local-repo/poetry")
+(require 'poetry)
+
+;; (load-library "~/.emacs.d/local-repo/poetry.elc")
 
 #+END_SRC
 
@@ -4134,3 +4147,5 @@ Version 2015-12-08"
 (straight-use-package 'ix)
 
 #+end_src
+
+

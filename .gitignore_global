@@ -268,6 +268,7 @@ auto-save-list/
 backups/
 el-get/
 elpa/
+custom-vars.txt
 emacs-reveal-submodules/
 emms/
 eshell/
