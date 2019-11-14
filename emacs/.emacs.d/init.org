@@ -289,10 +289,10 @@ M-x customize-unsaved
      (custom-set-variables
           '(initial-frame-alist (quote ((fullscreen . maximized)))))
     
-     (setq inhibit-startup-screen t)
+     ;;(setq inhibit-startup-screen t)
      (visual-line-mode 1)
      (global-visual-line-mode 1)
-     (load-theme 'misterioso)
+     (load-theme 'leuven)
      (tool-bar-mode 0)
      (scroll-bar-mode 0)
      (show-paren-mode 1)
@@ -304,9 +304,45 @@ M-x customize-unsaved
 
      (defalias 'yes-or-no-p 'y-or-n-p)
 	(setq confirm-kill-processes nil)
-
    (add-hook 'prog-mode-hook 'turn-on-auto-fill)
       (add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; http://folk.uio.no/simenheg/init.el.html
+
+(set-language-environment "UTF-8") ; Set up UTF-8 multilingual environment
+
+(setq
+ comint-input-ignoredups        t  ; Ignore duplicates in Comint history
+ compare-ignore-whitespace      t  ; Ignore whitespace differences
+;; default-input-method       "TeX"  ; TeX is the default toggled input method
+;; disabled-command-function    nil  ; Enable disabled commands
+ eshell-hist-ignoredups         t  ; Ignore duplicates in Eshell history
+ history-delete-duplicates      t  ; Delete duplicate history entries
+ inhibit-startup-screen         t  ; No startup screen
+;; initial-scratch-message      nil  ; No scratch message
+ iswitchb-prompt-newbuffer    nil  ; Create new buffers without confirmation
+;; kill-read-only-ok              t  ; Killing read-only text is OK
+;; password-cache-expiry        nil  ; Cache TRAMP passwords forever
+ show-paren-delay               0) ; Don't delay the paren update
+
+(setq-default
+;; fill-column                   76  ; Lines break at column 76
+;; frame-background-mode      'dark  ; My theme is dark
+ indent-tabs-mode             nil  ; Use spaces for indentation
+;; major-mode            'text-mode ; text-mode as the default for new buffers
+)
+
+;; (blink-cursor-mode              0) ; No blinking cursor
+(column-number-mode             1) ; Show column number
+(delete-selection-mode          1) ; Delete selection when typing
+(fset 'yes-or-no-p      'y-or-n-p) ; Make "yes/no" prompts "y/n"
+(global-auto-revert-mode        1) ; Reload files after modification
+(iswitchb-mode                  1) ; Neat buffer switching
+(menu-bar-mode                  1) ; Menu bar
+(prefer-coding-system      'utf-8) ; Always prefer UTF-8
+(scroll-bar-mode               -1) ; And no scroll bar either
+(show-paren-mode                1) ; Highlight matching parenthesis
+(tool-bar-mode                 -1) ; No tool bar, please
 
  #+END_SRC
 
@@ -3973,6 +4009,43 @@ You can customize this variable
   ;;  (unless (package-installed-p package)
   ;;    (package-install package))
   ;;    (require package))
+
+;; manipulationg resgisters
+;; https://ftp.gnu.org/old-gnu/Manuals/emacs-21.2/html_chapter/emacs_12.html
+
+(defun xah-copy-to-register-1 ()
+  "Copy current line or text selection to register 1.
+See also: `xah-paste-from-register-1', `copy-to-register'.
+
+URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
+Version 2017-01-23"
+  (interactive)
+  (let ($p1 $p2)
+    (if (region-active-p)
+        (progn (setq $p1 (region-beginning))
+               (setq $p2 (region-end)))
+      (progn (setq $p1 (line-beginning-position))
+             (setq $p2 (line-end-position))))
+    (copy-to-register ?1 $p1 $p2)
+    (message "Copied to register 1: 「%s」." (buffer-substring-no-properties $p1 $p2))))
+
+(defun xah-paste-from-register-1 ()
+  "Paste text from register 1.
+See also: `xah-copy-to-register-1', `insert-register'.
+URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
+Version 2015-12-08"
+  (interactive)
+  (when (use-region-p)
+    (delete-region (region-beginning) (region-end)))
+  (insert-register ?1 t))
+
+(global-set-key (kbd "s-1") 'xah-copy-to-register-1) ; win-1
+(global-set-key (kbd "s-2") 'xah-paste-from-regester-1) ; win-2
+
+;; you can set  files to registers, like so:
+;; (set-register ?2 '(file . "~/.emacs.d/init.org"))
+;; sets file "init.org" to register 2
+;; see the gnu manual link above
 
 #+END_SRC
 
