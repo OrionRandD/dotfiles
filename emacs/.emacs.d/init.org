@@ -16,7 +16,7 @@ Note: for removing a package, delete it from the init.el and from the org file, 
 
       ;;; Code:
 
-      (add-to-list 'load-path (expand-file-name "~/.dotfiles/emacs/.emacs.d/elpa"))
+      (add-to-list 'load-path (expand-file-name "~/.emacs.d/elpa"))
 
       (setq package-archives '(("gnu"           . "http://elpa.gnu.org/packages/")
                                 ("melpa-stable" . "http://stable.melpa.org/packages/")
@@ -44,11 +44,6 @@ Note: for removing a package, delete it from the init.el and from the org file, 
 
       (straight-use-package 'use-package)
 
-       ;; (use-package use-package-ensure-system-package
-        ;; :straight t)
-
-       ;; (straight-use-package 'use-package)
-
 #+END_SRC
 
 * use-package
@@ -74,211 +69,6 @@ Note: for removing a package, delete it from the init.el and from the org file, 
 #+BEGIN_SRC emacs-lisp
 
 (setq gc-cons-threshold (* 100 1024 1024))
-
-#+END_SRC
-
-* TODO Emacs commands
-
-#+BEGIN_VERSE
-
-Commands 
-
-Important note	do NOT run emacs in terminal inside tmux
-http://ergoemacs.org/emacs/emacs_package_system.html - for melpa, see this link
-http://www.ergoemacs.org/emacs/emacs_basics.html - emacs tutorial 
-
-C-h t	emacs tutorial
-C-h a	apropos-command find commands 
-M-x helm-man-women	manpages from within emacs
-org-shifttab	folds everything (non-evil-mode)
-org-cycle	unfolds everything (non-evil-mode)
-backtab (S-TAB)	unfolds everything (evil-mode)
-z B	folds everything (evil-mode)
-gpg -c file	encrypts a file with a given password. Issue it on eshell/term
-M-x async-shell-command RET $command	then write, e.g. diatheke -b KJVA -f plain -k 1John 1
-M-x epa-sign-file	encrypts a file with the gpg default password - you have to enter it
-M-x epa-encrypt-file	encrypts a file with a symmetric password you type
-M-x epa-dencrypt-file	decrepit a file with a symmetric password you gave
-bug-hunter	for debugging emacs.el
-M-x lisp-interaction-mode RET	lisp auto-completion programming   
-(flyspell-mode)	activates automatic spelling 
-\b or M-x switch-to-buffer	switches to another buffer
-C-c I	find-user-init-file
-Ctrl-Alt Alt Shift	for inserting a bullet and changing levels
-Ctrl-c c	org-capture
-Ctrl-c Ctrl-c for activating the above line
-Ctrl-c Ctrl-c	for "X" ticking brackets
-Ctrl-c Ctrl-l	inserts a link
-Ctrl-c Ctrl-o	opens a link
-Ctrl-c Ctrl-o	opens a link 
-Ctrl-c Ctrl-q	also for clearing tags and other options
-Ctrl-c Ctrl-q or Ctrl-c Ctrl-c	inserts a tags. Then press TAB if you want to add more non-predefined tags
-Ctrl-c Ctrl-t for inserting keywords - you have to place the cursor on the bullets
-Ctrl-c Ctrl-x Ctrl-a	for archiving a subtree
-Ctrl-c Ctrl-x Ctrl-c	column view - q to leave column view - inside column
-Ctrl-h a (apropos): buffer	shows all buffer related commands 
-Ctrl-h b	shows all your keybindings 
-Ctrl-h i	opens the /usr/share/info file and show all documentation available
-Ctrl-h k Ctrl-x b	shows the help about "Ctrl-x b" keybinding
-Ctrl-h t	opens up a tutorial window
-Ctrl-space Ctrt-space	sets a mark (position) on the text - Ctrl-u Ctrl-space goes back to the mark (position)
-Ctrl-u Ctrl-c . for getting date and time - you can configure it on the minibuffer as you like and you can edit other dates with it - if this does not work, you have to set it manually in your "init.el" with "(global-set-key (kbd "C-c .") 'org-time-stamp)"
-Ctrl-x 2	split frame horizontally 
-Ctrl-x 3	split frame vertically
-Ctrl-x b	switches back to the previous buffer
-Ctrl-x c	close emacs
-M-x customize-themes	customize the themes
-M-x customize-variable RET org-file-apps	customize browse options and other apps
-Ctrl-h v or describe-variable	custom-enabled-themes - shows the current theme
-M-x	helm-google-suggest	finds suggestions on google
-M-x load-library RET ox-reveal	loads ox-reveal library
-M-x menu-set-font	sets the font to whatever you want
-M-x shell	opens up a shell session
-M-x	tetris	opens up a game tetris frame
-M-x visual-line-mode	adjusts the words to the frame size without breaking words 
-Ctrl-x n s	focus to a section
-Ctrl-x n w	unfocus the section
-Ctrl-x s	save file
-Ctrl-x u or Ctrl-x /	undo
-Alt-x auto-complete-mode
-Alt-x count-words
-Alt-x eval-buffer - evaluates the buffer, so that you do not need to restart emacs
-Alt-x global-auto-complete-mode
-Alt-x linum-mode
-Alt-x linum-relative-mode
-Alt-x linum-relative-toggle
-Alt-x list-packages C-s packageName i x
-Alt-x list-packages - then install with "i-x"
-Alt-x load-theme <RET> name-of-theme
-Alt-x package-install RET package-name
-Alt-x package-refresh-content
-Alt-x package-safe-delete RET package-name
-Alt-x RET slime 
-Alt-x RET speedbar
-M-x w3m-print-this-url	prints the current url. Then you can paste on email messages 
-C-x m	compose-mail
-C-x 5 m	compose-mail-other-frame
-C-x 4 m	compose-mail-other window
-Alt-x electric-pair-mode	regulates the ugly parens in emacs
-Alt-x set-frame-font RET (font name, font size, etc...) 
-C-x m RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc...)
-C-x m RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc...)
-C-x r j r	Jump to the position (a mark) and buffer saved in register r (jump-to-register)
-C-x r <SPC> r	Record the position (a mark) of point and the current buffer in register r (point-to-register)
-M-x m RET org-pandoc-export-to (...)
-pwdcp.sh	copies a local path to clipboard - this is a shell command
-guu	downcase line
-gUU	upercase line
-qd (to begin) (commands) q (to stop)	defines a macro called "d" - to play it type @d - to view the registers, ":reg" - shows all registers; ":reg abc" - shows registers ab and c
-(maximize-window)
-(minimize-windows)
-(new-frame )
-(rotate-frame-clockwise)
-visual setection :!sort	alphabetically sorts a selected area
-
-mbsync -V gmail
-mu index --maildir=(G)gmail
-C-x m	compose-mail
-C-x 5 m	compose-mail-other-frame
-C-x 4 m	compose-mail-other window
-mu4e-org-mode	opens mu4e-org-mode
-message-send	sends a message in  mu4e-org-mode
-message-send-and-exit	sends a message and exits in  mu4e-org-mode
-helm-mu-contacts	look for contacts to send an email
-
-M-x org-insert-structure-template RET TAB or (C-c C-,)	then write the template you want, e.g. (python sh emacs-lisp etc.)
-
-org-insert-link	if you want to insert images
-org-toggle-inline-images	if you want to toogle them 
-
-Vim-like completion inside buffers
-
-Call them with "M-x"
-commint-dynamic-complete
-commint-dynamic-complete-filename
-commint-completion-at-point
-icicle-commint-dynamic-complete-filename
-helm-commint-prompts
-C-u M! diatheke -b $BibleVersion -f plain -k John 3:15	insert a Bible text inside a buffer (emacs normal-mode)
-:r!diatheke -b $BibleVersion -f plain -k John 3:15	insert a Bible text inside a buffer (evil-mode)
-w3m-browser-url	opens a url in w3m
-
-Snippets
-sbel	source-block-emacs-lisp
-sbupkg	source-block-use-package
-time	insert current time and date in the buffer
-C-u C-c .	insert current time and date in the buffer
-C-q TAB	insert a TAB in the buffer
-M-x calculator	opens a calculator in emacs
-M-x calendar	opens a calendar in emacs 
-M-x butterfly	unleashes the power of the butterfly
-
-Installed packages
-
-in evil-mode:
-M-x list-packages; /installed (they will be highlighted); v (for visual-mode); j (to select them); y (to copy them); open a new buffer and paste them.
-
-Tutorial workflow 
-M-s ! inv_Win.sh	for compton compositor 
-M-s ! screenkey	for showing keys
-Then you can record your screen
-
-Emacs customization 
-
-M-x customize-option <RET> option <RET>
-M-x customize-variable <RET> option <RET>
-    Set up a customization buffer for just one user option, option.
-M-x customize-face <RET> face <RET>
-    Set up a customization buffer for just one face, face.
-M-x customize-group <RET> group <RET>
-    Set up a customization buffer for just one group, group.
-M-x customize-apropos <RET> regexp <RET>
-    Set up a customization buffer for all the settings and groups that match
-    regexp.
-M-x customize-changed <RET> version <RET>
-    Set up a customization buffer with all the settings and groups whose
-    meaning has changed since Emacs version version.
-M-x customize-changed-options <RET> version <RET>
-    Set up a customization buffer with all the options whose meaning or
-    default values have changed since Emacs version version.
-M-x customize-saved
-    Set up a customization buffer containing all settings that you have saved
-    with customization buffers.
-M-x customize-unsaved
-    Set up a customization buffer containing all settings that you have set
-    but not saved.
-
-#+END_VERSE
-
-* Org-mode tutorials 
-
-  https://orgmode.org/worg/org-tutorials/
-
-#+BEGIN_SRC emacs-lisp
-
-#+END_SRC
-
-* People with great emacs configs
-
- List of people with nice emacs dotfiles files
- and some video tutorials:
-
- https://github.com/daedreth/UncleDavesEmacs
- https://github.com/dakra/dmacs
- https://github.com/valignatev/dotfiles
- https://invidio.us/latest_version?id=FYPE0dIoq1I&itag=43
-
- [[https://cestlaz.github.io/stories/emacs/]] 
-
- http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html
-
- https://zzamboni.org/post/my-emacs-configuration-with-commentary/
-
- https://github.com/caisah/emacs.dz
- https://github.com/DiegoVicen/my-emacs#my-blog-publishing-configuration
- https://github.com/myTerminal/super-emacs
-
-#+BEGIN_SRC emacs-lisp 
 
 #+END_SRC
 
@@ -379,9 +169,11 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
 
 **** kill it now
 
+Do not ask for confirmation when killing a buffer
+
 #+BEGIN_SRC emacs-lisp
 
-(setq kill-buffer-query-functions (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
+;; (setq kill-buffer-query-functions (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
 
 #+END_SRC
 
@@ -415,7 +207,10 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
 
 **** switch-window
 
-#+begin_src emacs-lisp :tangle yes
+when you have many windows, you can change around with
+"C-x o"
+
+#+BEGIN_SRC emacs-lisp
 
 (use-package switch-window
   :ensure t
@@ -429,11 +224,11 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
   :bind
     ([remap other-window] . switch-window))
 
-#+end_src
+#+END_SRC
 
 **** follow window splits
 
-#+begin_src emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
 
 (defun split-and-follow-horizontally ()
   (interactive)
@@ -449,11 +244,11 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
   (other-window 1))
 (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
 
-#+end_src
+#+END_SRC
 
 **** battery indicator
 
-#+begin_src emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
 
 (use-package fancy-battery
   :ensure t
@@ -464,7 +259,20 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
       (fancy-battery-mode)
       (display-battery-mode)))
 
-#+end_src
+#+END_SRC
+
+**** symon 
+
+system monitor
+
+#+BEGIN_SRC emacs-lisp
+
+(use-package symon
+  :ensure t
+  :bind
+  ("s-h" . symon-mode))
+
+#+END_SRC
 
 **** mark-multiple
 
@@ -472,13 +280,13 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
 
 (use-package mark-multiple
   :ensure t
-  :bind ("C-c q" . 'mark-next-like-this))
+  :bind ("C-$" . 'mark-next-like-this))
 
-#+end_src
+#+END_SRC
 
 **** kill-word improved
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 
 (defun cyber/kill-inner-word ()
   "Kills the entire word your cursor is in. Equivalent to 'ciw' in vim."
@@ -486,13 +294,13 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
   (forward-char 1)
   (backward-word)
   (kill-word 1))
-(global-set-key (kbd "C-c w k") 'cyber/kill-inner-word)
+(global-set-key (kbd "C-c i w") 'cyber/kill-inner-word)
 
-#+end_src
+#+END_SRC
 
 **** copy-word improved
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 
 (defun cyber/copy-whole-word ()
   (interactive)
@@ -503,11 +311,11 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
     (yank)))
 (global-set-key (kbd "C-c w c") 'cyber/copy-whole-word)
 
-#+end_src
+#+END_SRC
 
 **** copy-line
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 
 (defun cyber/copy-whole-line ()
   "Copies a line without regard for cursor position."
@@ -519,19 +327,19 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
       (point-at-eol)))))
 (global-set-key (kbd "C-c l c") 'cyber/copy-whole-line)
 
-#+end_src
+#+END_SRC
 
 **** kill-line
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp 
 
 (global-set-key (kbd "C-c l k") 'kill-whole-line)
 
-#+end_src
+#+END_SRC
 
 **** pretty-mode
 
-#+begin_src emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle yes
 
 (when window-system
       (use-package pretty-mode
@@ -539,61 +347,61 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
       :config
       (global-pretty-mode t)))
 
-#+end_src
+#+END_SRC
 
 **** rainbow
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 
 (use-package rainbow-mode
  :ensure t
  :init
   (add-hook 'prog-mode-hook 'rainbow-mode))
 
-#+end_src
+#+END_SRC
 
 **** rainbow delimiters
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 
 (use-package rainbow-delimiters
   :ensure t
   :init
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
-#+end_src
+#+END_SRC
 
 **** zapping to char
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp 
 
 (use-package zzz-to-char
   :ensure t
   :bind ("M-z" . zzz-up-to-char))
 
-#+end_src
+#+END_SRC
 
 **** kill-ring
 
-#+begin_src emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
 
 (setq kill-ring-max 100)
 
-#+end_src
+#+END_SRC
 
 **** popup-kill-ring
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp 
 
 (use-package popup-kill-ring
   :ensure t
-  :bind ("M-y" . popup-kill-ring))
+  :bind ("M-K" . popup-kill-ring))
 
-#+end_src
+#+END_SRC
 
 **** persistent scratch buffer
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp 
 
 (use-package persistent-scratch
   :config
@@ -614,25 +422,15 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
     "\n# This buffer is for text that is not saved, and for Lisp evaluation."
     "\n# To create a file, visit it with 'C-x C-f' e and enter text in its buffer.\n"))
 
-#+end_src
-
-**** async
-
-#+begin_src emacs-lisp :tangle yes
-
-(use-package async
-  :ensure t
-  :init (dired-async-mode 1))
-
-#+end_src
+#+END_SRC
 
 *** scratch org-mode
 
-    I spend more time in Org-mode than I do writing Elisp.
+disabled -> I spend more time in Org-mode than I do writing Elisp.
 
  #+BEGIN_SRC emacs-lisp
 
-   (setq initial-major-mode 'org-mode)
+;;   (setq initial-major-mode 'org-mode)
 
  #+END_SRC
 
@@ -695,7 +493,7 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
 
 ** org-mode
 
-#+begin_src emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
 
 (setq org-ellipsis " ")
 (setq org-src-fontify-natively t)
@@ -707,7 +505,7 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
 
 (global-set-key (kbd "C-c '") 'org-edit-src-code)
 
-#+end_src
+#+END_SRC
 
 ** tab on console 
 
@@ -729,7 +527,7 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
 
 #+BEGIN_SRC emacs-lisp
 
-;;  (straight-use-package 'evil)
+  (straight-use-package 'evil)
 ;;    (evil-mode 1)
 
 #+END_SRC
@@ -739,7 +537,7 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
 #+BEGIN_SRC emacs-lisp
 
   (straight-use-package 'evil-collection)
-  (evil-collection-init t)
+;;  (evil-collection-init t)
 
 #+END_SRC
 
@@ -747,7 +545,7 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
 
 #+BEGIN_SRC emacs-lisp
 
-  (straight-use-package 'evil-org)
+;;  (straight-use-package 'evil-org)
   
 #+END_SRC
 
@@ -878,23 +676,13 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
    (org-bullets-mode 1)
    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
-  ;; (use-package org-bullets
-  ;;  :straight t
-  ;;  :config
-  ;;    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-
-#+END_SRC
+ #+END_SRC
 
 ** emacs-w3m
 
  #+BEGIN_SRC emacs-lisp
 
-  ;;  (add-to-list 'load-path "~/.emacs.d/elpa/emacs-w3m/")
-
-  ;;  (require 'w3m-load)
-  ;;  (require 'mime-w3m)
-
-        (setq w3m-display-inline-images t) 
+         (setq w3m-display-inline-images t) 
 	(setq w3m-fill-column 80) ;; if this does not work, modify the file w3m.el itself
 	(setq w3m-default-display-inline-images t) 
 	(setq w3m-default-save-directory "~/Downloads")
@@ -908,6 +696,7 @@ Doing C-x k should kill the current buffer at all times, we have ibuffer for mor
   (straight-use-package 'bug-hunter)
 
 #+END_SRC
+
 ** emacspeak eloud
 
 if you want to use eloud, call it with:
@@ -936,29 +725,6 @@ M-x eloud-mode RET
 ;; edit the file "/usr/lib/x86_64-linux-gnu/espeak-data/voices/en"
 
   #+END_SRC
-
-** TODO Dired
-
-   install dired+ with
-   el-get-install RET dired+
-
-#+BEGIN_SRC emacs-lisp 
-
-(add-to-list 'load-path "~/.emacs.d/local-repo/dired+")
- (require 'dired+)
-
-(setq dired-dwim-target t)
-;; Hide details by default
-(add-hook 'dired-mode-hook 'dired-hide-details-mode)
-;; Not spawn endless amount of dired buffers
-(with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
-
-(use-package all-the-icons-dired
-  :after all-the-icons
-  :hook (dired-mode . all-the-icons-dired-mode))
-
-#+END_SRC
 
 ** hydra  
   
@@ -1086,6 +852,7 @@ yasnippet-classic-snippets))
   ))
 
 #+END_SRC
+
 ** abbreviations
 
 #+BEGIN_SRC emacs-lisp
@@ -1139,6 +906,26 @@ file with `edit-abbrevs`"
       (user-error "No typo at or before point"))))
 
 #+END_SRC
+
+** TODO Dired
+
+   install dired+ with
+   el-get-install RET dired+
+
+#+BEGIN_SRC emacs-lisp 
+
+;; (add-to-list 'load-path "~/.emacs.d/local-repo/dired+")
+;; (require 'dired+)
+
+(setq dired-dwim-target t)
+;; Hide details by default
+(add-hook 'dired-mode-hook 'dired-hide-details-mode)
+;; Not spawn endless amount of dired buffers
+(with-eval-after-load 'dired
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+
+#+END_SRC
+
 ** all-the-icons 
 
   M-x all-the-icons-install-fonts RET
@@ -1146,31 +933,27 @@ file with `edit-abbrevs`"
 #+BEGIN_SRC emacs-lisp
 
   (use-package all-the-icons
-       :ensure t)
+   :straight t)
+
+  (use-package all-the-icons-dired
+   :straight t)
 
   (use-package dired-rainbow
-       :ensure t)
+   :straight t)
 
-      (defun org-brain-insert-resource-icon (link)
-	"Insert an icon, based on content of org-mode LINK."
-	(insert (format "%s "
-			(cond ((string-prefix-p "http" link)
-			       (cond ((string-match "wikipedia\\.org" link)
-				      (all-the-icons-faicon "wikipedia-w"))
-				     ((string-match "github\\.com" link)
-				      (all-the-icons-octicon "mark-github"))
-				     ((string-match "vimeo\\.com" link)
-				      (all-the-icons-faicon "vimeo"))
-				     ((string-match "youtube\\.com" link)
-				      (all-the-icons-faicon "youtube"))
-				     (t
-				      (all-the-icons-faicon "globe"))))
-			      ((string-prefix-p "brain:" link)
-			       (all-the-icons-fileicon "brain"))
-			      (t
-			       (all-the-icons-icon-for-file link))))))
+  (use-package all-the-icons-ivy
+   :straight t)
 
-      (add-hook 'org-brain-after-resource-button-functions #'org-brain-insert-resource-icon)
+
+#+END_SRC
+
+*** async
+
+#+BEGIN_SRC emacs-lisp
+
+(use-package async
+  :ensure t
+  :init (dired-async-mode 1))
 
 #+END_SRC
 
@@ -1178,12 +961,18 @@ file with `edit-abbrevs`"
   
 #+BEGIN_SRC emacs-lisp
 
-(use-package eyebrowse 
+(use-package eyebrowse
   :straight t
-  :config 
-   (eyebrowse-setup-opinionated-keys)
-    (add-to-list 'window-persistent-parameters '(window-side . writable))
-    (add-to-list 'window-persistent-parameters '(window-slot . writable)))
+  :config
+  (progn
+    (define-key eyebrowse-mode-map (kbd "M-1") 'eyebrowse-switch-to-window-config-1)
+    (define-key eyebrowse-mode-map (kbd "M-2") 'eyebrowse-switch-to-window-config-2)
+    (define-key eyebrowse-mode-map (kbd "M-3") 'eyebrowse-switch-to-window-config-3)
+    (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
+    (define-key eyebrowse-mode-map (kbd "M-5") 'eyebrowse-switch-to-window-config-5)
+
+    (eyebrowse-mode t)
+    (setq eyebrowse-new-workspace t)))
 
 #+END_SRC
 
@@ -1193,20 +982,25 @@ https://github.com/daedreth/UncleDavesEmacs/blob/master/config.org#helm
 
 #+BEGIN_SRC emacs-lisp
 
- ;;helm
+  ;;  (use-package helm
+  ;;    :straight t)
 
-   (use-package helm)
-    	(helm-mode 1)
+    ;; helm
 
-   (define-key helm-map (kbd "C-j") 'helm-next-line)
-   (define-key helm-map (kbd "C-k") 'helm-previous-line)
+       (use-package helm)
+          (helm-mode 1)
 
-  ;; helm-swoop
-   (use-package helm-swoop)
+       (define-key helm-map (kbd "s-j") 'helm-next-line)
+       (define-key helm-map (kbd "s-k") 'helm-previous-line)
 
-   (global-set-key (kbd "M-x") 'helm-M-x)
-   (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
-   (global-set-key (kbd "C-x C-f") 'helm-find-files)
+    ;; helm-swoop
+
+
+  (use-package helm-swoop)
+
+       (global-set-key (kbd "M-x") 'helm-M-x)
+       (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+       (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 #+END_SRC
 
@@ -1215,9 +1009,13 @@ https://github.com/daedreth/UncleDavesEmacs/blob/master/config.org#helm
 #+BEGIN_SRC emacs-lisp
 
 (use-package beacon
- :straight t
- :config
- (beacon-mode 1))
+  :straight t
+  :defer 10
+  :diminish beacon-mode
+  :custom
+  (beacon-push-mark 10)
+  :config
+  (beacon-mode +1))
 
 #+END_SRC
 
@@ -1406,11 +1204,6 @@ https://github.com/daedreth/UncleDavesEmacs/blob/master/config.org#helm
 
 #+BEGIN_SRC emacs-lisp
 
-  ;; (use-package avy
-  ;;   :straight t
-  ;;   :config
-  ;;   (avy-setup-default))
-
   (use-package avy
     :ensure t
     :bind
@@ -1490,7 +1283,7 @@ flycheck-plantuml))
 
 #+END_SRC
 
-* company-emoji
+** company-emoji
 
 #+BEGIN_SRC emacs-lisp
 
@@ -1519,7 +1312,7 @@ flycheck-plantuml))
 
 #+END_SRC
 
-* pdf-tools
+** pdf-tools
 
 #+BEGIN_SRC emacs-lisp
 
@@ -1533,7 +1326,7 @@ flycheck-plantuml))
 
 #+END_SRC
 
-* default browser 
+** default browser 
 
 #+BEGIN_SRC emacs-lisp
 
@@ -1599,7 +1392,7 @@ flycheck-plantuml))
 
 #+END_SRC
 
-* telega
+** telega
 
   https://github.com/zevlg/telega.el/blob/master/README.md
   https://medium.com/@ajsb85/building-the-telegram-library-80afe68054c9
@@ -1618,15 +1411,6 @@ flycheck-plantuml))
     ("l" . nil))
     :custom (telega-notifications-mode t))
 
-;; (use-package telega
-;;  :bind (:map telega-msg-button-map
-;;              ("j" . nil)
-;;              ("k" . nil)
-;;              ("h" . nil)
-;;              ("l" . nil))
-;;  :custom
-;;  (telega-use-notifications t))
-
 #+END_SRC
 
 ** text-scale
@@ -1635,6 +1419,21 @@ flycheck-plantuml))
 
 (global-set-key (kbd "C-M-=") 'default-text-scale-increase)
 (global-set-key (kbd "C-M--") 'default-text-scale-decrease)
+
+#+END_SRC
+
+** dtrt-indent
+
+dtrt-indent guesses the indentation settings of files, and sets the buffer
+local variables accordingly. This makes it pleasant to edit corresponding textfiles
+
+#+BEGIN_SRC emacs-lisp
+
+(use-package dtrt-indent
+  :straight t
+  :diminish t
+  :config
+  (dtrt-indent-mode +1))
 
 #+END_SRC
 
@@ -2192,7 +1991,7 @@ you have to issue the command etags in the working directories
 #+BEGIN_SRC emacs-lisp
 
   (straight-use-package 'multiple-cursors)
-
+  (require 'multiple-cursors)
   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
@@ -2318,7 +2117,6 @@ you have to issue the command etags in the working directories
 
 #+BEGIN_SRC emacs-lisp
 
-
   (global-set-key (kbd "<f5>") 'my-save-word)
        (defun my-save-word ()
       (interactive)
@@ -2362,6 +2160,27 @@ you have to issue the command etags in the working directories
 ** org-brain
 
 #+BEGIN_SRC emacs-lisp
+
+      (defun org-brain-insert-resource-icon (link)
+	"Insert an icon, based on content of org-mode LINK."
+	(insert (format "%s "
+			(cond ((string-prefix-p "http" link)
+			       (cond ((string-match "wikipedia\\.org" link)
+				      (all-the-icons-faicon "wikipedia-w"))
+				     ((string-match "github\\.com" link)
+				      (all-the-icons-octicon "mark-github"))
+				     ((string-match "vimeo\\.com" link)
+				      (all-the-icons-faicon "vimeo"))
+				     ((string-match "youtube\\.com" link)
+				      (all-the-icons-faicon "youtube"))
+				     (t
+				      (all-the-icons-faicon "globe"))))
+			      ((string-prefix-p "brain:" link)
+			       (all-the-icons-fileicon "brain"))
+			      (t
+			       (all-the-icons-icon-for-file link))))))
+
+      (add-hook 'org-brain-after-resource-button-functions #'org-brain-insert-resource-icon)
 
   (straight-use-package 'org-brain)
     (setq org-brain-path "~/org~/brain")
@@ -2493,12 +2312,13 @@ you have to issue the command etags in the working directories
 
 ;; https://github.com/bastibe/org-journal
 
+(use-package org-journal
+ :ensure t)
+
     (customize-set-variable 'org-journal-dir "~/org~/journal/")
     (customize-set-variable 'org-journal-date-format "%A, %d %B %Y")
 
-    ;; (require 'org-journal)
-
-    (customize-set-variable  'org-journal-enable-agenda-integration t)
+    (customize-set-variable 'org-journal-enable-agenda-integration t)
     (customize-set-variable 'org-journal-carryover-items nil)
     (customize-set-variable 'org-journal-enable-agenda-integration t)
 
@@ -2519,7 +2339,7 @@ you have to issue the command etags in the working directories
 #+BEGIN_SRC emacs-lisp
 
 (add-hook 'org-mode-hook (lambda () 
-  (define-key org-mode-map (kbd "C-c g") 'omlg-grab-link)))
+  (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
 
 #+END_SRC
 
@@ -2780,6 +2600,7 @@ you have to issue the command etags in the working directories
 #+BEGIN_SRC emacs-lisp
 
 ;; It is not the same poetry package for writing poetry
+;; it is an interface for python poetry package tool
 
    (use-package poetry
     :straight t)
@@ -2788,7 +2609,7 @@ you have to issue the command etags in the working directories
 ;; you need to install the rhyme cli 
 ;; you have to install "~/Downloand/rhyme_4_poetry.el
 
-(add-to-list 'load-path "~/.dotfiles/emacs/.emacs.d/local-repo/poetry")
+(add-to-list 'load-path "~/.emacs.d/local-repo/poetry")
 (require 'poetry)
 
 ;; (load-library "~/.emacs.d/local-repo/poetry.elc")
@@ -2799,8 +2620,8 @@ you have to issue the command etags in the working directories
 
 #+BEGIN_SRC emacs-lisp
 
-;; (use-package perspective
-;;   :straight t)
+ (use-package perspective
+   :straight t)
 
 #+END_SRC
 
@@ -2808,11 +2629,14 @@ you have to issue the command etags in the working directories
 
 #+BEGIN_SRC emacs-lisp
 
-(use-package powerline 
- :straight t
- :config
- (powerline-center-theme)
- (setq powerline-center-default-separator 'wave))
+   (use-package powerline 
+    :straight t)
+
+(require 'powerline)
+(powerline-default-theme)
+
+  ;; (powerline-center-theme)
+  ;; (setq powerline-center-default-separator 'wave))
 
 #+END_SRC
 
@@ -2830,26 +2654,26 @@ you have to issue the command etags in the working directories
 
 #+END_SRC
 
-# ** quelpa
+** quelpa
 
-# #+BEGIN_SRC emacs-lisp
+ #+BEGIN_SRC emacs-lisp
 
-  
-#    (use-package quelpa-use-package
-#        :straight t
-#        :init
-#       (setq quelpa-update-melpa-p nil))
 
-# #+END_SRC
+   ;; (use-package quelpa-use-package
+   ;;     :straight t
+   ;;     :init
+   ;;    (setq quelpa-update-melpa-p nil))
 
+ #+END_SRC
+ 
 ** re-builder
 
 #+BEGIN_SRC emacs-lisp
 
-  ;; (use-package re-builder
-  ;;  :straight t
-  ;;  :config
-  ;;  (setq reb-re-syntax 'string))
+   (use-package re-builder
+    :straight t
+    :config
+    (setq reb-re-syntax 'string))
 
 #+END_SRC
 
@@ -2895,13 +2719,16 @@ you have to issue the command etags in the working directories
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
 
 (use-package slime
-  :ensure t
+  :straight t
+  :load-path
+   ("~/.emacs.d/straight/repos/slime/")
   :config
-  (setq inferior-lisp-program "/usr/bin/sbcl")
+  (setq inferior-lisp-program "/usr/local/bin/sbcl")
   (setq slime-contribs '(slime-fancy)))
+  (require 'slime-autoloads)
 
 (use-package slime-company
-  :ensure t
+  :straight t
   :init
     (require 'company)
     (slime-setup '(slime-fancy slime-company)))
@@ -2928,8 +2755,8 @@ you have to issue the command etags in the working directories
 
 (setq cyber-filelist
       '(
-	("init.el" . "~/.dotfiles/emacs/.emacs.d/init.el" )
-	("init.org" . "~/.dotfiles/emacs/.emacs.d/init.org")
+	("init.el" . "~/.emacs.d/init.el" )
+	("init.org" . "~/.emacs.d/init.org")
 	("dotfiles" . "~/.dotfiles/")
 	("Documents" . "~/Documents/" )
 	("org~" . "~/org~/" )
@@ -2976,18 +2803,21 @@ Version 2015-04-23"
 
 ** synonyms and thesaurus
 
+you have to comment 'disabled' keyword to use this package
+
 #+BEGIN_SRC emacs-lisp
 
 (use-package synonyms
-  :disabled
   :straight t
+  :disabled
   :init
   :config
   (setq synonyms-file "~/thesaurus/mthesaur.txt")
   (setq synonyms-file "~/thesaurus/brazilian-synonyms.txt")
   (setq synonyms-cache-file "~/thesaurus/thes.cache")
+  (global-set-key (kbd "C-*") 'synonyms))
 
-  (evil-leader/set-key "sy" 'synonyms))
+;;  (evil-leader/set-key "sy" 'synonyms))
 
 (use-package powerthesaurus
   :straight t
@@ -3004,9 +2834,11 @@ Version 2015-04-23"
 	(forward-word)
 	(activate-mark)
 	(powerthesaurus-lookup-word (region-beginning) (region-end)))))
+    (global-set-key (kbd "C-M-x") 'powerthesaurus-lookup-word-at-point)
+    (global-set-key (kbd "C-M-y") 'powerthesaurus-lookup-word))
 
-  (evil-leader/set-key "s" 'powerthesaurus-lookup-word-at-point)
-  (evil-leader/set-key "S" 'powerthesaurus-lookup-word))
+;;  (evil-leader/set-key "s" 'powerthesaurus-lookup-word-at-point)
+;;  (evil-leader/set-key "S" 'powerthesaurus-lookup-word))
 
 #+END_SRC
 
@@ -3031,21 +2863,83 @@ Version 2015-04-23"
 (use-package treemacs
   :straight t
   :defer t
+  :init
+  (with-eval-after-load 'winum
+    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   :config
   (progn
+    (setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
+          treemacs-deferred-git-apply-delay      0.5
+          treemacs-display-in-side-window        t
+          treemacs-eldoc-display                 t
+          treemacs-file-event-delay              5000
+          treemacs-file-follow-delay             0.2
+          treemacs-follow-after-init             t
+          treemacs-git-command-pipe              ""
+          treemacs-goto-tag-strategy             'refetch-index
+          treemacs-indentation                   2
+          treemacs-indentation-string            " "
+          treemacs-is-never-other-window         nil
+          treemacs-max-git-entries               5000
+          treemacs-missing-project-action        'ask
+          treemacs-no-png-images                 nil
+          treemacs-no-delete-other-windows       t
+          treemacs-project-follow-cleanup        nil
+          treemacs-persist-file                  (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
+          treemacs-position                      'left
+          treemacs-recenter-distance             0.1
+          treemacs-recenter-after-file-follow    nil
+          treemacs-recenter-after-tag-follow     nil
+          treemacs-recenter-after-project-jump   'always
+          treemacs-recenter-after-project-expand 'on-distance
+          treemacs-show-cursor                   nil
+          treemacs-show-hidden-files             t
+          treemacs-silent-filewatch              nil
+          treemacs-silent-refresh                nil
+          treemacs-sorting                       'alphabetic-desc
+          treemacs-space-between-root-nodes      t
+          treemacs-tag-follow-cleanup            t
+          treemacs-tag-follow-delay              1.5
+          treemacs-width                         35)
 
-    (setq treemacs-follow-after-init          t
-	  treemacs-width                      25
-	  treemacs-indentation                2
-	  treemacs-git-integration            t
-	  treemacs-collapse-dirs              3
-	  treemacs-silent-refresh             nil
-	  treemacs-change-root-without-asking nil
-	  treemacs-sorting                    'alphabetic-desc
-	  treemacs-show-hidden-files          t
-	  treemacs-never-persist              nil
-	  treemacs-is-never-other-window      nil
-	  treemacs-goto-tag-strategy          'refetch-index)))
+    ;; The default width and height of the icons is 22 pixels. If you are
+    ;; using a Hi-DPI display, uncomment this to double the icon size.
+    ;;(treemacs-resize-icons 44)
+
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode t)
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable)))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple))))
+  :bind
+  (:map global-map
+        ("M-0"       . treemacs-select-window)
+        ("C-x t 1"   . treemacs-delete-other-windows)
+        ("C-x t t"   . treemacs)
+        ("C-x t B"   . treemacs-bookmark)
+        ("C-x t C-t" . treemacs-find-file)
+        ("C-x t M-t" . treemacs-find-tag)))
+
+(use-package treemacs-evil
+  :after treemacs evil
+  :straight t)
+
+(use-package treemacs-projectile
+  :after treemacs projectile
+  :straight t)
+
+(use-package treemacs-icons-dired
+  :after treemacs dired
+  :straight t
+  :config (treemacs-icons-dired-mode))
+
+(use-package treemacs-magit
+  :after treemacs magit
+  :straight t)
 
 #+END_SRC
 
@@ -3169,7 +3063,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 
 #+BEGIN_SRC emacs-lisp
 
-(add-to-list 'load-path "~/.emacs.d/elpa/youtube-dl-emacs")
+(add-to-list 'load-path "~/.emacs.d/local-repo/youtube-dl-emacs")
 (require 'youtube-dl)
 
 #+END_SRC
@@ -3358,7 +3252,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 (use-package emms
  :straight t)
 
-(add-to-list 'load-path "~/.emacs.d/elpa/emms-get-lyrics/")
+(add-to-list 'load-path "~/.emacs.d/local-repo/emms-get-lyrics/")
 (require 'emms-get-lyrics)
 
 #+END_SRC
@@ -3406,7 +3300,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 
 #+BEGIN_SRC emacs-lisp
 
-(add-to-list 'load-path "~/.emacs.d/elpa/gedcom")
+(add-to-list 'load-path "~/.emacs.d/local-repo/gedcom")
 
 (autoload 'gedcom-mode "gedcom")
 (setq auto-mode-alist (cons '("\\.ged$" . gedcom-mode) auto-mode-alist))
@@ -3423,7 +3317,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 #+END_SRC
 
 ** blog apps
-   
+
 *** Ox-hugo
 
 #+BEGIN_SRC emacs-lisp
@@ -3657,8 +3551,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 
 #+BEGIN_SRC emacs-lisp
 
-(add-to-list 'load-path "~/.emacs.d/elpa/ipp")
-
+(add-to-list 'load-path "~/.emacs.d/local-repo/ipp")
 (require 'ipp)
 
 #+END_SRC
@@ -3705,6 +3598,8 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 
 ** gnutls-fix-bug
 
+#+BEGIN_SRC emacs-lisp
+
 ;;   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3/")
 ;;     (setq gnutls-verify-error t)
 ;;     (setq tls-checktrust t)
@@ -3719,7 +3614,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 
 ;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/emacs-wget")
 
-  ;; (require 'w3m-wget)
+;; (require 'w3m-wget)
 ;;   (load "w3m-wget")
 ;;  (autoload 'wget "wget" "wget interface for Emacs." t)
 ;;  (autoload 'wget-web-page "wget" "wget interface to download whole web page." t)
@@ -3837,9 +3732,9 @@ You can customize this variable
 
 #+BEGIN_SRC emacs-lisp
 
-(local-set-key (kbd "C-x w") 'toggle-truncate-lines)
 (setq truncate-partial-width-windows 1)
 (setq truncate-lines 1)
+(global-set-key (kbd "C-x t") 'toggle-truncate-lines)
 
 #+END_SRC
 
@@ -3946,10 +3841,10 @@ You can customize this variable
 
 #+BEGIN_SRC emacs-lisp
 
-(setq php-ext-path "~/.dotfiles/emacs/.emacs.d/elpa/php-ext/")
+(setq php-ext-path "~/.emacs.d/local-repo/php-ext/")
 (load (concat php-ext-path "php-ext.el"))
 
-   ;; (add-to-list 'load-path "~/.dotfiles/emacs/.emacs.d/elpa/php-ext")
+   ;; (add-to-list 'load-path "~/.emacs.d/local-repo/php-ext")
    ;; (require 'php-ext)
 
 #+END_SRC
@@ -4071,10 +3966,9 @@ Version 2015-12-08"
 
 #+END_SRC
 
-
 ** bash
 
-#+begin_src emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle yes
 
 (add-hook 'shell-mode-hook 'yas-minor-mode)
 (add-hook 'shell-mode-hook 'flycheck-mode)
@@ -4092,22 +3986,22 @@ Version 2015-12-08"
     (require 'company)
     (add-hook 'shell-mode-hook 'shell-mode-company-init))
 
-#+end_src
+#+END_SRC
 
 ** sudo-editing
 
-#+begin_src emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle yes
 
 (use-package sudo-edit
   :ensure t
   :bind
     ("s-e" . sudo-edit))
 
-#+end_src
+#+END_SRC
 
 ** diminishing modes
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 
 (use-package diminish
   :ensure t
@@ -4137,15 +4031,227 @@ Version 2015-12-08"
   (diminish 'flycheck-mode)
   (diminish 'flyspell-mode))
 
-#+end_src
+#+END_SRC
 
 ** pastbin
 
-#+begin_src emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle yes
 
 (straight-use-package 'debpaste)
 (straight-use-package 'ix)
 
-#+end_src
+#+END_SRC
 
+** free-keys
 
+Show unbound keys available for bounding 
+
+#+BEGIN_SRC emacs-lisp
+
+(straight-use-package 'free-keys)
+
+#+END_SRC
+
+* People with great emacs configs
+
+ List of people with nice emacs dotfiles files
+ and some video tutorials:
+
+ https://www.gtrun.org/custom/init.html
+ https://github.com/daedreth/UncleDavesEmacs
+ https://github.com/dakra/dmacs
+ https://github.com/valignatev/dotfiles
+ https://invidio.us/latest_version?id=FYPE0dIoq1I&itag=43
+ [[https://cestlaz.github.io/stories/emacs/]] 
+ http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html
+ https://zzamboni.org/post/my-emacs-configuration-with-commentary/
+ https://github.com/caisah/emacs.dz
+ https://github.com/DiegoVicen/my-emacs#my-blog-publishing-configuration
+ https://github.com/myTerminal/super-emacs
+
+#+BEGIN_SRC emacs-lisp 
+
+#+END_SRC
+
+* Org-mode tutorials 
+
+  https://orgmode.org/worg/org-tutorials/
+
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+
+* TODO Emacs commands
+
+#+BEGIN_VERSE
+
+Commands 
+
+Important note	do NOT run emacs in terminal inside tmux
+http://ergoemacs.org/emacs/emacs_package_system.html - for melpa, see this link
+http://www.ergoemacs.org/emacs/emacs_basics.html - emacs tutorial 
+
+C-h t	emacs tutorial
+C-h a	apropos-command find commands 
+M-x helm-man-women	manpages from within emacs
+C-c i w	kill internal word
+C-x z	repeat the previous command. Then hit 'z' again and again
+org-shifttab	folds everything (non-evil-mode)
+org-cycle	unfolds everything (non-evil-mode)
+backtab (S-TAB)	unfolds everything (evil-mode)
+z B	folds everything (evil-mode)
+gpg -c file	encrypts a file with a given password. Issue it on eshell/term
+M-x async-shell-command RET $command	then write, e.g. diatheke -b KJVA -f plain -k 1John 1
+M-x epa-sign-file	encrypts a file with the gpg default password - you have to enter it
+M-x epa-encrypt-file	encrypts a file with a symmetric password you type
+M-x epa-dencrypt-file	decrepit a file with a symmetric password you gave
+bug-hunter	for debugging emacs.el
+M-x lisp-interaction-mode RET	lisp auto-completion programming   
+(flyspell-mode)	activates automatic spelling 
+\b or M-x switch-to-buffer	switches to another buffer
+C-c I	find-user-init-file
+Ctrl-Alt Alt Shift	for inserting a bullet and changing levels
+Ctrl-c c	org-capture
+Ctrl-c Ctrl-c for activating the above line
+Ctrl-c Ctrl-c	for "X" ticking brackets
+Ctrl-c Ctrl-l	inserts a link
+Ctrl-c Ctrl-o	opens a link
+Ctrl-c Ctrl-o	opens a link 
+Ctrl-c Ctrl-q	also for clearing tags and other options
+Ctrl-c Ctrl-q or Ctrl-c Ctrl-c	inserts a tags. Then press TAB if you want to add more non-predefined tags
+Ctrl-c Ctrl-t for inserting keywords - you have to place the cursor on the bullets
+Ctrl-c Ctrl-x Ctrl-a	for archiving a subtree
+Ctrl-c Ctrl-x Ctrl-c	column view - q to leave column view - inside column
+Ctrl-h a (apropos): buffer	shows all buffer related commands 
+Ctrl-h b	shows all your keybindings 
+Ctrl-h i	opens the /usr/share/info file and show all documentation available
+Ctrl-h k Ctrl-x b	shows the help about "Ctrl-x b" keybinding
+Ctrl-h t	opens up a tutorial window
+Ctrl-space Ctrt-space	sets a mark (position) on the text - Ctrl-u Ctrl-space goes back to the mark (position)
+Ctrl-u Ctrl-c . for getting date and time - you can configure it on the minibuffer as you like and you can edit other dates with it - if this does not work, you have to set it manually in your "init.el" with "(global-set-key (kbd "C-c .") 'org-time-stamp)"
+Ctrl-x 2	split frame horizontally 
+Ctrl-x 3	split frame vertically
+Ctrl-x b	switches back to the previous buffer
+Ctrl-x c	close emacs
+M-x customize-themes	customize the themes
+M-x customize-variable RET org-file-apps	customize browse options and other apps
+Ctrl-h v or describe-variable	custom-enabled-themes - shows the current theme
+M-x	helm-google-suggest	finds suggestions on google
+M-x load-library RET ox-reveal	loads ox-reveal library
+M-x menu-set-font	sets the font to whatever you want
+M-x shell	opens up a shell session
+M-x	tetris	opens up a game tetris frame
+M-x visual-line-mode	adjusts the words to the frame size without breaking words 
+Ctrl-x n s	focus to a section
+Ctrl-x n w	unfocus the section
+Ctrl-x s	save file
+Ctrl-x u or Ctrl-x /	undo
+Alt-x auto-complete-mode
+Alt-x count-words
+Alt-x eval-buffer - evaluates the buffer, so that you do not need to restart emacs
+Alt-x global-auto-complete-mode
+Alt-x linum-mode
+Alt-x linum-relative-mode
+Alt-x linum-relative-toggle
+Alt-x list-packages C-s packageName i x
+Alt-x list-packages - then install with "i-x"
+Alt-x load-theme <RET> name-of-theme
+Alt-x package-install RET package-name
+Alt-x package-refresh-content
+Alt-x package-safe-delete RET package-name
+Alt-x RET slime 
+Alt-x RET speedbar
+M-x w3m-print-this-url	prints the current url. Then you can paste on email messages 
+C-x m	compose-mail
+C-x 5 m	compose-mail-other-frame
+C-x 4 m	compose-mail-other window
+Alt-x electric-pair-mode	regulates the ugly parens in emacs
+Alt-x set-frame-font RET (font name, font size, etc...) 
+C-x m RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc...)
+C-x m RET ispell-change-dictionary RET (brasileiro/english/espanish/espanol/ etc...)
+C-x r j r	Jump to the position (a mark) and buffer saved in register r (jump-to-register)
+C-x r <SPC> r	Record the position (a mark) of point and the current buffer in register r (point-to-register)
+M-x m RET org-pandoc-export-to (...)
+pwdcp.sh	copies a local path to clipboard - this is a shell command
+guu	downcase line
+gUU	upercase line
+qd (to begin) (commands) q (to stop)	defines a macro called "d" - to play it type @d - to view the registers, ":reg" - shows all registers; ":reg abc" - shows registers ab and c
+(maximize-window)
+(minimize-windows)
+(new-frame )
+(rotate-frame-clockwise)
+visual setection :!sort	alphabetically sorts a selected area
+
+mbsync -V gmail
+mu index --maildir=(G)gmail
+C-x m	compose-mail
+C-x 5 m	compose-mail-other-frame
+C-x 4 m	compose-mail-other window
+mu4e-org-mode	opens mu4e-org-mode
+message-send	sends a message in  mu4e-org-mode
+message-send-and-exit	sends a message and exits in  mu4e-org-mode
+helm-mu-contacts	look for contacts to send an email
+
+M-x org-insert-structure-template RET TAB or (C-c C-,)	then write the template you want, e.g. (python sh emacs-lisp etc.)
+
+org-insert-link	if you want to insert images
+org-toggle-inline-images	if you want to toogle them 
+
+Vim-like completion inside buffers
+
+Call them with "M-x"
+commint-dynamic-complete
+commint-dynamic-complete-filename
+commint-completion-at-point
+icicle-commint-dynamic-complete-filename
+helm-commint-prompts
+C-u M! diatheke -b $BibleVersion -f plain -k John 3:15	insert a Bible text inside a buffer (emacs normal-mode)
+:r!diatheke -b $BibleVersion -f plain -k John 3:15	insert a Bible text inside a buffer (evil-mode)
+w3m-browser-url	opens a url in w3m
+
+Snippets
+sbel	source-block-emacs-lisp
+sbupkg	source-block-use-package
+time	insert current time and date in the buffer
+C-u C-c .	insert current time and date in the buffer
+C-q TAB	insert a TAB in the buffer
+M-x calculator	opens a calculator in emacs
+M-x calendar	opens a calendar in emacs 
+M-x butterfly	unleashes the power of the butterfly
+
+Installed packages
+
+in evil-mode:
+M-x list-packages; /installed (they will be highlighted); v (for visual-mode); j (to select them); y (to copy them); open a new buffer and paste them.
+
+Tutorial workflow 
+M-s ! inv_Win.sh	for compton compositor 
+M-s ! screenkey	for showing keys
+Then you can record your screen
+
+Emacs customization 
+
+M-x customize-option <RET> option <RET>
+M-x customize-variable <RET> option <RET>
+    Set up a customization buffer for just one user option, option.
+M-x customize-face <RET> face <RET>
+    Set up a customization buffer for just one face, face.
+M-x customize-group <RET> group <RET>
+    Set up a customization buffer for just one group, group.
+M-x customize-apropos <RET> regexp <RET>
+    Set up a customization buffer for all the settings and groups that match
+    regexp.
+M-x customize-changed <RET> version <RET>
+    Set up a customization buffer with all the settings and groups whose
+    meaning has changed since Emacs version version.
+M-x customize-changed-options <RET> version <RET>
+    Set up a customization buffer with all the options whose meaning or
+    default values have changed since Emacs version version.
+M-x customize-saved
+    Set up a customization buffer containing all settings that you have saved
+    with customization buffers.
+M-x customize-unsaved
+    Set up a customization buffer containing all settings that you have set
+    but not saved.
+
+#+END_VERSE

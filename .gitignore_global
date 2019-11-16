@@ -266,6 +266,7 @@ stumpwm-git.pdf
 autosave/
 auto-save-list/
 backups/
+.cache/
 el-get/
 elpa/
 custom-vars.txt
