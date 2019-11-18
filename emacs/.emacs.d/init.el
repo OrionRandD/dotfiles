@@ -444,6 +444,8 @@
   (setq company-minimum-prefix-length 3)
   (setq company-idle-delay 0.1)
 
+  (setq company-dabbrev-downcase nil)
+
 (eval-after-load 'company
   '(progn
      (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
@@ -749,6 +751,19 @@ file with `edit-abbrevs`"
      (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
      (global-set-key (kbd "C-x C-f") 'helm-find-files)
 ;; helm:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*helm-deft][helm-deft:1]]
+(straight-use-package '(helm-deft :type git
+                                  :host github
+                                  :repo "dfeich/helm-deft"))
+
+(require 'helm-deft)
+(setq helm-deft-extension "org")
+(setq helm-deft-dir-list '(
+                           "~/org~/"
+                           "~/Documents/"
+                           ))
+;; helm-deft:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*beacon][beacon:1]]
 (use-package beacon
@@ -3160,77 +3175,6 @@ bbdb-popup-target-lines  1
 :straight t)
 ;; emmet-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*xah modes][xah modes:1]]
-(dolist (package '(xah-lookup xah-elisp-mode xah-find xah-fly-keys xah-get-thing xah-math-input xah-reformat-code xah-replace-pairs xahk-mode xah-css-mode))
-    (unless (package-installed-p package)
-      (package-install package))
-      (require package))
-
-;; http://ergoemacs.org/misc/ergoemacs_vi_mode.html
-;; see also https://ergoemacs.github.io/
-
-(require 'xah-fly-keys)
-
-(xah-fly-keys-set-layout "qwerty") ; required
-
-(xah-fly-keys 1)
-
-(global-set-key (kbd "<escape>") 'xah-fly-mode-toggle)
-(add-hook 'magit-popup-mode-hook 'xah-fly-insert-mode-activate)
-
-;; possible layout values:
-
-;;;;;;;;;;;;;
-;; "azerty"
-;; "azerty-be"
-;; "colemak"
-;; "colemak-mod-dh"
-;; "dvorak"
-;; "programer-dvorak"
-;; "qwerty"
-;; "qwerty-abnt"
-;; "qwertz"
-;; "workman"
-;;;;;;;;;;;;;
-
-;; manipulationg resgisters
-;; https://ftp.gnu.org/old-gnu/Manuals/emacs-21.2/html_chapter/emacs_12.html
-
-(defun xah-copy-to-register-1 ()
-  "Copy current line or text selection to register 1.
-See also: `xah-paste-from-register-1', `copy-to-register'.
-
-URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
-Version 2017-01-23"
-  (interactive)
-  (let ($p1 $p2)
-    (if (region-active-p)
-        (progn (setq $p1 (region-beginning))
-               (setq $p2 (region-end)))
-      (progn (setq $p1 (line-beginning-position))
-             (setq $p2 (line-end-position))))
-    (copy-to-register ?1 $p1 $p2)
-    (message "Copied to register 1: 「%s」." (buffer-substring-no-properties $p1 $p2))))
-
-(defun xah-paste-from-register-1 ()
-  "Paste text from register 1.
-See also: `xah-copy-to-register-1', `insert-register'.
-URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
-Version 2015-12-08"
-  (interactive)
-  (when (use-region-p)
-    (delete-region (region-beginning) (region-end)))
-  (insert-register ?1 t))
-
-(global-set-key (kbd "s-1") 'xah-copy-to-register-1) ; win-1
-(global-set-key (kbd "s-2") 'xah-paste-from-regester-1) ; win-2
-
-;; you can set  files to registers, like so:
-;; (set-register ?2 '(file . "~/.emacs.d/init.org"))
-;; sets file "init.org" to register 2
-;; see the gnu manual link above
-;; xah modes:1 ends here
-
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Ripgrep][Ripgrep:1]]
 (use-package ripgrep
   :straight t)
@@ -3311,6 +3255,92 @@ Version 2015-12-08"
   (sp-pair "'" nil :actions :rem))
 ;; smartparens:1 ends here
 
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*xah modes][xah modes:1]]
+(dolist (package '(xah-lookup xah-elisp-mode xah-find xah-fly-keys xah-get-thing xah-math-input xah-reformat-code xah-replace-pairs xahk-mode xah-css-mode))
+    (unless (package-installed-p package)
+      (package-install package))
+      (require package))
+
+;; http://ergoemacs.org/misc/ergoemacs_vi_mode.html
+;; see also https://ergoemacs.github.io/
+
+(require 'xah-fly-keys)
+
+(xah-fly-keys-set-layout "qwerty") ; required
+
+(xah-fly-keys 1)
+
+(define-key xah-fly-key-map (kbd "<C-M-g>") 'xah-fly-command-mode-activate)
+(define-key xah-fly-key-map (kbd "<C-M-g>") 'xah-fly-command-mode-activate-no-hook)
+;; (add-hook 'magit-popup-mode-hook 'xah-fly-insert-mode-activate)
+
+;; https://www.gtrun.org/post/init/#xah-fly-key
+;; edit
+(define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
+(define-key xah-fly-key-map (kbd "C-0") 'delete-region)
+(define-key xah-fly-key-map (kbd "C-n") 'next-line)
+
+;; org-mode
+(define-key xah-fly-key-map (kbd "C-c l") 'org-mac-grab-link)
+(define-key xah-fly-key-map (kbd "C-c a") 'org-agenda)
+(define-key xah-fly-key-map (kbd "C-c w") 'helm-deft)
+
+;; iseach
+(define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
+
+;; possible layout values:
+
+;;;;;;;;;;;;;
+;; "azerty"
+;; "azerty-be"
+;; "colemak"
+;; "colemak-mod-dh"
+;; "dvorak"
+;; "programer-dvorak"
+;; "qwerty"
+;; "qwerty-abnt"
+;; "qwertz"
+;; "workman"
+;;;;;;;;;;;;;
+
+;; manipulationg resgisters
+;; https://ftp.gnu.org/old-gnu/Manuals/emacs-21.2/html_chapter/emacs_12.html
+
+(defun xah-copy-to-register-1 ()
+  "Copy current line or text selection to register 1.
+See also: `xah-paste-from-register-1', `copy-to-register'.
+
+URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
+Version 2017-01-23"
+  (interactive)
+  (let ($p1 $p2)
+    (if (region-active-p)
+        (progn (setq $p1 (region-beginning))
+               (setq $p2 (region-end)))
+      (progn (setq $p1 (line-beginning-position))
+             (setq $p2 (line-end-position))))
+    (copy-to-register ?1 $p1 $p2)
+    (message "Copied to register 1: 「%s」." (buffer-substring-no-properties $p1 $p2))))
+
+(defun xah-paste-from-register-1 ()
+  "Paste text from register 1.
+See also: `xah-copy-to-register-1', `insert-register'.
+URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
+Version 2015-12-08"
+  (interactive)
+  (when (use-region-p)
+    (delete-region (region-beginning) (region-end)))
+  (insert-register ?1 t))
+
+(global-set-key (kbd "s-1") 'xah-copy-to-register-1) ; win-1
+(global-set-key (kbd "s-2") 'xah-paste-from-regester-1) ; win-2
+
+;; you can set  files to registers, like so:
+;; (set-register ?2 '(file . "~/.emacs.d/init.org"))
+;; sets file "init.org" to register 2
+;; see the gnu manual link above
+;; xah modes:1 ends here
+
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*free-keys][free-keys:1]]
 (straight-use-package 'free-keys)
 ;; free-keys:1 ends here
@@ -3322,4 +3352,3 @@ Version 2015-12-08"
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Org-mode tutorials][Org-mode tutorials:1]]
 
 ;; Org-mode tutorials:1 ends here
-(put 'dired-find-alternate-file 'disabled nil)
