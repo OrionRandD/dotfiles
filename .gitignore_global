@@ -278,6 +278,7 @@ quelpa/
 snippets/
 straight/
 transient/
+tags
 undo/
 var/
 abbrev_defs
@@ -334,3 +335,5 @@ recentf
 recentf~
 results
 rs_emacs.sh*
+amx-items
+lea_init.org

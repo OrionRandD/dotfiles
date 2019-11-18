@@ -1,4 +1,4 @@
-# -*- after-save-hook: (org-babel-tangle); -*-
+ -*- after-save-hook: (org-babel-tangle); -*-
 # Local IspellDict: en
 # Created 2017-07-15 Sat 19:15
 #+TITLE: Emacs init file
@@ -81,8 +81,11 @@ Note: for removing a package, delete it from the init.el and from the org file, 
 
      (custom-set-variables
           '(initial-frame-alist (quote ((fullscreen . maximized)))))
-    
+     ;; for customizing the face (fonts), do:
+     ;; M-x customize-face RET default RET    
      ;;(setq inhibit-startup-screen t)
+     (set-default-font "Source Code Pro" nil t)
+     (set-face-attribute 'default nil :height 105)
      (visual-line-mode 1)
      (global-visual-line-mode 1)
      (load-theme 'misterioso)
@@ -136,6 +139,7 @@ Note: for removing a package, delete it from the init.el and from the org file, 
 (scroll-bar-mode               -1) ; And no scroll bar either
 (show-paren-mode                1) ; Highlight matching parenthesis
 (tool-bar-mode                 -1) ; No tool bar, please
+(setq create-lockfiles nil)        ; do not save '#' lockfiles
 
  #+END_SRC
 
@@ -430,7 +434,8 @@ disabled -> I spend more time in Org-mode than I do writing Elisp.
 
  #+BEGIN_SRC emacs-lisp
 
-;;   (setq initial-major-mode 'org-mode)
+  ;;  (setq initial-major-mode 'org-mode)
+  ;;  (setq initial-major-mode 'fundamental-mode)
 
  #+END_SRC
 
@@ -470,7 +475,7 @@ disabled -> I spend more time in Org-mode than I do writing Elisp.
   ))
 (straight-use-package pkgname))
 
-  (global-set-key (kbd "<f8>") 'theme-looper-enable-random-theme)
+  (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
 
  #+END_SRC
 
@@ -585,10 +590,34 @@ disabled -> I spend more time in Org-mode than I do writing Elisp.
 
 #+BEGIN_SRC emacs-lisp 
 
+(global-set-key [f6] 'spell-checker)
+(global-set-key [f7] 'ispell-buffer)
+
+(require 'ispell)
+(require 'flyspell)
+
+(defun spell-checker ()
+  "spell checker (on/off) with selectable dictionary"
+  (interactive)
+  (if flyspell-mode
+      (flyspell-mode-off)
+    (progn
+      (flyspell-mode)
+      (ispell-change-dictionary
+       (completing-read
+        "Use new dictionary (RET for *default*): "
+        (and (fboundp 'ispell-valid-dictionary-list)
+         (mapcar 'list (ispell-valid-dictionary-list)))
+        nil t))
+      )))
+
 (defun my-turn-spell-checking-on ()
   "Turn flyspell-mode on."
   (flyspell-mode 1))
 (add-hook 'text-mode-hook 'my-turn-spell-checking-on)
+
+;; enable flyspell in text mode (and derived modes)
+;; (add-hook 'text-mode-hook 'flyspell-mode)
 
 #+END_SRC
 
@@ -1722,7 +1751,14 @@ you have to issue the command etags in the working directories
 
 #+BEGIN_SRC emacs-lisp
 
-   (straight-use-package 'linum)
+(use-package linum-relative
+  :ensure t
+  :init
+  (setq linum-format 'linum-relative)
+  :config
+  (setq linum-relative-current-symbol ""))
+
+  ;; (straight-use-package 'linum)
 
   ;; (setq linum-relative-current-symbol "")
 
@@ -1990,12 +2026,34 @@ you have to issue the command etags in the working directories
 
 #+BEGIN_SRC emacs-lisp
 
-  (straight-use-package 'multiple-cursors)
-  (require 'multiple-cursors)
-  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+  ;; (straight-use-package 'multiple-cursors)
+  ;; (require 'multiple-cursors)
+  ;; (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+  ;; (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  ;; (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  ;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+(use-package multiple-cursors
+  :ensure t
+  :bind 
+  (("C->" . mc/mark-next-like-this)
+   ("C-<" . mc/mark-previous-like-this)
+   ("C-M->" . mc/unmark-next-like-this)
+   ("C-M-<" . mc/unmark-previous-like-this)
+   ("C-*" . mc/mark-all-like-this))
+  :init
+  (bind-keys :prefix-map mc-map
+             :prefix "C-x m"
+             ("C-a" . mc/edit-beginnings-of-lines)
+             ("C-e" . mc/edit-ends-of-lines)
+             ("C-m" mc/mark-all-dwim)
+             ("a" . mc/mark-all-like-this)
+             ("d" . mc/mark-all-symbols-like-this-in-defun)
+             ("h" . mc-hide-unmatched-lines-mode)
+             ("i" . mc/insert-numbers)
+             ("l" . mc/edit-lines)
+             ("r" . mc/reverse-regions)
+             ("s" . mc/sort-regions)))
 
 #+END_SRC
 
@@ -2746,6 +2804,17 @@ you have to issue the command etags in the working directories
 ;;    (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 #+END_SRC
+
+** amx - a fork of smex
+
+#+begin_src emacs-lisp 
+
+(use-package amx
+ :straight t
+ :config
+  (amx-mode 1))
+
+#+end_src
 
 ** cyber-filelist
 
@@ -3689,6 +3758,49 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 
 #+END_SRC
 
+** key-chords
+
+#+begin_src emacs-lisp
+
+(use-package key-chord
+  :ensure t
+  :init
+  (progn 
+    (setq key-chord-two-keys-delay .015
+          key-chord-one-key-delay .020)
+    (key-chord-mode 1)
+    (key-chord-define-global "cg" 'undo)
+    (key-chord-define-global "yp" 'other-window)
+    (key-chord-define-global ";0" 'delete-window)
+    (key-chord-define-global ";1" 'delete-other-windows)
+    (key-chord-define-global ";2" 'split-window-below)
+    (key-chord-define-global ";3"  'split-window-right)
+    (key-chord-define-global ",." 'beginning-of-buffer)
+    (key-chord-define-global ".p" 'end-of-buffer)
+    (key-chord-define-global "jw" 'avy-goto-word-or-subword-1)
+    (key-chord-define-global "jc" 'avy-goto-char)
+    (key-chord-define-global "jl" 'avy-goto-line)
+    ;; (key-chord-define-global "jb" 'ace-jump-buffer)
+    ;; (key-chord-define-global "jo" 'ace-jump-buffer-other-window)
+    (key-chord-define-global "'l" 'ido-switch-buffer)
+    (key-chord-define-global "'-" 'smex)
+    (key-chord-define-global ",r" 'find-file)
+    (key-chord-define-global ".c" 'ido-dired)
+    (key-chord-define-global "0r" ")")
+    (key-chord-define-global "1'" "!")
+    (key-chord-define-global "2," "@")
+    (key-chord-define-global "3." "#")
+    (key-chord-define-global "4p" "$")
+    (key-chord-define-global "5y" "%")
+    (key-chord-define-global "6y" "^")
+    (key-chord-define-global "7f" "&")
+    (key-chord-define-global "8g" "*")
+    (key-chord-define-global "9c" "(")
+    (key-chord-define-global "-l" "_")
+    (key-chord-define emacs-lisp-mode-map "7f" "&optional ")))
+
+#+end_src
+
 ** better-shell 
 
 #+BEGIN_SRC emacs-lisp
@@ -3913,10 +4025,37 @@ You can customize this variable
 
 #+BEGIN_SRC emacs-lisp
 
-  ;; (dolist (package '(xah-lookup xah-elisp-mode xah-find xah-get-thing xah-math-input xah-reformat-code xah-replace-pairs xahk-mode xah-css-mode))
-  ;;  (unless (package-installed-p package)
-  ;;    (package-install package))
-  ;;    (require package))
+   (dolist (package '(xah-lookup xah-elisp-mode xah-find xah-fly-keys xah-get-thing xah-math-input xah-reformat-code xah-replace-pairs xahk-mode xah-css-mode))
+    (unless (package-installed-p package)
+      (package-install package))
+      (require package))
+
+;; http://ergoemacs.org/misc/ergoemacs_vi_mode.html
+;; see also https://ergoemacs.github.io/
+
+(require 'xah-fly-keys)
+
+(xah-fly-keys-set-layout "qwerty") ; required
+
+(xah-fly-keys 1)
+
+(global-set-key (kbd "<escape>") 'xah-fly-mode-toggle)
+(add-hook 'magit-popup-mode-hook 'xah-fly-insert-mode-activate)
+
+;; possible layout values:
+
+;;;;;;;;;;;;;
+;; "azerty"
+;; "azerty-be"
+;; "colemak"
+;; "colemak-mod-dh"
+;; "dvorak"
+;; "programer-dvorak"
+;; "qwerty"
+;; "qwerty-abnt"
+;; "qwertz"
+;; "workman"
+;;;;;;;;;;;;;
 
 ;; manipulationg resgisters
 ;; https://ftp.gnu.org/old-gnu/Manuals/emacs-21.2/html_chapter/emacs_12.html
@@ -4042,6 +4181,24 @@ Version 2015-12-08"
 
 #+END_SRC
 
+** smartparens
+
+#+BEGIN_SRC emacs-lisp
+    (use-package smartparens
+      :straight t
+      :config
+      ;; Activate smartparens globally
+      (smartparens-global-mode t)
+      (show-smartparens-global-mode t)
+    
+      ;; Activate smartparens in minibuffer
+      (add-hook 'eval-expression-minibuffer-setup-hook #'smartparens-mode)
+    
+      ;; Do not pair simple quotes
+      (sp-pair "'" nil :actions :rem))
+
+#+END_SRC
+
 ** free-keys
 
 Show unbound keys available for bounding 
@@ -4068,6 +4225,7 @@ Show unbound keys available for bounding
  https://github.com/caisah/emacs.dz
  https://github.com/DiegoVicen/my-emacs#my-blog-publishing-configuration
  https://github.com/myTerminal/super-emacs
+ https://github.com/mwfogleman/config/blob/master/home/.emacs.d/michael.org
 
 #+BEGIN_SRC emacs-lisp 
 
@@ -4253,5 +4411,7 @@ M-x customize-saved
 M-x customize-unsaved
     Set up a customization buffer containing all settings that you have set
     but not saved.
+;; for customizing the face (fonts), do:
+;; M-x customize-face RET default RET    
 
 #+END_VERSE

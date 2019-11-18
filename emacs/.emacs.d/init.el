@@ -51,8 +51,11 @@
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*small configs][small configs:1]]
 (custom-set-variables
           '(initial-frame-alist (quote ((fullscreen . maximized)))))
-    
+     ;; for customizing the face (fonts), do:
+     ;; M-x customize-face RET default RET    
      ;;(setq inhibit-startup-screen t)
+     (set-default-font "Source Code Pro" nil t)
+     (set-face-attribute 'default nil :height 105)
      (visual-line-mode 1)
      (global-visual-line-mode 1)
      (load-theme 'misterioso)
@@ -106,6 +109,7 @@
 (scroll-bar-mode               -1) ; And no scroll bar either
 (show-paren-mode                1) ; Highlight matching parenthesis
 (tool-bar-mode                 -1) ; No tool bar, please
+(setq create-lockfiles nil)        ; do not save '#' lockfiles
 ;; small configs:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*smart-hungry-delete][smart-hungry-delete:1]]
@@ -297,7 +301,8 @@
 ;; persistent scratch buffer:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*scratch org-mode][scratch org-mode:1]]
-;;   (setq initial-major-mode 'org-mode)
+;;  (setq initial-major-mode 'org-mode)
+;;  (setq initial-major-mode 'fundamental-mode)
 ;; scratch org-mode:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*centered-window][centered-window:1]]
@@ -325,7 +330,7 @@
   ))
 (straight-use-package pkgname))
 
-  (global-set-key (kbd "<f8>") 'theme-looper-enable-random-theme)
+  (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
 ;; theme and theme-looper:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*wrap lines][wrap lines:1]]
@@ -397,10 +402,34 @@
 ;; org-evil:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*flyspell][flyspell:1]]
+(global-set-key [f6] 'spell-checker)
+(global-set-key [f7] 'ispell-buffer)
+
+(require 'ispell)
+(require 'flyspell)
+
+(defun spell-checker ()
+  "spell checker (on/off) with selectable dictionary"
+  (interactive)
+  (if flyspell-mode
+      (flyspell-mode-off)
+    (progn
+      (flyspell-mode)
+      (ispell-change-dictionary
+       (completing-read
+        "Use new dictionary (RET for *default*): "
+        (and (fboundp 'ispell-valid-dictionary-list)
+         (mapcar 'list (ispell-valid-dictionary-list)))
+        nil t))
+      )))
+
 (defun my-turn-spell-checking-on ()
   "Turn flyspell-mode on."
   (flyspell-mode 1))
 (add-hook 'text-mode-hook 'my-turn-spell-checking-on)
+
+;; enable flyspell in text mode (and derived modes)
+;; (add-hook 'text-mode-hook 'flyspell-mode)
 ;; flyspell:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*icicles][icicles:1]]
@@ -1282,28 +1311,35 @@ flycheck-plantuml))
 ;; jabber:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*linum][linum:1]]
-(straight-use-package 'linum)
+(use-package linum-relative
+  :ensure t
+  :init
+  (setq linum-format 'linum-relative)
+  :config
+  (setq linum-relative-current-symbol ""))
 
-;; (setq linum-relative-current-symbol "")
+  ;; (straight-use-package 'linum)
 
-;; (linum-relative-global-mode)
-;; (eval-after-load "linum"
-;;   '(set-face-attribute 'linum nil :height 100))
+  ;; (setq linum-relative-current-symbol "")
 
-;; (autopair-global-mode)
+  ;; (linum-relative-global-mode)
+  ;; (eval-after-load "linum"
+  ;;   '(set-face-attribute 'linum nil :height 100))
 
-;; (global-undo-tree-mode)
+  ;; (autopair-global-mode)
 
-;; (defun linum-update-window-scale-fix (win)
-;;   "fix linum for scaled text"
-;;   (set-window-margins win
-;; 		      (ceiling (* (if (boundp 'text-scale-mode-step)
-;; 				      (expt text-scale-mode-step
-;; 					    text-scale-mode-amount) 1)
-;; 				  (if (car (window-margins))
-;; 				      (car (window-margins)) 1)
-;; 				  ))))
-;; (advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
+  ;; (global-undo-tree-mode)
+
+  ;; (defun linum-update-window-scale-fix (win)
+  ;;   "fix linum for scaled text"
+  ;;   (set-window-margins win
+  ;; 		      (ceiling (* (if (boundp 'text-scale-mode-step)
+  ;; 				      (expt text-scale-mode-step
+  ;; 					    text-scale-mode-amount) 1)
+  ;; 				  (if (car (window-margins))
+  ;; 				      (car (window-margins)) 1)
+  ;; 				  ))))
+  ;; (advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
 ;; linum:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*lyrics][lyrics:1]]
@@ -1506,12 +1542,34 @@ flycheck-plantuml))
 ;; more stuff:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*multilple-cursors][multilple-cursors:1]]
-(straight-use-package 'multiple-cursors)
-(require 'multiple-cursors)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+;; (straight-use-package 'multiple-cursors)
+  ;; (require 'multiple-cursors)
+  ;; (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+  ;; (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  ;; (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  ;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+(use-package multiple-cursors
+  :ensure t
+  :bind 
+  (("C->" . mc/mark-next-like-this)
+   ("C-<" . mc/mark-previous-like-this)
+   ("C-M->" . mc/unmark-next-like-this)
+   ("C-M-<" . mc/unmark-previous-like-this)
+   ("C-*" . mc/mark-all-like-this))
+  :init
+  (bind-keys :prefix-map mc-map
+             :prefix "C-x m"
+             ("C-a" . mc/edit-beginnings-of-lines)
+             ("C-e" . mc/edit-ends-of-lines)
+             ("C-m" mc/mark-all-dwim)
+             ("a" . mc/mark-all-like-this)
+             ("d" . mc/mark-all-symbols-like-this-in-defun)
+             ("h" . mc-hide-unmatched-lines-mode)
+             ("i" . mc/insert-numbers)
+             ("l" . mc/edit-lines)
+             ("r" . mc/reverse-regions)
+             ("s" . mc/sort-regions)))
 ;; multilple-cursors:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*mu4e][mu4e:1]]
@@ -2121,6 +2179,13 @@ Suggest the URL title as a description for resource."
 ;;    (global-set-key (kbd "M-x") 'smex)
 ;;    (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 ;; smex:1 ends here
+
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*amx - a fork of smex][amx - a fork of smex:1]]
+(use-package amx
+ :straight t
+ :config
+  (amx-mode 1))
+;; amx - a fork of smex:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*cyber-filelist][cyber-filelist:1]]
 (defvar cyber-filelist nil "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
@@ -2895,6 +2960,45 @@ bbdb-popup-target-lines  1
       (which-key-mode t))
 ;; more niceties:1 ends here
 
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*key-chords][key-chords:1]]
+(use-package key-chord
+  :ensure t
+  :init
+  (progn 
+    (setq key-chord-two-keys-delay .015
+          key-chord-one-key-delay .020)
+    (key-chord-mode 1)
+    (key-chord-define-global "cg" 'undo)
+    (key-chord-define-global "yp" 'other-window)
+    (key-chord-define-global ";0" 'delete-window)
+    (key-chord-define-global ";1" 'delete-other-windows)
+    (key-chord-define-global ";2" 'split-window-below)
+    (key-chord-define-global ";3"  'split-window-right)
+    (key-chord-define-global ",." 'beginning-of-buffer)
+    (key-chord-define-global ".p" 'end-of-buffer)
+    (key-chord-define-global "jw" 'avy-goto-word-or-subword-1)
+    (key-chord-define-global "jc" 'avy-goto-char)
+    (key-chord-define-global "jl" 'avy-goto-line)
+    ;; (key-chord-define-global "jb" 'ace-jump-buffer)
+    ;; (key-chord-define-global "jo" 'ace-jump-buffer-other-window)
+    (key-chord-define-global "'l" 'ido-switch-buffer)
+    (key-chord-define-global "'-" 'smex)
+    (key-chord-define-global ",r" 'find-file)
+    (key-chord-define-global ".c" 'ido-dired)
+    (key-chord-define-global "0r" ")")
+    (key-chord-define-global "1'" "!")
+    (key-chord-define-global "2," "@")
+    (key-chord-define-global "3." "#")
+    (key-chord-define-global "4p" "$")
+    (key-chord-define-global "5y" "%")
+    (key-chord-define-global "6y" "^")
+    (key-chord-define-global "7f" "&")
+    (key-chord-define-global "8g" "*")
+    (key-chord-define-global "9c" "(")
+    (key-chord-define-global "-l" "_")
+    (key-chord-define emacs-lisp-mode-map "7f" "&optional ")))
+;; key-chords:1 ends here
+
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*better-shell][better-shell:1]]
 (use-package better-shell
 :straight t
@@ -3057,10 +3161,37 @@ bbdb-popup-target-lines  1
 ;; emmet-mode:1 ends here
 
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*xah modes][xah modes:1]]
-;; (dolist (package '(xah-lookup xah-elisp-mode xah-find xah-get-thing xah-math-input xah-reformat-code xah-replace-pairs xahk-mode xah-css-mode))
-  ;;  (unless (package-installed-p package)
-  ;;    (package-install package))
-  ;;    (require package))
+(dolist (package '(xah-lookup xah-elisp-mode xah-find xah-fly-keys xah-get-thing xah-math-input xah-reformat-code xah-replace-pairs xahk-mode xah-css-mode))
+    (unless (package-installed-p package)
+      (package-install package))
+      (require package))
+
+;; http://ergoemacs.org/misc/ergoemacs_vi_mode.html
+;; see also https://ergoemacs.github.io/
+
+(require 'xah-fly-keys)
+
+(xah-fly-keys-set-layout "qwerty") ; required
+
+(xah-fly-keys 1)
+
+(global-set-key (kbd "<escape>") 'xah-fly-mode-toggle)
+(add-hook 'magit-popup-mode-hook 'xah-fly-insert-mode-activate)
+
+;; possible layout values:
+
+;;;;;;;;;;;;;
+;; "azerty"
+;; "azerty-be"
+;; "colemak"
+;; "colemak-mod-dh"
+;; "dvorak"
+;; "programer-dvorak"
+;; "qwerty"
+;; "qwerty-abnt"
+;; "qwertz"
+;; "workman"
+;;;;;;;;;;;;;
 
 ;; manipulationg resgisters
 ;; https://ftp.gnu.org/old-gnu/Manuals/emacs-21.2/html_chapter/emacs_12.html
@@ -3165,6 +3296,21 @@ Version 2015-12-08"
 (straight-use-package 'ix)
 ;; pastbin:1 ends here
 
+;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*smartparens][smartparens:1]]
+(use-package smartparens
+  :straight t
+  :config
+  ;; Activate smartparens globally
+  (smartparens-global-mode t)
+  (show-smartparens-global-mode t)
+
+  ;; Activate smartparens in minibuffer
+  (add-hook 'eval-expression-minibuffer-setup-hook #'smartparens-mode)
+
+  ;; Do not pair simple quotes
+  (sp-pair "'" nil :actions :rem))
+;; smartparens:1 ends here
+
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*free-keys][free-keys:1]]
 (straight-use-package 'free-keys)
 ;; free-keys:1 ends here
@@ -3176,3 +3322,4 @@ Version 2015-12-08"
 ;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Org-mode tutorials][Org-mode tutorials:1]]
 
 ;; Org-mode tutorials:1 ends here
+(put 'dired-find-alternate-file 'disabled nil)
