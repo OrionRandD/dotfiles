@@ -2882,10 +2882,10 @@ bbdb-popup-target-lines  1
 ;; http://ergoemacs.org/misc/ergoemacs_vi_mode.html
 ;; see also https://ergoemacs.github.io/
 
-(require 'xah-fly-keys)
+;;(require 'xah-fly-keys)
 
-(xah-fly-keys-set-layout "qwerty") ; required
-
+(xah-fly-keys-set-layout "qwerty-abnt") ; required
+;; (xah-fly-keys-set-layout "qwerty") ; required
 (xah-fly-keys 1)
 
 (define-key xah-fly-key-map (kbd "<C-M-g>") 'xah-fly-command-mode-activate)
