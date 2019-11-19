@@ -1,9 +1,15 @@
- -*- after-save-hook: (org-babel-tangle); -*-
+-*- after-save-hook: (org-babel-tangle); -*-
 # Local IspellDict: en
 # Created 2017-07-15 Sat 19:15
 #+TITLE: Emacs init file
 #+AUTHOR: Vagner Rener
-#+PROPERTY: header-args:emacs-lisp :exports code :tangle init.el :comments yes :results silent
+#+PROPERTY: header-args:emacs-lisp :exports code :tangle init.el :comments 
+yes :results silent
+
+Notes: When installing a new build for emacs, download this package in
+the first hand.
+https://github.com/technomancy/better-defaults
+This time, I did not do that. Because I didn't know about it
 
 The keyword ":tangle yes" will automatically create a better
 "emacs.el" which is good for debugging emacs
@@ -636,66 +642,81 @@ disabled -> I spend more time in Org-mode than I do writing Elisp.
 
 #+BEGIN_SRC emacs-lisp
 
-   (straight-use-package 'company)
-   (require 'company)
-   (add-hook 'after-init-hook 'global-company-mode)
-   (setq company-minimum-prefix-length 3)
-   (setq company-idle-delay 0.1)
+       (straight-use-package 'company)
+       (require 'company)
+       (add-hook 'after-init-hook 'global-company-mode)
+       (setq company-minimum-prefix-length 3)
+       (setq company-idle-delay 0.1)
 
-   (setq company-dabbrev-downcase nil)
+       (setq company-dabbrev-downcase nil)
 
- (eval-after-load 'company
-   '(progn
-      (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
-      (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)))
-     
- (eval-after-load 'company
-   '(progn
-      (define-key company-active-map (kbd "S-TAB") 'company-select-previous)
-      (define-key company-active-map (kbd "<backtab>") 'company-select-previous)))
-     
- (setq company-frontends
-       '(company-pseudo-tooltip-unless-just-one-frontend
-         company-preview-frontend
-         company-echo-metadata-frontend))
-	
- (setq company-require-match 'never)
+     (eval-after-load 'company
+       '(progn
+          (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+          (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)))
 
- (setq company-auto-complete t)
+     (eval-after-load 'company
+       '(progn
+          (define-key company-active-map (kbd "S-TAB") 'company-select-previous)
+          (define-key company-active-map (kbd "<backtab>") 'company-select-previous)))
 
-  (defun my-company-visible-and-explicit-action-p ()
-     (and (company-tooltip-visible-p)
-          (company-explicit-action-p)))
+     (setq company-frontends
+           '(company-pseudo-tooltip-unless-just-one-frontend
+             company-preview-frontend
+             company-echo-metadata-frontend))
 
-   (defun company-ac-setup ()
-     "Sets up `company-mode' to behave similarly to `auto-complete-mode'."
-     (setq company-require-match nil)
-     (setq company-auto-complete #'my-company-visible-and-explicit-action-p)
-     (setq company-frontends '(company-echo-metadata-frontend
-                               company-pseudo-tooltip-unless-just-one-frontend-with-delay
-                               company-preview-frontend))
-     (define-key company-active-map [tab]
-       'company-select-next-if-tooltip-visible-or-complete-selection)
-     (define-key company-active-map (kbd "TAB")
-       'company-select-next-if-tooltip-visible-or-complete-selection))
+     (setq company-require-match 'never)
 
-    (company-ac-setup)
-   
-  (custom-set-faces
-      '(company-preview
-	((t (:foreground "darkgray" :underline t))))
-      '(company-preview-common
-	((t (:inherit company-preview))))
-      '(company-tooltip
-	((t (:background "lightgray" :foreground "black"))))
-      '(company-tooltip-selection
-	((t (:background "steelblue" :foreground "white"))))
-      '(company-tooltip-common
-	((((type x)) (:inherit company-tooltip :weight bold))
-         (t (:inherit company-tooltip))))
-      '(company-tooltip-common-selection
-	((((type x)) (:inherit company-tooltip-selection :weight bold))
-         (t (:inherit company-tooltip-selection)))))
+     (setq company-auto-complete t)
+
+      (defun my-company-visible-and-explicit-action-p ()
+         (and (company-tooltip-visible-p)
+              (company-explicit-action-p)))
+
+       (defun company-ac-setup ()
+         "Sets up `company-mode' to behave similarly to `auto-complete-mode'."
+         (setq company-require-match nil)
+         (setq company-auto-complete #'my-company-visible-and-explicit-action-p)
+         (setq company-frontends '(company-echo-metadata-frontend
+                                   company-pseudo-tooltip-unless-just-one-frontend-with-delay
+                                   company-preview-frontend))
+         (define-key company-active-map [tab]
+           'company-select-next-if-tooltip-visible-or-complete-selection)
+         (define-key company-active-map (kbd "TAB")
+           'company-select-next-if-tooltip-visible-or-complete-selection))
+
+        (company-ac-setup)
+
+      (custom-set-faces
+          '(company-preview
+            ((t (:foreground "darkgray" :underline t))))
+          '(company-preview-common
+            ((t (:inherit company-preview))))
+          '(company-tooltip
+            ((t (:background "lightgray" :foreground "black"))))
+          '(company-tooltip-selection
+            ((t (:background "steelblue" :foreground "white"))))
+          '(company-tooltip-common
+            ((((type x)) (:inherit company-tooltip :weight bold))
+             (t (:inherit company-tooltip))))
+          '(company-tooltip-common-selection
+            ((((type x)) (:inherit company-tooltip-selection :weight bold))
+             (t (:inherit company-tooltip-selection)))))
+
+  ;;;;;;;;;;;;;;;;;;
+
+   (straight-use-package 'company-quickhelp)
+  (setq company-quickhelp-mode 1)
+ 
+   ;;;;;;;;;;;;;;;;;;
+
+  (straight-use-package '(company-englisp-helper
+                             :type git
+                             :host github
+                             :repo "manateelazycat/company-english-helper"))
+     (require 'company-english-helper)
+
+   ;;;;;;;;;;;;;;;;;;
 
 #+END_SRC
  
@@ -4449,3 +4470,4 @@ M-x customize-unsaved
 ;; M-x customize-face RET default RET    
 
 #+END_VERSE
+

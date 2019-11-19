@@ -1,4 +1,3 @@
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*straight][straight:1]]
 ;;; Code:
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/elpa"))
@@ -28,9 +27,7 @@
   use-package-always-defer t)
 
 (straight-use-package 'use-package)
-;; straight:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*use-package][use-package:1]]
 (defun cyber/use-package-if-prehook (name _keyword pred rest state)
     (unless pred (error "predicated failed; skipping package")))
 
@@ -42,13 +39,9 @@
 ;; https://zzamboni.org/post/my-emacs-configuration-with-commentary/
 
    (customize-set-variable 'use-package-always-defer t)
-;; use-package:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*speed up Emacs][speed up Emacs:1]]
 (setq gc-cons-threshold (* 100 1024 1024))
-;; speed up Emacs:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*small configs][small configs:1]]
 (custom-set-variables
           '(initial-frame-alist (quote ((fullscreen . maximized)))))
      ;; for customizing the face (fonts), do:
@@ -110,9 +103,7 @@
 (show-paren-mode                1) ; Highlight matching parenthesis
 (tool-bar-mode                 -1) ; No tool bar, please
 (setq create-lockfiles nil)        ; do not save '#' lockfiles
-;; small configs:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*smart-hungry-delete][smart-hungry-delete:1]]
 (use-package smart-hungry-delete
   :ensure t
   :bind (("<backspace>" . smart-hungry-delete-backward-char)
@@ -120,37 +111,25 @@
   :defer nil ;; dont defer so we can add our functions to hooks 
   :config (smart-hungry-delete-add-default-hooks)
   )
-;; smart-hungry-delete:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*always murder current buffer][always murder current buffer:1]]
 (defun kill-current-buffer ()
   "Kills the current buffer."
   (interactive)
   (kill-buffer (current-buffer)))
 (global-set-key (kbd "C-x k") 'kill-current-buffer)
-;; always murder current buffer:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*kill it now][kill it now:1]]
 ;; (setq kill-buffer-query-functions (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
-;; kill it now:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*ibuffer][ibuffer:1]]
 (global-set-key (kbd "C-x b") 'ibuffer)
-;; ibuffer:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*expert-mode][expert-mode:1]]
 (setq ibuffer-expert t)
-;; expert-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*close-all-buffers][close-all-buffers:1]]
 (defun close-all-buffers ()
   "Kill all buffers without regard for their origin."
   (interactive)
   (mapc 'kill-buffer (buffer-list)))
 (global-set-key (kbd "C-M-s-k") 'close-all-buffers)
-;; close-all-buffers:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*switch-window][switch-window:1]]
 (use-package switch-window
   :ensure t
   :config
@@ -162,9 +141,7 @@
         '("a" "s" "d" "f" "j" "k" "l" "i" "o"))
   :bind
     ([remap other-window] . switch-window))
-;; switch-window:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*follow window splits][follow window splits:1]]
 (defun split-and-follow-horizontally ()
   (interactive)
   (split-window-below)
@@ -178,9 +155,7 @@
   (balance-windows)
   (other-window 1))
 (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
-;; follow window splits:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*battery indicator][battery indicator:1]]
 (use-package fancy-battery
   :ensure t
   :config
@@ -189,22 +164,16 @@
     (if window-system
       (fancy-battery-mode)
       (display-battery-mode)))
-;; battery indicator:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*symon][symon:1]]
 (use-package symon
   :ensure t
   :bind
   ("s-h" . symon-mode))
-;; symon:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*mark-multiple][mark-multiple:1]]
 (use-package mark-multiple
   :ensure t
   :bind ("C-$" . 'mark-next-like-this))
-;; mark-multiple:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*kill-word improved][kill-word improved:1]]
 (defun cyber/kill-inner-word ()
   "Kills the entire word your cursor is in. Equivalent to 'ciw' in vim."
   (interactive)
@@ -212,9 +181,7 @@
   (backward-word)
   (kill-word 1))
 (global-set-key (kbd "C-c i w") 'cyber/kill-inner-word)
-;; kill-word improved:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*copy-word improved][copy-word improved:1]]
 (defun cyber/copy-whole-word ()
   (interactive)
   (save-excursion
@@ -223,9 +190,7 @@
     (kill-word 1)
     (yank)))
 (global-set-key (kbd "C-c w c") 'cyber/copy-whole-word)
-;; copy-word improved:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*copy-line][copy-line:1]]
 (defun cyber/copy-whole-line ()
   "Copies a line without regard for cursor position."
   (interactive)
@@ -235,51 +200,35 @@
       (point-at-bol)
       (point-at-eol)))))
 (global-set-key (kbd "C-c l c") 'cyber/copy-whole-line)
-;; copy-line:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*kill-line][kill-line:1]]
 (global-set-key (kbd "C-c l k") 'kill-whole-line)
-;; kill-line:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*pretty-mode][pretty-mode:1]]
 (when window-system
       (use-package pretty-mode
       :ensure t
       :config
       (global-pretty-mode t)))
-;; pretty-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*rainbow][rainbow:1]]
 (use-package rainbow-mode
  :ensure t
  :init
   (add-hook 'prog-mode-hook 'rainbow-mode))
-;; rainbow:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*rainbow delimiters][rainbow delimiters:1]]
 (use-package rainbow-delimiters
   :ensure t
   :init
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-;; rainbow delimiters:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*zapping to char][zapping to char:1]]
 (use-package zzz-to-char
   :ensure t
   :bind ("M-z" . zzz-up-to-char))
-;; zapping to char:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*kill-ring][kill-ring:1]]
 (setq kill-ring-max 100)
-;; kill-ring:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*popup-kill-ring][popup-kill-ring:1]]
 (use-package popup-kill-ring
   :ensure t
   :bind ("M-K" . popup-kill-ring))
-;; popup-kill-ring:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*persistent scratch buffer][persistent scratch buffer:1]]
 (use-package persistent-scratch
   :config
   (persistent-scratch-setup-default))
@@ -298,19 +247,13 @@
  "#+Title: 'Vagner Rener' @ 'Cyberwarrior"
     "\n# This buffer is for text that is not saved, and for Lisp evaluation."
     "\n# To create a file, visit it with 'C-x C-f' e and enter text in its buffer.\n"))
-;; persistent scratch buffer:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*scratch org-mode][scratch org-mode:1]]
 ;;  (setq initial-major-mode 'org-mode)
 ;;  (setq initial-major-mode 'fundamental-mode)
-;; scratch org-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*centered-window][centered-window:1]]
 (straight-use-package 'centered-window)
   (centered-window-mode 1)
-;; centered-window:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*portuguese-prefix][portuguese-prefix:1]]
 (set-input-method "portuguese-prefix")
 
 (defadvice switch-to-buffer (after activate-input-method activate)
@@ -318,9 +261,7 @@
 
 (add-hook 'text-mode-hook
   (lambda () (set-input-method "portuguese-prefix")))
-;; portuguese-prefix:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*theme and theme-looper][theme and theme-looper:1]]
 (dolist (pkgname '(theme-looper
   alect-themes
   base16-theme
@@ -331,18 +272,12 @@
 (straight-use-package pkgname))
 
   (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
-;; theme and theme-looper:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*wrap lines][wrap lines:1]]
 ;; Wrap lines without breaking the last word
 (add-hook 'org-mode-hook #'toggle-word-wrap)
-;; wrap lines:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*brazilian-holidays][brazilian-holidays:1]]
 (load "~/.emacs.d/elpa/emacs-brazilian-holidays/brazilian-holidays.el")
-;; brazilian-holidays:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-mode][org-mode:1]]
 (setq org-ellipsis " ")
 (setq org-src-fontify-natively t)
 (setq org-src-tab-acts-natively t)
@@ -352,32 +287,22 @@
 (add-hook 'org-mode-hook 'org-indent-mode)
 
 (global-set-key (kbd "C-c '") 'org-edit-src-code)
-;; org-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*tab on console][tab on console:1]]
 (setq evil-want-keybinding nil)
  ;; (setq evil-want-C-i-jump nil)
     (unless (display-graphic-p) (setq evil-want-C-i-jump nil))
     
 ;; (when evil-want-C-i-jump
   ;; (define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward))
-;; tab on console:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*evil][evil:1]]
 (straight-use-package 'evil)
 ;;    (evil-mode 1)
-;; evil:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*evil-collection][evil-collection:1]]
 (straight-use-package 'evil-collection)
 ;;  (evil-collection-init t)
-;; evil-collection:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*evil-org][evil-org:1]]
 ;;  (straight-use-package 'evil-org)
-;; evil-org:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*evil-leader][evil-leader:1]]
 (global-evil-leader-mode)
 (evil-leader/set-key
   "e" 'find-file
@@ -395,13 +320,9 @@
 	"c" 'org-archive-subtree
 	"l" 'evil-org-open-links
 	"C" 'org-resolve-clocks)
-;; evil-leader:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-evil][org-evil:1]]
 (straight-use-package 'org-evil)
-;; org-evil:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*flyspell][flyspell:1]]
 (global-set-key [f6] 'spell-checker)
 (global-set-key [f7] 'ispell-buffer)
 
@@ -430,94 +351,97 @@
 
 ;; enable flyspell in text mode (and derived modes)
 ;; (add-hook 'text-mode-hook 'flyspell-mode)
-;; flyspell:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*icicles][icicles:1]]
 ;; (require 'icicles)
 ;; (icy-mode 1)
-;; icicles:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*company][company:1]]
 (straight-use-package 'company)
-  (require 'company)
-  (add-hook 'after-init-hook 'global-company-mode)
-  (setq company-minimum-prefix-length 3)
-  (setq company-idle-delay 0.1)
+     (require 'company)
+     (add-hook 'after-init-hook 'global-company-mode)
+     (setq company-minimum-prefix-length 3)
+     (setq company-idle-delay 0.1)
 
-  (setq company-dabbrev-downcase nil)
+     (setq company-dabbrev-downcase nil)
 
-(eval-after-load 'company
-  '(progn
-     (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
-     (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)))
+   (eval-after-load 'company
+     '(progn
+        (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+        (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)))
 
-(eval-after-load 'company
-  '(progn
-     (define-key company-active-map (kbd "S-TAB") 'company-select-previous)
-     (define-key company-active-map (kbd "<backtab>") 'company-select-previous)))
+   (eval-after-load 'company
+     '(progn
+        (define-key company-active-map (kbd "S-TAB") 'company-select-previous)
+        (define-key company-active-map (kbd "<backtab>") 'company-select-previous)))
 
-(setq company-frontends
-      '(company-pseudo-tooltip-unless-just-one-frontend
-        company-preview-frontend
-        company-echo-metadata-frontend))
+   (setq company-frontends
+         '(company-pseudo-tooltip-unless-just-one-frontend
+           company-preview-frontend
+           company-echo-metadata-frontend))
 
-(setq company-require-match 'never)
+   (setq company-require-match 'never)
 
-(setq company-auto-complete t)
+   (setq company-auto-complete t)
 
- (defun my-company-visible-and-explicit-action-p ()
-    (and (company-tooltip-visible-p)
-         (company-explicit-action-p)))
+    (defun my-company-visible-and-explicit-action-p ()
+       (and (company-tooltip-visible-p)
+            (company-explicit-action-p)))
 
-  (defun company-ac-setup ()
-    "Sets up `company-mode' to behave similarly to `auto-complete-mode'."
-    (setq company-require-match nil)
-    (setq company-auto-complete #'my-company-visible-and-explicit-action-p)
-    (setq company-frontends '(company-echo-metadata-frontend
-                              company-pseudo-tooltip-unless-just-one-frontend-with-delay
-                              company-preview-frontend))
-    (define-key company-active-map [tab]
-      'company-select-next-if-tooltip-visible-or-complete-selection)
-    (define-key company-active-map (kbd "TAB")
-      'company-select-next-if-tooltip-visible-or-complete-selection))
+     (defun company-ac-setup ()
+       "Sets up `company-mode' to behave similarly to `auto-complete-mode'."
+       (setq company-require-match nil)
+       (setq company-auto-complete #'my-company-visible-and-explicit-action-p)
+       (setq company-frontends '(company-echo-metadata-frontend
+                                 company-pseudo-tooltip-unless-just-one-frontend-with-delay
+                                 company-preview-frontend))
+       (define-key company-active-map [tab]
+         'company-select-next-if-tooltip-visible-or-complete-selection)
+       (define-key company-active-map (kbd "TAB")
+         'company-select-next-if-tooltip-visible-or-complete-selection))
 
-   (company-ac-setup)
+      (company-ac-setup)
 
- (custom-set-faces
-     '(company-preview
-       ((t (:foreground "darkgray" :underline t))))
-     '(company-preview-common
-       ((t (:inherit company-preview))))
-     '(company-tooltip
-       ((t (:background "lightgray" :foreground "black"))))
-     '(company-tooltip-selection
-       ((t (:background "steelblue" :foreground "white"))))
-     '(company-tooltip-common
-       ((((type x)) (:inherit company-tooltip :weight bold))
-        (t (:inherit company-tooltip))))
-     '(company-tooltip-common-selection
-       ((((type x)) (:inherit company-tooltip-selection :weight bold))
-        (t (:inherit company-tooltip-selection)))))
-;; company:1 ends here
+    (custom-set-faces
+        '(company-preview
+          ((t (:foreground "darkgray" :underline t))))
+        '(company-preview-common
+          ((t (:inherit company-preview))))
+        '(company-tooltip
+          ((t (:background "lightgray" :foreground "black"))))
+        '(company-tooltip-selection
+          ((t (:background "steelblue" :foreground "white"))))
+        '(company-tooltip-common
+          ((((type x)) (:inherit company-tooltip :weight bold))
+           (t (:inherit company-tooltip))))
+        '(company-tooltip-common-selection
+          ((((type x)) (:inherit company-tooltip-selection :weight bold))
+           (t (:inherit company-tooltip-selection)))))
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-bullets][org-bullets:1]]
+;;;;;;;;;;;;;;;;;;
+
+ (straight-use-package 'company-quickhelp)
+(setq company-quickhelp-mode 1)
+
+ ;;;;;;;;;;;;;;;;;;
+
+(straight-use-package '(company-englisp-helper
+                           :type git
+                           :host github
+                           :repo "manateelazycat/company-english-helper"))
+   (require 'company-english-helper)
+
+ ;;;;;;;;;;;;;;;;;;
+
 (straight-use-package 'org-bullets)
  (org-bullets-mode 1)
  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-;; org-bullets:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacs-w3m][emacs-w3m:1]]
 (setq w3m-display-inline-images t) 
 (setq w3m-fill-column 80) ;; if this does not work, modify the file w3m.el itself
 (setq w3m-default-display-inline-images t) 
 (setq w3m-default-save-directory "~/Downloads")
-;; emacs-w3m:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*bug-hunter][bug-hunter:1]]
 (straight-use-package 'bug-hunter)
-;; bug-hunter:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacspeak eloud][emacspeak eloud:1]]
 (use-package eloud
      :ensure t
      :load-path "~/.emacs.d/straight/repos/eloud"
@@ -533,13 +457,9 @@
 
 ;; if you want to set espeak voice default pitch, you have to
 ;; edit the file "/usr/lib/x86_64-linux-gnu/espeak-data/voices/en"
-;; emacspeak eloud:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*hydra][hydra:1]]
 (straight-use-package 'hydra)
-;; hydra:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*cyber hydra][cyber hydra:1]]
 (defhydra cyber-hydra-window (global-map "C-c w")
        "Commands relating to window manipulation"
        ("h" windmove-left "move left")
@@ -557,9 +477,7 @@
        ("s" split-window-below "split window (below)")
        ("v" split-window-right "split window (right)")
        (";" ace-window "select window" :exit t))
-;; cyber hydra:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org hydra][org hydra:1]]
 (defhydra hydra-org-state ()
 	 ;; basic navigation
 	 ("i" org-cycle)
@@ -585,9 +503,7 @@
 	 ("J" org-shiftdown)
 	 ("K" org-shiftup)
 	 ("t" org-todo))
-;; org hydra:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*yasnippets][yasnippets:1]]
 (dolist (pkgname '(snippet
 yasnippet
 yasnippet-snippets
@@ -595,9 +511,7 @@ yasnippet-classic-snippets))
   (straight-use-package pkgname))
 
   (yas-global-mode 1)
-;; yasnippets:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*counsel - ivy - swiper][counsel - ivy - swiper:1]]
 (use-package counsel
  :straight t
  :bind
@@ -631,9 +545,7 @@ yasnippet-classic-snippets))
   (setq ivy-display-style 'fancy)
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
   ))
-;; counsel - ivy - swiper:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*abbreviations][abbreviations:1]]
 (setq-default abbrev-mode t)
      (read-abbrev-file "~/.emacs.d/abbrev_defs")
      (setq save-abbrevs t)
@@ -681,9 +593,7 @@ file with `edit-abbrevs`"
 	  (message "\"%s\" now expands to \"%s\" %sally"
 		   bef aft (if p "loc" "glob")))
       (user-error "No typo at or before point"))))
-;; abbreviations:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Dired][Dired:1]]
 ;; (add-to-list 'load-path "~/.emacs.d/local-repo/dired+")
 ;; (require 'dired+)
 
@@ -693,9 +603,7 @@ file with `edit-abbrevs`"
 ;; Not spawn endless amount of dired buffers
 (with-eval-after-load 'dired
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
-;; Dired:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*all-the-icons][all-the-icons:1]]
 (use-package all-the-icons
  :straight t)
 
@@ -707,15 +615,11 @@ file with `edit-abbrevs`"
 
 (use-package all-the-icons-ivy
  :straight t)
-;; all-the-icons:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*async][async:1]]
 (use-package async
   :ensure t
   :init (dired-async-mode 1))
-;; async:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*eyebrowse][eyebrowse:1]]
 (use-package eyebrowse
   :straight t
   :config
@@ -728,9 +632,7 @@ file with `edit-abbrevs`"
 
     (eyebrowse-mode t)
     (setq eyebrowse-new-workspace t)))
-;; eyebrowse:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*helm][helm:1]]
 ;;  (use-package helm
 ;;    :straight t)
 
@@ -750,9 +652,7 @@ file with `edit-abbrevs`"
      (global-set-key (kbd "M-x") 'helm-M-x)
      (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
      (global-set-key (kbd "C-x C-f") 'helm-find-files)
-;; helm:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*helm-deft][helm-deft:1]]
 (straight-use-package '(helm-deft :type git
                                   :host github
                                   :repo "dfeich/helm-deft"))
@@ -763,9 +663,7 @@ file with `edit-abbrevs`"
                            "~/org~/"
                            "~/Documents/"
                            ))
-;; helm-deft:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*beacon][beacon:1]]
 (use-package beacon
   :straight t
   :defer 10
@@ -774,9 +672,7 @@ file with `edit-abbrevs`"
   (beacon-push-mark 10)
   :config
   (beacon-mode +1))
-;; beacon:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*bidi][bidi:1]]
 (setq-default bidi-display-reordering nil)
 
  (defun bidi-reordering-toggle ()
@@ -802,9 +698,7 @@ file with `edit-abbrevs`"
  (setq bidi-paragraph-direction 'left-to-right)
  (setq bidi-paragraph-direction 'right-to-left))
  (message "%s" bidi-paragraph-direction))
-;; bidi:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*auctex][auctex:1]]
 (setq TeX-parse-self t); Enable parse on load.
   (setq TeX-auto-save t); Enable parse on save.
   (setq-default TeX-master nil)
@@ -933,9 +827,7 @@ file with `edit-abbrevs`"
 	  ("renewlist" "{")
 	  ("setlistdepth" "{")
 	  ("restartlist" "{")))
-;; auctex:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*init.el][init.el:1]]
 (defun find-user-init-file ()
   "Edit the `user-init-file', in another window."
   (interactive)
@@ -943,24 +835,18 @@ file with `edit-abbrevs`"
   (rotate-frame-clockwise))
 
 (global-set-key (kbd "C-c I") 'find-user-init-file)
-;; init.el:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*avy][avy:1]]
 (use-package avy
   :ensure t
   :bind
     ("M-s" . avy-goto-char))
-;; avy:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*plantuml][plantuml:1]]
 (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
 
   (dolist (pkgname '(plantuml-mode
 flycheck-plantuml))
   (straight-use-package pkgname))
-;; plantuml:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-babel][org-babel:1]]
 ;; active Babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -1014,9 +900,7 @@ flycheck-plantuml))
 
    (setq org-confirm-babel-evaluate nil)
    (setq org-export-use-babel t)
-;; org-babel:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*company-emoji][company-emoji:1]]
 (defun --set-emoji-font (frame)
 
   "Adjust the font settings of FRAME so Emacs can display emoji properly."
@@ -1039,9 +923,7 @@ flycheck-plantuml))
   ;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
 
   (add-hook 'after-make-frame-functions '--set-emoji-font)
-;; company-emoji:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*pdf-tools][pdf-tools:1]]
 (use-package pdf-tools
  :straight t
  :config
@@ -1049,9 +931,7 @@ flycheck-plantuml))
 
 (use-package org-pdfview
  :straight t)
-;; pdf-tools:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*default browser][default browser:1]]
 ;; (setq browse-url-browser-function 'browse-url-generic
  ;; browse-url-generic-program "firefox")
  ;; browse-url-generic-program "chromium")
@@ -1060,9 +940,7 @@ flycheck-plantuml))
     (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
   ;; optional keyboard short-cut
     (global-set-key "\C-xm" 'browse-url-at-point)
-;; default browser:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*diatheke][diatheke:1]]
 (straight-use-package 'diatheke)
 (setq max-specpdl-size 2000)
 
@@ -1082,23 +960,17 @@ flycheck-plantuml))
 ;; C-c C-p: search for a phrase
 ;; C-c C-m: search for multiple words
 ;; C-c C-r: search by regex
-;; diatheke:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*dtk][dtk:1]]
 (use-package dtk
   :bind (("C-c B" . dtk-bible))
   :custom
   (dtk-default-module "KJVA")
   (dtk-default-module-category "Biblical Texts")
   (dtk-word-wrap t))
-;; dtk:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*sword-to-org][sword-to-org:1]]
 (add-to-list 'load-path "~/.emacs.d/elpa/sword-to-org/")
 (require 'sword-to-org)
-;; sword-to-org:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*telega][telega:1]]
 (use-package telega
  :straight t
  :bind 
@@ -1108,27 +980,19 @@ flycheck-plantuml))
     ("h" . nil)
     ("l" . nil))
     :custom (telega-notifications-mode t))
-;; telega:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*text-scale][text-scale:1]]
 (global-set-key (kbd "C-M-=") 'default-text-scale-increase)
 (global-set-key (kbd "C-M--") 'default-text-scale-decrease)
-;; text-scale:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*dtrt-indent][dtrt-indent:1]]
 (use-package dtrt-indent
   :straight t
   :diminish t
   :config
   (dtrt-indent-mode +1))
-;; dtrt-indent:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*wgrep][wgrep:1]]
 (use-package wgrep
  :straight t)
-;; wgrep:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*engine-mode][engine-mode:1]]
 (use-package engine-mode
   :straight t
   :config (engine-mode t))
@@ -1179,9 +1043,7 @@ flycheck-plantuml))
 
   (defengine youtube
     "http://www.youtube.com/results?aq=f&oq=&search_query=%s")
-;; engine-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*erc][erc:1]]
 (require 'erc)
 
 (defun irc-maybe ()
@@ -1201,9 +1063,7 @@ flycheck-plantuml))
 
 (use-package elcord
   :ensure t)
-;; erc:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*flyspell][flyspell:1]]
 (defun my-turn-spell-checking-on ()
   "Turn flyspell-mode on."
   (flyspell-mode 1))
@@ -1212,16 +1072,12 @@ flycheck-plantuml))
 
  ;; enable flyspell in text mode (and derived modes)
  ;; (add-hook 'text-mode-hook 'flyspell-mode)
-;; flyspell:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*gitlab][gitlab:1]]
 (use-package gitlab
  :straight t)
    (setq gitlab-host "https://gitlab.com"
 	 gitlab-token-id "")
-;; gitlab:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*ggtags][ggtags:1]]
 (use-package ggtags
 :straight t
 :config 
@@ -1229,9 +1085,7 @@ flycheck-plantuml))
       (lambda ()
 	(when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'php-mode 'web-mode)
 	  (ggtags-mode 1)))))
-;; ggtags:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*ob-translate][ob-translate:1]]
 (use-package ob-translate
        :straight t)
       (define-key org-mode-map (kbd "C-c C-v e") 'org-babel-execute-src-block)
@@ -1239,9 +1093,7 @@ flycheck-plantuml))
 ;; https://orgmode.org/manual/Evaluating-code-blocks.html#DOCF142
 ;; I don't want to execute code blocks with C-c C-c
 (setq org-babel-no-eval-on-ctrl-c-ctrl-c t)
-;; ob-translate:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*google-translate][google-translate:1]]
 (use-package google-translate
 :straight t
 :config
@@ -1251,26 +1103,18 @@ flycheck-plantuml))
 
 (defun google-translate--get-b-d1 ()
       (list 432928 274893998))
-;; google-translate:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*grasp][grasp:1]]
 
-;; grasp:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*hippie-expand][hippie-expand:1]]
 (fset 'my-complete-file-name
    (make-hippie-expand-function '(try-complete-file-name-partially
 					try-complete-file-name)))
    (global-set-key "\M-/" 'my-complete-file-name)
    (global-set-key "\M-\\" 'comint-dynamic-complete-filename)
-;; hippie-expand:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*helm-mu][helm-mu:1]]
 (use-package helm-mu
   :straight t)
-;; helm-mu:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*image-magick][image-magick:1]]
 (autoload 'eimp-mode "eimp" "Emacs Image Manipulation Package." t)
       (add-hook 'image-mode-hook 'eimp-mode)
 
@@ -1299,14 +1143,10 @@ flycheck-plantuml))
    (autoload 'thumbs "thumbs" "Preview images in a directory." t)
 
    ;; then M-x thumbs
-;; image-magick:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*imaxima][imaxima:1]]
 (defvar imaxima-fnt-size "Large")
 (defvar imaxima-use-maxima-mode-flag t)
-;; imaxima:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*indent lisp][indent lisp:1]]
 (setq org-src-tab-acts-natively t)
 
   (defun my/org-cleanup ()
@@ -1318,14 +1158,10 @@ flycheck-plantuml))
   (defun indent-buffer ()
   (interactive)
   (indent-region (point-min) (point-max)))
-;; indent lisp:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*jabber][jabber:1]]
 (use-package jabber 
  :straight t)
-;; jabber:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*linum][linum:1]]
 (use-package linum-relative
   :ensure t
   :init
@@ -1355,14 +1191,10 @@ flycheck-plantuml))
   ;; 				      (car (window-margins)) 1)
   ;; 				  ))))
   ;; (advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
-;; linum:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*lyrics][lyrics:1]]
 (use-package lyrics
  :straight t)
-;; lyrics:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*lispy][lispy:1]]
 (use-package lispy
    :straight t)
 
@@ -1372,9 +1204,7 @@ flycheck-plantuml))
     (when (eq this-command 'eval-expression)
       (lispy-mode 1)))
   (add-hook 'minibuffer-setup-hook 'conditionally-enable-lispy)
-;; lispy:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*lorem-ipsum][lorem-ipsum:1]]
 (use-package lorem-ipsum
     :straight t)
 
@@ -1387,9 +1217,7 @@ flycheck-plantuml))
 ;;				  Lorem-ipsum-list-bullet "<li>"
 ;;				  Lorem-ipsum-list-item-end "</li>\n"
 ;;				  Lorem-ipsum-list-end "</ul>\n")))
-;; lorem-ipsum:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*magit][magit:1]]
 ;; (use-package magit 
   ;;  :straight t
   ;;  :config
@@ -1402,14 +1230,10 @@ flycheck-plantuml))
   (setq git-commit-summary-max-length 50)
   :bind
   ("M-g" . magit-status))
-;; magit:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*mplayer-mode][mplayer-mode:1]]
 (use-package mplayer-mode
   :straight t)
-;; mplayer-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*message-mode][message-mode:1]]
 ;; colorizing multiply-quoted lines
 
 (add-hook 'message-mode-hook
@@ -1481,26 +1305,18 @@ flycheck-plantuml))
  ;; C-c C-s	send the message but don't exit the message buffer
  ;; C-c C-b	go to the start of the message
  ;; C-c C-z	kill text from point until end of buffer
-;; message-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*mingus][mingus:1]]
 (use-package mingus
  :straight t)
-;; mingus:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emamux][emamux:1]]
 (use-package emamux
   :straight t
   :defer t)
-;; emamux:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*debian stuff][debian stuff:1]]
 (use-package debian-el
   :straight t
   :defer t)
-;; debian stuff:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*more stuff][more stuff:1]]
 ;;  ;;  (setq frame-title-format "emacs")
    ;;  ;;  (set-default 'cursor-type 'hbar)
    ;;      (ido-mode 1)
@@ -1554,9 +1370,7 @@ flycheck-plantuml))
    ;;  		   "Cursor type: "
    ;;  		   (mapcar 'list '("box" "hollow" "bar" "hbar" nil))))))
    ;;    (modify-frame-parameters (selected-frame) (list (cons 'cursor-type cursor-type))))
-;; more stuff:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*multilple-cursors][multilple-cursors:1]]
 ;; (straight-use-package 'multiple-cursors)
   ;; (require 'multiple-cursors)
   ;; (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
@@ -1585,9 +1399,7 @@ flycheck-plantuml))
              ("l" . mc/edit-lines)
              ("r" . mc/reverse-regions)
              ("s" . mc/sort-regions)))
-;; multilple-cursors:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*mu4e][mu4e:1]]
 (straight-use-package 'mu4e)
 
 	 (global-set-key (kbd "C-<f10>") 'mu4e)
@@ -1695,9 +1507,7 @@ flycheck-plantuml))
       ;; show full addresses in view message (instead of just names)
       ;; toggle per name with M-RET
       (setq mu4e-view-show-addresses 't)
-;; mu4e:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*my-save-word][my-save-word:1]]
 (global-set-key (kbd "<f5>") 'my-save-word)
      (defun my-save-word ()
     (interactive)
@@ -1705,18 +1515,14 @@ flycheck-plantuml))
 	   (word (flyspell-get-word)))
       (when (consp word)    
 	(flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
-;; my-save-word:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*oauth2][oauth2:1]]
 ;;  (straight-use-package 'oauth2)
 
 ;;    (use-package oauth2 
 ;;	   :config
 ;;	(eval-when-compile
 ;;	     (defvar oauth--token-data ())))
-;; oauth2:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-agenda][org-agenda:1]]
 ;; (require 'org)
 ;;       (setq org-directory "~/~org/")
 ;;       (define-key global-map "\C-cl" 'org-store-link)
@@ -1727,9 +1533,7 @@ flycheck-plantuml))
 			     "~/org~/home.org"
 			     "~/org~/studies.org"
 			     "~/org~/work.org"))
-;; org-agenda:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-brain][org-brain:1]]
 (defun org-brain-insert-resource-icon (link)
       "Insert an icon, based on content of org-mode LINK."
       (insert (format "%s "
@@ -1765,9 +1569,7 @@ flycheck-plantuml))
   ;; 	   org-capture-templates)
   (setq org-brain-visualize-default-choices 'all)
   (setq org-brain-title-max-length 12)
-;; org-brain:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-capture with w3m or eww][org-capture with w3m or eww:1]]
 ;; org-eww and org-w3m should be in your org distribution, but see
 ;; note below on patch level of org-eww.
 
@@ -1817,9 +1619,7 @@ flycheck-plantuml))
   (setq kill-ring-yank-pointer kill-ring)
   ;; Final repositioning.
   (forward-line -1))
-;; org-capture with w3m or eww:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Org-cliplink][Org-cliplink:1]]
 (use-package org-cliplink
  :straight t)
 
@@ -1836,14 +1636,10 @@ Suggest the URL title as a description for resource."
 (global-set-key (kbd "C-x p i") 'org-cliplink)
 
 ;; (define-key org-brain-visualize-mode-map (kbd "L") #'org-brain-cliplink-resource)
-;; Org-cliplink:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*origami][origami:1]]
 ;; (use-package origami
 ;; :straight t)
-;; origami:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*ascii art to unicode][ascii art to unicode:1]]
 (defface aa2u-face '((t . nil))
   "Face for aa2u box drawing characters")
 (advice-add #'aa2u-1c :filter-return
@@ -1856,9 +1652,7 @@ Suggest the URL title as a description for resource."
     (ignore-errors (aa2u (point-min) (point-max)))))
 (with-eval-after-load 'org-brain
   (add-hook 'org-brain-after-visualize-hook #'aa2u-org-brain-buffer))
-;; ascii art to unicode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-journal][org-journal:1]]
 ;; https://github.com/bastibe/org-journal
 
 (use-package org-journal
@@ -1880,18 +1674,12 @@ Suggest the URL title as a description for resource."
 (global-set-key (kbd "C-c C-g") 'org-journal-open-next-entry)
 (global-set-key (kbd "C-c C-h") 'org-journal-open-previous-entry)
 (global-set-key (kbd "C-c j") 'org-journal-new-entry)
-;; org-journal:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-mac-link][org-mac-link:1]]
 (add-hook 'org-mode-hook (lambda () 
   (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
-;; org-mac-link:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-protocol][org-protocol:1]]
 (require 'org-protocol)
-;; org-protocol:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*orca][orca:1]]
 ;;    (require 'orca)
 
     (setq orca-handler-list
@@ -1928,14 +1716,10 @@ Suggest the URL title as a description for resource."
             (const orca-handler-file)
             (string :tag "File")
             (string :tag "Heading")))))
-;; orca:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*epresent][epresent:1]]
 (use-package epresent
  :straight t)
-;; epresent:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-present][org-present:1]]
 (use-package org-present
  :straight t
  :config
@@ -1948,24 +1732,18 @@ Suggest the URL title as a description for resource."
   (defun org-present/start ()
   (org-present-small)
   (org-present-read-write))))
-;; org-present:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-present-remote][org-present-remote:1]]
 (use-package org-present-remote
  :straight t)
 
 (use-package fakir
  :straight t)
-;; org-present-remote:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacs-reveal][emacs-reveal:1]]
 (add-to-list 'load-path "/home/vagner/.emacs.d/elpa/emacs-reveal")
 
 ;; (setq oer-reveal-plugins nil)
 ;; (setq oer-reveal-plugins t)
-;; emacs-reveal:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-reveal][org-reveal:1]]
 ;; Note: give the ABSOLUTE PATH to reveal.js
 ;; Otherwise it will not work
 
@@ -1997,9 +1775,7 @@ Suggest the URL title as a description for resource."
     ;; for viewing your slides and using the remote control
     ;; Now you can export this manual into Reveal.js presentation by typing “C-c C-e R B”.
     ;; Open the generated “Readme.html” in your browser and enjoy the cool slides.
-;; org-reveal:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-re-reveal][org-re-reveal:1]]
 (use-package org-re-reveal 
    :straight t
    :config
@@ -2007,29 +1783,21 @@ Suggest the URL title as a description for resource."
      (require 'org-re-reveal)
 ;;     (setq oer-reveal-plugins t)
      (setq org-re-reveal-hlevel 2))
-;; org-re-reveal:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-re-reveal-ref][org-re-reveal-ref:1]]
 (use-package org-re-reveal-ref
  :straight t
  :config
    (require 'org-re-reveal-ref))
-;; org-re-reveal-ref:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*oer-reveal][oer-reveal:1]]
 (use-package oer-reveal
  :straight t
  :config
    (require 'oer-reveal) 
    (setq oer-reveal-plugins t))
-;; oer-reveal:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*ox-spectacle][ox-spectacle:1]]
 (use-package ox-spectacle
       :straight t)
-;; ox-spectacle:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-tree-slide][org-tree-slide:1]]
 (use-package org-tree-slide
      :straight t
      :config
@@ -2052,14 +1820,10 @@ Suggest the URL title as a description for resource."
 	   (define-key map (kbd "<down>")  'org-tree-slide-display-header-toggle)
 	   (set-transient-map map nil 'wolfe/org-tree-set-transient-map))
        (makeunbound wolfe--enable-transient-map)))
-;; org-tree-slide:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*ox-pandoc][ox-pandoc:1]]
 (use-package ox-pandoc 
 	   :straight t)
-;; ox-pandoc:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*persistent-soft][persistent-soft:1]]
 (use-package persistent-soft
   :straight t
   :config
@@ -2070,16 +1834,12 @@ Suggest the URL title as a description for resource."
 ;; quit and restart Emacs
 
 (persistent-soft-fetch 'hundred "mydatastore")    ; 100
-;; persistent-soft:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*poly-markdown][poly-markdown:1]]
 (use-package poly-markdown
   :straight t
   :config 
 (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode)))
-;; poly-markdown:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*poetry][poetry:1]]
 ;; It is not the same poetry package for writing poetry
 ;; it is an interface for python poetry package tool
 
@@ -2094,14 +1854,10 @@ Suggest the URL title as a description for resource."
 (require 'poetry)
 
 ;; (load-library "~/.emacs.d/local-repo/poetry.elc")
-;; poetry:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*perspective][perspective:1]]
 (use-package perspective
   :straight t)
-;; perspective:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*powerline][powerline:1]]
 (use-package powerline 
     :straight t)
 
@@ -2110,9 +1866,7 @@ Suggest the URL title as a description for resource."
 
   ;; (powerline-center-theme)
   ;; (setq powerline-center-default-separator 'wave))
-;; powerline:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*prolog][prolog:1]]
 (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
 (autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
 (autoload 'mercury-mode "prolog" "Major mode for editing Mercury programs." t)
@@ -2120,23 +1874,17 @@ Suggest the URL title as a description for resource."
 (setq auto-mode-alist (append '(("\\.pl$" . prolog-mode)
 				("\\.m$" . mercury-mode))
 			       auto-mode-alist))
-;; prolog:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*quelpa][quelpa:1]]
 ;; (use-package quelpa-use-package
 ;;     :straight t
 ;;     :init
 ;;    (setq quelpa-update-melpa-p nil))
-;; quelpa:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*re-builder][re-builder:1]]
 (use-package re-builder
  :straight t
  :config
  (setq reb-re-syntax 'string))
-;; re-builder:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*slime swank][slime swank:1]]
 ;; ;; Set your lisp system and, optionally, some contribs
 
   ;; ;; (setq inferior-lisp-program "/usr/bin/sbcl")
@@ -2188,21 +1936,15 @@ Suggest the URL title as a description for resource."
   :init
     (require 'company)
     (slime-setup '(slime-fancy slime-company)))
-;; slime swank:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*smex][smex:1]]
 ;;    (global-set-key (kbd "M-x") 'smex)
 ;;    (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-;; smex:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*amx - a fork of smex][amx - a fork of smex:1]]
 (use-package amx
  :straight t
  :config
   (amx-mode 1))
-;; amx - a fork of smex:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*cyber-filelist][cyber-filelist:1]]
 (defvar cyber-filelist nil "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
 
 (setq cyber-filelist
@@ -2226,13 +1968,9 @@ Version 2015-04-23"
   (let ((ξabbrevCode
 	 (ido-completing-read "Open:" (mapcar (lambda (ξx) (car ξx)) cyber-filelist))))
     (find-file (cdr (assoc ξabbrevCode cyber-filelist)))))
-;; cyber-filelist:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*scheme][scheme:1]]
 
-;; scheme:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*shackle-rules][shackle-rules:1]]
 ;; (setq shackle-rules
 ;;      '(((svg-2048-mode circe-query-mode) :same t)
 ;;        ("*Help*" :align t :select t)
@@ -2244,9 +1982,7 @@ Version 2015-04-23"
 ;;       shackle-default-rule '(:select t)
 ;;       shackle-default-size 0.4
 ;;       shackle-inhibit-window-quit-on-same-windows t)
-;; shackle-rules:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*synonyms and thesaurus][synonyms and thesaurus:1]]
 (use-package synonyms
   :straight t
   :disabled
@@ -2279,9 +2015,7 @@ Version 2015-04-23"
 
 ;;  (evil-leader/set-key "s" 'powerthesaurus-lookup-word-at-point)
 ;;  (evil-leader/set-key "S" 'powerthesaurus-lookup-word))
-;; synonyms and thesaurus:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*tramp][tramp:1]]
 (use-package tramp
       :init
       (setq tramp-default-method "ssh")
@@ -2289,9 +2023,7 @@ Version 2015-04-23"
       :config
 
       (add-to-list 'tramp-remote-path "~/"))
-;; tramp:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*treemacs][treemacs:1]]
 (use-package treemacs
   :straight t
   :defer t
@@ -2372,9 +2104,7 @@ Version 2015-04-23"
 (use-package treemacs-magit
   :after treemacs magit
   :straight t)
-;; treemacs:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*trident - lisp2javascript][trident - lisp2javascript:1]]
 ;; (add-to-list 'auto-mode-alist (cons "\\.paren\\'" 'lisp-mode))
 ;; (add-hook 'lisp-mode-hook
 ;; 	  #'(lambda ()
@@ -2390,16 +2120,12 @@ Version 2015-04-23"
 ;;     ;; (ql:quickload :parenscript)
 ;;     ;; Then you can use "trident-expand-buffer" 
 ;;     ;; etc...
-;; trident - lisp2javascript:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Unicode-fonts][Unicode-fonts:1]]
 (use-package unicode-fonts
  :straight t
  :config
  (unicode-fonts-setup))
-;; Unicode-fonts:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*visual-regexp-steroids][visual-regexp-steroids:1]]
 (add-to-list 'load-path "~/.emacs.d/elpa/visual-regexp-20170301.116/")
 (add-to-list 'load-path "~/.emacs.d/elpa/visual-regexp-steroids-20170222.253")
 (require 'visual-regexp)
@@ -2411,9 +2137,7 @@ Version 2015-04-23"
 ;; to use visual-regexp-steroids's isearch instead of the built-in regexp isearch, also include the following lines:
 (define-key esc-map (kbd "C-r") 'vr/isearch-backward) ;; C-M-r
 (define-key esc-map (kbd "C-s") 'vr/isearch-forward) ;; C-M-s
-;; visual-regexp-steroids:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*wanderlust email-client][wanderlust email-client:1]]
 (autoload 'wl "wl" "Wanderlust" t)
 
 ;; apt install bbdb 
@@ -2460,19 +2184,13 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 )
 
  (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
-;; wanderlust email-client:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*winner-mode][winner-mode:1]]
 (when (fboundp 'winner-mode)
      (winner-mode 1))
-;; winner-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*youtube-dl][youtube-dl:1]]
 (add-to-list 'load-path "~/.emacs.d/local-repo/youtube-dl-emacs")
 (require 'youtube-dl)
-;; youtube-dl:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*elisp][elisp:1]]
 ;;    (use-package elisp
 ;;      :hook
 ;;      (after-save . check-parens)
@@ -2533,9 +2251,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
    :straight t
    :custom
    (dash-enable-fontlock t))
-;; elisp:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*networking][networking:1]]
 (use-package net-utils
   :straight t
   :bind
@@ -2553,14 +2269,10 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 	("d" . dig)
 	("s" . smbclient)
 	("t" . traceroute)))
-;; networking:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*save-place][save-place:1]]
 (require 'saveplace)
 (save-place-mode 1)
-;; save-place:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*shell-pop][shell-pop:1]]
 (use-package shell-pop
 :straight t
   :bind (("C-t" . shell-pop))
@@ -2569,21 +2281,15 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
   (setq shell-pop-term-shell "eshell")
   ;; need to do this manually or not picked up by `shell-pop'
   (shell-pop--set-shell-type 'shell-pop-shell-type shell-pop-shell-type))
-;; shell-pop:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*simple-mpc][simple-mpc:1]]
 (use-package simple-mpc
  :straight t)
-;; simple-mpc:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*command-log][command-log:1]]
 (use-package command-log-mode
    :ensure t
    :commands (command-log-mode global-command-log-mode)
    :bind ("C-c o" . clm/toggle-command-log-buffer))
-;; command-log:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*circe][circe:1]]
 (use-package circe
     :straight t
     :bind ("<S-f2>" . circe-init))
@@ -2617,17 +2323,13 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
      ;;  :channels ("#alsa" "#bash" "#badrock" "#c" "#clnoobs" "#clojure" "#clojure-beginners" "#clschool" "#coreboot" "#debian" "#debian-offtopic" "#devuan" "#emacs" "#emacs-es" "#erc" "#evil-mode " "#filmsbykris" "#freebsd" "#freedos" "#git" "#gitlab" "#guix" "#hardware" "#haskell" "#i3" "#javascript" "#julia" "#latex" "#libreoffice" "#lisp" "#lisp-es" "#lispcafe" "#lispweb" "#maria" "#math" "#matrix"  "#maxima" "#mpd" "#mysql" "#neomutt" "#oauth" "#org-mode" "#pcbsd" "#physics" "#plasma" "#prolog" "#python" "#qtox" "#ranger" "#regex" "#ring" "#sbcl" "#scala" "#slime" "#startups" "#sword" "#tmux" "#trueos" "#vim" "#vimus" "#wanderlust" "#weechat" "#xfce" "#xiphos")
 
        :nickserv-password my-nickserv-password)))
-;; circe:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emms-get-lyrics][emms-get-lyrics:1]]
 (use-package emms
  :straight t)
 
 (add-to-list 'load-path "~/.emacs.d/local-repo/emms-get-lyrics/")
 (require 'emms-get-lyrics)
-;; emms-get-lyrics:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emms-player][emms-player:1]]
 (use-package emms-player-simple-mpv
    :straight t
    :after emms
@@ -2654,25 +2356,17 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
   (add-to-list 'emms-player-list 'emms-player-my-mpv))
 
   (use-package emms-mark-ext :straight t)
-;; emms-player:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*memacs][memacs:1]]
 
-;; memacs:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*genealogy][genealogy:1]]
 (add-to-list 'load-path "~/.emacs.d/local-repo/gedcom")
 
 (autoload 'gedcom-mode "gedcom")
 (setq auto-mode-alist (cons '("\\.ged$" . gedcom-mode) auto-mode-alist))
-;; genealogy:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-chef][org-chef:1]]
 (use-package org-chef
   :straight t)
-;; org-chef:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Ox-hugo][Ox-hugo:1]]
 (use-package ox-hugo
   :straight t   
   :after ox)
@@ -2707,9 +2401,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 ;; 	       (file+datetree (concat org-directory "~/blog/content/posts/my-post.org")
 ;; "* TODO %^{Description}  %^g\n%?\nAdded: %U")
 ;; 	       (function org-hugo-new-subtree-post-capture-template))))
-;; Ox-hugo:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*easy-hugo][easy-hugo:1]]
 ;; (use-package easy-hugo
 ;;   :custom
 ;;   (easy-hugo-basedir "~/Personal/devel/zzamboni.org/zzamboni.org/")
@@ -2717,16 +2409,12 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 ;;   (easy-hugo-previewtime "300")
 ;;   ;;(define-key global-map (kbd "C-c C-e") 'easy-hugo)
 ;;   )
-;; easy-hugo:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-refile][org-refile:1]]
 (setq org-refile-targets '((nil :maxlevel . 9)
                                 (org-agenda-files :maxlevel . 9)))
 (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
 (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
-;; org-refile:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-capture][org-capture:1]]
 ;; https://cestlaz.github.io/posts/using-emacs-24-capture-2/
   ;; This function pops up Capture templates options in a new emacs frame
   ;; You have to bound it to a desktop key to make it pops up wherever you 
@@ -2820,36 +2508,26 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
      :END:")
 
      ("w" "Website" plain (function org-website-clipper) "* %a\n%T\n" :immediate-finish t)))
-;; org-capture:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*hyperbole][hyperbole:1]]
 ;; (unless (package-installed-p 'hyperbole)
 ;;   (package-refresh-contents)	
 ;;   (package-install 'hyperbole))
 ;; (require 'hyperbole)
-;; hyperbole:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*gtklp printer app][gtklp printer app:1]]
 (setq lpr-command "gtklp")
 (setq ps-lpr-command "gtklp")
-;; gtklp printer app:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Emacs server][Emacs server:1]]
 (load "server")
  (unless (server-running-p)
  (server-start))
-;; Emacs server:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*epg-gpg2][epg-gpg2:1]]
 (setq epg-gpg-program "usr/bin/gpg2")
 (setq epa-file t)
 (epa-file-enable)
 (setq epa-file-select-keys nil)
 (setq epa-pinentry-mode 'loopback)
 (setq pinentry-start t)
-;; epg-gpg2:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*bbdb-database][bbdb-database:1]]
 (setq bbdb-north-american-phone-numbers-p nil)
 (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
 (setq bbdb-file "~/.emacs.d/bbdb")
@@ -2863,46 +2541,32 @@ bbdb-use-pop-up t
 bbdb-electric-p t
 bbdb-popup-target-lines  1
 )
-;; bbdb-database:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*ipp printer][ipp printer:1]]
 (add-to-list 'load-path "~/.emacs.d/local-repo/ipp")
 (require 'ipp)
-;; ipp printer:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*linguistic][linguistic:1]]
 (use-package linguistic 
  :straight t)
-;; linguistic:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Org-drill][Org-drill:1]]
 (use-package org-drill
   :straight t)
-;; Org-drill:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Org-drill-table][Org-drill-table:1]]
 (use-package org-drill-table
   :straight t)
-;; Org-drill-table:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*memrise][memrise:1]]
 ;; (use-package memrise
 ;;   :quelpa (memrise
 ;; 	   :fetcher github
 ;; 	   :repo "SavchenkoValeriy/memrise.el"))
 
 ;; (setq memrise-sync-requests t)
-;; memrise:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*gnutls-fix-bug][gnutls-fix-bug:1]]
 ;;   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3/")
 ;;     (setq gnutls-verify-error t)
 ;;     (setq tls-checktrust t)
 
        (toggle-debug-on-error)
-;; gnutls-fix-bug:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacs-wget][emacs-wget:1]]
 ;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/emacs-wget")
 
 ;; (require 'w3m-wget)
@@ -2914,9 +2578,7 @@ bbdb-popup-target-lines  1
 ;;  (setq wget-basic-options (cons "-P." wget-basic-options))
 ;;  (setq wget-process-buffer nil)
 ;;  (setq wget-command "/usr/bin/wget")
-;; emacs-wget:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*more niceties][more niceties:1]]
 ;; Mouse scrolling
   (setq mouse-wheel-scroll-amount '(1)
 	mouse-wheel-progressive-speed nil 
@@ -2973,9 +2635,7 @@ bbdb-popup-target-lines  1
      :straight t
      :config
       (which-key-mode t))
-;; more niceties:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*key-chords][key-chords:1]]
 (use-package key-chord
   :ensure t
   :init
@@ -3012,37 +2672,27 @@ bbdb-popup-target-lines  1
     (key-chord-define-global "9c" "(")
     (key-chord-define-global "-l" "_")
     (key-chord-define emacs-lisp-mode-map "7f" "&optional ")))
-;; key-chords:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*better-shell][better-shell:1]]
 (use-package better-shell
 :straight t
 :bind (("C-'" . better-shell-shell)
 ("C-;" . better-shell-remote-open)))
-;; better-shell:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*virtualenvwrapper][virtualenvwrapper:1]]
 (use-package virtualenvwrapper
 :straight t
 :config
 (venv-initialize-interactive-shells)
 (venv-initialize-eshell))
-;; virtualenvwrapper:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*time in modeline][time in modeline:1]]
 (setq display-time-default-load-average nil)
 (setq display-time-interval 1)
 (setq display-time-format "%d|%m-%a|%r")
 (display-time-mode +1)
-;; time in modeline:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*toggle-truncate-lines][toggle-truncate-lines:1]]
 (setq truncate-partial-width-windows 1)
 (setq truncate-lines 1)
 (global-set-key (kbd "C-x t") 'toggle-truncate-lines)
-;; toggle-truncate-lines:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*evil-macro keys][evil-macro keys:1]]
 ;; (evil-define-key 'normal 'global
 ;;   ;; select the previously pasted text
 ;;   "gp" "`[v`]"
@@ -3062,25 +2712,17 @@ bbdb-popup-target-lines  1
 ;;   (evil-ex-normal (region-beginning) (region-end) "@q"))
 
 ;;   (evil-define-key 'visual 'global "Q" #'my-norm@q)
-;; evil-macro keys:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emacros][emacros:1]]
 
-;; emacros:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*zoom-frm for hycontrol][zoom-frm for hycontrol:1]]
 ;; (add-to-list 'load-path "~/.emacs.d/local-repo/zoom-frm")
 ;; (require 'zoom-frm)
-;; zoom-frm for hycontrol:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*openwith][openwith:1]]
 (use-package openwith
  :straight t
  :config
 (setq openwith-associations '(("\\.mp4\\'" "smplayer" (file)))))
-;; openwith:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*org-mind-map][org-mind-map:1]]
 ;; (use-package org-mind-map
 ;;   :init
 ;;   (require 'ox-org)
@@ -3100,9 +2742,7 @@ bbdb-popup-target-lines  1
      :straight t
      :init
      (require 'ox-org))
-;; org-mind-map:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*php-mode][php-mode:1]]
 (use-package php-mode
     :straight t)
 
@@ -3117,17 +2757,13 @@ bbdb-popup-target-lines  1
 
   (use-package php-auto-yasnippets
     :straight t)
-;; php-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*php-ext][php-ext:1]]
 (setq php-ext-path "~/.emacs.d/local-repo/php-ext/")
 (load (concat php-ext-path "php-ext.el"))
 
    ;; (add-to-list 'load-path "~/.emacs.d/local-repo/php-ext")
    ;; (require 'php-ext)
-;; php-ext:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*web-mode][web-mode:1]]
 (use-package web-mode
   :straight t
   :mode
@@ -3163,24 +2799,16 @@ bbdb-popup-target-lines  1
 
 (use-package web-completion-data :straight t)
 (use-package web-mode-edit-element :straight t)
-;; web-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*impatient-mode][impatient-mode:1]]
 (use-package impatient-mode 
 :straight t)
-;; impatient-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*emmet-mode][emmet-mode:1]]
 (use-package emmet-mode 
 :straight t)
-;; emmet-mode:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Ripgrep][Ripgrep:1]]
 (use-package ripgrep
   :straight t)
-;; Ripgrep:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*bash][bash:1]]
 (add-hook 'shell-mode-hook 'yas-minor-mode)
 (add-hook 'shell-mode-hook 'flycheck-mode)
 (add-hook 'shell-mode-hook 'company-mode)
@@ -3196,16 +2824,12 @@ bbdb-popup-target-lines  1
   :config
     (require 'company)
     (add-hook 'shell-mode-hook 'shell-mode-company-init))
-;; bash:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*sudo-editing][sudo-editing:1]]
 (use-package sudo-edit
   :ensure t
   :bind
     ("s-e" . sudo-edit))
-;; sudo-editing:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*diminishing modes][diminishing modes:1]]
 (use-package diminish
   :ensure t
   :init
@@ -3233,14 +2857,10 @@ bbdb-popup-target-lines  1
   (diminish 'company-mode)
   (diminish 'flycheck-mode)
   (diminish 'flyspell-mode))
-;; diminishing modes:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*pastbin][pastbin:1]]
 (straight-use-package 'debpaste)
 (straight-use-package 'ix)
-;; pastbin:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*smartparens][smartparens:1]]
 (use-package smartparens
   :straight t
   :config
@@ -3253,9 +2873,7 @@ bbdb-popup-target-lines  1
 
   ;; Do not pair simple quotes
   (sp-pair "'" nil :actions :rem))
-;; smartparens:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*xah modes][xah modes:1]]
 (dolist (package '(xah-lookup xah-elisp-mode xah-find xah-fly-keys xah-get-thing xah-math-input xah-reformat-code xah-replace-pairs xahk-mode xah-css-mode))
     (unless (package-installed-p package)
       (package-install package))
@@ -3339,16 +2957,9 @@ Version 2015-12-08"
 ;; (set-register ?2 '(file . "~/.emacs.d/init.org"))
 ;; sets file "init.org" to register 2
 ;; see the gnu manual link above
-;; xah modes:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*free-keys][free-keys:1]]
 (straight-use-package 'free-keys)
-;; free-keys:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*People with great emacs configs][People with great emacs configs:1]]
 
-;; People with great emacs configs:1 ends here
 
-;; [[file:~/.dotfiles/emacs/.emacs.d/init.org::*Org-mode tutorials][Org-mode tutorials:1]]
 
-;; Org-mode tutorials:1 ends here
