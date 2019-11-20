@@ -2882,11 +2882,30 @@ bbdb-popup-target-lines  1
 ;; http://ergoemacs.org/misc/ergoemacs_vi_mode.html
 ;; see also https://ergoemacs.github.io/
 
-;;(require 'xah-fly-keys)
+     (require 'xah-fly-keys)
 
-(xah-fly-keys-set-layout "qwerty-abnt") ; required
-;; (xah-fly-keys-set-layout "qwerty") ; required
-(xah-fly-keys 1)
+     (xah-fly-keys-set-layout "qwerty-abnt") ; required
+;;   (xah-fly-keys-set-layout "qwerty") ; required
+
+(defun my-toggle-layout ()
+"switch between qwerty-abnt and qwerty.
+Version 2019-11-20"
+(interactive)
+(if (string-equal xah-fly-key--current-layout "qwerty")
+(setq xah-fly-key--current-layout "qwerty-abnt")
+(setq xah-fly-key--current-layout "qwerty")))
+
+(xah-fly-keys 1) 
+
+;;;;;;;;;;;;;;
+;; (defun my-toggle-layout ()
+;; "switch between qwerty-abnt and qwerty.
+;; Version 2019-11-20"
+;; (interactive)
+;; (if (string-equal xah-fly-key--current-layout "qwerty")
+;; (setq xah-fly-key--current-layout "qwerty-abnt")
+;; (setq xah-fly-key--current-layout "qwerty")))
+;;;;;;;;;;;;;;
 
 (define-key xah-fly-key-map (kbd "<C-M-g>") 'xah-fly-command-mode-activate)
 (define-key xah-fly-key-map (kbd "<C-M-g>") 'xah-fly-command-mode-activate-no-hook)
