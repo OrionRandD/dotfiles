@@ -6,13 +6,12 @@
 #+PROPERTY: header-args:emacs-lisp :exports code :tangle init.el :comments 
 yes :results silent
 
-Notes: When installing a new build for emacs, download this package in
 the first hand.
 https://github.com/technomancy/better-defaults
 This time, I did not do that. Because I didn't know about it
 
 The keyword ":tangle yes" will automatically create a better
-"emacs.el" which is good for debugging emacs
+"emacs.el" which is good for debugging Emacs
 
 Note: for removing a package, delete it from the init.el and from the org file, delete the build-cache.el file, delete it from the build and repos directories
 
@@ -85,67 +84,305 @@ Note: for removing a package, delete it from the init.el and from the org file, 
     
  #+BEGIN_SRC emacs-lisp
 
-     (custom-set-variables
-          '(initial-frame-alist (quote ((fullscreen . maximized)))))
-     ;; for customizing the face (fonts), do:
-     ;; M-x customize-face RET default RET    
-     ;;(setq inhibit-startup-screen t)
-     (set-default-font "Source Code Pro" nil t)
-     (set-face-attribute 'default nil :height 105)
-     (visual-line-mode 1)
-     (global-visual-line-mode 1)
-     (load-theme 'misterioso)
-     (tool-bar-mode 0)
-     (scroll-bar-mode 0)
-     (show-paren-mode 1)
-     (toggle-truncate-lines nil) ;; you have to set truncate-partial-width-windows to non-nil for this to work
-     (ido-mode 1) ;; this shows minibuffer options
-     (blink-cursor-mode 0)
-     (setq org-src-wind-setup 'current-window)
-     (global-subword-mode 1)
+                                      (custom-set-variables
+                                           '(initial-frame-alist (quote ((fullscreen . maximized)))))
+                                      ;; for customizing the face (fonts), do:
+                                      ;; M-x customize-face RET default RET    
+                                      ;;(setq inhibit-startup-screen t)
+                                      (set-default-font "Source Code Pro" nil t)
+                                      (set-face-attribute 'default nil :height 105)
+                                      (visual-line-mode 1)
+                                      (global-visual-line-mode 1)
+                                      (load-theme 'misterioso)
+                                      (tool-bar-mode 0)
+                                      (scroll-bar-mode 0)
+                                      (show-paren-mode 1)
+                                      (toggle-truncate-lines nil) ;; you have to set truncate-partial-width-windows to non-nil for this to work
+                                      (ido-mode 1) ;; this shows minibuffer options
+                                      (blink-cursor-mode 0)
+                                      (setq org-src-wind-setup 'current-window)
+                                      (global-subword-mode 1)
 
-     (defalias 'yes-or-no-p 'y-or-n-p)
-	(setq confirm-kill-processes nil)
-   (add-hook 'prog-mode-hook 'turn-on-auto-fill)
-      (add-hook 'text-mode-hook 'turn-on-auto-fill)
+                                      (defalias 'yes-or-no-p 'y-or-n-p)
+                                         (setq confirm-kill-processes nil)
+                                    (add-hook 'prog-mode-hook 'turn-on-auto-fill)
+                                       (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-;; http://folk.uio.no/simenheg/init.el.html
+                                 ;; http://folk.uio.no/simenheg/init.el.html
 
-(set-language-environment "UTF-8") ; Set up UTF-8 multilingual environment
+                                 (set-language-environment "UTF-8") ; Set up UTF-8 multilingual environment
 
-(setq
- comint-input-ignoredups        t  ; Ignore duplicates in Comint history
- compare-ignore-whitespace      t  ; Ignore whitespace differences
-;; default-input-method       "TeX"  ; TeX is the default toggled input method
-;; disabled-command-function    nil  ; Enable disabled commands
- eshell-hist-ignoredups         t  ; Ignore duplicates in Eshell history
- history-delete-duplicates      t  ; Delete duplicate history entries
- inhibit-startup-screen         t  ; No startup screen
-;; initial-scratch-message      nil  ; No scratch message
- iswitchb-prompt-newbuffer    nil  ; Create new buffers without confirmation
-;; kill-read-only-ok              t  ; Killing read-only text is OK
-;; password-cache-expiry        nil  ; Cache TRAMP passwords forever
- show-paren-delay               0) ; Don't delay the paren update
+                                 (setq
+                                  comint-input-ignoredups        t  ; Ignore duplicates in Comint history
+                                  compare-ignore-whitespace      t  ; Ignore whitespace differences
+                                 ;; default-input-method       "TeX"  ; TeX is the default toggled input method
+                                 ;; disabled-command-function    nil  ; Enable disabled commands
+                                  eshell-hist-ignoredups         t  ; Ignore duplicates in Eshell history
+                                  history-delete-duplicates      t  ; Delete duplicate history entries
+                                  inhibit-startup-screen         t  ; No startup screen
+                                 ;; initial-scratch-message      nil  ; No scratch message
+                                  iswitchb-prompt-newbuffer    nil  ; Create new buffers without confirmation
+                                 ;; kill-read-only-ok              t  ; Killing read-only text is OK
+                                 ;; password-cache-expiry        nil  ; Cache TRAMP passwords forever
+                                  show-paren-delay               0) ; Don't delay the paren update
 
-(setq-default
-;; fill-column                   76  ; Lines break at column 76
-;; frame-background-mode      'dark  ; My theme is dark
- indent-tabs-mode             nil  ; Use spaces for indentation
-;; major-mode            'text-mode ; text-mode as the default for new buffers
-)
+                                 (setq-default
+                                 ;; fill-column                   76  ; Lines break at column 76
+                                 ;; frame-background-mode      'dark  ; My theme is dark
+                                  indent-tabs-mode             nil  ; Use spaces for indentation
+                                 ;; major-mode            'text-mode ; text-mode as the default for new buffers
+                                 )
 
-;; (blink-cursor-mode              0) ; No blinking cursor
-(column-number-mode             1) ; Show column number
-(delete-selection-mode          1) ; Delete selection when typing
-(fset 'yes-or-no-p      'y-or-n-p) ; Make "yes/no" prompts "y/n"
-(global-auto-revert-mode        1) ; Reload files after modification
-(iswitchb-mode                  1) ; Neat buffer switching
-(menu-bar-mode                  1) ; Menu bar
-(prefer-coding-system      'utf-8) ; Always prefer UTF-8
-(scroll-bar-mode               -1) ; And no scroll bar either
-(show-paren-mode                1) ; Highlight matching parenthesis
-(tool-bar-mode                 -1) ; No tool bar, please
-(setq create-lockfiles nil)        ; do not save '#' lockfiles
+                                 ;; (blink-cursor-mode              0) ; No blinking cursor
+                                 (column-number-mode             1) ; Show column number
+                                 (delete-selection-mode          1) ; Delete selection when typing
+                                 (fset 'yes-or-no-p      'y-or-n-p) ; Make "yes/no" prompts "y/n"
+                                 (global-auto-revert-mode        1) ; Reload files after modification
+                                 (iswitchb-mode                  1) ; Neat buffer switching
+                                 (menu-bar-mode                  1) ; Menu bar
+                                 (prefer-coding-system      'utf-8) ; Always prefer UTF-8
+                                 (scroll-bar-mode               -1) ; And no scroll bar either
+                                 (show-paren-mode                1) ; Highlight matching parenthesis
+                                 (tool-bar-mode                 -1) ; No tool bar, please
+                                 (setq create-lockfiles nil)        ; do not save '#' lockfiles
+
+                                 ;; Xah-hacks
+                                 ;; http://ergoemacs.org/emacs/modernization_formfeed.html
+                                 ;; keys for moving to prev/next code section (Form Feed; ^L)
+                                 (global-set-key (kbd "<C-M-prior>") 'backward-page) ; Ctrl+Alt+PageUp
+                                 (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
+                                 (delete-selection-mode 1)
+                                 (cua-mode 1)
+
+                                 (defun cyber-new-empty-buffer ()
+                                   "Create a new empty buffer.
+                                 New buffer will be named “untitled” or “untitled<2>”, “untitled<3>”, etc.
+
+                                 It returns the buffer (for elisp programing).
+
+                                 URL `http://ergoemacs.org/emacs/emacs_new_empty_buffer.html'
+                                 Version 2017-11-01"
+                                   (interactive)
+                                   (let (($buf (generate-new-buffer "untitled")))
+                                     (switch-to-buffer $buf)
+                                     (funcall initial-major-mode)
+                                     (setq buffer-offer-save t)
+                                     $buf
+                                     ))
+
+                                 (global-set-key (kbd "M-N") 'cyber-new-empty-buffer) ; Alt+N
+
+                                 ;; cyber-cut-line-or-region
+                                 (defun cyber-cut-line-or-region ()
+                                   "Cut current line, or text selection.
+                                 When `universal-argument' is called first, cut whole buffer (respects `narrow-to-region').
+
+                                 URL `http://ergoemacs.org/emacs/emacs_copy_cut_current_line.html'
+                                 Version 2015-06-10"
+                                   (interactive)
+                                   (if current-prefix-arg
+                                       (progn ; not using kill-region because we don't want to include previous kill
+                                         (kill-new (buffer-string))
+                                         (delete-region (point-min) (point-max)))
+                                     (progn (if (use-region-p)
+                                                (kill-region (region-beginning) (region-end) t)
+                                              (kill-region (line-beginning-position) (line-beginning-position 2))))))
+
+                                 ;; cyber-copy-line-or-region
+                                 (defun cyber-copy-line-or-region ()
+                                   "Copy current line, or text selection.
+                                 When called repeatedly, append copy subsequent lines.
+                                 When `universal-argument' is called first, copy whole buffer (respects `narrow-to-region').
+
+                                 URL `http://ergoemacs.org/emacs/emacs_copy_cut_current_line.html'
+                                 Version 2018-09-10"
+                                   (interactive)
+                                   (if current-prefix-arg
+                                       (progn
+                                         (copy-region-as-kill (point-min) (point-max)))
+                                     (if (use-region-p)
+                                         (progn
+                                           (copy-region-as-kill (region-beginning) (region-end)))
+                                       (if (eq last-command this-command)
+                                           (if (eobp)
+                                               (progn )
+                                             (progn
+                                               (kill-append "\n" nil)
+                                               (kill-append
+                                                (buffer-substring-no-properties (line-beginning-position) (line-end-position))
+                                                nil)
+                                               (progn
+                                                 (end-of-line)
+                                                 (forward-char))))
+                                         (if (eobp)
+                                             (if (eq (char-before) 10 )
+                                                 (progn )
+                                               (progn
+                                                 (copy-region-as-kill (line-beginning-position) (line-end-position))
+                                                 (end-of-line)))
+                                           (progn
+                                             (copy-region-as-kill (line-beginning-position) (line-end-position))
+                                             (end-of-line)
+                                             (forward-char)))))))
+
+                                 (global-set-key (kbd "<M-X>")  'cyber-cut-line-or-region) ; Alt-M Uppercase - cut  
+                                 (global-set-key (kbd "<M-C>")  'cyber-copy-line-or-region) ; Alt-C Uppercase - copy 
+                                 (global-set-key (kbd "<M-P>") 'yank) ; Alt-P Uppercase - paste
+
+                                 ;; cyber-copy-all-or-region
+                                 (defun cyber-copy-all-or-region ()
+                                   "Put the whole buffer content to `kill-ring', or text selection if there's one.
+                                 Respects `narrow-to-region'.
+                                 URL `http://ergoemacs.org/emacs/emacs_copy_cut_all_or_region.html'
+                                 Version 2015-08-22"
+                                   (interactive)
+                                   (if (use-region-p)
+                                       (progn
+                                         (kill-new (buffer-substring (region-beginning) (region-end)))
+                                         (message "Text selection copied."))
+                                     (progn
+                                       (kill-new (buffer-string))
+                                       (message "Buffer content copied."))))
+
+                                 (global-set-key (kbd "<M-T>")  'cyber-copy-all-or-region) ; Alt-T Uppercase - copy-all-or-region 
+
+                              ;; cyber-cut-all-or-region
+                              (defun cyber-cut-all-or-region ()
+                                "Cut the whole buffer content to `kill-ring', or text selection if there's one.
+                              Respects `narrow-to-region'.
+                              URL `http://ergoemacs.org/emacs/emacs_copy_cut_all_or_region.html'
+                              Version 2015-08-22"
+                                (interactive)
+                                (if (use-region-p)
+                                    (progn
+                                      (kill-new (buffer-substring (region-beginning) (region-end)))
+                                      (delete-region (region-beginning) (region-end)))
+                                  (progn
+                                    (kill-new (buffer-string))
+                                    (delete-region (point-min) (point-max)))))
+
+                              (global-set-key (kbd "<M-U>")  'cyber-cut-all-or-region) ; Alt-U Uppercase - copy-all-or-region 
+
+                           ;; cyber-paste-or-paste-previous
+                           (defun xah-paste-or-paste-previous ()
+                             "Paste. When called repeatedly, paste previous.
+                           This command calls `yank', and if repeated, call `yank-pop'.
+
+                           When `universal-argument' is called first with a number arg, paste that many times.
+
+                           URL `http://ergoemacs.org/emacs/emacs_paste_or_paste_previous.html'
+                           Version 2017-07-25"
+                             (interactive)
+                             (progn
+                               (when (and delete-selection-mode (region-active-p))
+                                 (delete-region (region-beginning) (region-end)))
+                               (if current-prefix-arg
+                                   (progn
+                                     (dotimes ($i (prefix-numeric-value current-prefix-arg))
+                                       (yank)))
+                                 (if (eq real-last-command this-command)
+                                     (yank-pop 1)
+                                   (yank)))))
+
+                        (global-set-key (kbd "<C-y>")  'cyber-paste-or-paste-previous) ; cyber-paste-or-paste-previous
+
+                   ;; cyber-show-kill-ring
+                  (defun cyber-show-kill-ring ()
+                    "Insert all `kill-ring' content in a new buffer named *copy history*.
+
+                  URL `http://ergoemacs.org/emacs/emacs_show_kill_ring.html'
+                  Version 2018-10-05"
+                    (interactive)
+                    (let (($buf (generate-new-buffer "*copy history*")))
+                      (progn
+                        (switch-to-buffer $buf)
+                        (funcall 'fundamental-mode)
+                        (setq buffer-offer-save t)
+                        (dolist (x kill-ring )
+                          (insert x "\n\u000cttt\n\n"))
+                        (goto-char (point-min)))
+                      (when (fboundp 'cyber-show-formfeed-as-line)
+                        (cyber-show-formfeed-as-line))))
+
+               ;; manipulationg resgisters
+               ;; https://ftp.gnu.org/old-gnu/Manuals/emacs-21.2/html_chapter/emacs_12.html
+
+                  ;; cyber-copy-to-register
+                  (defun cyber-copy-to-register-1 ()
+                 ;;   "Copy current line or text selection to register 1.
+                 ;; See also: `xah-paste-from-register-1', `copy-to-register'.
+                 ;; URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
+                 ;; Version 2017-01-23"
+                    (interactive)
+                    (let ($p1 $p2)
+                      (if (region-active-p)
+                          (progn (setq $p1 (region-beginning))
+                                 (setq $p2 (region-end)))
+                        (progn (setq $p1 (line-beginning-position))
+                               (setq $p2 (line-end-position))))
+                      (copy-to-register ?1 $p1 $p2)
+                      (message "Copied to register 1: 「%s」." (buffer-substring-no-properties $p1 $p2))))
+
+                  ;; cyber-paste-from-resgister 
+                  (defun cyber-paste-from-register-1 ()
+                 ;;   "Paste text from register 1.
+                 ;; See also: `xah-copy-to-register-1', `insert-register'.
+                 ;; URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
+                 ;; Version 2015-12-08"
+                    (interactive)
+                    (when (use-region-p)
+                      (delete-region (region-beginning) (region-end)))
+                    (insert-register ?1 t))
+
+                  (global-set-key (kbd "s-1") 'cyber-copy-to-register-1) ; win-1
+                  (global-set-key (kbd "s-2") 'cyber-paste-from-regester-1) ; win-2
+
+                 ;; ;; you can set  files to registers, like so:
+                 ;; ;; (set-register ?2 '(file . "~/.emacs.d/init.org"))
+                 ;; ;; sets file "init.org" to register 2
+                 ;; ;; see the gnu manual link above
+
+         ;; cyber-append-to-register
+         (defun cyber-append-to-register-1 ()
+           "Append current line or text selection to register 1.
+         When no selection, append current line with newline char.
+         See also: `xah-paste-from-register-1', `copy-to-register'.
+
+         URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
+         Version 2015-12-08"
+           (interactive)
+           (let ($p1 $p2)
+             (if (region-active-p)
+                 (progn (setq $p1 (region-beginning))
+                        (setq $p2 (region-end)))
+               (progn (setq $p1 (line-beginning-position))
+                      (setq $p2 (line-end-position))))
+             (append-to-register ?1 $p1 $p2)
+             (with-temp-buffer (insert "\n")
+                               (append-to-register ?1 (point-min) (point-max)))
+             (message "Appended to register 1: 「%s」." (buffer-substring-no-properties $p1 $p2))))
+
+      (global-set-key (kbd "M-I") 'cyber-append-to-register-1) ; M-I Uppercase 
+
+   ;; cyber-clear-register
+   (defun cyber-clear-register-1 ()
+     "Clear register 1.
+   See also: `xah-paste-from-register-1', `copy-to-register'.
+
+   URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
+   Version 2015-12-08"
+     (interactive)
+     (progn
+       (copy-to-register ?1 (point-min) (point-min))
+       (message "Cleared register 1.")))
+
+      (global-set-key (kbd "M-*") 'cyber-clear-register-1) ; M-*
+
+;; after copy Ctrl+c in Linux X11, you can paste by `yank' in emacs
+(setq x-select-enable-clipboard t)
+
+;; after mouse selection in X11, you can paste by `yank' in emacs
+(setq x-select-enable-primary t)
 
  #+END_SRC
 
@@ -472,16 +709,29 @@ disabled -> I spend more time in Org-mode than I do writing Elisp.
 
 #+BEGIN_SRC emacs-lisp
 
-    (dolist (pkgname '(theme-looper
-  alect-themes
-  base16-theme
-  color-theme-modern
-  doom-themes
-  moe-theme
-  ))
-(straight-use-package pkgname))
+      ;;  (dolist (pkgname '(theme-looper
+      ;;  alect-themes
+      ;;  base16-theme
+      ;;  color-theme-modern
+      ;;  doom-themes
+      ;;  moe-theme
+      ;;  ))
+      ;;   (straight-use-package pkgname))
 
-  (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
+    (use-package theme-looper
+     :ensure t)
+    (use-package color-theme-modern
+     :ensure t)
+    (use-package alect-themes 
+     :ensure t)
+    (use-package base16-theme 
+     :ensure t)
+    (use-package doom-themes
+     :ensure t)
+    (use-package moe-theme
+     :ensure t)
+
+    (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
 
  #+END_SRC
 
@@ -599,34 +849,507 @@ ant its levels of vim-like
 
 #+BEGIN_SRC emacs-lisp 
 
-(global-set-key [f6] 'spell-checker)
-(global-set-key [f7] 'ispell-buffer)
+                               (global-set-key [f6] 'spell-checker)
+                               (global-set-key [f7] 'ispell-buffer)
 
-(require 'ispell)
-(require 'flyspell)
+                               (require 'ispell)
+                               (require 'flyspell)
 
-(defun spell-checker ()
-  "spell checker (on/off) with selectable dictionary"
-  (interactive)
-  (if flyspell-mode
-      (flyspell-mode-off)
-    (progn
-      (flyspell-mode)
-      (ispell-change-dictionary
-       (completing-read
-        "Use new dictionary (RET for *default*): "
-        (and (fboundp 'ispell-valid-dictionary-list)
-         (mapcar 'list (ispell-valid-dictionary-list)))
-        nil t))
-      )))
+                               (defun spell-checker ()
+                                 "spell checker (on/off) with selectable dictionary"
+                                 (interactive)
+                                 (if flyspell-mode
+                                     (flyspell-mode-off)
+                                   (progn
+                                     (flyspell-mode)
+                                     (ispell-change-dictionary
+                                      (completing-read
+                                       "Use new dictionary (RET for *default*): "
+                                       (and (fboundp 'ispell-valid-dictionary-list)
+                                        (mapcar 'list (ispell-valid-dictionary-list)))
+                                       nil t))
+                                     )))
 
-(defun my-turn-spell-checking-on ()
-  "Turn flyspell-mode on."
-  (flyspell-mode 1))
-(add-hook 'text-mode-hook 'my-turn-spell-checking-on)
+                               (defun my-turn-spell-checking-on ()
+                                 "Turn flyspell-mode on."
+                                 (flyspell-mode 1))
+                               (add-hook 'text-mode-hook 'my-turn-spell-checking-on)
 
-;; enable flyspell in text mode (and derived modes)
-;; (add-hook 'text-mode-hook 'flyspell-mode)
+                               ;; enable flyspell in text mode (and derived modes)
+                               ;; (add-hook 'text-mode-hook 'flyspell-mode)
+
+                             ;; elisp-index-search
+                             ;; Kevin Rodgers 〔kevin.d.rodg…@gmail.com〕, 2008-10-09
+                             (defadvice elisp-index-search (before interactive-default activate)
+                               "Provide the symbol at point as the default when reading TOPIC interactively."
+                               (interactive
+                                (let ((symbol-at-point (thing-at-point 'symbol)))
+                                  (list (read-string (if symbol-at-point
+                                                         (format "Topic (%s): " symbol-at-point)
+                                                       (format "Topic: "))
+                                                     nil nil symbol-at-point)))))
+
+                             ;; fix for describe-major-mode
+                             (defun describe-major-mode ()
+                               "Show doc string for current major-mode."
+                               ;; code by Kevin Rodgers. 2009-02-25
+                               (interactive)
+                               (describe-function major-mode))
+
+                             (global-set-key (kbd "C-h m") 'describe-major-mode)
+
+                         (add-to-list 'load-path "~/.emacs.d/local-repo/pp-c-l")
+                           (require 'pp-c-l)
+                           (pretty-control-l-mode 1)
+
+
+                       ;; cyber-toggle-letter-case
+                       (defun cyber-toggle-letter-case ()
+                         "Toggle the letter case of current word or text selection.
+                       Always cycle in this order: Init Caps, ALL CAPS, all lower.
+
+                       URL `http://ergoemacs.org/emacs/modernization_upcase-word.html'
+                       Version 2017-04-19"
+                         (interactive)
+                         (let (
+                               (deactivate-mark nil)
+                               $p1 $p2)
+                           (if (use-region-p)
+                               (setq $p1 (region-beginning)
+                                     $p2 (region-end))
+                             (save-excursion
+                               (skip-chars-backward "[:alnum:]-_")
+                               (setq $p1 (point))
+                               (skip-chars-forward "[:alnum:]-_")
+                               (setq $p2 (point))))
+                           (when (not (eq last-command this-command))
+                             (put this-command 'state 0))
+                           (cond
+                            ((equal 0 (get this-command 'state))
+                             (upcase-initials-region $p1 $p2)
+                             (put this-command 'state 1))
+                            ((equal 1  (get this-command 'state))
+                             (upcase-region $p1 $p2)
+                             (put this-command 'state 2))
+                            ((equal 2 (get this-command 'state))
+                             (downcase-region $p1 $p2)
+                             (put this-command 'state 0)))))
+
+                   (global-set-key (kbd "C-0") 'cyber-toggle-letter-case)
+
+                     ;; cyber-toggle-previous-letter-case
+                     (defun cyber-toggle-previous-letter-case ()
+                       "Toggle the letter case of the letter to the left of cursor.
+                     URL `http://ergoemacs.org/emacs/modernization_upcase-word.html'
+                     Version 2015-12-22"
+                       (interactive)
+                       (let ((case-fold-search nil))
+                         (left-char 1)
+                         (cond
+                          ((looking-at "[[:lower:]]") (upcase-region (point) (1+ (point))))
+                          ((looking-at "[[:upper:]]") (downcase-region (point) (1+ (point)))))
+                         (right-char)))
+
+                   (global-set-key (kbd "C-s-0") 'cyber-toggle-previous-letter-case)
+
+                 ;; cyber-select-line
+                 (defun cyber-select-line ()
+                   "Select current line. If region is active, extend selection downward by line.
+                 URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
+                 Version 2017-11-01"
+                   (interactive)
+                   (if (region-active-p)
+                       (progn
+                         (forward-line 1)
+                         (end-of-line))
+                     (progn
+                       (end-of-line)
+                       (set-mark (line-beginning-position)))))
+
+                 (global-set-key (kbd "M-L") 'cyber-select-line)
+
+               ;; cyber-select-text-in-quote
+               (defun cyber-select-text-in-quote ()
+                 "Select text between the nearest left and right delimiters.
+               Delimiters here includes the following chars: \"<>(){}[]“”‘’‹›«»「」『』【】〖〗《》〈〉〔〕（）
+               This command select between any bracket chars, not the inner text of a bracket. For example, if text is
+
+                (a(b)c▮)
+
+                the selected char is “c”, not “a(b)c”.
+
+               URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
+               Version 2016-12-18"
+                 (interactive)
+                 (let (
+                       ($skipChars
+                        (if (boundp 'cyber-brackets)
+                            (concat "^\"" cyber-brackets)
+                          "^\"<>(){}[]“”‘’‹›«»「」『』【】〖〗《》〈〉〔〕（）"))
+                       $pos
+                       )
+                   (skip-chars-backward $skipChars)
+                   (setq $pos (point))
+                   (skip-chars-forward $skipChars)
+                   (set-mark $pos)))
+
+                   (global-set-key (kbd "M-Q") 'cyber-select-text-in-quote)
+
+             ;; cyber-select-block
+             (defun cyber-select-block ()
+             "Select the current/next block of text between blank lines.
+           If region is active, extend selection downward by block.
+
+           URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
+           Version 2017-11-01"
+             (interactive)
+             (if (region-active-p)
+                 (re-search-forward "\n[ \t]*\n" nil "move")
+               (progn
+                 (skip-chars-forward " \n\t")
+                 (when (re-search-backward "\n[ \t]*\n" nil "move")
+                   (re-search-forward "\n[ \t]*\n"))
+                 (push-mark (point) t t)
+                 (re-search-forward "\n[ \t]*\n" nil "move"))))
+
+                  (global-set-key (kbd "M-B") 'cyber-select-block)
+
+        ;; cyber-extend-selection
+        (defun xah-extend-selection ()
+         (interactive)
+          (if (region-active-p)
+              (progn
+                (let (($rb (region-beginning)) ($re (region-end)))
+                  (goto-char $rb)
+                  (cond
+                   ((looking-at "\\s(")
+                    (if (eq (nth 0 (syntax-ppss)) 0)
+                        (progn
+                          (message "left bracket, depth 0.")
+                          (end-of-line) ; select current line
+                          (set-mark (line-beginning-position)))
+                      (progn
+                        (message "left bracket, depth not 0")
+                        (up-list -1 t t)
+                        (mark-sexp))))
+                   ((eq $rb (line-beginning-position))
+                    (progn
+                      (goto-char $rb)
+                      (let (($firstLineEndPos (line-end-position)))
+                        (cond
+                         ((eq $re $firstLineEndPos)
+                          (progn
+                            (message "exactly 1 line. extend to next whole line." )
+                            (forward-line 1)
+                            (end-of-line)))
+                         ((< $re $firstLineEndPos)
+                          (progn
+                            (message "less than 1 line. complete the line." )
+                            (end-of-line)))
+                         ((> $re $firstLineEndPos)
+                          (progn
+                            (message "beginning of line, but end is greater than 1st end of line" )
+                            (goto-char $re)
+                            (if (eq (point) (line-end-position))
+                                (progn
+                                  (message "exactly multiple lines" )
+                                  (forward-line 1)
+                                  (end-of-line))
+                              (progn
+                                (message "multiple lines but end is not eol. make it so" )
+                                (goto-char $re)
+                                (end-of-line)))))
+                         (t (error "logic error 42946" ))))))
+                   ((and (> (point) (line-beginning-position)) (<= (point) (line-end-position)))
+                    (progn
+                      (message "less than 1 line" )
+                      (end-of-line) ; select current line
+                      (set-mark (line-beginning-position))))
+                   (t (message "last resort" ) nil))))
+            (progn
+              (cond
+               ((looking-at "\\s(")
+                (message "left bracket")
+                (mark-sexp)) ; left bracket
+               ((looking-at "\\s)")
+                (message "right bracket")
+                (backward-up-list) (mark-sexp))
+               ((looking-at "\\s\"")
+                (message "string quote")
+                (mark-sexp)) ; string quote
+               ((and (eq (point) (line-beginning-position)) (not (looking-at "\n")))
+                (message "beginning of line and not empty")
+                (end-of-line)
+                (set-mark (line-beginning-position)))
+               ((or (looking-back "\\s_" 1) (looking-back "\\sw" 1))
+                (message "left is word or symbol")
+                (skip-syntax-backward "_w" )
+                ;; (re-search-backward "^\\(\\sw\\|\\s_\\)" nil t)
+                (mark-sexp))
+               ((and (looking-at "\\s ") (looking-back "\\s " 1))
+                (message "left and right both space" )
+                (skip-chars-backward "\\s " ) (set-mark (point))
+                (skip-chars-forward "\\s "))
+               ((and (looking-at "\n") (looking-back "\n" 1))
+                (message "left and right both newline")
+                (skip-chars-forward "\n")
+                (set-mark (point))
+                (re-search-forward "\n[ \t]*\n")) ; between blank lines, select next text block
+               (t (message "just mark sexp" )
+                  (mark-sexp))
+               ;;
+               ))))
+
+             (global-set-key (kbd "M-E") 'cyber-extend-selection)
+
+        ;; cyber-brackets 
+        (defvar cyber-brackets nil "string of left/right brackets pairs.")
+        (setq cyber-brackets "()[]{}<>（）［］｛｝⦅⦆〚〛⦃⦄“”‘’‹›«»「」〈〉《》【】〔〕⦗⦘『』〖〗〘〙｢｣⟦⟧⟨⟩⟪⟫⟮⟯⟬⟭⌈⌉⌊⌋⦇⦈⦉⦊❛❜❝❞❨❩❪❫❴❵❬❭❮❯❰❱❲❳〈〉⦑⦒⧼⧽﹙﹚﹛﹜﹝﹞⁽⁾₍₎⦋⦌⦍⦎⦏⦐⁅⁆⸢⸣⸤⸥⟅⟆⦓⦔⦕⦖⸦⸧⸨⸩｟｠⧘⧙⧚⧛⸜⸝⸌⸍⸂⸃⸄⸅⸉⸊᚛᚜༺༻༼༽⏜⏝⎴⎵⏞⏟⏠⏡﹁﹂﹃﹄︹︺︻︼︗︘︿﹀︽︾﹇﹈︷︸")
+
+         ;; cyber-left-brackets
+        (defvar cyber-left-brackets '("(" "{" "[" "<" "〔" "【" "〖" "〈" "《" "「" "『" "“" "‘" "‹" "«" )
+          "List of left bracket chars.")
+        (progn
+        ;; make cyber-left-brackets based on cyber-brackets
+          (setq cyber-left-brackets '())
+          (dotimes ($x (- (length cyber-brackets) 1))
+            (when (= (% $x 2) 0)
+              (push (char-to-string (elt cyber-brackets $x))
+                    cyber-left-brackets)))
+          (setq cyber-left-brackets (reverse cyber-left-brackets)))
+
+      (defvar cyber-right-brackets '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»")
+        "list of right bracket chars.")
+      (progn
+        (setq cyber-right-brackets '())
+        (dotimes ($x (- (length cyber-brackets) 1))
+          (when (= (% $x 2) 1)
+            (push (char-to-string (elt cyber-brackets $x))
+                  cyber-right-brackets)))
+        (setq cyber-right-brackets (reverse cyber-right-brackets)))
+
+     ;; cyber-backward-left-bracket
+    (defun cyber-backward-left-bracket ()
+      "Move cursor to the previous occurrence of left bracket.
+    The list of brackets to jump to is defined by `cyber-left-brackets'.
+    URL `http://ergoemacs.org/emacs/emacs_navigating_keys_for_brackets.html'
+    Version 2015-10-01"
+      (interactive)
+      (re-search-backward (regexp-opt cyber-left-brackets) nil t))
+
+    ;; cyber-forward-right-bracket
+    (defun cyber-forward-right-bracket ()
+      "Move cursor to the next occurrence of right bracket.
+    The list of brackets to jump to is defined by `cyber-right-brackets'.
+    URL `http://ergoemacs.org/emacs/emacs_navigating_keys_for_brackets.html'
+    Version 2015-10-01"
+      (interactive)
+      (re-search-forward (regexp-opt cyber-right-brackets) nil t))
+
+
+
+  ;; cyber-goto-matching-bracket
+  (defun cyber-goto-matching-bracket ()
+    "Move cursor to the matching bracket.
+  If cursor is not on a bracket, call `backward-up-list'.
+  The list of brackets to jump to is defined by `cyber-left-brackets' and `cyber-right-brackets'.
+  URL `http://ergoemacs.org/emacs/emacs_navigating_keys_for_brackets.html'
+  Version 2016-11-22"
+    (interactive)
+    (if (nth 3 (syntax-ppss))
+        (backward-up-list 1 'ESCAPE-STRINGS 'NO-SYNTAX-CROSSING)
+      (cond
+       ((eq (char-after) ?\") (forward-sexp))
+       ((eq (char-before) ?\") (backward-sexp ))
+       ((looking-at (regexp-opt cyber-left-brackets))
+        (forward-sexp))
+       ((looking-back (regexp-opt cyber-right-brackets) (max (- (point) 1) 1))
+        (backward-sexp))
+       (t (backward-up-list 1 'ESCAPE-STRINGS 'NO-SYNTAX-CROSSING)))))
+
+    ;; cyber-forward-quote-smart
+    (defun cyber-forward-quote-smart ()
+    "Move cursor to the current or next string quote.
+  Place cursor at the position after the left quote.
+  Repeated call will find the next string.
+  URL `http://ergoemacs.org/emacs/emacs_navigating_keys_for_brackets.html'
+  Version 2016-11-22"
+    (interactive)
+    (let (($pos (point)))
+      (if (nth 3 (syntax-ppss))
+          (progn
+            (backward-up-list 1 'ESCAPE-STRINGS 'NO-SYNTAX-CROSSING)
+            (forward-sexp)
+            (re-search-forward "\\\"" nil t))
+        (progn (re-search-forward "\\\"" nil t)))
+      (when (<= (point) $pos)
+        (progn (re-search-forward "\\\"" nil t)))))
+
+  ;; cyber-backward-quote 
+  (defun cyber-backward-quote ()
+    "Move cursor to the previous occurrence of \".
+  If there are consecutive quotes of the same char, keep moving until none.
+  Returns `t' if found, else `nil'.
+  URL `http://ergoemacs.org/emacs/emacs_navigating_keys_for_brackets.html'
+  Version 2016-07-23"
+    (interactive)
+    (if (re-search-backward "\\\"+" nil t)
+        (when (char-before) ; isn't nil, at beginning of buffer
+          (while (char-equal (char-before) (char-after))
+            (left-char)
+            t))
+      (progn
+        (message "No more quotes before cursor.")
+        nil))) 
+
+ ;; cyber-change-bracket-pairs
+(defun cyber-change-bracket-pairs ( @from-chars @to-chars)
+  "Change bracket pairs from one type to another.
+
+For example, change all parenthesis () to square brackets [].
+
+Works on selected text, or current text block.
+
+When called in lisp program, @from-chars or @to-chars is a string of bracket pair. eg \"(paren)\",  \"[bracket]\", etc.
+The first and last characters are used.
+If the string contains “,2”, then the first 2 chars and last 2 chars are used, for example  \"[[bracket,2]]\".
+If @to-chars is equal to string “none”, the brackets are deleted.
+
+ If the string has length greater than 2, the rest are ignored.
+
+URL `http://ergoemacs.org/emacs/elisp_change_brackets.html'
+Version 2018-03-31"
+  (interactive
+   (let (($bracketsList
+          '("(paren)"
+            "{brace}"
+            "[square]"
+            "<greater>"
+            "`emacs'"
+            "`markdown`"
+            "~tilde~"
+            "=equal="
+            "\"ascii quote\""
+            "[[double square,2]]"
+            "“curly quote”"
+            "‘single quote’"
+            "‹angle quote›"
+            "«double angle quote»"
+            "「corner」"
+            "『white corner』"
+            "【LENTICULAR】"
+            "〖white LENTICULAR〗"
+            "〈angle bracket〉"
+            "《double angle bracket》"
+            "〔TORTOISE〕"
+            "⦅white paren⦆"
+            "〚white square〛"
+            "⦃white curly bracket⦄"
+            "〈angle bracket〉"
+            "⦑ANGLE BRACKET WITH DOT⦒"
+            "⧼CURVED ANGLE BRACKET⧽"
+            "⟦math square⟧"
+            "⟨math angle⟩"
+            "⟪math DOUBLE ANGLE BRACKET⟫"
+            "⟮math FLATTENED PARENTHESIS⟯"
+            "⟬math WHITE TORTOISE SHELL BRACKET⟭"
+            "❛HEAVY SINGLE QUOTATION MARK ORNAMENT❜"
+            "❝HEAVY DOUBLE TURNED COMMA QUOTATION MARK ORNAMENT❞"
+            "❨MEDIUM LEFT PARENTHESIS ORNAMENT❩"
+            "❪MEDIUM FLATTENED LEFT PARENTHESIS ORNAMENT❫"
+            "❴MEDIUM LEFT CURLY BRACKET ORNAMENT❵"
+            "❬MEDIUM LEFT-POINTING ANGLE BRACKET ORNAMENT❭"
+            "❮HEAVY LEFT-POINTING ANGLE QUOTATION MARK ORNAMENT❯"
+            "❰HEAVY LEFT-POINTING ANGLE BRACKET ORNAMENT❱"
+            "none"
+            )))
+     (list
+      (ido-completing-read "Replace this:" $bracketsList )
+      (ido-completing-read "To:" $bracketsList ))))
+  (let ( $p1 $p2 )
+    (if (use-region-p)
+        (progn
+          (setq $p1 (region-beginning))
+          (setq $p2 (region-end)))
+      (save-excursion
+        (if (re-search-backward "\n[ \t]*\n" nil "move")
+            (progn (re-search-forward "\n[ \t]*\n")
+                   (setq $p1 (point)))
+          (setq $p1 (point)))
+        (if (re-search-forward "\n[ \t]*\n" nil "move")
+            (progn (re-search-backward "\n[ \t]*\n")
+                   (setq $p2 (point)))
+          (setq $p2 (point)))))
+    (save-excursion
+      (save-restriction
+        (narrow-to-region $p1 $p2)
+        (let ( (case-fold-search nil)
+               $fromLeft
+               $fromRight
+               $toLeft
+               $toRight)
+          (cond
+           ((string-match ",2" @from-chars  )
+            (progn
+              (setq $fromLeft (substring @from-chars 0 2))
+              (setq $fromRight (substring @from-chars -2))))
+           (t
+            (progn
+              (setq $fromLeft (substring @from-chars 0 1))
+              (setq $fromRight (substring @from-chars -1)))))
+          (cond
+           ((string-match ",2" @to-chars)
+            (progn
+              (setq $toLeft (substring @to-chars 0 2))
+              (setq $toRight (substring @to-chars -2))))
+           ((string-match "none" @to-chars)
+            (progn
+              (setq $toLeft "")
+              (setq $toRight "")))
+           (t
+            (progn
+              (setq $toLeft (substring @to-chars 0 1))
+              (setq $toRight (substring @to-chars -1)))))
+          (cond
+           ((string-match "markdown" @from-chars)
+            (progn
+              (goto-char (point-min))
+              (while
+                  (re-search-forward "`\\([^`]+?\\)`" nil t)
+                (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+                (replace-match (concat $toLeft "\\1" $toRight ) "FIXEDCASE" ))))
+           ((string-match "tilde" @from-chars)
+            (progn
+              (goto-char (point-min))
+              (while
+                  (re-search-forward "~\\([^~]+?\\)~" nil t)
+                (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+                (replace-match (concat $toLeft "\\1" $toRight ) "FIXEDCASE" ))))
+           ((string-match "ascii quote" @from-chars)
+            (progn
+              (goto-char (point-min))
+              (while
+                  (re-search-forward "\"\\([^\"]+?\\)\"" nil t)
+                (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+                (replace-match (concat $toLeft "\\1" $toRight ) "FIXEDCASE" ))))
+           ((string-match "equal" @from-chars)
+            (progn
+              (goto-char (point-min))
+              (while
+                  (re-search-forward "=\\([^=]+?\\)=" nil t)
+                (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+                (replace-match (concat $toLeft "\\1" $toRight ) "FIXEDCASE" ))))
+           (t (progn
+                (progn
+                  (goto-char (point-min))
+                  (while (search-forward $fromLeft nil t)
+                    (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+                    (replace-match $toLeft "FIXEDCASE" "LITERAL")))
+                (progn
+                  (goto-char (point-min))
+                  (while (search-forward $fromRight nil t)
+                    (overlay-put (make-overlay (match-beginning 0) (match-end 0)) 'face 'highlight)
+                    (replace-match $toRight "FIXEDCASE" "LITERAL")))))))))))
 
 #+END_SRC
 
@@ -636,7 +1359,7 @@ ant its levels of vim-like
 
   ;; (require 'icicles)
   ;; (icy-mode 1) 
- 
+
 #+END_SRC
 
 ** company
