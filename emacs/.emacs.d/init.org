@@ -441,7 +441,7 @@ disabled -> I spend more time in Org-mode than I do writing Elisp.
  #+BEGIN_SRC emacs-lisp
 
   ;;  (setq initial-major-mode 'org-mode)
-  ;;  (setq initial-major-mode 'fundamental-mode)
+      (setq initial-major-mode 'fundamental-mode)
 
  #+END_SRC
 
@@ -536,10 +536,13 @@ disabled -> I spend more time in Org-mode than I do writing Elisp.
 
 ** evil  
 
+Also look at the built in viper-mode
+ant its levels of vim-like
+
 #+BEGIN_SRC emacs-lisp
 
   (straight-use-package 'evil)
-;;    (evil-mode 1)
+ ;; (evil-mode 1)
 
 #+END_SRC
 
@@ -548,7 +551,7 @@ disabled -> I spend more time in Org-mode than I do writing Elisp.
 #+BEGIN_SRC emacs-lisp
 
   (straight-use-package 'evil-collection)
-;;  (evil-collection-init t)
+ ;; (evil-collection-init t)
 
 #+END_SRC
 
@@ -556,7 +559,7 @@ disabled -> I spend more time in Org-mode than I do writing Elisp.
 
 #+BEGIN_SRC emacs-lisp
 
-;;  (straight-use-package 'evil-org)
+  (straight-use-package 'evil-org)
   
 #+END_SRC
 
@@ -1720,6 +1723,9 @@ you have to issue the command etags in the working directories
 
 #+BEGIN_SRC emacs-lisp
 
+(use-package eimp
+ :ensure t)
+
 (autoload 'eimp-mode "eimp" "Emacs Image Manipulation Package." t)
       (add-hook 'image-mode-hook 'eimp-mode)
 
@@ -1844,6 +1850,7 @@ you have to issue the command etags in the working directories
   (defun conditionally-enable-lispy ()
     (when (eq this-command 'eval-expression)
       (lispy-mode 1)))
+
   (add-hook 'minibuffer-setup-hook 'conditionally-enable-lispy)
 
 #+END_SRC
@@ -2006,20 +2013,23 @@ you have to issue the command etags in the working directories
 
  #+BEGIN_SRC emacs-lisp
 
-      ;;  ;;  (setq frame-title-format "emacs")
-      ;;  ;;  (set-default 'cursor-type 'hbar)
+      ;;    (setq frame-title-format "emacs")
+      ;;    (set-default 'cursor-type 'hbar)
       ;;      (ido-mode 1)
       ;;      (column-number-mode 1)
       ;;      (global-hl-line-mode 0)
       ;;      (delete-selection-mode +1)
 
-   (setq electric-pair-pairs '(
-			      (?\{ . ?\})
-			      (?\( . ?\))
-			      (?\[ . ?\])
-			      (?\" . ?\")
-			      ))
-   (electric-pair-mode 1)
+   ;; Use xah brackets system, instead of 
+   ;; electric-pairs, paredit, etc...
+ 
+   ;; (setq electric-pair-pairs '(
+   ;; 			   (?\{ . ?\})
+   ;; 			   (?\( . ?\))
+   ;; 			   (?\[ . ?\])
+   ;; 			   (?\" . ?\")
+   ;; 			   ))
+   ;; (electric-pair-mode 1)
 
       ;;      (defalias 'yes-or-no-p 'y-or-n-p)
       ;;      (setq confirm-kill-processes nil)
@@ -3650,7 +3660,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
     (setq
     bbdb-offer-save 1
     bbdb-use-pop-up t
-    bbdb-electric-p t
+   ;; bbdb-electric-p t
     bbdb-popup-target-lines  1
     )
 
@@ -4161,115 +4171,6 @@ You can customize this variable
     
       ;; Do not pair simple quotes
       (sp-pair "'" nil :actions :rem))
-
-#+END_SRC
-
-** xah modes
-
-#+BEGIN_SRC emacs-lisp
-
-   (dolist (package '(xah-lookup xah-elisp-mode xah-find xah-fly-keys xah-get-thing xah-math-input xah-reformat-code xah-replace-pairs xahk-mode xah-css-mode))
-    (unless (package-installed-p package)
-      (package-install package))
-      (require package))
-
-;; http://ergoemacs.org/misc/ergoemacs_vi_mode.html
-;; see also https://ergoemacs.github.io/
-
-     (require 'xah-fly-keys)
-
-     (xah-fly-keys-set-layout "qwerty-abnt") ; required
-;;   (xah-fly-keys-set-layout "qwerty") ; required
-
-(defun my-toggle-layout ()
-"switch between qwerty-abnt and qwerty.
-Version 2019-11-20"
-(interactive)
-(if (string-equal xah-fly-key--current-layout "qwerty")
-(setq xah-fly-key--current-layout "qwerty-abnt")
-(setq xah-fly-key--current-layout "qwerty")))
-
-(xah-fly-keys 1) 
-
-;;;;;;;;;;;;;;
-;; (defun my-toggle-layout ()
-;; "switch between qwerty-abnt and qwerty.
-;; Version 2019-11-20"
-;; (interactive)
-;; (if (string-equal xah-fly-key--current-layout "qwerty")
-;; (setq xah-fly-key--current-layout "qwerty-abnt")
-;; (setq xah-fly-key--current-layout "qwerty")))
-;;;;;;;;;;;;;;
-
-(define-key xah-fly-key-map (kbd "<C-M-g>") 'xah-fly-command-mode-activate)
-(define-key xah-fly-key-map (kbd "<C-M-g>") 'xah-fly-command-mode-activate-no-hook)
-;; (add-hook 'magit-popup-mode-hook 'xah-fly-insert-mode-activate)
-
-;; https://www.gtrun.org/post/init/#xah-fly-key
-;; edit
-(define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
-(define-key xah-fly-key-map (kbd "C-0") 'delete-region)
-(define-key xah-fly-key-map (kbd "C-n") 'next-line)
-
-;; org-mode
-(define-key xah-fly-key-map (kbd "C-c l") 'org-mac-grab-link)
-(define-key xah-fly-key-map (kbd "C-c a") 'org-agenda)
-(define-key xah-fly-key-map (kbd "C-c w") 'helm-deft)
-
-;; iseach
-(define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
-
-;; possible layout values:
-
-;;;;;;;;;;;;;
-;; "azerty"
-;; "azerty-be"
-;; "colemak"
-;; "colemak-mod-dh"
-;; "dvorak"
-;; "programer-dvorak"
-;; "qwerty"
-;; "qwerty-abnt"
-;; "qwertz"
-;; "workman"
-;;;;;;;;;;;;;
-
-;; manipulationg resgisters
-;; https://ftp.gnu.org/old-gnu/Manuals/emacs-21.2/html_chapter/emacs_12.html
-
-(defun xah-copy-to-register-1 ()
-  "Copy current line or text selection to register 1.
-See also: `xah-paste-from-register-1', `copy-to-register'.
-
-URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
-Version 2017-01-23"
-  (interactive)
-  (let ($p1 $p2)
-    (if (region-active-p)
-        (progn (setq $p1 (region-beginning))
-               (setq $p2 (region-end)))
-      (progn (setq $p1 (line-beginning-position))
-             (setq $p2 (line-end-position))))
-    (copy-to-register ?1 $p1 $p2)
-    (message "Copied to register 1: 「%s」." (buffer-substring-no-properties $p1 $p2))))
-
-(defun xah-paste-from-register-1 ()
-  "Paste text from register 1.
-See also: `xah-copy-to-register-1', `insert-register'.
-URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
-Version 2015-12-08"
-  (interactive)
-  (when (use-region-p)
-    (delete-region (region-beginning) (region-end)))
-  (insert-register ?1 t))
-
-(global-set-key (kbd "s-1") 'xah-copy-to-register-1) ; win-1
-(global-set-key (kbd "s-2") 'xah-paste-from-regester-1) ; win-2
-
-;; you can set  files to registers, like so:
-;; (set-register ?2 '(file . "~/.emacs.d/init.org"))
-;; sets file "init.org" to register 2
-;; see the gnu manual link above
 
 #+END_SRC
 
