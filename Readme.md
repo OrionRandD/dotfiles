@@ -13,16 +13,16 @@ How to manage your dotfiles on github
 10. ls -la | grep mydotfile
 
 11. Create packages to stow - a package is a folder containing files and/or folders - gnu stow does not symlink single files
-12.cd ~/.dotfiles 
+12. cd ~/.dotfiles 
 13. mkdir emacs && cd emacs 
-15. cp ~/.emacs.d/ ~/.emacs.d_bak
-16. mv ~/.emacs.d/ emacs/
-17. make a .gitignore or .gitignore_global in your "~./.dotfiles" and add some excluding rules
-18. stow .emacs.d
-19. git add emacs
-20. git commit -c "my emacs config"
-21. git push
-22. Make as many packages as you want. Stow them and push them to your git repository
+14. cp ~/.emacs.d/ ~/.emacs.d_bak
+15. mv ~/.emacs.d/ emacs/
+16. make a .gitignore or .gitignore_global in your "~./.dotfiles" and add some excluding rules
+17. stow .emacs.d
+18. git add emacs
+19. git commit -c "my emacs config"
+20. git push
+21. Make as many packages as you want. Stow them and push them to your git repository
 
 Source: https://alexpearce.me/2016/02/managing-dotfiles-with-stow/
 
