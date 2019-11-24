@@ -1080,80 +1080,92 @@ Version 2018-03-31"
 ;; (icy-mode 1)
 
 (straight-use-package 'company)
-     (require 'company)
-     (add-hook 'after-init-hook 'global-company-mode)
-     (setq company-minimum-prefix-length 3)
-     (setq company-idle-delay 0.1)
+       (require 'company)
+       (add-hook 'after-init-hook 'global-company-mode)
+       (setq company-minimum-prefix-length 3)
+       (setq company-idle-delay 0.1)
 
-     (setq company-dabbrev-downcase nil)
+       (setq company-dabbrev-downcase nil)
 
-   (eval-after-load 'company
-     '(progn
-        (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
-        (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)))
+     (eval-after-load 'company
+       '(progn
+          (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+          (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)))
 
-   (eval-after-load 'company
-     '(progn
-        (define-key company-active-map (kbd "S-TAB") 'company-select-previous)
-        (define-key company-active-map (kbd "<backtab>") 'company-select-previous)))
+     (eval-after-load 'company
+       '(progn
+          (define-key company-active-map (kbd "S-TAB") 'company-select-previous)
+          (define-key company-active-map (kbd "<backtab>") 'company-select-previous)))
 
-   (setq company-frontends
-         '(company-pseudo-tooltip-unless-just-one-frontend
-           company-preview-frontend
-           company-echo-metadata-frontend))
+     (setq company-frontends
+           '(company-pseudo-tooltip-unless-just-one-frontend
+             company-preview-frontend
+             company-echo-metadata-frontend))
 
-   (setq company-require-match 'never)
+     (setq company-require-match 'never)
 
-   (setq company-auto-complete t)
+     (setq company-auto-complete t)
 
-    (defun my-company-visible-and-explicit-action-p ()
-       (and (company-tooltip-visible-p)
-            (company-explicit-action-p)))
+      (defun my-company-visible-and-explicit-action-p ()
+         (and (company-tooltip-visible-p)
+              (company-explicit-action-p)))
 
-     (defun company-ac-setup ()
-       "Sets up `company-mode' to behave similarly to `auto-complete-mode'."
-       (setq company-require-match nil)
-       (setq company-auto-complete #'my-company-visible-and-explicit-action-p)
-       (setq company-frontends '(company-echo-metadata-frontend
-                                 company-pseudo-tooltip-unless-just-one-frontend-with-delay
-                                 company-preview-frontend))
-       (define-key company-active-map [tab]
-         'company-select-next-if-tooltip-visible-or-complete-selection)
-       (define-key company-active-map (kbd "TAB")
-         'company-select-next-if-tooltip-visible-or-complete-selection))
+       (defun company-ac-setup ()
+         "Sets up `company-mode' to behave similarly to `auto-complete-mode'."
+         (setq company-require-match nil)
+         (setq company-auto-complete #'my-company-visible-and-explicit-action-p)
+         (setq company-frontends '(company-echo-metadata-frontend
+                                   company-pseudo-tooltip-unless-just-one-frontend-with-delay
+                                   company-preview-frontend))
+         (define-key company-active-map [tab]
+           'company-select-next-if-tooltip-visible-or-complete-selection)
+         (define-key company-active-map (kbd "TAB")
+           'company-select-next-if-tooltip-visible-or-complete-selection))
 
-      (company-ac-setup)
+        (company-ac-setup)
 
-    (custom-set-faces
-        '(company-preview
-          ((t (:foreground "darkgray" :underline t))))
-        '(company-preview-common
-          ((t (:inherit company-preview))))
-        '(company-tooltip
-          ((t (:background "lightgray" :foreground "black"))))
-        '(company-tooltip-selection
-          ((t (:background "steelblue" :foreground "white"))))
-        '(company-tooltip-common
-          ((((type x)) (:inherit company-tooltip :weight bold))
-           (t (:inherit company-tooltip))))
-        '(company-tooltip-common-selection
-          ((((type x)) (:inherit company-tooltip-selection :weight bold))
-           (t (:inherit company-tooltip-selection)))))
+      (custom-set-faces
+          '(company-preview
+            ((t (:foreground "darkgray" :underline t))))
+          '(company-preview-common
+            ((t (:inherit company-preview))))
+          '(company-tooltip
+            ((t (:background "lightgray" :foreground "black"))))
+          '(company-tooltip-selection
+            ((t (:background "steelblue" :foreground "white"))))
+          '(company-tooltip-common
+            ((((type x)) (:inherit company-tooltip :weight bold))
+             (t (:inherit company-tooltip))))
+          '(company-tooltip-common-selection
+            ((((type x)) (:inherit company-tooltip-selection :weight bold))
+             (t (:inherit company-tooltip-selection)))))
 
-;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;
 
- (straight-use-package 'company-quickhelp)
-(setq company-quickhelp-mode 1)
+   (straight-use-package 'company-quickhelp)
+  (setq company-quickhelp-mode 1)
+ 
+   ;;;;;;;;;;;;;;;;;;
 
- ;;;;;;;;;;;;;;;;;;
+  (straight-use-package '(company-englisp-helper
+                             :type git
+                             :host github
+                             :repo "manateelazycat/company-english-helper"))
+     (require 'company-english-helper)
 
-(straight-use-package '(company-englisp-helper
-                           :type git
-                           :host github
-                           :repo "manateelazycat/company-english-helper"))
-   (require 'company-english-helper)
+   ;;;;;;;;;;;;;;;;;;
 
- ;;;;;;;;;;;;;;;;;;
+(setq company-backends '(company-cpp
+                         company-ctag
+                         company-dabbrev
+                         company-dabbrev-code
+                         company-elisp 
+                         company-files 
+                         company-gtags
+                         company-ispell
+                         company-keywords
+                         company-lisp
+                         company-ropemacs))
 
 (straight-use-package 'org-bullets)
  (org-bullets-mode 1)
@@ -1551,6 +1563,23 @@ file with `edit-abbrevs`"
 	  ("renewlist" "{")
 	  ("setlistdepth" "{")
 	  ("restartlist" "{")))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; how to setup
+;; https://emacs.stackexchange.com/questions/37725/defining-custom-latex-class-for-org-mode-export
+;; https://orgmode.org/worg/org-tutorials/org-latex-export.html
+;; https://github.com/tsdye/org-article
+
+(with-eval-after-load 'ox-latex
+  (add-to-list 'org-latex-classes
+          '("koma-article"
+             "\\documentclass{scrartcl}"
+             ("\\section{%s}" . "\\section*{%s}")
+             ("\\subsection{%s}" . "\\subsection*{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+             ("\\paragraph{%s}" . "\\paragraph*{%s}")
+             ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
 
 (defun find-user-init-file ()
   "Edit the `user-init-file', in another window."
@@ -2700,6 +2729,8 @@ Version 2015-04-23"
 	 (ido-completing-read "Open:" (mapcar (lambda (ξx) (car ξx)) cyber-filelist))))
     (find-file (cdr (assoc ξabbrevCode cyber-filelist)))))
 
+(global-set-key (kbd "C-´") 'cyber-open-file-fast)
+
 
 
 ;; (setq shackle-rules
@@ -2979,6 +3010,11 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
   ;; it again with "apt purge dash-el" 
 
  (use-package dash
+   :straight t
+   :custom
+   (dash-enable-fontlock t))
+
+ (use-package dash-functional
    :straight t
    :custom
    (dash-enable-fontlock t))
@@ -3446,8 +3482,13 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 
 
 
-;; (add-to-list 'load-path "~/.emacs.d/local-repo/zoom-frm")
-;; (require 'zoom-frm)
+(add-to-list 'load-path "~/.emacs.d/local-repo/zoom-frm")
+(require 'zoom-frm)
+
+(define-key ctl-x-map [(control ?+)] 'zoom-in/out)
+(define-key ctl-x-map [(control ?-)] 'zoom-in/out)
+(define-key ctl-x-map [(control ?=)] 'zoom-in/out)
+(define-key ctl-x-map [(control ?0)] 'zoom-in/out)
 
 (use-package openwith
  :straight t
@@ -3548,7 +3589,7 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
   (setq-local company-backends '((company-shell
                                   company-shell-env
                                   company-etags
-                                  company-dabbrev-code))))
+                        company-dabbrev-code))))
 
 (use-package company-shell
   :ensure t
@@ -3591,6 +3632,13 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 
 (straight-use-package 'debpaste)
 (straight-use-package 'ix)
+
+(add-to-list 'load-path "~/.emacs.d/local-repo/tiny-tools")
+ (add-to-list 'load-path "~/.emacs.d/local-repo/tiny-tools/lisp/tiny")
+            (add-to-list 'load-path "~/.emacs.d/local-repo/tiny-tools/lisp/other")
+
+(require 'tinyurl)
+(tinyurl-mode 1)
 
 (use-package smartparens
   :straight t

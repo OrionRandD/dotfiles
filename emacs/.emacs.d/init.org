@@ -1,4 +1,4 @@
--*- after-save-hook: (org-babel-tangle); -*-
+y-*- after-save-hook: (org-babel-tangle); -*-
 # Local IspellDict: en
 # Created 2017-07-15 Sat 19:15
 #+TITLE: Emacs init file
@@ -754,6 +754,8 @@ disabled -> I spend more time in Org-mode than I do writing Elisp.
 
 ** org-mode
 
+http://ehneilsen.net/notebook/orgExamples/org-examples.html#sec-2-2
+
 #+BEGIN_SRC emacs-lisp
 
 (setq org-ellipsis " ")
@@ -1444,6 +1446,18 @@ Version 2018-03-31"
 
    ;;;;;;;;;;;;;;;;;;
 
+(setq company-backends '(company-cpp
+                         company-ctag
+                         company-dabbrev
+                         company-dabbrev-code
+                         company-elisp 
+                         company-files 
+                         company-gtags
+                         company-ispell
+                         company-keywords
+                         company-lisp
+                         company-ropemacs)) 
+
 #+END_SRC
  
 ** org-bullets
@@ -1978,6 +1992,23 @@ https://github.com/daedreth/UncleDavesEmacs/blob/master/config.org#helm
 	  ("renewlist" "{")
 	  ("setlistdepth" "{")
 	  ("restartlist" "{")))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; how to setup
+;; https://emacs.stackexchange.com/questions/37725/defining-custom-latex-class-for-org-mode-export
+;; https://orgmode.org/worg/org-tutorials/org-latex-export.html
+;; https://github.com/tsdye/org-article
+
+(with-eval-after-load 'ox-latex
+  (add-to-list 'org-latex-classes
+          '("koma-article"
+             "\\documentclass{scrartcl}"
+             ("\\section{%s}" . "\\section*{%s}")
+             ("\\subsection{%s}" . "\\subsection*{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+             ("\\paragraph{%s}" . "\\paragraph*{%s}")
+             ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
 
 #+END_SRC
 
@@ -3227,6 +3258,8 @@ you have to issue the command etags in the working directories
 
 ** epresent
 
+https://geeksocket.in/posts/presentations-org-emacs/
+
 #+BEGIN_SRC emacs-lisp
 
 (use-package epresent
@@ -3617,6 +3650,8 @@ Version 2015-04-23"
 	 (ido-completing-read "Open:" (mapcar (lambda (ξx) (car ξx)) cyber-filelist))))
     (find-file (cdr (assoc ξabbrevCode cyber-filelist)))))
 
+(global-set-key (kbd "C-´") 'cyber-open-file-fast)
+
 #+END_SRC
 
 ** TODO scheme 
@@ -3912,6 +3947,8 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
 
 ** elisp
 
+use lisp-interaction-mode for learning lisp 
+
 #+BEGIN_SRC emacs-lisp
 
 ;;    (use-package elisp
@@ -3971,6 +4008,11 @@ bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
   ;; it again with "apt purge dash-el" 
 
  (use-package dash
+   :straight t
+   :custom
+   (dash-enable-fontlock t))
+
+ (use-package dash-functional
    :straight t
    :custom
    (dash-enable-fontlock t))
@@ -4657,10 +4699,18 @@ You can customize this variable
 
 ** zoom-frm for hycontrol
 
+see also doremi packages 
+https://www.emacswiki.org/emacs/DoReMi
+
 #+BEGIN_SRC emacs-lisp
 
-  ;; (add-to-list 'load-path "~/.emacs.d/local-repo/zoom-frm")
-  ;; (require 'zoom-frm)
+    (add-to-list 'load-path "~/.emacs.d/local-repo/zoom-frm")
+    (require 'zoom-frm)
+
+    (define-key ctl-x-map [(control ?+)] 'zoom-in/out)
+    (define-key ctl-x-map [(control ?-)] 'zoom-in/out)
+    (define-key ctl-x-map [(control ?=)] 'zoom-in/out)
+    (define-key ctl-x-map [(control ?0)] 'zoom-in/out)
 
 #+END_SRC
 
@@ -4815,7 +4865,7 @@ You can customize this variable
   (setq-local company-backends '((company-shell
                                   company-shell-env
                                   company-etags
-                                  company-dabbrev-code))))
+                        company-dabbrev-code))))
 
 (use-package company-shell
   :ensure t
@@ -4879,6 +4929,19 @@ You can customize this variable
 
 #+END_SRC
 
+** tiny-tools
+
+#+begin_src emacs-lisp 
+
+ (add-to-list 'load-path "~/.emacs.d/local-repo/tiny-tools")
+ (add-to-list 'load-path "~/.emacs.d/local-repo/tiny-tools/lisp/tiny")
+            (add-to-list 'load-path "~/.emacs.d/local-repo/tiny-tools/lisp/other")
+
+(require 'tinyurl)
+(tinyurl-mode 1)
+
+#+end_src
+
 ** smartparens
 
 #+BEGIN_SRC emacs-lisp
@@ -4911,7 +4974,7 @@ Show unbound keys available for bounding
 
  List of people with nice emacs dotfiles files
  and some video tutorials:
-
+ https://github.com/suvratapte - it is a great option for emacs minimal
  https://www.gtrun.org/custom/init.html
  https://github.com/daedreth/UncleDavesEmacs
  https://github.com/dakra/dmacs
