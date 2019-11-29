@@ -1955,6 +1955,22 @@ https://geeksocket.in/posts/presentations-org-emacs/
 
 #+END_SRC
 
+** eshell
+
+https://www.masteringemacs.org/article/complete-guide-mastering-eshell#plan-9-smart-shell
+
+#+BEGIN_SRC emacs-lisp
+
+(add-to-list 'load-path "~/.emacs.d/local-repo/init-eshell")
+
+(require 'eshell)
+(require 'em-smart)
+(add-hook 'eshell-mode-hook 'eshell-smart-initialize)
+(require 'esh-module) ; require modules
+(add-to-list 'eshell-modules-list 'eshell-tramp)
+
+#+END_SRC
+
 ** evil  
 
 Also look at the built in viper-mode
@@ -2052,6 +2068,28 @@ ant its levels of vim-like
     (setq eyebrowse-new-workspace t)))
 
 #+END_SRC
+
+** eww
+
+Renaming buffers in eww - so that it has tabs
+eww does not have tabs, but new buffers behave like tabs on it
+
+#+begin_src emacs-lisp
+
+(when (fboundp 'eww)
+  (defun cyber-rename-eww-buffer ()
+    "Rename `eww-mode' buffer so sites open in new page.
+URL `http://ergoemacs.org/emacs/emacs_eww_web_browser.html'
+Version 2017-11-10"
+    (let (($title (plist-get eww-data :title)))
+      (when (eq major-mode 'eww-mode )
+        (if $title
+            (rename-buffer (concat "eww " $title ) t)
+          (rename-buffer "eww" t)))))
+
+  (add-hook 'eww-after-render-hook 'cyber-rename-eww-buffer))
+
+#+end_src
 
 ** flyspell
 
@@ -5143,22 +5181,23 @@ https://www.emacswiki.org/emacs/DoReMi
 
  List of people with nice emacs dotfiles files
  and some video tutorials:
- https://github.com/munen/emacs.d
- https://www.reddit.com/r/emacs/comments/8128z5/whose_dotfiles_do_you_steal_from/
- https://github.com/purcell/emacs.d - this one is great for introducing emacs to people
- https://github.com/suvratapte - it is a great option for emacs minimal
- https://www.gtrun.org/custom/init.html
- https://github.com/daedreth/UncleDavesEmacs
- https://github.com/dakra/dmacs
- https://github.com/valignatev/dotfiles
- https://invidio.us/latest_version?id=FYPE0dIoq1I&itag=43
- [[https://cestlaz.github.io/stories/emacs/]] 
- http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html
- https://zzamboni.org/post/my-emacs-configuration-with-commentary/
- https://github.com/caisah/emacs.dz
- https://github.com/DiegoVicen/my-emacs#my-blog-publishing-configuration
- https://github.com/myTerminal/super-emacs
- https://github.com/mwfogleman/config/blob/master/home/.emacs.d/michael.org
+
+-  https://github.com/munen/emacs.d
+- https://www.reddit.com/r/emacs/comments/8128z5/whose_dotfiles_do_you_steal_from/
+- https://github.com/purcell/emacs.d - this one is great for introducing emacs to people
+- https://github.com/suvratapte - it is a great option for emacs minimal
+- https://www.gtrun.org/custom/init.html
+- https://github.com/daedreth/UncleDavesEmacs
+- https://github.com/dakra/dmacs
+- https://github.com/valignatev/dotfiles
+- https://invidio.us/latest_version?id=FYPE0dIoq1I&itag=43
+- [[https://cestlaz.github.io/stories/emacs/]] 
+- http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html
+- https://zzamboni.org/post/my-emacs-configuration-with-commentary/
+- https://github.com/caisah/emacs.dz
+- https://github.com/DiegoVicen/my-emacs#my-blog-publishing-configuration
+- https://github.com/myTerminal/super-emacs
+- https://github.com/mwfogleman/config/blob/master/home/.emacs.d/michael.org
 
 #+BEGIN_SRC emacs-lisp 
 

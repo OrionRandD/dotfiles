@@ -1424,6 +1424,14 @@ Version 2015-04-23"
 (use-package elcord
   :ensure t)
 
+(add-to-list 'load-path "~/.emacs.d/local-repo/init-eshell")
+
+(require 'eshell)
+(require 'em-smart)
+(add-hook 'eshell-mode-hook 'eshell-smart-initialize)
+(require 'esh-module) ; require modules
+(add-to-list 'eshell-modules-list 'eshell-tramp)
+
 (straight-use-package 'evil)
 ;; (evil-mode 1)
 
@@ -1482,6 +1490,19 @@ Version 2015-04-23"
 
     (eyebrowse-mode t)
     (setq eyebrowse-new-workspace t)))
+
+(when (fboundp 'eww)
+  (defun cyber-rename-eww-buffer ()
+    "Rename `eww-mode' buffer so sites open in new page.
+URL `http://ergoemacs.org/emacs/emacs_eww_web_browser.html'
+Version 2017-11-10"
+    (let (($title (plist-get eww-data :title)))
+      (when (eq major-mode 'eww-mode )
+        (if $title
+            (rename-buffer (concat "eww " $title ) t)
+          (rename-buffer "eww" t)))))
+
+  (add-hook 'eww-after-render-hook 'cyber-rename-eww-buffer))
 
 (global-set-key [f6] 'spell-checker)
                                (global-set-key [f7] 'ispell-buffer)
