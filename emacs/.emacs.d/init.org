@@ -4569,12 +4569,71 @@ flycheck-plantuml))
 
 #+END_SRC
 
-** restart-emacs ** ripgrep
+** restart-emacs
+
+#+BEGIN_SRC emacs-lisp
+
+     (use-package restart-emacs
+       :ensure t)
+
+#+END_SRC
+
+** ripgrep
 
 #+BEGIN_SRC emacs-lisp
 
      (use-package ripgrep
        :straight t)
+
+#+END_SRC
+
+** rust
+
+- https://hoverbear.org/blog/setting-up-a-rust-devenv/
+- http://julienblanchard.com/2016/fancy-rust-development-with-emacs/
+
+#+BEGIN_SRC emacs-lisp
+
+     (use-package rust-mode
+       :ensure t
+       :config
+       (setq rust-format-on-save t)
+       (add-hook 'rust-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
+       (add-hook 'rust-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c <tab>") #'rust-format-buffer))))
+
+(require 'rust-mode)
+
+(defun indent-buffer ()
+  "Indent current buffer according to major mode."
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+(use-package cargo
+ :ensure t
+ :config
+(setq racer-cmd "~/.cargo/bin/cargo") ;; cargo binaries PATH
+(add-hook 'rust-mode-hook 'cargo-minor-mode))
+
+;; https://github.com/racer-rust/emacs-racer
+(use-package racer
+ :ensure t
+ :config
+ (setq racer-cmd "~/.cargo/bin/racer") ;; rustup binaries PATH
+ (setq racer-rust-src-path "~/rust/src") ;; Rust  source code PATH
+ (add-hook 'rust-mode-hook #'racer-mode)
+ (add-hook 'racer-mode-hook #'eldoc-mode)
+ )
+
+(use-package flycheck-rust
+ :ensure t
+ :config
+ (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+(setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/.cargo/bin")))
+(setq exec-path (append exec-path (list (expand-file-name "~/.cargo/bin"))))
 
 #+END_SRC
 
@@ -5181,23 +5240,22 @@ https://www.emacswiki.org/emacs/DoReMi
 
  List of people with nice emacs dotfiles files
  and some video tutorials:
-
--  https://github.com/munen/emacs.d
-- https://www.reddit.com/r/emacs/comments/8128z5/whose_dotfiles_do_you_steal_from/
-- https://github.com/purcell/emacs.d - this one is great for introducing emacs to people
-- https://github.com/suvratapte - it is a great option for emacs minimal
-- https://www.gtrun.org/custom/init.html
-- https://github.com/daedreth/UncleDavesEmacs
-- https://github.com/dakra/dmacs
-- https://github.com/valignatev/dotfiles
-- https://invidio.us/latest_version?id=FYPE0dIoq1I&itag=43
-- [[https://cestlaz.github.io/stories/emacs/]] 
-- http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html
-- https://zzamboni.org/post/my-emacs-configuration-with-commentary/
-- https://github.com/caisah/emacs.dz
-- https://github.com/DiegoVicen/my-emacs#my-blog-publishing-configuration
-- https://github.com/myTerminal/super-emacs
-- https://github.com/mwfogleman/config/blob/master/home/.emacs.d/michael.org
+ https://github.com/munen/emacs.d
+ https://www.reddit.com/r/emacs/comments/8128z5/whose_dotfiles_do_you_steal_from/
+ https://github.com/purcell/emacs.d - this one is great for introducing emacs to people
+ https://github.com/suvratapte - it is a great option for emacs minimal
+ https://www.gtrun.org/custom/init.html
+ https://github.com/daedreth/UncleDavesEmacs
+ https://github.com/dakra/dmacs
+ https://github.com/valignatev/dotfiles
+ https://invidio.us/latest_version?id=FYPE0dIoq1I&itag=43
+ [[https://cestlaz.github.io/stories/emacs/]] 
+ http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html
+ https://zzamboni.org/post/my-emacs-configuration-with-commentary/
+ https://github.com/caisah/emacs.dz
+ https://github.com/DiegoVicen/my-emacs#my-blog-publishing-configuration
+ https://github.com/myTerminal/super-emacs
+ https://github.com/mwfogleman/config/blob/master/home/.emacs.d/michael.org
 
 #+BEGIN_SRC emacs-lisp 
 
@@ -5387,3 +5445,4 @@ M-x customize-unsaved
 ;; M-x customize-face RET default RET    
 
 #+END_VERSE
+

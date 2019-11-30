@@ -979,3 +979,6 @@ ctrl2esc.sh
 # source ~/.cache/wal/colors-tty.sh
 
 #####################################################
+# rustc and cargo
+export PATH="$HOME/.cargo/bin:$PATH"
+

@@ -3443,8 +3443,52 @@ flycheck-plantuml))
  :config
  (setq reb-re-syntax 'string))
 
+(use-package restart-emacs
+  :ensure t)
+
 (use-package ripgrep
   :straight t)
+
+(use-package rust-mode
+       :ensure t
+       :config
+       (setq rust-format-on-save t)
+       (add-hook 'rust-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
+       (add-hook 'rust-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c <tab>") #'rust-format-buffer))))
+
+(require 'rust-mode)
+
+(defun indent-buffer ()
+  "Indent current buffer according to major mode."
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+(use-package cargo
+ :ensure t
+ :config
+(setq racer-cmd "~/.cargo/bin/cargo") ;; cargo binaries PATH
+(add-hook 'rust-mode-hook 'cargo-minor-mode))
+
+;; https://github.com/racer-rust/emacs-racer
+(use-package racer
+ :ensure t
+ :config
+ (setq racer-cmd "~/.cargo/bin/racer") ;; rustup binaries PATH
+ (setq racer-rust-src-path "~/rust/src") ;; Rust  source code PATH
+ (add-hook 'rust-mode-hook #'racer-mode)
+ (add-hook 'racer-mode-hook #'eldoc-mode)
+ )
+
+(use-package flycheck-rust
+ :ensure t
+ :config
+ (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+(setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/.cargo/bin")))
+(setq exec-path (append exec-path (list (expand-file-name "~/.cargo/bin"))))
 
 (require 'saveplace)
 (save-place-mode 1)
