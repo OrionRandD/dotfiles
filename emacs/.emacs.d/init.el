@@ -44,9 +44,6 @@
 
 (load "~/.emacs.d/elpa/emacs-brazilian-holidays/brazilian-holidays.el")
 
-(straight-use-package 'centered-window)
-  (centered-window-mode 1)
-
 (set-input-method "portuguese-prefix")
 
 (defadvice switch-to-buffer (after activate-input-method activate)
@@ -59,7 +56,13 @@
     (setq initial-major-mode 'fundamental-mode)
 
 (custom-set-variables
-                                           '(initial-frame-alist (quote ((fullscreen . maximized)))))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ecb-options-version "2.50")
+ '(initial-frame-alist (quote ((fullscreen . maximized))))
+ '(use-package-always-defer t))
                                       ;; for customizing the face (fonts), do:
                                       ;; M-x customize-face RET default RET    
                                       ;;(setq inhibit-startup-screen t)
@@ -199,9 +202,9 @@
                                              (end-of-line)
                                              (forward-char)))))))
 
-                                 (global-set-key (kbd "<M-X>")  'cyber-cut-line-or-region) ; Alt-M Uppercase - cut  
-                                 (global-set-key (kbd "<M-C>")  'cyber-copy-line-or-region) ; Alt-C Uppercase - copy 
-                                 (global-set-key (kbd "<M-P>") 'yank) ; Alt-P Uppercase - paste
+                                 (global-set-key (kbd "<C-M x>")  'cyber-cut-line-or-region) ; C-Alt x - cut  
+                                 (global-set-key (kbd "<M->")  'cyber-copy-line-or-region) ; Alt->  - copy 
+                                 (global-set-key (kbd "<M-p>") 'yank) ; Alt-p Uppercase - paste
 
                                  ;; cyber-copy-all-or-region
                                  (defun cyber-copy-all-or-region ()
@@ -503,26 +506,36 @@
     "\n# To create a file, visit it with 'C-x C-f' e and enter text in its buffer.\n"))
 
 ;;  (dolist (pkgname '(theme-looper
-  ;;  alect-themes
-  ;;  base16-theme
-  ;;  color-theme-modern
-  ;;  doom-themes
-  ;;  moe-theme
-  ;;  ))
-  ;;   (straight-use-package pkgname))
+      ;;  alect-themes
+      ;;  base16-theme
+      ;;  color-theme-modern
+      ;;  doom-themes
+      ;;  moe-theme
+      ;;  ))
+      ;;   (straight-use-package pkgname))
 
-(use-package theme-looper
- :ensure t)
-(use-package color-theme-modern
- :ensure t)
-(use-package alect-themes 
- :ensure t)
-(use-package base16-theme 
- :ensure t)
-(use-package doom-themes
- :ensure t)
+    (use-package theme-looper
+     :ensure t)
+    (use-package color-theme-modern
+     :ensure t)
+    (use-package alect-themes 
+     :ensure t)
+    (use-package base16-theme 
+     :ensure t)
+    (use-package doom-themes
+     :ensure t)
 
-(global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
+;; Load a nice theme if in GUI
+(when (display-graphic-p)
+  (load-theme 'base16-mellow-purple t)
+  )
+
+    (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
+
+(use-package centered-window
+ :ensure t)
+(require 'centered-window)
+(centered-window-mode 1)
 
 ;; Wrap lines without breaking the last word
 (add-hook 'org-mode-hook #'toggle-word-wrap)
@@ -989,21 +1002,18 @@ file with `edit-abbrevs`"
 
         (company-ac-setup)
 
-      (custom-set-faces
-          '(company-preview
-            ((t (:foreground "darkgray" :underline t))))
-          '(company-preview-common
-            ((t (:inherit company-preview))))
-          '(company-tooltip
-            ((t (:background "lightgray" :foreground "black"))))
-          '(company-tooltip-selection
-            ((t (:background "steelblue" :foreground "white"))))
-          '(company-tooltip-common
-            ((((type x)) (:inherit company-tooltip :weight bold))
-             (t (:inherit company-tooltip))))
-          '(company-tooltip-common-selection
-            ((((type x)) (:inherit company-tooltip-selection :weight bold))
-             (t (:inherit company-tooltip-selection)))))
+      
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-preview ((t (:foreground "darkgray" :underline t))))
+ '(company-preview-common ((t (:inherit company-preview))))
+ '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
+ '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
+ '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
+ '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))
 
   ;;;;;;;;;;;;;;;;;;
 
@@ -2039,7 +2049,7 @@ Version 2018-03-31"
 ;;     (setq gnutls-verify-error t)
 ;;     (setq tls-checktrust t)
 
-       (toggle-debug-on-error)
+;;     (toggle-debug-on-error)
 
 
 
@@ -3845,6 +3855,15 @@ yasnippet-classic-snippets))
 (use-package restart-emacs
  :ensure t)
 
+(global-set-key "\C-cH" 'hyperspec-lookup)
+
+(straight-use-package 'ecb)
+(require 'ecb)
+
+(semantic-mode 1)
+(require 'semantic/ia)
 
 
 
+
+(put 'dired-find-alternate-file 'disabled nil)

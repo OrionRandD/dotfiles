@@ -89,15 +89,6 @@ Note: for removing a package, delete it from the init.el and from the org file, 
 
 #+END_SRC
 
-*** centered-window 
-
-  #+BEGIN_SRC emacs-lisp
-
-    (straight-use-package 'centered-window)
-      (centered-window-mode 1)
-  
-  #+END_SRC
-
 *** portuguese-prefix
 
 #+BEGIN_SRC emacs-lisp
@@ -127,154 +118,171 @@ disabled -> I spend more time in Org-mode than I do writing Elisp.
     
  #+BEGIN_SRC emacs-lisp
 
-                                      (custom-set-variables
-                                           '(initial-frame-alist (quote ((fullscreen . maximized)))))
-                                      ;; for customizing the face (fonts), do:
-                                      ;; M-x customize-face RET default RET    
-                                      ;;(setq inhibit-startup-screen t)
-                                      (set-default-font "Source Code Pro" nil t)
-                                      (set-face-attribute 'default nil :height 105)
-                                      (visual-line-mode 1)
-                                      (global-visual-line-mode 1)
-                                      (load-theme 'misterioso)
-                                      (tool-bar-mode 0)
-                                      (scroll-bar-mode 0)
-                                      (show-paren-mode 1)
-                                      (toggle-truncate-lines nil) ;; you have to set truncate-partial-width-windows to non-nil for this to work
-                                      (ido-mode 1) ;; this shows minibuffer options
-                                      (blink-cursor-mode 0)
-                                      (setq org-src-wind-setup 'current-window)
-                                      (global-subword-mode 1)
+                                         (custom-set-variables
+                                              '(initial-frame-alist (quote ((fullscreen . maximized)))))
+                                         ;; for customizing the face (fonts), do:
+                                         ;; M-x customize-face RET default RET    
+                                         ;;(setq inhibit-startup-screen t)
+                                         (set-default-font "Source Code Pro" nil t)
+                                         (set-face-attribute 'default nil :height 105)
+                                         (visual-line-mode 1)
+                                         (global-visual-line-mode 1)
+                                         (load-theme 'misterioso)
+                                         (tool-bar-mode 0)
+                                         (scroll-bar-mode 0)
+                                         (show-paren-mode 1)
+                                         (toggle-truncate-lines nil) ;; you have to set truncate-partial-width-windows to non-nil for this to work
+                                         (ido-mode 1) ;; this shows minibuffer options
+                                         (blink-cursor-mode 0)
+                                         (setq org-src-wind-setup 'current-window)
+                                         (global-subword-mode 1)
 
-                                      (defalias 'yes-or-no-p 'y-or-n-p)
-                                         (setq confirm-kill-processes nil)
-                                    (add-hook 'prog-mode-hook 'turn-on-auto-fill)
-                                       (add-hook 'text-mode-hook 'turn-on-auto-fill)
+                                         (defalias 'yes-or-no-p 'y-or-n-p)
+                                            (setq confirm-kill-processes nil)
+                                       (add-hook 'prog-mode-hook 'turn-on-auto-fill)
+                                          (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-                                 ;; http://folk.uio.no/simenheg/init.el.html
+                                    ;; http://folk.uio.no/simenheg/init.el.html
 
-                                 (set-language-environment "UTF-8") ; Set up UTF-8 multilingual environment
+                                    (set-language-environment "UTF-8") ; Set up UTF-8 multilingual environment
 
-                                 (setq
-                                  comint-input-ignoredups        t  ; Ignore duplicates in Comint history
-                                  compare-ignore-whitespace      t  ; Ignore whitespace differences
-                                 ;; default-input-method       "TeX"  ; TeX is the default toggled input method
-                                 ;; disabled-command-function    nil  ; Enable disabled commands
-                                  eshell-hist-ignoredups         t  ; Ignore duplicates in Eshell history
-                                  history-delete-duplicates      t  ; Delete duplicate history entries
-                                  inhibit-startup-screen         t  ; No startup screen
-                                 ;; initial-scratch-message      nil  ; No scratch message
-                                  iswitchb-prompt-newbuffer    nil  ; Create new buffers without confirmation
-                                 ;; kill-read-only-ok              t  ; Killing read-only text is OK
-                                 ;; password-cache-expiry        nil  ; Cache TRAMP passwords forever
-                                  show-paren-delay               0) ; Don't delay the paren update
+                                    (setq
+                                     comint-input-ignoredups        t  ; Ignore duplicates in Comint history
+                                     compare-ignore-whitespace      t  ; Ignore whitespace differences
+                                    ;; default-input-method       "TeX"  ; TeX is the default toggled input method
+                                    ;; disabled-command-function    nil  ; Enable disabled commands
+                                     eshell-hist-ignoredups         t  ; Ignore duplicates in Eshell history
+                                     history-delete-duplicates      t  ; Delete duplicate history entries
+                                     inhibit-startup-screen         t  ; No startup screen
+                                    ;; initial-scratch-message      nil  ; No scratch message
+                                     iswitchb-prompt-newbuffer    nil  ; Create new buffers without confirmation
+                                    ;; kill-read-only-ok              t  ; Killing read-only text is OK
+                                    ;; password-cache-expiry        nil  ; Cache TRAMP passwords forever
+                                     show-paren-delay               0) ; Don't delay the paren update
 
-                                 (setq-default
-                                 ;; fill-column                   76  ; Lines break at column 76
-                                 ;; frame-background-mode      'dark  ; My theme is dark
-                                  indent-tabs-mode             nil  ; Use spaces for indentation
-                                 ;; major-mode            'text-mode ; text-mode as the default for new buffers
-                                 )
+                                    (setq-default
+                                    ;; fill-column                   76  ; Lines break at column 76
+                                    ;; frame-background-mode      'dark  ; My theme is dark
+                                     indent-tabs-mode             nil  ; Use spaces for indentation
+                                    ;; major-mode            'text-mode ; text-mode as the default for new buffers
+                                    )
 
-                                 ;; (blink-cursor-mode              0) ; No blinking cursor
-                                 (column-number-mode             1) ; Show column number
-                                 (delete-selection-mode          1) ; Delete selection when typing
-                                 (fset 'yes-or-no-p      'y-or-n-p) ; Make "yes/no" prompts "y/n"
-                                 (global-auto-revert-mode        1) ; Reload files after modification
-                                 (iswitchb-mode                  1) ; Neat buffer switching
-                                 (menu-bar-mode                  1) ; Menu bar
-                                 (prefer-coding-system      'utf-8) ; Always prefer UTF-8
-                                 (scroll-bar-mode               -1) ; And no scroll bar either
-                                 (show-paren-mode                1) ; Highlight matching parenthesis
-                                 (tool-bar-mode                 -1) ; No tool bar, please
-                                 (setq create-lockfiles nil)        ; do not save '#' lockfiles
+                                    ;; (blink-cursor-mode              0) ; No blinking cursor
+                                    (column-number-mode             1) ; Show column number
+                                    (delete-selection-mode          1) ; Delete selection when typing
+                                    (fset 'yes-or-no-p      'y-or-n-p) ; Make "yes/no" prompts "y/n"
+                                    (global-auto-revert-mode        1) ; Reload files after modification
+                                    (iswitchb-mode                  1) ; Neat buffer switching
+                                    (menu-bar-mode                  1) ; Menu bar
+                                    (prefer-coding-system      'utf-8) ; Always prefer UTF-8
+                                    (scroll-bar-mode               -1) ; And no scroll bar either
+                                    (show-paren-mode                1) ; Highlight matching parenthesis
+                                    (tool-bar-mode                 -1) ; No tool bar, please
+                                    (setq create-lockfiles nil)        ; do not save '#' lockfiles
 
-                                 ;; Xah-hacks
-                                 ;; http://ergoemacs.org/emacs/modernization_formfeed.html
-                                 ;; keys for moving to prev/next code section (Form Feed; ^L)
-                                 (global-set-key (kbd "<C-M-prior>") 'backward-page) ; Ctrl+Alt+PageUp
-                                 (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
-                                 (delete-selection-mode 1)
-                                 (cua-mode 1)
+                                    ;; Xah-hacks
+                                    ;; http://ergoemacs.org/emacs/modernization_formfeed.html
+                                    ;; keys for moving to prev/next code section (Form Feed; ^L)
+                                    (global-set-key (kbd "<C-M-prior>") 'backward-page) ; Ctrl+Alt+PageUp
+                                    (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
+                                    (delete-selection-mode 1)
+                                    (cua-mode 1)
 
-                                 (defun cyber-new-empty-buffer ()
-                                   "Create a new empty buffer.
-                                 New buffer will be named “untitled” or “untitled<2>”, “untitled<3>”, etc.
+                                    (defun cyber-new-empty-buffer ()
+                                      "Create a new empty buffer.
+                                    New buffer will be named “untitled” or “untitled<2>”, “untitled<3>”, etc.
 
-                                 It returns the buffer (for elisp programing).
+                                    It returns the buffer (for elisp programing).
 
-                                 URL `http://ergoemacs.org/emacs/emacs_new_empty_buffer.html'
-                                 Version 2017-11-01"
-                                   (interactive)
-                                   (let (($buf (generate-new-buffer "untitled")))
-                                     (switch-to-buffer $buf)
-                                     (funcall initial-major-mode)
-                                     (setq buffer-offer-save t)
-                                     $buf
-                                     ))
+                                    URL `http://ergoemacs.org/emacs/emacs_new_empty_buffer.html'
+                                    Version 2017-11-01"
+                                      (interactive)
+                                      (let (($buf (generate-new-buffer "untitled")))
+                                        (switch-to-buffer $buf)
+                                        (funcall initial-major-mode)
+                                        (setq buffer-offer-save t)
+                                        $buf
+                                        ))
 
-                                 (global-set-key (kbd "M-N") 'cyber-new-empty-buffer) ; Alt+N
+                                    (global-set-key (kbd "M-N") 'cyber-new-empty-buffer) ; Alt+N
 
-                                 ;; cyber-cut-line-or-region
-                                 (defun cyber-cut-line-or-region ()
-                                   "Cut current line, or text selection.
-                                 When `universal-argument' is called first, cut whole buffer (respects `narrow-to-region').
+                                    ;; cyber-cut-line-or-region
+                                    (defun cyber-cut-line-or-region ()
+                                      "Cut current line, or text selection.
+                                    When `universal-argument' is called first, cut whole buffer (respects `narrow-to-region').
 
-                                 URL `http://ergoemacs.org/emacs/emacs_copy_cut_current_line.html'
-                                 Version 2015-06-10"
-                                   (interactive)
-                                   (if current-prefix-arg
-                                       (progn ; not using kill-region because we don't want to include previous kill
-                                         (kill-new (buffer-string))
-                                         (delete-region (point-min) (point-max)))
-                                     (progn (if (use-region-p)
-                                                (kill-region (region-beginning) (region-end) t)
-                                              (kill-region (line-beginning-position) (line-beginning-position 2))))))
+                                    URL `http://ergoemacs.org/emacs/emacs_copy_cut_current_line.html'
+                                    Version 2015-06-10"
+                                      (interactive)
+                                      (if current-prefix-arg
+                                          (progn ; not using kill-region because we don't want to include previous kill
+                                            (kill-new (buffer-string))
+                                            (delete-region (point-min) (point-max)))
+                                        (progn (if (use-region-p)
+                                                   (kill-region (region-beginning) (region-end) t)
+                                                 (kill-region (line-beginning-position) (line-beginning-position 2))))))
 
-                                 ;; cyber-copy-line-or-region
-                                 (defun cyber-copy-line-or-region ()
-                                   "Copy current line, or text selection.
-                                 When called repeatedly, append copy subsequent lines.
-                                 When `universal-argument' is called first, copy whole buffer (respects `narrow-to-region').
+                                    ;; cyber-copy-line-or-region
+                                    (defun cyber-copy-line-or-region ()
+                                      "Copy current line, or text selection.
+                                    When called repeatedly, append copy subsequent lines.
+                                    When `universal-argument' is called first, copy whole buffer (respects `narrow-to-region').
 
-                                 URL `http://ergoemacs.org/emacs/emacs_copy_cut_current_line.html'
-                                 Version 2018-09-10"
-                                   (interactive)
-                                   (if current-prefix-arg
-                                       (progn
-                                         (copy-region-as-kill (point-min) (point-max)))
-                                     (if (use-region-p)
-                                         (progn
-                                           (copy-region-as-kill (region-beginning) (region-end)))
-                                       (if (eq last-command this-command)
-                                           (if (eobp)
-                                               (progn )
-                                             (progn
-                                               (kill-append "\n" nil)
-                                               (kill-append
-                                                (buffer-substring-no-properties (line-beginning-position) (line-end-position))
-                                                nil)
-                                               (progn
-                                                 (end-of-line)
-                                                 (forward-char))))
-                                         (if (eobp)
-                                             (if (eq (char-before) 10 )
-                                                 (progn )
-                                               (progn
-                                                 (copy-region-as-kill (line-beginning-position) (line-end-position))
-                                                 (end-of-line)))
-                                           (progn
-                                             (copy-region-as-kill (line-beginning-position) (line-end-position))
-                                             (end-of-line)
-                                             (forward-char)))))))
+                                    URL `http://ergoemacs.org/emacs/emacs_copy_cut_current_line.html'
+                                    Version 2018-09-10"
+                                      (interactive)
+                                      (if current-prefix-arg
+                                          (progn
+                                            (copy-region-as-kill (point-min) (point-max)))
+                                        (if (use-region-p)
+                                            (progn
+                                              (copy-region-as-kill (region-beginning) (region-end)))
+                                          (if (eq last-command this-command)
+                                              (if (eobp)
+                                                  (progn )
+                                                (progn
+                                                  (kill-append "\n" nil)
+                                                  (kill-append
+                                                   (buffer-substring-no-properties (line-beginning-position) (line-end-position))
+                                                   nil)
+                                                  (progn
+                                                    (end-of-line)
+                                                    (forward-char))))
+                                            (if (eobp)
+                                                (if (eq (char-before) 10 )
+                                                    (progn )
+                                                  (progn
+                                                    (copy-region-as-kill (line-beginning-position) (line-end-position))
+                                                    (end-of-line)))
+                                              (progn
+                                                (copy-region-as-kill (line-beginning-position) (line-end-position))
+                                                (end-of-line)
+                                                (forward-char)))))))
 
-                                 (global-set-key (kbd "<M-X>")  'cyber-cut-line-or-region) ; Alt-M Uppercase - cut  
-                                 (global-set-key (kbd "<M-C>")  'cyber-copy-line-or-region) ; Alt-C Uppercase - copy 
-                                 (global-set-key (kbd "<M-P>") 'yank) ; Alt-P Uppercase - paste
+                                    (global-set-key (kbd "<C-M x>")  'cyber-cut-line-or-region) ; C-Alt x - cut  
+                                    (global-set-key (kbd "<M->")  'cyber-copy-line-or-region) ; Alt->  - copy 
+                                    (global-set-key (kbd "<M-p>") 'yank) ; Alt-p Uppercase - paste
 
-                                 ;; cyber-copy-all-or-region
-                                 (defun cyber-copy-all-or-region ()
-                                   "Put the whole buffer content to `kill-ring', or text selection if there's one.
+                                    ;; cyber-copy-all-or-region
+                                    (defun cyber-copy-all-or-region ()
+                                      "Put the whole buffer content to `kill-ring', or text selection if there's one.
+                                    Respects `narrow-to-region'.
+                                    URL `http://ergoemacs.org/emacs/emacs_copy_cut_all_or_region.html'
+                                    Version 2015-08-22"
+                                      (interactive)
+                                      (if (use-region-p)
+                                          (progn
+                                            (kill-new (buffer-substring (region-beginning) (region-end)))
+                                            (message "Text selection copied."))
+                                        (progn
+                                          (kill-new (buffer-string))
+                                          (message "Buffer content copied."))))
+
+                                    (global-set-key (kbd "<M-T>")  'cyber-copy-all-or-region) ; Alt-T Uppercase - copy-all-or-region 
+
+                                 ;; cyber-cut-all-or-region
+                                 (defun cyber-cut-all-or-region ()
+                                   "Cut the whole buffer content to `kill-ring', or text selection if there's one.
                                  Respects `narrow-to-region'.
                                  URL `http://ergoemacs.org/emacs/emacs_copy_cut_all_or_region.html'
                                  Version 2015-08-22"
@@ -282,150 +290,133 @@ disabled -> I spend more time in Org-mode than I do writing Elisp.
                                    (if (use-region-p)
                                        (progn
                                          (kill-new (buffer-substring (region-beginning) (region-end)))
-                                         (message "Text selection copied."))
+                                         (delete-region (region-beginning) (region-end)))
                                      (progn
                                        (kill-new (buffer-string))
-                                       (message "Buffer content copied."))))
+                                       (delete-region (point-min) (point-max)))))
 
-                                 (global-set-key (kbd "<M-T>")  'cyber-copy-all-or-region) ; Alt-T Uppercase - copy-all-or-region 
+                                 (global-set-key (kbd "<M-U>")  'cyber-cut-all-or-region) ; Alt-U Uppercase - copy-all-or-region 
 
-                              ;; cyber-cut-all-or-region
-                              (defun cyber-cut-all-or-region ()
-                                "Cut the whole buffer content to `kill-ring', or text selection if there's one.
-                              Respects `narrow-to-region'.
-                              URL `http://ergoemacs.org/emacs/emacs_copy_cut_all_or_region.html'
-                              Version 2015-08-22"
+                              ;; cyber-paste-or-paste-previous
+                              (defun xah-paste-or-paste-previous ()
+                                "Paste. When called repeatedly, paste previous.
+                              This command calls `yank', and if repeated, call `yank-pop'.
+
+                              When `universal-argument' is called first with a number arg, paste that many times.
+
+                              URL `http://ergoemacs.org/emacs/emacs_paste_or_paste_previous.html'
+                              Version 2017-07-25"
                                 (interactive)
-                                (if (use-region-p)
-                                    (progn
-                                      (kill-new (buffer-substring (region-beginning) (region-end)))
-                                      (delete-region (region-beginning) (region-end)))
-                                  (progn
-                                    (kill-new (buffer-string))
-                                    (delete-region (point-min) (point-max)))))
+                                (progn
+                                  (when (and delete-selection-mode (region-active-p))
+                                    (delete-region (region-beginning) (region-end)))
+                                  (if current-prefix-arg
+                                      (progn
+                                        (dotimes ($i (prefix-numeric-value current-prefix-arg))
+                                          (yank)))
+                                    (if (eq real-last-command this-command)
+                                        (yank-pop 1)
+                                      (yank)))))
 
-                              (global-set-key (kbd "<M-U>")  'cyber-cut-all-or-region) ; Alt-U Uppercase - copy-all-or-region 
+                           (global-set-key (kbd "<C-y>")  'cyber-paste-or-paste-previous) ; cyber-paste-or-paste-previous
 
-                           ;; cyber-paste-or-paste-previous
-                           (defun xah-paste-or-paste-previous ()
-                             "Paste. When called repeatedly, paste previous.
-                           This command calls `yank', and if repeated, call `yank-pop'.
+                      ;; cyber-show-kill-ring
+                     (defun cyber-show-kill-ring ()
+                       "Insert all `kill-ring' content in a new buffer named *copy history*.
 
-                           When `universal-argument' is called first with a number arg, paste that many times.
+                     URL `http://ergoemacs.org/emacs/emacs_show_kill_ring.html'
+                     Version 2018-10-05"
+                       (interactive)
+                       (let (($buf (generate-new-buffer "*copy history*")))
+                         (progn
+                           (switch-to-buffer $buf)
+                           (funcall 'fundamental-mode)
+                           (setq buffer-offer-save t)
+                           (dolist (x kill-ring )
+                             (insert x "\n\u000cttt\n\n"))
+                           (goto-char (point-min)))
+                         (when (fboundp 'cyber-show-formfeed-as-line)
+                           (cyber-show-formfeed-as-line))))
 
-                           URL `http://ergoemacs.org/emacs/emacs_paste_or_paste_previous.html'
-                           Version 2017-07-25"
-                             (interactive)
-                             (progn
-                               (when (and delete-selection-mode (region-active-p))
-                                 (delete-region (region-beginning) (region-end)))
-                               (if current-prefix-arg
-                                   (progn
-                                     (dotimes ($i (prefix-numeric-value current-prefix-arg))
-                                       (yank)))
-                                 (if (eq real-last-command this-command)
-                                     (yank-pop 1)
-                                   (yank)))))
+                  ;; manipulationg resgisters
+                  ;; https://ftp.gnu.org/old-gnu/Manuals/emacs-21.2/html_chapter/emacs_12.html
 
-                        (global-set-key (kbd "<C-y>")  'cyber-paste-or-paste-previous) ; cyber-paste-or-paste-previous
+                     ;; cyber-copy-to-register
+                     (defun cyber-copy-to-register-1 ()
+                    ;;   "Copy current line or text selection to register 1.
+                    ;; See also: `xah-paste-from-register-1', `copy-to-register'.
+                    ;; URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
+                    ;; Version 2017-01-23"
+                       (interactive)
+                       (let ($p1 $p2)
+                         (if (region-active-p)
+                             (progn (setq $p1 (region-beginning))
+                                    (setq $p2 (region-end)))
+                           (progn (setq $p1 (line-beginning-position))
+                                  (setq $p2 (line-end-position))))
+                         (copy-to-register ?1 $p1 $p2)
+                         (message "Copied to register 1: 「%s」." (buffer-substring-no-properties $p1 $p2))))
 
-                   ;; cyber-show-kill-ring
-                  (defun cyber-show-kill-ring ()
-                    "Insert all `kill-ring' content in a new buffer named *copy history*.
+                     ;; cyber-paste-from-resgister 
+                     (defun cyber-paste-from-register-1 ()
+                    ;;   "Paste text from register 1.
+                    ;; See also: `xah-copy-to-register-1', `insert-register'.
+                    ;; URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
+                    ;; Version 2015-12-08"
+                       (interactive)
+                       (when (use-region-p)
+                         (delete-region (region-beginning) (region-end)))
+                       (insert-register ?1 t))
 
-                  URL `http://ergoemacs.org/emacs/emacs_show_kill_ring.html'
-                  Version 2018-10-05"
-                    (interactive)
-                    (let (($buf (generate-new-buffer "*copy history*")))
-                      (progn
-                        (switch-to-buffer $buf)
-                        (funcall 'fundamental-mode)
-                        (setq buffer-offer-save t)
-                        (dolist (x kill-ring )
-                          (insert x "\n\u000cttt\n\n"))
-                        (goto-char (point-min)))
-                      (when (fboundp 'cyber-show-formfeed-as-line)
-                        (cyber-show-formfeed-as-line))))
+                     (global-set-key (kbd "s-1") 'cyber-copy-to-register-1) ; win-1
+                     (global-set-key (kbd "s-2") 'cyber-paste-from-regester-1) ; win-2
 
-               ;; manipulationg resgisters
-               ;; https://ftp.gnu.org/old-gnu/Manuals/emacs-21.2/html_chapter/emacs_12.html
+                    ;; ;; you can set  files to registers, like so:
+                    ;; ;; (set-register ?2 '(file . "~/.emacs.d/init.org"))
+                    ;; ;; sets file "init.org" to register 2
+                    ;; ;; see the gnu manual link above
 
-                  ;; cyber-copy-to-register
-                  (defun cyber-copy-to-register-1 ()
-                 ;;   "Copy current line or text selection to register 1.
-                 ;; See also: `xah-paste-from-register-1', `copy-to-register'.
-                 ;; URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
-                 ;; Version 2017-01-23"
-                    (interactive)
-                    (let ($p1 $p2)
-                      (if (region-active-p)
-                          (progn (setq $p1 (region-beginning))
-                                 (setq $p2 (region-end)))
-                        (progn (setq $p1 (line-beginning-position))
-                               (setq $p2 (line-end-position))))
-                      (copy-to-register ?1 $p1 $p2)
-                      (message "Copied to register 1: 「%s」." (buffer-substring-no-properties $p1 $p2))))
+            ;; cyber-append-to-register
+            (defun cyber-append-to-register-1 ()
+              "Append current line or text selection to register 1.
+            When no selection, append current line with newline char.
+            See also: `xah-paste-from-register-1', `copy-to-register'.
 
-                  ;; cyber-paste-from-resgister 
-                  (defun cyber-paste-from-register-1 ()
-                 ;;   "Paste text from register 1.
-                 ;; See also: `xah-copy-to-register-1', `insert-register'.
-                 ;; URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
-                 ;; Version 2015-12-08"
-                    (interactive)
-                    (when (use-region-p)
-                      (delete-region (region-beginning) (region-end)))
-                    (insert-register ?1 t))
+            URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
+            Version 2015-12-08"
+              (interactive)
+              (let ($p1 $p2)
+                (if (region-active-p)
+                    (progn (setq $p1 (region-beginning))
+                           (setq $p2 (region-end)))
+                  (progn (setq $p1 (line-beginning-position))
+                         (setq $p2 (line-end-position))))
+                (append-to-register ?1 $p1 $p2)
+                (with-temp-buffer (insert "\n")
+                                  (append-to-register ?1 (point-min) (point-max)))
+                (message "Appended to register 1: 「%s」." (buffer-substring-no-properties $p1 $p2))))
 
-                  (global-set-key (kbd "s-1") 'cyber-copy-to-register-1) ; win-1
-                  (global-set-key (kbd "s-2") 'cyber-paste-from-regester-1) ; win-2
+         (global-set-key (kbd "M-I") 'cyber-append-to-register-1) ; M-I Uppercase 
 
-                 ;; ;; you can set  files to registers, like so:
-                 ;; ;; (set-register ?2 '(file . "~/.emacs.d/init.org"))
-                 ;; ;; sets file "init.org" to register 2
-                 ;; ;; see the gnu manual link above
+      ;; cyber-clear-register
+      (defun cyber-clear-register-1 ()
+        "Clear register 1.
+      See also: `xah-paste-from-register-1', `copy-to-register'.
 
-         ;; cyber-append-to-register
-         (defun cyber-append-to-register-1 ()
-           "Append current line or text selection to register 1.
-         When no selection, append current line with newline char.
-         See also: `xah-paste-from-register-1', `copy-to-register'.
+      URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
+      Version 2015-12-08"
+        (interactive)
+        (progn
+          (copy-to-register ?1 (point-min) (point-min))
+          (message "Cleared register 1.")))
 
-         URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
-         Version 2015-12-08"
-           (interactive)
-           (let ($p1 $p2)
-             (if (region-active-p)
-                 (progn (setq $p1 (region-beginning))
-                        (setq $p2 (region-end)))
-               (progn (setq $p1 (line-beginning-position))
-                      (setq $p2 (line-end-position))))
-             (append-to-register ?1 $p1 $p2)
-             (with-temp-buffer (insert "\n")
-                               (append-to-register ?1 (point-min) (point-max)))
-             (message "Appended to register 1: 「%s」." (buffer-substring-no-properties $p1 $p2))))
+         (global-set-key (kbd "M-*") 'cyber-clear-register-1) ; M-*
 
-      (global-set-key (kbd "M-I") 'cyber-append-to-register-1) ; M-I Uppercase 
+   ;; after copy Ctrl+c in Linux X11, you can paste by `yank' in emacs
+   (setq x-select-enable-clipboard t)
 
-   ;; cyber-clear-register
-   (defun cyber-clear-register-1 ()
-     "Clear register 1.
-   See also: `xah-paste-from-register-1', `copy-to-register'.
-
-   URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
-   Version 2015-12-08"
-     (interactive)
-     (progn
-       (copy-to-register ?1 (point-min) (point-min))
-       (message "Cleared register 1.")))
-
-      (global-set-key (kbd "M-*") 'cyber-clear-register-1) ; M-*
-
-;; after copy Ctrl+c in Linux X11, you can paste by `yank' in emacs
-(setq x-select-enable-clipboard t)
-
-;; after mouse selection in X11, you can paste by `yank' in emacs
-(setq x-select-enable-primary t)
+   ;; after mouse selection in X11, you can paste by `yank' in emacs
+   (setq x-select-enable-primary t)
 
  #+END_SRC
 
@@ -738,9 +729,25 @@ system monitor
     (use-package doom-themes
      :ensure t)
 
+;; Load a nice theme if in GUI
+(when (display-graphic-p)
+  (load-theme 'base16-mellow-purple t)
+  )
+
     (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
 
  #+END_SRC
+
+*** centered-window 
+
+#+BEGIN_SRC emacs-lisp
+
+(use-package centered-window
+ :ensure t)
+(require 'centered-window)
+(centered-window-mode 1)
+  
+#+END_SRC
 
 *** wrap lines
 
@@ -2672,7 +2679,7 @@ you have to issue the command etags in the working directories
 ;;     (setq gnutls-verify-error t)
 ;;     (setq tls-checktrust t)
 
-       (toggle-debug-on-error)
+;;     (toggle-debug-on-error)
 
 #+END_SRC
 
@@ -5236,6 +5243,36 @@ https://www.emacswiki.org/emacs/DoReMi
 
 #+end_src
 
+** hyperspec-lookup
+
+#+begin_src emacs-lisp 
+
+(global-set-key "\C-cH" 'hyperspec-lookup)
+
+#+end_src
+
+** ecb
+
+http://ecb.sourceforge.net/
+
+#+begin_src emacs-lisp :tangle yes
+
+(straight-use-package 'ecb)
+(require 'ecb)
+
+#+end_src
+
+** cedet
+
+http://alexott.net/en/writings/emacs-devenv/EmacsCedet.html
+
+#+begin_src emacs-lisp :tangle yes
+
+(semantic-mode 1)
+(require 'semantic/ia)
+
+#+end_src
+
 * People with great emacs configs
 
  List of people with nice emacs dotfiles files
@@ -5279,9 +5316,11 @@ Important note	do NOT run emacs in terminal inside tmux
 http://ergoemacs.org/emacs/emacs_package_system.html - for melpa, see this link
 http://www.ergoemacs.org/emacs/emacs_basics.html - emacs tutorial 
 
-C-h t	emacs tutorial
-C-h a	apropos-command find commands 
-M-x helm-man-women	manpages from within emacs
+(help-with-tutorial)	C-h t
+(apropos-command "async-shell-command")	C-h a
+(helm-man-woman t)	manpages from within emacs
+(helm-stumpwm-commands)
+(global-set-key "\C-cH" 'hyperspec-lookup)
 C-c i w	kill internal word
 C-x z	repeat the previous command. Then hit 'z' again and again
 org-shifttab	folds everything (non-evil-mode)
@@ -5446,3 +5485,4 @@ M-x customize-unsaved
 
 #+END_VERSE
 
+(save-buffers-kill-terminal)
