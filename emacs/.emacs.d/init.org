@@ -15,6 +15,13 @@ The keyword ":tangle yes" will automatically create a better
 
 Note: for removing a package, delete it from the init.el and from the org file, delete the build-cache.el file, delete it from the build and repos directories
 
+- Installation:
+- install git
+- apt install git
+- install /usr/share/fonts/adobe_pro/ 
+- put /home/vagner/.emacs.d/snippets/ inside
+- /home/vagner/.emacs.d/straight/build/yasnippet-classic-snippets/ 
+
 * straight
 
 #+BEGIN_SRC emacs-lisp
@@ -124,10 +131,11 @@ disabled -> I spend more time in Org-mode than I do writing Elisp.
                                          ;; M-x customize-face RET default RET    
                                          ;;(setq inhibit-startup-screen t)
                                          (set-default-font "Source Code Pro" nil t)
+                                         ;; you have to install /usr/share/fonts/adobe_pro/ 
                                          (set-face-attribute 'default nil :height 105)
                                          (visual-line-mode 1)
                                          (global-visual-line-mode 1)
-                                         (load-theme 'misterioso)
+                                      ;; (load-theme 'misterioso)
                                          (tool-bar-mode 0)
                                          (scroll-bar-mode 0)
                                          (show-paren-mode 1)
@@ -731,7 +739,7 @@ system monitor
 
 ;; Load a nice theme if in GUI
 (when (display-graphic-p)
-  (load-theme 'base16-mellow-purple t)
+  (load-theme 'base16-gruvbox-dark-soft t)
   )
 
     (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
@@ -1395,7 +1403,8 @@ file with `edit-abbrevs`"
                          company-ispell
                          company-keywords
                          company-lisp
-                         company-ropemacs)) 
+                         ;; company-ropemacs)
+                         )
 
 #+END_SRC
  
@@ -1550,6 +1559,17 @@ Version 2015-04-23"
     (global-set-key "\C-xm" 'browse-url-at-point)
 
 #+END_SRC
+
+** dh tools
+
+search dh-|grep elpa
+dh-elpa - Debian helper tools for packaging emacs lisp extensions
+dh-elpa-helper - helper package for emacs lisp extensions
+dh-make-elpa - helper for creating Debian packages from ELPA packages
+
+#+begin_src emacs-lisp :tangle yes
+
+#+end_src
 
 ** diminishing modes
 

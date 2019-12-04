@@ -56,13 +56,7 @@
     (setq initial-major-mode 'fundamental-mode)
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ecb-options-version "2.50")
- '(initial-frame-alist (quote ((fullscreen . maximized))))
- '(use-package-always-defer t))
+                                           '(initial-frame-alist (quote ((fullscreen . maximized)))))
                                       ;; for customizing the face (fonts), do:
                                       ;; M-x customize-face RET default RET    
                                       ;;(setq inhibit-startup-screen t)
@@ -70,7 +64,7 @@
                                       (set-face-attribute 'default nil :height 105)
                                       (visual-line-mode 1)
                                       (global-visual-line-mode 1)
-                                      (load-theme 'misterioso)
+                                   ;; (load-theme 'misterioso)
                                       (tool-bar-mode 0)
                                       (scroll-bar-mode 0)
                                       (show-paren-mode 1)
@@ -527,7 +521,7 @@
 
 ;; Load a nice theme if in GUI
 (when (display-graphic-p)
-  (load-theme 'base16-mellow-purple t)
+  (load-theme 'base16-gruvbox-dark-soft t)
   )
 
     (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
@@ -1002,18 +996,21 @@ file with `edit-abbrevs`"
 
         (company-ac-setup)
 
-      
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-preview ((t (:foreground "darkgray" :underline t))))
- '(company-preview-common ((t (:inherit company-preview))))
- '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
- '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
- '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
- '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))
+      (custom-set-faces
+          '(company-preview
+            ((t (:foreground "darkgray" :underline t))))
+          '(company-preview-common
+            ((t (:inherit company-preview))))
+          '(company-tooltip
+            ((t (:background "lightgray" :foreground "black"))))
+          '(company-tooltip-selection
+            ((t (:background "steelblue" :foreground "white"))))
+          '(company-tooltip-common
+            ((((type x)) (:inherit company-tooltip :weight bold))
+             (t (:inherit company-tooltip))))
+          '(company-tooltip-common-selection
+            ((((type x)) (:inherit company-tooltip-selection :weight bold))
+             (t (:inherit company-tooltip-selection)))))
 
   ;;;;;;;;;;;;;;;;;;
 
@@ -1155,6 +1152,8 @@ Version 2015-04-23"
     (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
   ;; optional keyboard short-cut
     (global-set-key "\C-xm" 'browse-url-at-point)
+
+
 
 (use-package diminish
   :ensure t
@@ -3866,4 +3865,3 @@ yasnippet-classic-snippets))
 
 
 
-(put 'dired-find-alternate-file 'disabled nil)
