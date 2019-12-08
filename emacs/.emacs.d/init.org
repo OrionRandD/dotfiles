@@ -16,8 +16,7 @@ The keyword ":tangle yes" will automatically create a better
 Note: for removing a package, delete it from the init.el and from the org file, delete the build-cache.el file, delete it from the build and repos directories
 
 - Installation:
-- install git
-- apt install git
+- apt install emacs emacspeak git texlive-full
 - install /usr/share/fonts/adobe_pro/ 
 - put /home/vagner/.emacs.d/snippets/ inside
 - /home/vagner/.emacs.d/straight/build/yasnippet-classic-snippets/ 
