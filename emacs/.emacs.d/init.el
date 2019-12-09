@@ -61,6 +61,7 @@
                                       ;; M-x customize-face RET default RET    
                                       ;;(setq inhibit-startup-screen t)
                                       (set-default-font "Source Code Pro" nil t)
+                                      ;; you have to install /usr/share/fonts/adobe_pro/ 
                                       (set-face-attribute 'default nil :height 105)
                                       (visual-line-mode 1)
                                       (global-visual-line-mode 1)
@@ -1037,7 +1038,8 @@ file with `edit-abbrevs`"
                          company-ispell
                          company-keywords
                          company-lisp
-                         company-ropemacs))
+                         ;; company-ropemacs
+                           ))
 
 (defun --set-emoji-font (frame)
 
@@ -3865,3 +3867,4 @@ yasnippet-classic-snippets))
 
 
 
+(put 'dired-find-alternate-file 'disabled nil)

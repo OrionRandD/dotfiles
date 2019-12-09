@@ -13,9 +13,17 @@ This time, I did not do that. Because I didn't know about it
 The keyword ":tangle yes" will automatically create a better
 "emacs.el" which is good for debugging Emacs
 
-Note: for removing a package, delete it from the init.el and from the org file, delete the build-cache.el file, delete it from the build and repos directories
+Note: for removing a package, delete it from the init.el and from the
+org file, delete the build-cache.el file, delete it from the build and
+repos directories
 
-- Installation:
+Emacs cedilla: if cedilla does not work with your emacs using
+us_intl keyboard - setxkbmap us_intl - then start Emacs like so:
+"LANG=C emacs &"
+
+https://lists.gnu.org/archive/html/help-gnu-emacs/2017-07/msg00070.html
+
+- Emacs installation:
 - apt install emacs emacspeak git texlive-full
 - install /usr/share/fonts/adobe_pro/ 
 - put /home/vagner/.emacs.d/snippets/ inside
@@ -1402,8 +1410,8 @@ file with `edit-abbrevs`"
                          company-ispell
                          company-keywords
                          company-lisp
-                         ;; company-ropemacs)
-                         )
+                         ;; company-ropemacs
+                           ))
 
 #+END_SRC
  
