@@ -280,9 +280,6 @@ alias pbdump='pbpaste | pastebinit | pbcopy'	# dump text to pastebin server
 
 # alias pylote='python ~vagner/Downloads/Pylote/pylote/pylote.pyw'
 
-set -o vi
-set editing-mode vi
-
 #####################################################
 
 # PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:~/bin/"
@@ -326,10 +323,13 @@ shopt -s direxpand ## fixes the escape character before $PWD --> "\$PWD/"
 
 # setando o editor padrão.
 
+# vim
 export EDITOR="vim"
 export VISUAL="vim"
 
-set -o vi
+# this sets back emacs
+# set -o vi 
+
 set editing-mode vi
 
 # opções para o teclado, ótimas para os WMs mais leves.

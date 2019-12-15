@@ -1146,13 +1146,13 @@ Version 2015-04-23"
   :straight t
   :defer t)
 
-;; (setq browse-url-browser-function 'browse-url-generic
- ;; browse-url-generic-program "firefox")
+(setq browse-url-browser-function 'browse-url-generic
+  browse-url-generic-program "firefox")
  ;; browse-url-generic-program "chromium")
 
-   (setq browse-url-browser-function 'w3m-browse-url)
-    (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
-  ;; optional keyboard short-cut
+ (setq browse-url-browser-function 'w3m-browse-url)
+  (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+ ;; optional keyboard short-cut
     (global-set-key "\C-xm" 'browse-url-at-point)
 
 
@@ -2479,8 +2479,8 @@ Version 2018-03-31"
    ;;  		   (mapcar 'list '("box" "hollow" "bar" "hbar" nil))))))
    ;;    (modify-frame-parameters (selected-frame) (list (cons 'cursor-type cursor-type))))
 
-(use-package mplayer-mode
-  :straight t)
+(add-to-list 'load-path "~/.emacs.d/local-repo/mplayer-mode/")
+(require 'mplayer-mode)
 
 (straight-use-package 'mu4e)
 
