@@ -1165,8 +1165,8 @@ file with `edit-abbrevs`"
 
 #+BEGIN_SRC emacs-lisp
 
-(add-to-list 'load-path "~/.emacs.d/elpa/sword-to-org/")
-(require 'sword-to-org)
+ (add-to-list 'load-path "~/.emacs.d/elpa/sword-to-org/")
+ (require 'sword-to-org)
 
 #+END_SRC
 

@@ -66,10 +66,12 @@ fi
 
 #####################################################
 
+# export TERM=xterm-256color
+
 # set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
+ case "$TERM" in
+     xterm-color|*-256color) color_prompt=yes;;
+ esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
@@ -328,7 +330,7 @@ export EDITOR="vim"
 export VISUAL="vim"
 
 # this sets back emacs
-# set -o vi 
+set -o vi 
 
 set editing-mode vi
 
@@ -981,4 +983,8 @@ ctrl2esc.sh
 #####################################################
 # rustc and cargo
 export PATH="$HOME/.cargo/bin:$PATH"
+
+#############################
+
+alias bible_verse='fortune bible| cowsay -f bud-frogs'
 
