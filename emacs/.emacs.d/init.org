@@ -746,7 +746,7 @@ system monitor
 
 ;; Load a nice theme if in GUI
 (when (display-graphic-p)
-  (load-theme 'base16-gruvbox-dark-soft t)
+  (load-theme 'pok-wog t)
   )
 
     (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)

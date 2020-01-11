@@ -522,7 +522,7 @@
 
 ;; Load a nice theme if in GUI
 (when (display-graphic-p)
-  (load-theme 'base16-gruvbox-dark-soft t)
+  (load-theme 'pok-wog t)
   )
 
     (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
@@ -839,8 +839,8 @@ file with `edit-abbrevs`"
   (dtk-default-module-category "Biblical Texts")
   (dtk-word-wrap t))
 
-;; (add-to-list 'load-path "~/.emacs.d/elpa/sword-to-org/")
-;; (require 'sword-to-org)
+(add-to-list 'load-path "~/.emacs.d/elpa/sword-to-org/")
+(require 'sword-to-org)
 
 (setq-default bidi-display-reordering nil)
 
@@ -2077,16 +2077,16 @@ Version 2018-03-31"
      (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
      (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
-;; (straight-use-package '(helm-deft :type git
-;;                                  :host github
-;;                                  :repo "dfeich/helm-deft"))
+(straight-use-package '(helm-deft :type git
+                                  :host github
+                                  :repo "dfeich/helm-deft"))
 
-;;(require 'helm-deft)
-;;(setq helm-deft-extension "org")
-;;(setq helm-deft-dir-list '(
-;;                           "~/org~/"
-;;                           "~/Documents/"
-;;                           ))
+(require 'helm-deft)
+(setq helm-deft-extension "org")
+(setq helm-deft-dir-list '(
+                           "~/org~/"
+                           "~/Documents/"
+                           ))
 
 (use-package helm-mu
   :straight t)
