@@ -3446,6 +3446,9 @@ flycheck-plantuml))
 
 (setq python-shell-interpreter "/usr/bin/python3")
 
+(use-package evil-python-movement
+ :ensure t)
+
 ;; (use-package quelpa-use-package
 ;;     :straight t
 ;;     :init
