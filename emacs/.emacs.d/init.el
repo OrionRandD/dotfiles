@@ -522,7 +522,7 @@
 
 ;; Load a nice theme if in GUI
 (when (display-graphic-p)
-  (load-theme 'pok-wog t)
+  (load-theme 'base16-material-palenight t)
   )
 
     (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
