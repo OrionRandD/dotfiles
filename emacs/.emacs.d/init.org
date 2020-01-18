@@ -103,6 +103,21 @@ https://lists.gnu.org/archive/html/help-gnu-emacs/2017-07/msg00070.html
 
 #+END_SRC
 
+*** file path
+
+;; set the frame title to show filename plus working directory
+
+#+begin_src emacs-lisp 
+
+  (setq uniquify-buffer-name-style 'reverse)
+  (setq inhibit-default-init t)
+  ;; (setq-default frame-title-format "%b (%f)")
+  (setq-default frame-title-format "-> %f")
+  (global-set-key "\M-n" "\C-u1\C-v")
+  (global-set-key "\M-p" "\C-u1\M-v")
+
+#+end_src
+
 *** portuguese-prefix
 
 #+BEGIN_SRC emacs-lisp

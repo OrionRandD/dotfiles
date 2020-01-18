@@ -44,6 +44,13 @@
 
 (load "~/.emacs.d/elpa/emacs-brazilian-holidays/brazilian-holidays.el")
 
+(setq uniquify-buffer-name-style 'reverse)
+(setq inhibit-default-init t)
+;; (setq-default frame-title-format "%b (%f)")
+(setq-default frame-title-format "-> %f")
+(global-set-key "\M-n" "\C-u1\C-v")
+(global-set-key "\M-p" "\C-u1\M-v")
+
 (set-input-method "portuguese-prefix")
 
 (defadvice switch-to-buffer (after activate-input-method activate)
