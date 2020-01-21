@@ -2031,7 +2031,7 @@ ant its levels of vim-like
 #+BEGIN_SRC emacs-lisp
 
   (straight-use-package 'evil)
- ;; (evil-mode 1)
+    (evil-mode 1)
 
 #+END_SRC
 

@@ -1453,7 +1453,7 @@ Version 2015-04-23"
 (add-to-list 'eshell-modules-list 'eshell-tramp)
 
 (straight-use-package 'evil)
-;; (evil-mode 1)
+  (evil-mode 1)
 
 (straight-use-package 'evil-collection)
 ;; (evil-collection-init t)
