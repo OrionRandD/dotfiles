@@ -1452,8 +1452,16 @@ Version 2015-04-23"
 (require 'esh-module) ; require modules
 (add-to-list 'eshell-modules-list 'eshell-tramp)
 
+;; (setq evil-want-keybinding nil)
+ ;; (setq evil-want-C-i-jump nil)
+   (unless (display-graphic-p) (setq evil-want-C-i-jump nil))
+    
+;; (when evil-want-C-i-jump
+  ;; (define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward))
+
 (straight-use-package 'evil)
-  (evil-mode 1)
+(require 'evil)
+(evil-mode 1)
 
 (straight-use-package 'evil-collection)
 ;; (evil-collection-init t)
@@ -3649,13 +3657,6 @@ flycheck-plantuml))
 
 ;;  (evil-leader/set-key "s" 'powerthesaurus-lookup-word-at-point)
 ;;  (evil-leader/set-key "S" 'powerthesaurus-lookup-word))
-
-(setq evil-want-keybinding nil)
- ;; (setq evil-want-C-i-jump nil)
-    (unless (display-graphic-p) (setq evil-want-C-i-jump nil))
-    
-;; (when evil-want-C-i-jump
-  ;; (define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward))
 
 (use-package telega
  :straight t

@@ -2023,6 +2023,23 @@ https://www.masteringemacs.org/article/complete-guide-mastering-eshell#plan-9-sm
 
 #+END_SRC
 
+** tab on console 
+
+  tab fold on console
+  put this before evil
+  unfortunately, not working with evil-mode
+
+#+BEGIN_SRC emacs-lisp
+
+ ;; (setq evil-want-keybinding nil)
+ ;; (setq evil-want-C-i-jump nil)
+   (unless (display-graphic-p) (setq evil-want-C-i-jump nil))
+    
+;; (when evil-want-C-i-jump
+  ;; (define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward))
+
+#+END_SRC
+
 ** evil  
 
 Also look at the built in viper-mode
@@ -2031,7 +2048,8 @@ ant its levels of vim-like
 #+BEGIN_SRC emacs-lisp
 
   (straight-use-package 'evil)
-    (evil-mode 1)
+  (require 'evil)
+  (evil-mode 1)
 
 #+END_SRC
 
@@ -2078,7 +2096,7 @@ ant its levels of vim-like
   
 #+END_SRC
 
-*** evil-leader 
+** evil-leader 
 
 #+BEGIN_SRC emacs-lisp
 
@@ -4901,22 +4919,6 @@ you have to comment 'disabled' keyword to use this package
 
 #+END_SRC
 
-** tab on console 
-
-  tab fold on console
-  put this before evil
-
-#+BEGIN_SRC emacs-lisp
-
-    (setq evil-want-keybinding nil)
- ;; (setq evil-want-C-i-jump nil)
-    (unless (display-graphic-p) (setq evil-want-C-i-jump nil))
-    
-;; (when evil-want-C-i-jump
-  ;; (define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward))
-
-#+END_SRC
-
 ** telega
 
   https://github.com/zevlg/telega.el/blob/master/README.md
@@ -5477,4 +5479,41 @@ message-send	sends a message in  mu4e-org-mode
 message-send-and-exit	sends a message and exits in  mu4e-org-mode
 helm-mu-contacts	look for contacts to send an email
 
-M-x org-insert-structure-template RET TAB or (C-c C-,)	then write the template you want, e.g. (python sh emacs-lisp etc.) org-insert-link	if you want to insert images org-toggle-inline-images	if you want to toogle them Vim-like completion inside buffers Call them with "M-x" commint-dynamic-complete commint-dynamic-complete-filename commint-completion-at-point icicle-commint-dynamic-complete-filename helm-commint-prompts C-u M! diatheke -b $BibleVersion -f plain -k John 3:15	insert a Bible text inside a buffer (emacs normal-mode) :r!diatheke -b $BibleVersion -f plain -k John 3:15	insert a Bible text inside a buffer (evil-mode) w3m-browser-url	opens a url in w3m Snippets sbel	source-block-emacs-lisp sbupkg	source-block-use-package time	insert current time and date in the buffer C-u C-c .	insert current time and date in the buffer C-q TAB	insert a TAB in the buffer M-x calculator	opens a calculator in emacs M-x calendar	opens a calendar in emacs M-x butterfly	unleashes the power of the butterfly Installed packages in evil-mode: M-x list-packages; /installed (they will be highlighted); v (for visual-mode); j (to select them); y (to copy them); open a new buffer and paste them. Tutorial workflow M-s ! inv_Win.sh	for compton compositor M-s ! screenkey	for showing keys Then you can record your screen Emacs customization M-x customize-option <RET> option <RET> M-x customize-variable <RET> option <RET> Set up a customization buffer for just one user option, option. M-x customize-face <RET> face <RET> Set up a customization buffer for just one face, face. M-x customize-group <RET> group <RET> Set up a customization buffer for just one group, group. M-x customize-apropos <RET> regexp <RET> Set up a customization buffer for all the settings and groups that match regexp. M-x customize-changed <RET> version <RET> Set up a customization buffer with all the settings and groups whose meaning has changed since Emacs version version. M-x customize-changed-options <RET> version <RET> Set up a customization buffer with all the options whose meaning or default values have changed since Emacs version version. M-x customize-saved Set up a customization buffer containing all settings that you have saved with customization buffers. M-x customize-unsaved Set up a customization buffer containing all settings that you have set but not saved. ;; for customizing the face (fonts), do: ;; M-x customize-face RET default RET #+END_VERSE (save-buffers-kill-terminal)
+M-x org-insert-structure-template RET TAB or (C-c C-,)	then write the template you want, e.g. (python sh emacs-lisp etc.)
+org-insert-link	if you want to insert images org-toggle-inline-images.
+If you want to toggle them like vim completion inside buffers Call them with
+"M-x" commint-dynamic-complete commint-dynamic-complete-filename commint-completion-at-point
+icicle-commint-dynamic-complete-filename helm-commint-prompts
+C-u M! diatheke -b $BibleVersion -f plain -k John 3:15	insert a Bible text inside a buffer (emacs normal-mode)
+:r!diatheke -b $BibleVersion -f plain -k John 3:15	insert a Bible text inside a buffer (evil-mode)
+w3m-browser-url	opens a url in w3m
+
+Snippets:
+sbel	source-block-emacs-lisp
+sbupkg	source-block-use-package
+time	insert current time and date in the buffer
+C-u C-c .	insert current time and date in the buffer
+C-q TAB	insert a TAB in the buffer
+M-x calculator	opens a calculator in emacs
+M-x calendar	opens a calendar in emacs
+M-x butterfly	unleashes the power of the butterfly Installed packages in evil-mode:
+M-x list-packages; /installed (they will be highlighted); v (for visual-mode); j (to select them); y (to copy them); open a new buffer and paste them.
+Tutorial workflow M-s ! inv_Win.sh	for compton compositor
+M-s ! screenkey	for showing keys Then you can record your screen Emacs customization
+M-x customize-option <RET> option <RET>
+M-x customize-variable <RET> option <RET> Set up a customization
+buffer for just one user option, option.
+M-x customize-face <RET> face <RET> Set up a customization buffer for just one face, face.
+M-x customize-group <RET> group <RET> Set up a customization buffer for just one group, group.
+M-x customize-apropos <RET> regexp <RET> Set up a customization buffer for all the settings and groups that match regexp.
+M-x customize-changed <RET> version <RET> Set up a customization buffer with all the settings and groups whose meaning has changed since Emacs version 
+M-x customize-changed-options <RET> version <RET> Set up a customization buffer with all the options whose meaning or default values have changed since Emacs version
+M-x customize-saved Set up a customization buffer containing all settings that you have saved with customization buffers
+M-x customize-unsaved Set up a customization buffer containing all settings that you have set but not saved.
+;; for customizing the face (fonts), do:
+;; M-x customize-face RET default RET
+
+#+END_VERSE
+
+(save-buffers-kill-terminal)
+
