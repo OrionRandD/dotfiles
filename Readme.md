@@ -28,6 +28,12 @@ Source: https://alexpearce.me/2016/02/managing-dotfiles-with-stow/
 
 SSh
 Generate an ssh-key to connect to github
+
+ssh-keygen -t rsa -b 4096 -C "[your github's email]"
+---> id_rsa.pub
+
+and copy it to your github ssh credentials
+
 https://www.w3docs.com/snippets/git/how-to-generate-ssh-key-for-git.html
 
 and change the access to ssh:
