@@ -281,6 +281,7 @@ oer-reveal-org/
 quelpa/
 snippets/
 straight/
+straight.md
 transient/
 tags
 undo/
@@ -289,6 +290,7 @@ abbrev_defs
 ac-comphist.dat
 bookmarks
 _emacs.org
+emacs_setup.md
 gitig+
 history
 init.el~
