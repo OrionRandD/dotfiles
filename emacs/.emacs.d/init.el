@@ -42,7 +42,7 @@
 
 (setq gc-cons-threshold (* 100 1024 1024))
 
-(load "~/.emacs.d/elpa/emacs-brazilian-holidays/brazilian-holidays.el")
+(load "~/.emacs.d/local-repo/emacs-brazilian-holidays/brazilian-holidays.el")
 
 (setq uniquify-buffer-name-style 'reverse)
 (setq inhibit-default-init t)
@@ -846,7 +846,7 @@ file with `edit-abbrevs`"
   (dtk-default-module-category "Biblical Texts")
   (dtk-word-wrap t))
 
-(add-to-list 'load-path "~/.emacs.d/elpa/sword-to-org/")
+(add-to-list 'load-path "~/.emacs.d/local-repo/sword-to-org/")
 (require 'sword-to-org)
 
 (setq-default bidi-display-reordering nil)
@@ -1304,12 +1304,14 @@ Version 2015-04-23"
  (unless (server-running-p)
  (server-start))
 
-(require 'w3m-load)
-(require 'mime-w3m)
-    (setq w3m-display-inline-images t) 
-    (setq w3m-fill-column 80) ;; if this does not work, modify the file w3m.el itself
-    (setq w3m-default-display-inline-images t) 
-    (setq w3m-default-save-directory "~/Downloads")
+(use-package w3m
+  :ensure t)
+  (require 'w3m-load)
+;; (require 'mime-w3m)
+        (setq w3m-display-inline-images t) 
+        (setq w3m-fill-column 80) ;; if this does not work, modify the file w3m.el itself
+        (setq w3m-default-display-inline-images t) 
+        (setq w3m-default-save-directory "~/Downloads")
 
 ;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/emacs-wget")
 
@@ -1488,11 +1490,14 @@ Version 2015-04-23"
 
 (straight-use-package 'evil-org)
 
+(use-package evil-leader
+ :ensure t
+ :config
 (global-evil-leader-mode)
 (evil-leader/set-key
   "e" 'find-file
   "b" 'switch-to-buffer
-  "k" 'kill-buffer)
+  "k" 'kill-buffer))
 
  ;; Configure leader key
 
@@ -2928,7 +2933,8 @@ Version 2018-03-31"
 
 ;; org-eww and org-w3m should be in your org distribution, but see
 ;; note below on patch level of org-eww.
-
+;; NOTE: perhaps you will need to comment next line if you get an error
+;; and emacs stops building itself
 (require 'org-eww)
 (require 'org-w3m)
 (defvar org-website-page-archive-file "~/org~/capture.org")
@@ -3748,10 +3754,14 @@ flycheck-plantuml))
 (venv-initialize-interactive-shells)
 (venv-initialize-eshell))
 
-(add-to-list 'load-path "~/.emacs.d/elpa/visual-regexp-20170301.116/")
-(add-to-list 'load-path "~/.emacs.d/elpa/visual-regexp-steroids-20170222.253")
-(require 'visual-regexp)
-(require 'visual-regexp-steroids)
+;; (add-to-list 'load-path "~/.emacs.d/elpa/visual-regexp-20170301.116/")
+;; (add-to-list 'load-path "~/.emacs.d/elpa/visual-regexp-steroids-20170222.253")
+
+(use-package visual-regexp
+ :ensure t)
+(use-package visual-regexp-steroids
+ :ensure t)
+
 (define-key global-map (kbd "C-c r") 'vr/replace)
 (define-key global-map (kbd "C-c q") 'vr/query-replace)
 ;; if you use multiple-cursors, this is for you:
