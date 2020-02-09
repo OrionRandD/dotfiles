@@ -252,6 +252,11 @@ alias rsync='rsync -v'
 alias ls='ls -hNF --color=auto --group-directories-first'
 alias ll='ls -lhF --color=auto --group-directories-first'
 alias la='ls -aF --color=auto --group-directories-first'
+
+alias lf="ls -l | egrep -v '^d'"
+alias lfr='ls -d */ --color=auto --group-directories-first'
+#alias lfr="ls -l | egrep '^d' --color=auto --group-directories-first"
+
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 alias lsda="ls -alF ${colorflag} | grep --color=never '^d'"
 alias sl='ls -F --color=auto --group-directories-first'
@@ -355,7 +360,7 @@ function ext ()
       *.zip)                unzip $1     ;;
       *.Z)                  uncompress $1  ;;
       *.7z)                 7z x $1    ;;
-      *.xz)                 tar xJvf $1 ;;
+      *.xz | *.txz)         tar xJvf $1 ;;
       *)   echo ""${1}" não pode ser extraído()" ;;
      esac
    else
@@ -987,4 +992,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 #############################
 
 alias bible_verse='fortune bible| cowsay -f bud-frogs'
+
+#############################
+# pywal
+# wal -i /home/vagner/Pictures/todas_as_fotos/wallpapers/girls_anime/automata_flying.jpg 
 

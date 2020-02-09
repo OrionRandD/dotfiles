@@ -814,13 +814,21 @@ file with `edit-abbrevs`"
   :config
   (beacon-mode +1))
 
+(use-package tramp
+      :init
+      (setq tramp-default-method "ssh")
+      (setq password-cache-expiry nil)
+      :config
+      ;; (add-to-list 'tramp-remote-path "~/")
+      (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash")))
+
 (use-package better-shell
 :straight t
 :bind (("C-'" . better-shell-shell)
 ("C-;" . better-shell-remote-open)))
 
 (straight-use-package 'diatheke)
-(setq max-specpdl-size 2000)
+(setq max-specpdl-size 5000)
 
 ;;  (use-package diatheke
 ;;    :straight t)
@@ -1416,7 +1424,7 @@ Version 2015-04-23"
   (defengine youtube
     "http://www.youtube.com/results?aq=f&oq=&search_query=%s")
 
-(setq epg-gpg-program "usr/bin/gpg2")
+(setq epg-gpg-program "/usr/bin/gpg2")
 (setq epa-file t)
 (epa-file-enable)
 (setq epa-file-select-keys nil)
@@ -1424,7 +1432,13 @@ Version 2015-04-23"
 (setq pinentry-start t)
 
 (use-package epresent
- :straight t)
+   :straight t)
+
+;;  (evil-define-key 'normal epresent-mode-map "j" 'scroll-down)
+;;  (evil-define-key 'normal epresent-mode-map "k" 'scroll-up)
+;;  (evil-define-key 'normal epresent-mode-map "p" 'epresent-previous-page)
+ ;; (evil-define-key 'normal epresent-mode-map "n" 'epresent-next-page)
+  ;; continue with other wanted bindings here...
 
 (require 'erc)
 
@@ -2506,83 +2520,83 @@ Version 2018-03-31"
 
 (straight-use-package 'mu4e)
 
-	 (global-set-key (kbd "C-<f10>") 'mu4e)
+         (global-set-key (kbd "C-<f10>") 'mu4e)
 
-	 ;; default
-	 (setq mu4e-maildir "~/gmail/")
-	 (setq mu4e-sent-folder "/Sent")
-	 ;; (setq mu4e-drafts-folder "/Drafts")
-	 (setq mu4e-trash-folder   "/Junk")
-	 (setq mu4e-trash-folder  "/Queue")
-	 (setq mu4e-inbox-folder  "/Inbox")
+         ;; default
+         (setq mu4e-maildir "~/gmail/")
+         (setq mu4e-sent-folder "/Sent")
+         ;; (setq mu4e-drafts-folder "/Drafts")
+         (setq mu4e-trash-folder   "/Junk")
+         (setq mu4e-trash-folder  "/Queue")
+         (setq mu4e-inbox-folder  "/Inbox")
 
-	 ;; setup some handy shortcuts
-	 ;; you can quickly switch to your Inbox -- press ``ji''
-	 ;; then, when you want archive some messages, move them to
-	 ;; the 'All Mail' folder by pressing ``ma''.
+         ;; setup some handy shortcuts
+         ;; you can quickly switch to your Inbox -- press ``ji''
+         ;; then, when you want archive some messages, move them to
+         ;; the 'All Mail' folder by pressing ``ma''.
 
-	 (setq mu4e-maildir-shortcuts
-	  '( ("/Inbox"               . ?i)
-	      ;; ("/Drafts"              . ?d)
-		 ("/Junk"                . ?j)
-		 ("/Sent"                . ?s)
-		 ("/Queue"               . ?q)))
+         (setq mu4e-maildir-shortcuts
+          '( ("/Inbox"               . ?i)
+              ;; ("/Drafts"              . ?d)
+                 ("/Junk"                . ?j)
+                 ("/Sent"                . ?s)
+                 ("/Queue"               . ?q)))
 
-	 ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-	 (setq mu4e-sent-messages-behavior 'delete)
+         ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+         (setq mu4e-sent-messages-behavior 'delete)
 
-	 ;; allow for updating mail using 'U' in the main view:
-	 ;; (setq mu4e-get-mail-command "offlineimap")
-	 ;; (setq mu4e-get-mail-command "mbsync ~/gmail")
+         ;; allow for updating mail using 'U' in the main view:
+         ;; (setq mu4e-get-mail-command "offlineimap")
+         ;; (setq mu4e-get-mail-command "mbsync ~/gmail")
 
-	 (setq mu4e-get-mail-command "mbsync -aV ~/gmail")
+         (setq mu4e-get-mail-command "mbsync -aV ~/gmail")
 
-	 ;; something about ourselves
+         ;; something about ourselves
 
-	 (setq
-	  user-mail-address "vagnerrener@gmail.com"
-	  user-full-name  "Vagner Rener"
-	  message-signature
-	 (concat
-	   ;;"任文山 (Ren Wenshan)\n"
-	   ;;"Email: renws1990@gmail.com\n"
-	   ;;"Blog: wenshanren.org\n"
-	   ;;"Douban: www.douban.com/people/renws"
-	   "\n"))
+         (setq
+          user-mail-address "vagnerrener@gmail.com"
+          user-full-name  "Vagner Rener"
+          message-signature
+         (concat
+           ;;"任文山 (Ren Wenshan)\n"
+           ;;"Email: renws1990@gmail.com\n"
+           ;;"Blog: wenshanren.org\n"
+           ;;"Douban: www.douban.com/people/renws"
+           "\n"))
 
- 	 ;; sending mail -- replace USERNAME with your gmail username
-	 ;; also, make sure the gnutls command line utils are installed
-	 ;; package 'gnutls-bin' in Debian/Ubuntu
+         ;; sending mail -- replace USERNAME with your gmail username
+         ;; also, make sure the gnutls command line utils are installed
+         ;; package 'gnutls-bin' in Debian/Ubuntu
 
-	 (require 'smtpmail)
-	 ;; for sending a message, just hit "C-c C-s"
+         (require 'smtpmail)
+         ;; for sending a message, just hit "C-c C-s"
 
         (setq message-send-mail-function 'smtpmail-send-it
-	 starttls-use-gnutls t
-	 smtpmail-stream-type 'starttls
-	 smtpmail-starttls-credentials
-	 '(("smtp.gmail.com" 587 nil nil))
-	 smtpmail-auth-credentials
-	 (expand-file-name "~/.authinfo.gpg")
-	 smtpmail-default-smtp-server "smtp.gmail.com"
-	 smtpmail-smtp-server "smtp.gmail.com"
-	 smtpmail-smtp-service 587
-	 smtpmail-debug-info t)
+         starttls-use-gnutls t
+         smtpmail-stream-type 'starttls
+         smtpmail-starttls-credentials
+         '(("smtp.gmail.com" 587 nil nil))
+         smtpmail-auth-credentials
+         (expand-file-name "~/.authinfo.gpg")
+         smtpmail-default-smtp-server "smtp.gmail.com"
+         smtpmail-smtp-server "smtp.gmail.com"
+         smtpmail-smtp-service 587
+         smtpmail-debug-info t)
 
-	;; don't keep message buffers around
-	(setq message-kill-buffer-on-exit t)
+        ;; don't keep message buffers around
+        (setq message-kill-buffer-on-exit t)
 
-	;; https://github.com/bandresen/mu4e-send-delay
+        ;; https://github.com/bandresen/mu4e-send-delay
 
-	(add-to-list 'load-path "~/.emacs.d/elpa/mu4e-send-delay")
+        (add-to-list 'load-path "~/.emacs.d/elpa/mu4e-send-delay")
 
-	;; Recommended settings
+        ;; Recommended settings
 
         ;; Assigning the scheduled enabled send to C-c C-c
 
-	(add-hook 'mu4e-main-mode-hook (lambda ()
-	(define-key mu4e-compose-mode-map
-	  (kbd "C-c C-c") 'mu4e-send-delay-send-and-exit)))
+        (add-hook 'mu4e-main-mode-hook (lambda ()
+        (define-key mu4e-compose-mode-map
+          (kbd "C-c C-c") 'mu4e-send-delay-send-and-exit)))
 
       ;; Now you can C-c C-c every mail
       ;; Defaults
@@ -3664,6 +3678,10 @@ flycheck-plantuml))
 ;;  (evil-leader/set-key "s" 'powerthesaurus-lookup-word-at-point)
 ;;  (evil-leader/set-key "S" 'powerthesaurus-lookup-word))
 
+;;this telega is not from elpa repo
+;;it is in /home/vagner/emacs.d/straight/repos/telega.el
+;;just delete its directory if it complains about the server
+
 (use-package telega
  :straight t
  :bind 
@@ -3698,14 +3716,6 @@ flycheck-plantuml))
 (setq truncate-partial-width-windows 1)
 (setq truncate-lines 1)
 (global-set-key (kbd "C-x t") 'toggle-truncate-lines)
-
-(use-package tramp
-      :init
-      (setq tramp-default-method "ssh")
-      (setq password-cache-expiry nil)
-      :config
-
-      (add-to-list 'tramp-remote-path "~/"))
 
 (use-package ob-translate
        :straight t)
@@ -3769,6 +3779,12 @@ flycheck-plantuml))
 ;; to use visual-regexp-steroids's isearch instead of the built-in regexp isearch, also include the following lines:
 (define-key esc-map (kbd "C-r") 'vr/isearch-backward) ;; C-M-r
 (define-key esc-map (kbd "C-s") 'vr/isearch-forward) ;; C-M-s
+
+;; (use-package vterm
+   ;; :ensure t)
+
+;; (use-package vterm-toggle
+   ;; :ensure t)
 
 (autoload 'wl "wl" "Wanderlust" t)
 
@@ -3892,3 +3908,4 @@ yasnippet-classic-snippets))
 
 
 
+(put 'dired-find-alternate-file 'disabled nil)
