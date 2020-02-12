@@ -363,6 +363,15 @@
 ;; after mouse selection in X11, you can paste by `yank' in emacs
 (setq x-select-enable-primary t)
 
+;;  (use-package ewal
+;;   :ensure t
+;;   :config
+;;    (setq ewal-use-built-in-always-p t)
+;;    (setq ewal-use-built-in-on-failure-p t)
+;;    (setq ewal-evil-cursors-obey-evil-p t)
+;;    (setq ewal-built-in-palette "sexy-material")
+;;    (setq eval-json-file "~/.cache/wal/colors.json"))
+
 (use-package smart-hungry-delete
   :ensure t
   :bind (("<backspace>" . smart-hungry-delete-backward-char)
@@ -528,9 +537,9 @@
      :ensure t)
 
 ;; Load a nice theme if in GUI
-(when (display-graphic-p)
-  (load-theme 'base16-material-palenight t)
-  )
+ (when (display-graphic-p)
+   (load-theme 'renegade t)
+   )
 
     (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
 
@@ -2204,8 +2213,92 @@ Version 2018-03-31"
 (add-to-list 'load-path "~/.emacs.d/local-repo/ipp")
 (require 'ipp)
 
-(use-package jabber 
- :straight t)
+;;  (use-package jabber 
+;;  :straight t)
+
+;; http://www.totherme.org/configs/gds.html#orgheadline87
+;; https://mrblog.nl/emacs/config.html
+
+  (use-package jabber
+   :init
+   ;; My accounts
+   ;; Make sure the user-xmpp-account gets evaluated
+   (setq jabber-account-list
+         `(("vagnerrener@gmail.com" (:connection-type . starttls))))
+
+   :config
+   (progn
+     ;; Show some info in the modeline
+     (jabber-mode-line-mode 1)
+
+     ;; Configuration variables
+     (setq
+      jabber-show-offline-contacts nil
+      jabber-default-priority 30
+      jabber-alert-message-hooks (quote
+                                  (jabber-message-libnotify
+                                   jabber-message-echo
+                                   jabber-message-awesome
+                                   jabber-message-wave
+                                   jabber-message-scroll))
+      jabber-message-alert-same-buffer nil
+      jabber-roster-show-bindings nil
+      jabber-auto-reconnect t
+      jabber-chat-buffer-format "*-chat-%n-*"
+      jabber-groupchat-buffer-format "*-groupchat-%n-*"
+      jabber-muc-colorize-foreign t
+      jabber-muc-colorize-local t
+      jabber-muc-disable-disco-check t
+      jabber-muc-private-buffer-format "*-muc-priv-%g-%n-*"
+      jit-lock-stealth-time 16
+      jabber-show-resources 'sometimes
+      jabber-resource-line-format "         %j/%r%S [%p]"
+      jabber-roster-buffer "*-roster-*"
+      jabber-roster-line-format "  %u %a %-25n - %S"
+      jabber-roster-show-title nil
+      jabber-roster-subscription-display (quote
+                                          (("none" . "   ")
+                                           ("from" . "← ")
+                                           ("to" . " →")
+                                           ("both" . "←→")))
+      ;; jabber-socks5-proxies (quote ("proxy.hsdev.com"))
+      jabber-vcard-avatars-retrieve nil
+      jabber-muc-disable-disco-check t
+      jabber-muc-colorize-foreign t
+      jabber-muc-colorize-local t
+      jabber-muc-nick-saturation 0.35 ;; empirical value, suitable for my theme
+      jabber-muc-nick-value 0.75
+
+      ;; Make the MUCs
+      jabber-muc-show-affiliation-changes nil
+      jabber-muc-show-enter-presence nil
+      jabber-muc-show-leave-messages nil
+      jabber-muc-show-role-changes nil
+      )
+
+
+     ;; C-j is the prefix for all jabber command in the C-x map (so, C-x C-j precede all commands for jabber)
+     ;; The default C-x map for emacs has a C-j entry which binds it to
+     ;; dired-jump. This gets in the way of all the keyboard shortcuts for
+     ;; jabber, so lets re-call the definition here, so we are sure we get
+     ;; them.
+
+     (bind-key "C-j" jabber-global-keymap ctl-x-map)
+
+     ;; Do not steal my focus in the mini buffer
+     ;; Message alert hooks
+     (define-jabber-alert echo "Show a message in the echo area"
+       (lambda (msg)
+         (unless (minibuffer-prompt)
+           (message "%s" msg))))
+
+     ;; Some face adjustments
+     (add-hook 'jabber-chat-mode-hook
+               (lambda ()
+                 (set-face-attribute 'jabber-chat-prompt-system nil :foreground "dark gray" :weight 'bold))))
+
+   :bind
+   ("C-c C-SPC" . jabber-activity-switch-to))
 
 (use-package key-chord
   :ensure t

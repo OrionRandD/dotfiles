@@ -4,6 +4,7 @@
 # the other machine:
 
 # abbrev_defs
+# emacs_setup.md
 # init.el
 # local-repo
 # rs_emacs.sh
@@ -14,9 +15,11 @@
 
 # $HOME/org~
 # $HOME/reveal-slides
+
 # to your $HOME
 
-# Then, start Emacs
+# Then, start emacs like this:
+  "emacs init.el" and M-x eval-buffer
 # it will try to build pulling the packages
 # from the repositories
 # Note: hyperbola distro does not have W3M

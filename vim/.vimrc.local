@@ -91,3 +91,6 @@ let g:BASH_Company      = 'Sofia Corporation'
  set viewoptions=folds 
 " }
 
+"pywal {
+" colorscheme wal
+"}
