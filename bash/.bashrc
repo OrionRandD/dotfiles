@@ -191,8 +191,8 @@ alias emacsgnd="emacsclient -c -a emacs"           # new - opens the GUI with al
 
 # Emacs config
 export ALTERNATE_EDITOR=""
-export EDITOR="emacsclient -t"                  # $EDITOR should open in terminal
-export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI with non-daemon as alternate
+# export EDITOR="emacsclient -t"                  # $EDITOR should open in terminal
+# export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI with non-daemon as alternate
 
 [ -s "~/.dnx/dnvm/dnvm.sh" ] && . "~/.dnx/dnvm/dnvm.sh" # Load dnvm
 
@@ -611,6 +611,8 @@ function marks {
 }
 
 # Mark tab-completion 
+# In freeBSD, it is "--printf"
+
 _completemarks() {
   local curw=${COMP_WORDS[COMP_CWORD]}
   local wordlist=$(find $MARKPATH -type l -printf "%f\n")

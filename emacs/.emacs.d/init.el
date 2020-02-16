@@ -3788,11 +3788,11 @@ flycheck-plantuml))
 (global-set-key (kbd "C-M-=") 'default-text-scale-increase)
 (global-set-key (kbd "C-M--") 'default-text-scale-decrease)
 
-;;   (use-package theme-magic
-;;    :ensure t)
+;;     (use-package theme-magic
+;;      :ensure t)
 
-;; (require 'theme-magic)
-;; (theme-magic-export-theme-mode)
+;;   (require 'theme-magic)
+;;   (theme-magic-export-theme-mode)
 
 (setq display-time-default-load-average nil)
 (setq display-time-interval 1)
@@ -4001,4 +4001,3 @@ yasnippet-classic-snippets))
 
 
 
-(put 'dired-find-alternate-file 'disabled nil)
