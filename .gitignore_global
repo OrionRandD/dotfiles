@@ -116,6 +116,7 @@ auto-save-list
 auto-save-list/
 autosave/
 backups/
+%backup%~
 bbdb
 bbdb-vcard/
 bin/
