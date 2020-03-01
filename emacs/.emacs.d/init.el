@@ -3998,7 +3998,9 @@ yasnippet-classic-snippets))
 (semantic-mode 1)
 (require 'semantic/ia)
 
+(use-package camcorder
+   :ensure t)
 
 
 
-(put 'dired-find-alternate-file 'disabled nil)
+
