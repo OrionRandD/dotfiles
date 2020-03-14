@@ -8,6 +8,10 @@
 "   /                          
                               
 
+" Note: you have to run:
+" :PlugInstall as normal user in its $HOME and
+" :PlugInstall as root in its $HOME as well
+
 " help {
 ":h --> show the whole help manual
 ":h i_^n --> show what Ctrl-n does in insert mode
@@ -69,9 +73,12 @@
     setlocal formatoptions=1 
     setlocal noexpandtab 
     set complete+=s
-    set formatprg=par\ -w85         " Sets 85 column
-    setlocal wrap 
-    setlocal linebreak 
+
+    ""set formatprg=par\ -w85         " Sets 85 column
+    setlocal nowrap 
+    set textwidth=0
+    ""setlocal linebreak 
+
     set list
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 " }
@@ -212,8 +219,12 @@ set makeprg=bundle\ exec\ rspec\ -f\ QuickfixFormatter
 " http://www.drbunsen.org/writing-in-vim/ 
 " Usage --> Ctrl-x Ctrl-t (insert mode)
 
-set thesaurus+=$HOME/thesaurus/mthesaur.txt
-set thesaurus+=$HOME/thesaurus/brazilian-synonyms.txt
+"set thesaurus+=$HOME/thesaurus/mthesaur.txt
+"set thesaurus+=$HOME/thesaurus/brazilian-synonyms.txt
+
+set thesaurus+=~/thesaurus/mthesaur.txt
+set thesaurus+=~/thesaurus/brazilian-synonyms.txt
+
 " }
 
 "" source: https://github.com/changemewtf/no_plugins/blob/master/no_plugins.vim
@@ -458,3 +469,4 @@ call plug#begin('~/.dotfiles/vim/.vim_minimal/plugged/')
 "" List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 "}
+

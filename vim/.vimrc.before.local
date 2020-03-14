@@ -37,9 +37,13 @@ cab Q  q
     setlocal formatoptions=1 
     setlocal noexpandtab 
     set complete+=s
- "  set formatprg=par\ -w85         " Sets 85 column
-    setlocal wrap 
-    setlocal linebreak 
+
+    ""set formatprg=par\ -w85         " Sets 85 column
+    ""setlocal linebreak 
+    setlocal nowrap 
+    ""setlocal wrap 
+    set textwidth=0
+
     set list
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 " }

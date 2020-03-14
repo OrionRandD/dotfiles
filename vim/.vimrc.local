@@ -1,7 +1,11 @@
 
 " Vim options {
 
-set wrap "wrap lines
+""set formatprg=par\ -w85         " Sets 85 column
+""setlocal linebreak 
+  setlocal nowrap 
+""setlocal wrap 
+  set textwidth=0
 
 " }
 
