@@ -63,14 +63,7 @@
     (setq initial-major-mode 'fundamental-mode)
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("7356632cebc6a11a87bc5fcffaa49bae528026a78637acd03cae57c091afd9b9" default)))
- '(initial-frame-alist (quote ((fullscreen . maximized)))))
+                                           '(initial-frame-alist (quote ((fullscreen . maximized)))))
                                       ;; for customizing the face (fonts), do:
                                       ;; M-x customize-face RET default RET    
                                       ;;(setq inhibit-startup-screen t)
@@ -125,7 +118,7 @@
                                  (fset 'yes-or-no-p      'y-or-n-p) ; Make "yes/no" prompts "y/n"
                                  (global-auto-revert-mode        1) ; Reload files after modification
                                  (iswitchb-mode                  1) ; Neat buffer switching
-                                 (menu-bar-mode                  1) ; Menu bar
+                                 (menu-bar-mode                  -1) ; Menu bar can be accessed with F10
                                  (prefer-coding-system      'utf-8) ; Always prefer UTF-8
                                  (scroll-bar-mode               -1) ; And no scroll bar either
                                  (show-paren-mode                1) ; Highlight matching parenthesis
@@ -845,6 +838,7 @@ file with `edit-abbrevs`"
 
 (straight-use-package 'diatheke)
 (setq max-specpdl-size 5000)
+(require 'diatheke)
 
 ;;  (use-package diatheke
 ;;    :straight t)
@@ -1028,19 +1022,21 @@ file with `edit-abbrevs`"
 
         (company-ac-setup)
 
-      
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-preview ((t (:foreground "darkgray" :underline t))))
- '(company-preview-common ((t (:inherit company-preview))))
- '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
- '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
- '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
- '(company-tooltip-selection ((t (:background "steelblue" :foreground "white"))))
- '(fringe ((t (:background "unspecified-bg")))))
+      (custom-set-faces
+          '(company-preview
+            ((t (:foreground "darkgray" :underline t))))
+          '(company-preview-common
+            ((t (:inherit company-preview))))
+          '(company-tooltip
+            ((t (:background "lightgray" :foreground "black"))))
+          '(company-tooltip-selection
+            ((t (:background "steelblue" :foreground "white"))))
+          '(company-tooltip-common
+            ((((type x)) (:inherit company-tooltip :weight bold))
+             (t (:inherit company-tooltip))))
+          '(company-tooltip-common-selection
+            ((((type x)) (:inherit company-tooltip-selection :weight bold))
+             (t (:inherit company-tooltip-selection)))))
 
   ;;;;;;;;;;;;;;;;;;
 
@@ -3646,6 +3642,8 @@ flycheck-plantuml))
 
 
 
+
+
 ;; (setq shackle-rules
 ;;      '(((svg-2048-mode circe-query-mode) :same t)
 ;;        ("*Help*" :align t :select t)
@@ -4009,4 +4007,3 @@ yasnippet-classic-snippets))
 
 
 
-(put 'dired-find-alternate-file 'disabled nil)
