@@ -795,8 +795,8 @@ alias ccat="highlight --out-format=xterm256" #Color cat - print file with syntax
 # Internet
 alias yt="youtube-dl --add-metadata -ic" # Download video link
 alias yta="youtube-dl --add-metadata -xic" # Download only audio
-alias yt-vw="youtube-viewer -C"
-alias g-yt-vw="gtk-youtube-viewer"
+alias st-vw="straw-viewer -C"
+alias g-st-vw="gtk-straw-viewer"
 alias yt-free="FreeTube"
 
 #############################
