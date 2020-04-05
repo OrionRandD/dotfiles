@@ -3775,18 +3775,32 @@ flycheck-plantuml))
 ;;  (evil-leader/set-key "S" 'powerthesaurus-lookup-word))
 
 ;;this telega is not from elpa repo
-;;it is in /home/vagner/emacs.d/straight/repos/telega.el
-;;just delete its directory if it complains about the server
+  ;;it is in /home/vagner/emacs.d/straight/repos/telega.el
+  ;;just delete its directory if it complains about the server
+
+  ;; (use-package telega
+  ;;  :straight t
+  ;;  :bind 
+  ;;   (:map telega-msg-button-map
+  ;;     ("j" . nil)
+  ;;     ("k" . nil)
+  ;;     ("h" . nil)
+  ;;     ("l" . nil))
+  ;;     :custom (telega-notifications-mode t))
+
+  ;;this telega is from melpa repo
+  ;;it is in /home/vagner/emacs.d/straight/repos/telega.el
+  ;;just delete its directory if it complains about the server
 
 (use-package telega
- :straight t
- :bind 
-  (:map telega-msg-button-map
-    ("j" . nil)
-    ("k" . nil)
-    ("h" . nil)
-    ("l" . nil))
-    :custom (telega-notifications-mode t))
+   :ensure t
+   :bind 
+    (:map telega-msg-button-map
+      ("j" . nil)
+      ("k" . nil)
+      ("h" . nil)
+      ("l" . nil))
+      :custom (telega-notifications-mode t))
 
 (global-set-key (kbd "C-M-=") 'default-text-scale-increase)
 (global-set-key (kbd "C-M--") 'default-text-scale-decrease)
