@@ -999,3 +999,11 @@ alias bible_verse='fortune bible| cowsay -f bud-frogs'
 # pywal
 # wal -i /home/vagner/Pictures/todas_as_fotos/wallpapers/girls_anime/automata_flying.jpg 
 
+#############################
+## converting bashrc aliases to eshell aliases
+## https://www.emacswiki.org/emacs/EshellAlias
+
+alias | sed -E "s/^alias ([^=]+)='(.*)'$/alias \1 \2 \$*/g; s/'\\\''/'/g;" >~/.emacs.d/eshell/alias
+
+#############################
+
