@@ -1110,7 +1110,12 @@ file with `edit-abbrevs`"
 
 (use-package swiper
 :straight t
-:bind (("C-s" . swiper)
+:init
+(if (fboundp 'swiper-isearch)
+    (bind-key "C-s" #'swiper-isearch)
+    (bind-key "C-s" #'swiper))
+:bind (
+    ;; ("C-s" . swiper)
        ("C-r" . swiper)
        ("C-c C-r" . ivy-resume)
        ("M-x" . counsel-M-x)
