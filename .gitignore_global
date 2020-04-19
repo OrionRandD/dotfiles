@@ -137,6 +137,7 @@ emacs.service
 emacs.service
 emacs_bak.el
 emacs_bak.org
+learn_emacs.org
 _.emacs_vagner_Cyberwarrior
 emacs_bugged_packages.org
 emacs_config-framagit/
