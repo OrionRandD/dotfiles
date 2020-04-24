@@ -972,6 +972,16 @@ file with `edit-abbrevs`"
 
        :nickserv-password my-nickserv-password)))
 
+(use-package cobol-mode
+ :ensure t
+ :config
+ (setq auto-mode-alist
+    (append
+     '(("\\.cob\\'" . cobol-mode)
+       ("\\.cbl\\'" . cobol-mode)
+       ("\\.cpy\\'" . cobol-mode))
+     auto-mode-alist)))
+
 (use-package command-log-mode
    :ensure t
    :commands (command-log-mode global-command-log-mode)
@@ -3584,6 +3594,8 @@ flycheck-plantuml))
 
 (use-package evil-python-movement
  :ensure t)
+
+
 
 ;; (use-package quelpa-use-package
 ;;     :straight t

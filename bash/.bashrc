@@ -233,6 +233,8 @@ export ALTERNATE_EDITOR=""
 
 neofetch
 # ln -s /usr/share/games/fortune /usr/local/bin/
+# or
+# ln -s /usr/games/fortune /usr/local/bin/
 # fortune bible| cowsay -f sheep
 fortune bible| cowsay -f bud-frogs
 # verse| cowsay -f sheep
