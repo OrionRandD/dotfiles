@@ -517,31 +517,31 @@
     "\n# To create a file, visit it with 'C-x C-f' e and enter text in its buffer.\n"))
 
 ;;  (dolist (pkgname '(theme-looper
-      ;;  alect-themes
-      ;;  base16-theme
-      ;;  color-theme-modern
-      ;;  doom-themes
-      ;;  moe-theme
-      ;;  ))
-      ;;   (straight-use-package pkgname))
+  ;;  alect-themes
+  ;;  base16-theme
+  ;;  color-theme-modern
+  ;;  doom-themes
+  ;;  moe-theme
+  ;;  ))
+  ;;   (straight-use-package pkgname))
 
-    (use-package theme-looper
-     :ensure t)
-    (use-package color-theme-modern
-     :ensure t)
-    (use-package alect-themes 
-     :ensure t)
-    (use-package base16-theme 
-     :ensure t)
-    (use-package doom-themes
-     :ensure t)
+(use-package theme-looper
+ :ensure t)
+(use-package color-theme-modern
+ :ensure t)
+(use-package alect-themes 
+ :ensure t)
+(use-package base16-theme 
+ :ensure t)
+(use-package doom-themes
+ :ensure t)
 
 ;; Load a nice theme if in GUI
- (when (display-graphic-p)
-   (load-theme 'renegade t)
-   )
+  (when (display-graphic-p)
+  (load-theme 'renegade t)
+  )
 
-    (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
+  (global-set-key (kbd "<C-f8>") 'theme-looper-enable-random-theme)
 
 (use-package centered-window
  :ensure t)
@@ -1302,13 +1302,15 @@ Version 2015-04-23"
 
  (use-package dash
    :straight t
-   :custom
-   (dash-enable-fontlock t))
+;;   :custom
+;;   (dash-enable-fontlock t)
+)
 
  (use-package dash-functional
    :straight t
-   :custom
-   (dash-enable-fontlock t))
+ ;;  :custom
+ ;;  (dash-enable-fontlock t)
+)
 
 
 
