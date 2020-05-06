@@ -131,7 +131,7 @@
                                  (global-set-key (kbd "<C-M-prior>") 'backward-page) ; Ctrl+Alt+PageUp
                                  (global-set-key (kbd "<C-M-next>") 'forward-page)   ; Ctrl+Alt+PageDown
                                  (delete-selection-mode 1)
-                                 (cua-mode 1)
+                                 (cua-mode -1) ; 1 disables "Ctrl-Alt" in orgmode
 
                                  (defun cyber-new-empty-buffer ()
                                    "Create a new empty buffer.
@@ -1529,7 +1529,9 @@ Version 2015-04-23"
 
 ;;   (evil-define-key 'visual 'global "Q" #'my-norm@q)
 
-(straight-use-package 'evil-org)
+(use-package org-evil
+ :ensure t)
+(require 'org-evil)
 
 (use-package evil-leader
  :ensure t
@@ -4040,4 +4042,3 @@ yasnippet-classic-snippets))
 
 
 
-(put 'dired-find-alternate-file 'disabled nil)
