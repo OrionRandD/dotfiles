@@ -1342,11 +1342,12 @@ Version 2015-04-23"
 (use-package w3m
   :ensure t)
   (require 'w3m-load)
-;; (require 'mime-w3m)
-        (setq w3m-display-inline-images t) 
-        (setq w3m-fill-column 80) ;; if this does not work, modify the file w3m.el itself
-        (setq w3m-default-display-inline-images t) 
-        (setq w3m-default-save-directory "~/Downloads")
+;;(require 'mime-w3m)
+;; if this does not work, modify the file w3m.el itself inside /home/$USER/.emacs.d/elpa/w3m-*
+     (setq w3m-display-inline-images t) 
+     (setq w3m-fill-column 80) 
+     (setq w3m-default-display-inline-images t) 
+     (setq w3m-default-save-directory "~/Downloads")
 
 ;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/emacs-wget")
 
