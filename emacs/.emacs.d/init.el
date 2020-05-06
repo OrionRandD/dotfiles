@@ -3597,8 +3597,19 @@ flycheck-plantuml))
 
 (setq python-shell-interpreter "/usr/bin/python3")
 
-(use-package evil-python-movement
- :ensure t)
+    (use-package evil-python-movement
+     :ensure t)
+
+;; You can start a jupyter-src block with:
+;; #+begin_src jupyter-python .
+
+    (use-package jupyter
+      :ensure t
+      :defer t
+      :init
+      (setq org-babel-default-header-args:jupyter-python '((:async . "yes")
+                                                           (:session . "py")
+                                                           (:kernel . "python3"))))
 
 
 
