@@ -63,7 +63,14 @@
     (setq initial-major-mode 'fundamental-mode)
 
 (custom-set-variables
-                                           '(initial-frame-alist (quote ((fullscreen . maximized)))))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("ed92c27d2d086496b232617213a4e4a28110bdc0730a9457edf74f81b782c5cf" default)))
+ '(initial-frame-alist (quote ((fullscreen . maximized)))))
                                       ;; for customizing the face (fonts), do:
                                       ;; M-x customize-face RET default RET    
                                       ;;(setq inhibit-startup-screen t)
@@ -1032,21 +1039,18 @@ file with `edit-abbrevs`"
 
         (company-ac-setup)
 
-      (custom-set-faces
-          '(company-preview
-            ((t (:foreground "darkgray" :underline t))))
-          '(company-preview-common
-            ((t (:inherit company-preview))))
-          '(company-tooltip
-            ((t (:background "lightgray" :foreground "black"))))
-          '(company-tooltip-selection
-            ((t (:background "steelblue" :foreground "white"))))
-          '(company-tooltip-common
-            ((((type x)) (:inherit company-tooltip :weight bold))
-             (t (:inherit company-tooltip))))
-          '(company-tooltip-common-selection
-            ((((type x)) (:inherit company-tooltip-selection :weight bold))
-             (t (:inherit company-tooltip-selection)))))
+      
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-preview ((t (:foreground "darkgray" :underline t))))
+ '(company-preview-common ((t (:inherit company-preview))))
+ '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
+ '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
+ '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
+ '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))
 
   ;;;;;;;;;;;;;;;;;;
 
@@ -4050,6 +4054,49 @@ yasnippet-classic-snippets))
 
 (use-package camcorder
    :ensure t)
+
+;; (use-package company-org-roam)
+ ;;   :ensure t)
+
+ ;; (use-package org-roam
+ ;;   :ensure t)
+
+ ;; (use-package org-roam-bibtex
+ ;;   :ensure t)
+
+;; (use-package org-roam
+;;       :hook
+;;       (after-init . org-roam-mode)
+;;       :custom
+;;       (org-roam-directory "~/org~/")
+;;       :bind (:map org-roam-mode-map
+;;               (("C-c n l" . org-roam)
+;;                ("C-c n f" . org-roam-find-file)
+;;                ("C-c n j" . org-roam-jump-to-index)
+;;                ("C-c n b" . org-roam-switch-to-buffer)
+;;                ("C-c n g" . org-roam-graph))
+;;               :map org-mode-map
+;;               (("C-c n i" . org-roam-insert))))
+
+(use-package deft
+  :ensure t
+  :custom
+    (deft-extensions '("org" "md" "txt"))
+    (deft-directory "~/org~/deft-notes")
+    (deft-use-filename-as-title t))
+
+(add-to-list 'load-path "~/.emacs.d/elpa/zetteldeft-20200501.935")
+ (require 'zetteldeft)
+ (zetteldeft-set-classic-keybindings)
+
+;;  (use-package zetteldeft
+;;  :ensure t
+;;  :after deft
+;;  :config
+;;  (zetteldeft-set-classic-keybindings))
+
+(use-package nov
+ :ensure t)
 
 
 
