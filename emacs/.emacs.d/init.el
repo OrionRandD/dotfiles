@@ -63,14 +63,7 @@
     (setq initial-major-mode 'fundamental-mode)
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("ed92c27d2d086496b232617213a4e4a28110bdc0730a9457edf74f81b782c5cf" default)))
- '(initial-frame-alist (quote ((fullscreen . maximized)))))
+                                           '(initial-frame-alist (quote ((fullscreen . maximized)))))
                                       ;; for customizing the face (fonts), do:
                                       ;; M-x customize-face RET default RET    
                                       ;;(setq inhibit-startup-screen t)
@@ -931,7 +924,7 @@ file with `edit-abbrevs`"
 ;; 	       ;; It is assumed that below file is present in `org-directory'
 ;; 	       ;; and that it has an "Ideas" heading. It can even be a
 ;; 	       ;; symlink pointing to the actual location of all-posts.org!
-;; 	       (file+datetree (concat org-directory "~/blog/content/posts/my-post.org")
+;; 	       (file+olp+datetree (concat org-directory "~/org~/blog/content/posts/my-post.org")
 ;; "* TODO %^{Description}  %^g\n%?\nAdded: %U")
 ;; 	       (function org-hugo-new-subtree-post-capture-template))))
 
@@ -1039,18 +1032,21 @@ file with `edit-abbrevs`"
 
         (company-ac-setup)
 
-      
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-preview ((t (:foreground "darkgray" :underline t))))
- '(company-preview-common ((t (:inherit company-preview))))
- '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
- '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
- '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
- '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))
+      (custom-set-faces
+          '(company-preview
+            ((t (:foreground "darkgray" :underline t))))
+          '(company-preview-common
+            ((t (:inherit company-preview))))
+          '(company-tooltip
+            ((t (:background "lightgray" :foreground "black"))))
+          '(company-tooltip-selection
+            ((t (:background "steelblue" :foreground "white"))))
+          '(company-tooltip-common
+            ((((type x)) (:inherit company-tooltip :weight bold))
+             (t (:inherit company-tooltip))))
+          '(company-tooltip-common-selection
+            ((((type x)) (:inherit company-tooltip-selection :weight bold))
+             (t (:inherit company-tooltip-selection)))))
 
   ;;;;;;;;;;;;;;;;;;
 
@@ -3014,7 +3010,7 @@ Version 2018-03-31"
     ;; you have to set up a template for this 
     ;; ("c" "Contacts" entry (file+headline "~/org~/contacts.org" "Contacts"), my/org-contacts-template :empty-lines 1)
 
-     ("d" "Dreams" entry (file+datetree "~/org~/my-dreams.org") "* %^{Description} %^g %?\nAdded: %U")
+     ("d" "Dreams" entry (file+olp+datetree "~/org~/my-dreams.org") "* %^{Description} %^g %?\nAdded: %U")
 
      ("e" "Cookbook" entry (file "~/org~/cookbook.org")
 	 "%(org-chef-get-recipe-from-url)"
@@ -3023,21 +3019,21 @@ Version 2018-03-31"
      ("f" "Manual Cookbook" entry (file "~/org~/cookbook.org")
 	 "* %^{Recipe title: }\n  :PROPERTIES:\n  :source-url:\n  :servings:\n  :prep-time:\n  :cook-time:\n  :ready-in:\n  :END:\n** Ingredients\n   %?\n** Directions\n\n")
 
-     ("j" "Journal" entry (file+datetree "~/org~/journal.org") "* %?\nEntered on %U\n  %i\n  %a")
+     ("j" "Journal" entry (file+olp+datetree "~/org~/journal.org") "* %?\nEntered on %U\n  %i\n  %a")
 
      ("k" "Cliplink capture" entry (file "")
           "* TODO %(org-cliplink-capture) \n  SCHEDULED: %t\n" :empty-lines 1)
 
-     ("l" "Log Time" entry (file+datetree "~/org~/timelog.org") "** %U - %^{Activity}  :TIME:")
+     ("l" "Log Time" entry (file+olp+datetree "~/org~/timelog.org") "** %U - %^{Activity}  :TIME:")
 
      ("m" "Brain" entry (function org-brain-goto-end) "* %i%?" :empty-lines 1)
 
-     ("n" "Notes" entry (file+datetree "~/org~/my-notes.org") "* %^{Description} %^g %?\nAdded: %U")
+     ("n" "Notes" entry (file+olp+datetree "~/org~/my-notes.org") "* %^{Description} %^g %?\nAdded: %U")
 
      ;; you have to set hugo up for this
-     ;; ("o" "Posts" (file+datetree "~/org~/my-post.org") "* TODO %^{Description} %^g\n%?\nAdded: %U")
+     ;; ("o" "Posts" (file+olp+datetree "~/org~/my-post.org") "* TODO %^{Description} %^g\n%?\nAdded: %U")
 
-     ("t" "Tasks" entry (file+datetree "~/org~/tasks.org")
+     ("t" "Tasks" entry (file+olp+datetree "~/org~/tasks.org")
    "* TODO %^{Description} %^g\n%?\nAdded: %U")
 
      ;; example is in:
@@ -4055,28 +4051,24 @@ yasnippet-classic-snippets))
 (use-package camcorder
    :ensure t)
 
-;; (use-package company-org-roam)
- ;;   :ensure t)
+(use-package org-roam
+      :ensure t
+      :hook 
+      (after-init . org-roam-mode)
+      :custom
+      (org-roam-directory "~/org~/")
+      :bind (:map org-roam-mode-map
+              (("C-c n l" . org-roam)
+               ("C-c n f" . org-roam-find-file)
+               ("C-c n g" . org-roam-show-graph))
+              :map org-mode-map
+              (("C-c n i" . org-roam-insert))))
 
- ;; (use-package org-roam
- ;;   :ensure t)
+    (use-package org-roam-bibtex
+      :ensure t)
 
- ;; (use-package org-roam-bibtex
- ;;   :ensure t)
-
-;; (use-package org-roam
-;;       :hook
-;;       (after-init . org-roam-mode)
-;;       :custom
-;;       (org-roam-directory "~/org~/")
-;;       :bind (:map org-roam-mode-map
-;;               (("C-c n l" . org-roam)
-;;                ("C-c n f" . org-roam-find-file)
-;;                ("C-c n j" . org-roam-jump-to-index)
-;;                ("C-c n b" . org-roam-switch-to-buffer)
-;;                ("C-c n g" . org-roam-graph))
-;;               :map org-mode-map
-;;               (("C-c n i" . org-roam-insert))))
+    (use-package company-org-roam
+      :ensure t)
 
 (use-package deft
   :ensure t
@@ -4085,15 +4077,15 @@ yasnippet-classic-snippets))
     (deft-directory "~/org~/deft-notes")
     (deft-use-filename-as-title t))
 
-(add-to-list 'load-path "~/.emacs.d/elpa/zetteldeft-20200501.935")
- (require 'zetteldeft)
- (zetteldeft-set-classic-keybindings)
+;;   (add-to-list 'load-path "~/.emacs.d/elpa/zetteldeft-20200501.935")
+;;  (require 'zetteldeft)
+;;  (zetteldeft-set-classic-keybindings)
 
-;;  (use-package zetteldeft
-;;  :ensure t
-;;  :after deft
-;;  :config
-;;  (zetteldeft-set-classic-keybindings))
+   (use-package zetteldeft
+   :ensure t
+   :after deft
+   :config
+   (zetteldeft-set-classic-keybindings))
 
 (use-package nov
  :ensure t)
