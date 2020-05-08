@@ -1063,8 +1063,8 @@ file with `edit-abbrevs`"
 
    ;;;;;;;;;;;;;;;;;;
 
-(setq company-backends '(company-cpp
-                         company-ctag
+(setq company-backends '(;;company-cpp
+                         ;;company-ctag
                          company-dabbrev
                          company-dabbrev-code
                          company-elisp 
@@ -1072,7 +1072,7 @@ file with `edit-abbrevs`"
                          company-gtags
                          company-ispell
                          company-keywords
-                         company-lisp
+                         ;;company-lisp
                          ;; company-ropemacs
                            ))
 
