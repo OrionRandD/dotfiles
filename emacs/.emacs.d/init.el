@@ -3130,6 +3130,41 @@ Suggest the URL title as a description for resource."
 
 ;; (define-key org-brain-visualize-mode-map (kbd "L") #'org-brain-cliplink-resource)
 
+(use-package org-download
+    :ensure t
+    :config
+    ;; add support to dired
+    (add-hook 'dired-mode-hook 'org-download-enable))
+
+;;  Now we need to add .dir-locals.el to our project root directory, create a file
+;;  called .dir-locals.el with following contents
+
+
+;; ((nil
+;;   .
+;;   ((eval
+;;     .
+;;     (progn
+
+;;       ;; make drag-and-drop image save in the same name folder as org file
+;;       ;; ex: `aa-bb-cc.org' then save image test.png to `aa-bb-cc/test.png'
+;;       (defun my-org-download-method (link)
+;;         (let ((filename
+;;                (file-name-nondirectory
+;;                 (car (url-path-and-query
+;;                       (url-generic-parse-url link)))))
+;;               (dirname (file-name-sans-extension (buffer-name)) ))
+;;           ;; if directory not exist, create it
+;;           (unless (file-exists-p dirname)
+;;             (make-directory dirname))
+;;           ;; return the path to save the download files
+;;           (expand-file-name filename dirname)))
+
+;;       ;; only modify `org-download-method' in this project
+;;       (setq-local org-download-method 'my-org-download-method)
+
+;;       )))))
+
 (use-package org-drill
   :straight t)
 
