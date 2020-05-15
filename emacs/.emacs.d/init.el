@@ -28,10 +28,10 @@
 
 (straight-use-package 'use-package)
 
-(defun cyber/use-package-if-prehook (name _keyword pred rest state)
+(defun cypher/use-package-if-prehook (name _keyword pred rest state)
     (unless pred (error "predicated failed; skipping package")))
 
-  (advice-add 'use-package-handler/:if :before 'cyber/use-package-if-prehook)
+  (advice-add 'use-package-handler/:if :before 'cypher/use-package-if-prehook)
 
   (use-package f
     :ensure t)  ;; this will force use package keyword ":ensure" when using "use-package" 
@@ -133,7 +133,7 @@
                                  (delete-selection-mode 1)
                                  (cua-mode -1) ; 1 disables "Ctrl-Alt" in orgmode
 
-                                 (defun cyber-new-empty-buffer ()
+                                 (defun cypher-new-empty-buffer ()
                                    "Create a new empty buffer.
                                  New buffer will be named “untitled” or “untitled<2>”, “untitled<3>”, etc.
 
@@ -149,10 +149,10 @@
                                      $buf
                                      ))
 
-                                 (global-set-key (kbd "M-N") 'cyber-new-empty-buffer) ; Alt+N
+                                 (global-set-key (kbd "M-N") 'cypher-new-empty-buffer) ; Alt+N
 
-                                 ;; cyber-cut-line-or-region
-                                 (defun cyber-cut-line-or-region ()
+                                 ;; cypher-cut-line-or-region
+                                 (defun cypher-cut-line-or-region ()
                                    "Cut current line, or text selection.
                                  When `universal-argument' is called first, cut whole buffer (respects `narrow-to-region').
 
@@ -167,8 +167,8 @@
                                                 (kill-region (region-beginning) (region-end) t)
                                               (kill-region (line-beginning-position) (line-beginning-position 2))))))
 
-                                 ;; cyber-copy-line-or-region
-                                 (defun cyber-copy-line-or-region ()
+                                 ;; cypher-copy-line-or-region
+                                 (defun cypher-copy-line-or-region ()
                                    "Copy current line, or text selection.
                                  When called repeatedly, append copy subsequent lines.
                                  When `universal-argument' is called first, copy whole buffer (respects `narrow-to-region').
@@ -204,12 +204,12 @@
                                              (end-of-line)
                                              (forward-char)))))))
 
-                                 (global-set-key (kbd "<C-M x>")  'cyber-cut-line-or-region) ; C-Alt x - cut  
-                                 (global-set-key (kbd "<M->")  'cyber-copy-line-or-region) ; Alt->  - copy 
+                                 (global-set-key (kbd "<C-M x>")  'cypher-cut-line-or-region) ; C-Alt x - cut  
+                                 (global-set-key (kbd "<M->")  'cypher-copy-line-or-region) ; Alt->  - copy 
                                  (global-set-key (kbd "<M-p>") 'yank) ; Alt-p Uppercase - paste
 
-                                 ;; cyber-copy-all-or-region
-                                 (defun cyber-copy-all-or-region ()
+                                 ;; cypher-copy-all-or-region
+                                 (defun cypher-copy-all-or-region ()
                                    "Put the whole buffer content to `kill-ring', or text selection if there's one.
                                  Respects `narrow-to-region'.
                                  URL `http://ergoemacs.org/emacs/emacs_copy_cut_all_or_region.html'
@@ -223,10 +223,10 @@
                                        (kill-new (buffer-string))
                                        (message "Buffer content copied."))))
 
-                                 (global-set-key (kbd "<M-T>")  'cyber-copy-all-or-region) ; Alt-T Uppercase - copy-all-or-region 
+                                 (global-set-key (kbd "<M-T>")  'cypher-copy-all-or-region) ; Alt-T Uppercase - copy-all-or-region 
 
-                              ;; cyber-cut-all-or-region
-                              (defun cyber-cut-all-or-region ()
+                              ;; cypher-cut-all-or-region
+                              (defun cypher-cut-all-or-region ()
                                 "Cut the whole buffer content to `kill-ring', or text selection if there's one.
                               Respects `narrow-to-region'.
                               URL `http://ergoemacs.org/emacs/emacs_copy_cut_all_or_region.html'
@@ -240,9 +240,9 @@
                                     (kill-new (buffer-string))
                                     (delete-region (point-min) (point-max)))))
 
-                              (global-set-key (kbd "<M-U>")  'cyber-cut-all-or-region) ; Alt-U Uppercase - copy-all-or-region 
+                              (global-set-key (kbd "<M-U>")  'cypher-cut-all-or-region) ; Alt-U Uppercase - copy-all-or-region 
 
-                           ;; cyber-paste-or-paste-previous
+                           ;; cypher-paste-or-paste-previous
                            (defun xah-paste-or-paste-previous ()
                              "Paste. When called repeatedly, paste previous.
                            This command calls `yank', and if repeated, call `yank-pop'.
@@ -263,10 +263,10 @@
                                      (yank-pop 1)
                                    (yank)))))
 
-                        (global-set-key (kbd "<C-y>")  'cyber-paste-or-paste-previous) ; cyber-paste-or-paste-previous
+                        (global-set-key (kbd "<C-y>")  'cypher-paste-or-paste-previous) ; cypher-paste-or-paste-previous
 
-                   ;; cyber-show-kill-ring
-                  (defun cyber-show-kill-ring ()
+                   ;; cypher-show-kill-ring
+                  (defun cypher-show-kill-ring ()
                     "Insert all `kill-ring' content in a new buffer named *copy history*.
 
                   URL `http://ergoemacs.org/emacs/emacs_show_kill_ring.html'
@@ -280,14 +280,14 @@
                         (dolist (x kill-ring )
                           (insert x "\n\u000cttt\n\n"))
                         (goto-char (point-min)))
-                      (when (fboundp 'cyber-show-formfeed-as-line)
-                        (cyber-show-formfeed-as-line))))
+                      (when (fboundp 'cypher-show-formfeed-as-line)
+                        (cypher-show-formfeed-as-line))))
 
                ;; manipulationg resgisters
                ;; https://ftp.gnu.org/old-gnu/Manuals/emacs-21.2/html_chapter/emacs_12.html
 
-                  ;; cyber-copy-to-register
-                  (defun cyber-copy-to-register-1 ()
+                  ;; cypher-copy-to-register
+                  (defun cypher-copy-to-register-1 ()
                  ;;   "Copy current line or text selection to register 1.
                  ;; See also: `xah-paste-from-register-1', `copy-to-register'.
                  ;; URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
@@ -302,8 +302,8 @@
                       (copy-to-register ?1 $p1 $p2)
                       (message "Copied to register 1: 「%s」." (buffer-substring-no-properties $p1 $p2))))
 
-                  ;; cyber-paste-from-resgister 
-                  (defun cyber-paste-from-register-1 ()
+                  ;; cypher-paste-from-resgister 
+                  (defun cypher-paste-from-register-1 ()
                  ;;   "Paste text from register 1.
                  ;; See also: `xah-copy-to-register-1', `insert-register'.
                  ;; URL `http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html'
@@ -313,16 +313,16 @@
                       (delete-region (region-beginning) (region-end)))
                     (insert-register ?1 t))
 
-                  (global-set-key (kbd "s-1") 'cyber-copy-to-register-1) ; win-1
-                  (global-set-key (kbd "s-2") 'cyber-paste-from-regester-1) ; win-2
+                  (global-set-key (kbd "s-1") 'cypher-copy-to-register-1) ; win-1
+                  (global-set-key (kbd "s-2") 'cypher-paste-from-regester-1) ; win-2
 
                  ;; ;; you can set  files to registers, like so:
                  ;; ;; (set-register ?2 '(file . "~/.emacs.d/init.org"))
                  ;; ;; sets file "init.org" to register 2
                  ;; ;; see the gnu manual link above
 
-         ;; cyber-append-to-register
-         (defun cyber-append-to-register-1 ()
+         ;; cypher-append-to-register
+         (defun cypher-append-to-register-1 ()
            "Append current line or text selection to register 1.
          When no selection, append current line with newline char.
          See also: `xah-paste-from-register-1', `copy-to-register'.
@@ -341,10 +341,10 @@
                                (append-to-register ?1 (point-min) (point-max)))
              (message "Appended to register 1: 「%s」." (buffer-substring-no-properties $p1 $p2))))
 
-      (global-set-key (kbd "M-I") 'cyber-append-to-register-1) ; M-I Uppercase 
+      (global-set-key (kbd "M-I") 'cypher-append-to-register-1) ; M-I Uppercase 
 
-   ;; cyber-clear-register
-   (defun cyber-clear-register-1 ()
+   ;; cypher-clear-register
+   (defun cypher-clear-register-1 ()
      "Clear register 1.
    See also: `xah-paste-from-register-1', `copy-to-register'.
 
@@ -355,7 +355,7 @@
        (copy-to-register ?1 (point-min) (point-min))
        (message "Cleared register 1.")))
 
-      (global-set-key (kbd "M-*") 'cyber-clear-register-1) ; M-*
+      (global-set-key (kbd "M-*") 'cypher-clear-register-1) ; M-*
 
 ;; after copy Ctrl+c in Linux X11, you can paste by `yank' in emacs
 (setq x-select-enable-clipboard t)
@@ -442,24 +442,24 @@
   :ensure t
   :bind ("C-$" . 'mark-next-like-this))
 
-(defun cyber/kill-inner-word ()
+(defun cypher/kill-inner-word ()
   "Kills the entire word your cursor is in. Equivalent to 'ciw' in vim."
   (interactive)
   (forward-char 1)
   (backward-word)
   (kill-word 1))
-(global-set-key (kbd "C-c i w") 'cyber/kill-inner-word)
+(global-set-key (kbd "C-c i w") 'cypher/kill-inner-word)
 
-(defun cyber/copy-whole-word ()
+(defun cypher/copy-whole-word ()
   (interactive)
   (save-excursion
     (forward-char 1)
     (backward-word)
     (kill-word 1)
     (yank)))
-(global-set-key (kbd "C-c w c") 'cyber/copy-whole-word)
+(global-set-key (kbd "C-c w c") 'cypher/copy-whole-word)
 
-(defun cyber/copy-whole-line ()
+(defun cypher/copy-whole-line ()
   "Copies a line without regard for cursor position."
   (interactive)
   (save-excursion
@@ -467,7 +467,7 @@
      (buffer-substring
       (point-at-bol)
       (point-at-eol)))))
-(global-set-key (kbd "C-c l c") 'cyber/copy-whole-line)
+(global-set-key (kbd "C-c l c") 'cypher/copy-whole-line)
 
 (global-set-key (kbd "C-c l k") 'kill-whole-line)
 
@@ -512,7 +512,7 @@
 ;; https://alhassy.github.io/init/
 ;; initial-scratch-message
 (setq initial-scratch-message (concat
- "#+Title: 'Vagner Rener' @ 'Cyberwarrior"
+ "#+Title: 'Vagner Rener' @ 'Cypherwarrior"
     "\n# This buffer is for text that is not saved, and for Lisp evaluation."
     "\n# To create a file, visit it with 'C-x C-f' e and enter text in its buffer.\n"))
 
@@ -1138,9 +1138,9 @@ file with `edit-abbrevs`"
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
   ))
 
-(defvar cyber-filelist nil "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
+(defvar cypher-filelist nil "alist for files i need to open frequently. Key is a short abbrev string, Value is file path string.")
 
-(setq cyber-filelist
+(setq cypher-filelist
       '(
 	("init.el" . "~/.emacs.d/init.el" )
 	("init.org" . "~/.emacs.d/init.org")
@@ -1153,18 +1153,18 @@ file with `edit-abbrevs`"
 	;; more here
 	) )
 
-(defun cyber-open-file-fast ()
-  "Prompt to open a file from `cyber-filelist'.
+(defun cypher-open-file-fast ()
+  "Prompt to open a file from `cypher-filelist'.
 URL 'http://ergoemacs.org/emacs/emacs_hotkey_open_file_fast.html'
 Version 2015-04-23"
   (interactive)
   (let ((ξabbrevCode
-	 (ido-completing-read "Open:" (mapcar (lambda (ξx) (car ξx)) cyber-filelist))))
-    (find-file (cdr (assoc ξabbrevCode cyber-filelist)))))
+	 (ido-completing-read "Open:" (mapcar (lambda (ξx) (car ξx)) cypher-filelist))))
+    (find-file (cdr (assoc ξabbrevCode cypher-filelist)))))
 
-(global-set-key (kbd "C-´") 'cyber-open-file-fast)
+(global-set-key (kbd "C-´") 'cypher-open-file-fast)
 
-(defhydra cyber-hydra-window (global-map "C-c w")
+(defhydra cypher-hydra-window (global-map "C-c w")
        "Commands relating to window manipulation"
        ("h" windmove-left "move left")
        ("l" windmove-right "move right")
@@ -1172,12 +1172,12 @@ Version 2015-04-23"
        ("k" windmove-up "move up")
        ("q" delete-window "delete window")
        ("Q" kill-buffer-and-window "kill buffer, delete window")
-       ("H" cyber-move-splitter-left "move splitter left")
-       ("L" cyber-move-splitter-right "move splitter right")
-       ("J" cyber-move-splitter-down "move splitter down")
-       ("K" cyber-move-splitter-up "move splitter up")
+       ("H" cypher-move-splitter-left "move splitter left")
+       ("L" cypher-move-splitter-right "move splitter right")
+       ("J" cypher-move-splitter-down "move splitter down")
+       ("K" cypher-move-splitter-up "move splitter up")
        ("b" balance-windows)
-       ("|" cyber-window-toggle-split-direction)
+       ("|" cypher-window-toggle-split-direction)
        ("s" split-window-below "split window (below)")
        ("v" split-window-right "split window (right)")
        (";" ace-window "select window" :exit t))
@@ -1503,6 +1503,28 @@ Version 2015-04-23"
 ;; (when evil-want-C-i-jump
   ;; (define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward))
 
+(use-package evil-leader
+ :ensure t
+ :config
+(global-evil-leader-mode)
+(evil-leader/set-leader "<SPC>")
+(evil-leader/set-key 
+  "e" 'find-file
+  "b" 'switch-to-buffer
+  "k" 'kill-buffer))
+
+ ;; Configure leader key
+
+ (evil-leader/set-key-for-mode 'org-mode
+        "." 'hydra-org-state/body
+        "t" 'org-todo
+        "T" 'org-show-todo-tree
+        "v" 'org-mark-element
+        "a" 'org-agenda
+        "c" 'org-archive-subtree
+        "l" 'evil-org-open-links
+        "C" 'org-resolve-clocks)
+
 (straight-use-package 'evil)
 (require 'evil)
 (evil-mode 1)
@@ -1534,27 +1556,6 @@ Version 2015-04-23"
  :ensure t)
 (require 'org-evil)
 
-(use-package evil-leader
- :ensure t
- :config
-(global-evil-leader-mode)
-(evil-leader/set-key
-  "e" 'find-file
-  "b" 'switch-to-buffer
-  "k" 'kill-buffer))
-
- ;; Configure leader key
-
- (evil-leader/set-key-for-mode 'org-mode
-	"." 'hydra-org-state/body
-	"t" 'org-todo
-	"T" 'org-show-todo-tree
-	"v" 'org-mark-element
-	"a" 'org-agenda
-	"c" 'org-archive-subtree
-	"l" 'evil-org-open-links
-	"C" 'org-resolve-clocks)
-
 (use-package eyebrowse
   :straight t
   :config
@@ -1569,7 +1570,7 @@ Version 2015-04-23"
     (setq eyebrowse-new-workspace t)))
 
 (when (fboundp 'eww)
-  (defun cyber-rename-eww-buffer ()
+  (defun cypher-rename-eww-buffer ()
     "Rename `eww-mode' buffer so sites open in new page.
 URL `http://ergoemacs.org/emacs/emacs_eww_web_browser.html'
 Version 2017-11-10"
@@ -1579,7 +1580,7 @@ Version 2017-11-10"
             (rename-buffer (concat "eww " $title ) t)
           (rename-buffer "eww" t)))))
 
-  (add-hook 'eww-after-render-hook 'cyber-rename-eww-buffer))
+  (add-hook 'eww-after-render-hook 'cypher-rename-eww-buffer))
 
 (global-set-key [f6] 'spell-checker)
                                (global-set-key [f7] 'ispell-buffer)
@@ -1635,8 +1636,8 @@ Version 2017-11-10"
                            (pretty-control-l-mode 1)
 
 
-                       ;; cyber-toggle-letter-case
-                       (defun cyber-toggle-letter-case ()
+                       ;; cypher-toggle-letter-case
+                       (defun cypher-toggle-letter-case ()
                          "Toggle the letter case of current word or text selection.
                        Always cycle in this order: Init Caps, ALL CAPS, all lower.
 
@@ -1667,10 +1668,10 @@ Version 2017-11-10"
                              (downcase-region $p1 $p2)
                              (put this-command 'state 0)))))
 
-                   (global-set-key (kbd "C-0") 'cyber-toggle-letter-case)
+                   (global-set-key (kbd "C-0") 'cypher-toggle-letter-case)
 
-                     ;; cyber-toggle-previous-letter-case
-                     (defun cyber-toggle-previous-letter-case ()
+                     ;; cypher-toggle-previous-letter-case
+                     (defun cypher-toggle-previous-letter-case ()
                        "Toggle the letter case of the letter to the left of cursor.
                      URL `http://ergoemacs.org/emacs/modernization_upcase-word.html'
                      Version 2015-12-22"
@@ -1682,10 +1683,10 @@ Version 2017-11-10"
                           ((looking-at "[[:upper:]]") (downcase-region (point) (1+ (point)))))
                          (right-char)))
 
-                   (global-set-key (kbd "C-s-0") 'cyber-toggle-previous-letter-case)
+                   (global-set-key (kbd "C-s-0") 'cypher-toggle-previous-letter-case)
 
-                 ;; cyber-select-line
-                 (defun cyber-select-line ()
+                 ;; cypher-select-line
+                 (defun cypher-select-line ()
                    "Select current line. If region is active, extend selection downward by line.
                  URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
                  Version 2017-11-01"
@@ -1698,10 +1699,10 @@ Version 2017-11-10"
                        (end-of-line)
                        (set-mark (line-beginning-position)))))
 
-                 (global-set-key (kbd "M-L") 'cyber-select-line)
+                 (global-set-key (kbd "M-L") 'cypher-select-line)
 
-               ;; cyber-select-text-in-quote
-               (defun cyber-select-text-in-quote ()
+               ;; cypher-select-text-in-quote
+               (defun cypher-select-text-in-quote ()
                  "Select text between the nearest left and right delimiters.
                Delimiters here includes the following chars: \"<>(){}[]“”‘’‹›«»「」『』【】〖〗《》〈〉〔〕（）
                This command select between any bracket chars, not the inner text of a bracket. For example, if text is
@@ -1715,8 +1716,8 @@ Version 2017-11-10"
                  (interactive)
                  (let (
                        ($skipChars
-                        (if (boundp 'cyber-brackets)
-                            (concat "^\"" cyber-brackets)
+                        (if (boundp 'cypher-brackets)
+                            (concat "^\"" cypher-brackets)
                           "^\"<>(){}[]“”‘’‹›«»「」『』【】〖〗《》〈〉〔〕（）"))
                        $pos
                        )
@@ -1725,10 +1726,10 @@ Version 2017-11-10"
                    (skip-chars-forward $skipChars)
                    (set-mark $pos)))
 
-                   (global-set-key (kbd "M-Q") 'cyber-select-text-in-quote)
+                   (global-set-key (kbd "M-Q") 'cypher-select-text-in-quote)
 
-             ;; cyber-select-block
-             (defun cyber-select-block ()
+             ;; cypher-select-block
+             (defun cypher-select-block ()
              "Select the current/next block of text between blank lines.
            If region is active, extend selection downward by block.
 
@@ -1744,9 +1745,9 @@ Version 2017-11-10"
                  (push-mark (point) t t)
                  (re-search-forward "\n[ \t]*\n" nil "move"))))
 
-                  (global-set-key (kbd "M-B") 'cyber-select-block)
+                  (global-set-key (kbd "M-B") 'cypher-select-block)
 
-        ;; cyber-extend-selection
+        ;; cypher-extend-selection
         (defun xah-extend-selection ()
          (interactive)
           (if (region-active-p)
@@ -1832,59 +1833,59 @@ Version 2017-11-10"
                ;;
                ))))
 
-             (global-set-key (kbd "M-E") 'cyber-extend-selection)
+             (global-set-key (kbd "M-E") 'cypher-extend-selection)
 
-        ;; cyber-brackets 
-        (defvar cyber-brackets nil "string of left/right brackets pairs.")
-        (setq cyber-brackets "()[]{}<>（）［］｛｝⦅⦆〚〛⦃⦄“”‘’‹›«»「」〈〉《》【】〔〕⦗⦘『』〖〗〘〙｢｣⟦⟧⟨⟩⟪⟫⟮⟯⟬⟭⌈⌉⌊⌋⦇⦈⦉⦊❛❜❝❞❨❩❪❫❴❵❬❭❮❯❰❱❲❳〈〉⦑⦒⧼⧽﹙﹚﹛﹜﹝﹞⁽⁾₍₎⦋⦌⦍⦎⦏⦐⁅⁆⸢⸣⸤⸥⟅⟆⦓⦔⦕⦖⸦⸧⸨⸩｟｠⧘⧙⧚⧛⸜⸝⸌⸍⸂⸃⸄⸅⸉⸊᚛᚜༺༻༼༽⏜⏝⎴⎵⏞⏟⏠⏡﹁﹂﹃﹄︹︺︻︼︗︘︿﹀︽︾﹇﹈︷︸")
+        ;; cypher-brackets 
+        (defvar cypher-brackets nil "string of left/right brackets pairs.")
+        (setq cypher-brackets "()[]{}<>（）［］｛｝⦅⦆〚〛⦃⦄“”‘’‹›«»「」〈〉《》【】〔〕⦗⦘『』〖〗〘〙｢｣⟦⟧⟨⟩⟪⟫⟮⟯⟬⟭⌈⌉⌊⌋⦇⦈⦉⦊❛❜❝❞❨❩❪❫❴❵❬❭❮❯❰❱❲❳〈〉⦑⦒⧼⧽﹙﹚﹛﹜﹝﹞⁽⁾₍₎⦋⦌⦍⦎⦏⦐⁅⁆⸢⸣⸤⸥⟅⟆⦓⦔⦕⦖⸦⸧⸨⸩｟｠⧘⧙⧚⧛⸜⸝⸌⸍⸂⸃⸄⸅⸉⸊᚛᚜༺༻༼༽⏜⏝⎴⎵⏞⏟⏠⏡﹁﹂﹃﹄︹︺︻︼︗︘︿﹀︽︾﹇﹈︷︸")
 
-         ;; cyber-left-brackets
-        (defvar cyber-left-brackets '("(" "{" "[" "<" "〔" "【" "〖" "〈" "《" "「" "『" "“" "‘" "‹" "«" )
+         ;; cypher-left-brackets
+        (defvar cypher-left-brackets '("(" "{" "[" "<" "〔" "【" "〖" "〈" "《" "「" "『" "“" "‘" "‹" "«" )
           "List of left bracket chars.")
         (progn
-        ;; make cyber-left-brackets based on cyber-brackets
-          (setq cyber-left-brackets '())
-          (dotimes ($x (- (length cyber-brackets) 1))
+        ;; make cypher-left-brackets based on cypher-brackets
+          (setq cypher-left-brackets '())
+          (dotimes ($x (- (length cypher-brackets) 1))
             (when (= (% $x 2) 0)
-              (push (char-to-string (elt cyber-brackets $x))
-                    cyber-left-brackets)))
-          (setq cyber-left-brackets (reverse cyber-left-brackets)))
+              (push (char-to-string (elt cypher-brackets $x))
+                    cypher-left-brackets)))
+          (setq cypher-left-brackets (reverse cypher-left-brackets)))
 
-      (defvar cyber-right-brackets '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»")
+      (defvar cypher-right-brackets '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»")
         "list of right bracket chars.")
       (progn
-        (setq cyber-right-brackets '())
-        (dotimes ($x (- (length cyber-brackets) 1))
+        (setq cypher-right-brackets '())
+        (dotimes ($x (- (length cypher-brackets) 1))
           (when (= (% $x 2) 1)
-            (push (char-to-string (elt cyber-brackets $x))
-                  cyber-right-brackets)))
-        (setq cyber-right-brackets (reverse cyber-right-brackets)))
+            (push (char-to-string (elt cypher-brackets $x))
+                  cypher-right-brackets)))
+        (setq cypher-right-brackets (reverse cypher-right-brackets)))
 
-     ;; cyber-backward-left-bracket
-    (defun cyber-backward-left-bracket ()
+     ;; cypher-backward-left-bracket
+    (defun cypher-backward-left-bracket ()
       "Move cursor to the previous occurrence of left bracket.
-    The list of brackets to jump to is defined by `cyber-left-brackets'.
+    The list of brackets to jump to is defined by `cypher-left-brackets'.
     URL `http://ergoemacs.org/emacs/emacs_navigating_keys_for_brackets.html'
     Version 2015-10-01"
       (interactive)
-      (re-search-backward (regexp-opt cyber-left-brackets) nil t))
+      (re-search-backward (regexp-opt cypher-left-brackets) nil t))
 
-    ;; cyber-forward-right-bracket
-    (defun cyber-forward-right-bracket ()
+    ;; cypher-forward-right-bracket
+    (defun cypher-forward-right-bracket ()
       "Move cursor to the next occurrence of right bracket.
-    The list of brackets to jump to is defined by `cyber-right-brackets'.
+    The list of brackets to jump to is defined by `cypher-right-brackets'.
     URL `http://ergoemacs.org/emacs/emacs_navigating_keys_for_brackets.html'
     Version 2015-10-01"
       (interactive)
-      (re-search-forward (regexp-opt cyber-right-brackets) nil t))
+      (re-search-forward (regexp-opt cypher-right-brackets) nil t))
 
 
 
-  ;; cyber-goto-matching-bracket
-  (defun cyber-goto-matching-bracket ()
+  ;; cypher-goto-matching-bracket
+  (defun cypher-goto-matching-bracket ()
     "Move cursor to the matching bracket.
   If cursor is not on a bracket, call `backward-up-list'.
-  The list of brackets to jump to is defined by `cyber-left-brackets' and `cyber-right-brackets'.
+  The list of brackets to jump to is defined by `cypher-left-brackets' and `cypher-right-brackets'.
   URL `http://ergoemacs.org/emacs/emacs_navigating_keys_for_brackets.html'
   Version 2016-11-22"
     (interactive)
@@ -1893,14 +1894,14 @@ Version 2017-11-10"
       (cond
        ((eq (char-after) ?\") (forward-sexp))
        ((eq (char-before) ?\") (backward-sexp ))
-       ((looking-at (regexp-opt cyber-left-brackets))
+       ((looking-at (regexp-opt cypher-left-brackets))
         (forward-sexp))
-       ((looking-back (regexp-opt cyber-right-brackets) (max (- (point) 1) 1))
+       ((looking-back (regexp-opt cypher-right-brackets) (max (- (point) 1) 1))
         (backward-sexp))
        (t (backward-up-list 1 'ESCAPE-STRINGS 'NO-SYNTAX-CROSSING)))))
 
-    ;; cyber-forward-quote-smart
-    (defun cyber-forward-quote-smart ()
+    ;; cypher-forward-quote-smart
+    (defun cypher-forward-quote-smart ()
     "Move cursor to the current or next string quote.
   Place cursor at the position after the left quote.
   Repeated call will find the next string.
@@ -1917,8 +1918,8 @@ Version 2017-11-10"
       (when (<= (point) $pos)
         (progn (re-search-forward "\\\"" nil t)))))
 
-  ;; cyber-backward-quote 
-  (defun cyber-backward-quote ()
+  ;; cypher-backward-quote 
+  (defun cypher-backward-quote ()
     "Move cursor to the previous occurrence of \".
   If there are consecutive quotes of the same char, keep moving until none.
   Returns `t' if found, else `nil'.
@@ -1934,8 +1935,8 @@ Version 2017-11-10"
         (message "No more quotes before cursor.")
         nil))) 
 
- ;; cyber-change-bracket-pairs
-(defun cyber-change-bracket-pairs ( @from-chars @to-chars)
+ ;; cypher-change-bracket-pairs
+(defun cypher-change-bracket-pairs ( @from-chars @to-chars)
   "Change bracket pairs from one type to another.
 
 For example, change all parenthesis () to square brackets [].
@@ -4106,11 +4107,34 @@ yasnippet-classic-snippets))
       :ensure t)
 
 (use-package deft
-  :ensure t
-  :custom
-    (deft-extensions '("org" "md" "txt"))
-    (deft-directory "~/org~/deft-notes")
-    (deft-use-filename-as-title t))
+        :ensure t
+        :custom
+          (deft-extensions '("org" "md" "txt" ""))
+          (deft-directory "~/org~/deft-notes")
+          (deft-use-filename-as-title t))
+
+       (defun cypher/deft-open-other ()
+       (interactive)
+       (deft-open-file-other-window t))
+
+       (defun cypher/deft-open-preview ()
+       (interactive)
+       (deft-open-file-other-window))
+
+  (with-eval-after-load 'deft
+    (define-key deft-mode-map
+      (kbd "<tab>") 'cypher/deft-open-preview)
+    (define-key deft-mode-map
+      (kbd "<s-return>") 'cypher/deft-open-other)
+    (define-key deft-mode-map
+      (kbd "s-j") 'evil-next-line)
+    (define-key deft-mode-map (kbd "s-k") 'evil-previous-line))
+
+(setq deft-strip-summary-regexp
+ (concat "\\("
+         "[\n\t]" ;; blank
+         "\\|^#\\+[a-zA-Z_]+:.*$" ;;org-mode metadata
+         "\\)"))
 
 ;;   (add-to-list 'load-path "~/.emacs.d/elpa/zetteldeft-20200501.935")
 ;;  (require 'zetteldeft)
@@ -4121,6 +4145,9 @@ yasnippet-classic-snippets))
    :after deft
    :config
    (zetteldeft-set-classic-keybindings))
+
+    (require 'zetteldeft)
+   ;; (zetteldeft-set-classic-keybindings)
 
 (use-package nov
  :ensure t)
