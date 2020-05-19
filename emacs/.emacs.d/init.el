@@ -68,6 +68,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(byte-compile-warnings (quote (obsolete)))
+ '(custom-safe-themes
+   (quote
+    ("ed92c27d2d086496b232617213a4e4a28110bdc0730a9457edf74f81b782c5cf" default)))
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(use-package-always-defer t))
                                       ;; for customizing the face (fonts), do:
@@ -4166,3 +4169,4 @@ yasnippet-classic-snippets))
 
 
 
+(put 'dired-find-alternate-file 'disabled nil)
