@@ -346,6 +346,33 @@ let g:nv_expect_keys = []
 
 " }
 
+" SQHell {
+" https://github.com/joereynolds/SQHell.vim 
+" To connect to your " to connect to your DBMS of choice.
+" The connections are in a dictionary to let you manage
+" multiple hosts. By default SQHell uses the 'default' key
+" details (no surprise there)
+"
+" example:
+"
+" let g:sqh_connections = openCurlBraces
+"    \ 'default': openCurlBraces
+"    \   'user': 'root',
+"    \   'password': 'testing345',
+"    \   'host': 'localhost'
+"    \closeCurlBraces,
+"    \ 'live': openCurlBraces
+"    \   'user': 'root',
+"    \   'password': 'jerw5Y^$Hdfj',
+"    \   'host': '46.121.44.392'
+"    \closeCurlBraces
+"
+"  \closeCurlBraces
+
+nnoremap <leader>xc :r !mysql -uroot -psomepass -h somehost.com <<< `cat %` \| column -t<cr>
+
+" }
+
 "
 "" Plugins {
 "
@@ -456,6 +483,7 @@ call plug#begin('~/.dotfiles/vim/.vim_minimal/plugged/')
 "         "Plug 'godlygeek/tabular'
 "         "Plug 'luochen1990/rainbow'
          Plug 'christoomey/vim-tmux-navigator'
+         Plug 'joereynolds/SQHell.vim'
 "         "Plug 'majutsushi/tagbar'
 "
 "    " Snippets & AutoComplete
