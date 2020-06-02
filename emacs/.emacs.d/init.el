@@ -63,7 +63,14 @@
     (setq initial-major-mode 'fundamental-mode)
 
 (custom-set-variables
-                                           '(initial-frame-alist (quote ((fullscreen . maximized)))))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("ed92c27d2d086496b232617213a4e4a28110bdc0730a9457edf74f81b782c5cf" default)))
+ '(initial-frame-alist (quote ((fullscreen . maximized)))))
                                       ;; for customizing the face (fonts), do:
                                       ;; M-x customize-face RET default RET    
                                       ;;(setq inhibit-startup-screen t)
@@ -1032,21 +1039,18 @@ file with `edit-abbrevs`"
 
         (company-ac-setup)
 
-      (custom-set-faces
-          '(company-preview
-            ((t (:foreground "darkgray" :underline t))))
-          '(company-preview-common
-            ((t (:inherit company-preview))))
-          '(company-tooltip
-            ((t (:background "lightgray" :foreground "black"))))
-          '(company-tooltip-selection
-            ((t (:background "steelblue" :foreground "white"))))
-          '(company-tooltip-common
-            ((((type x)) (:inherit company-tooltip :weight bold))
-             (t (:inherit company-tooltip))))
-          '(company-tooltip-common-selection
-            ((((type x)) (:inherit company-tooltip-selection :weight bold))
-             (t (:inherit company-tooltip-selection)))))
+      
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-preview ((t (:foreground "darkgray" :underline t))))
+ '(company-preview-common ((t (:inherit company-preview))))
+ '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
+ '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
+ '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
+ '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))
 
   ;;;;;;;;;;;;;;;;;;
 
@@ -2363,34 +2367,34 @@ Version 2018-03-31"
  :straight t)
 
 (use-package linum-relative
-  :ensure t
-  :init
-  (setq linum-format 'linum-relative)
-  :config
-  (setq linum-relative-current-symbol ""))
+    :ensure t
+    :init
+    (setq linum-format 'linum-relative)
+    :config
+    (setq linum-relative-current-symbol ""))
 
-   (straight-use-package 'linum)
+     (straight-use-package 'linum)
 
-   (setq linum-relative-current-symbol "")
+     (setq linum-relative-current-symbol "")
 
-   (linum-relative-global-mode)
-   (eval-after-load "linum"
-     '(set-face-attribute 'linum nil :height 100))
+     (linum-relative-global-mode)
+     (eval-after-load "linum"
+       '(set-face-attribute 'linum nil :height 100))
 
-   (autopair-global-mode)
+     ;; (autopair-global-mode)
 
-   (global-undo-tree-mode)
+     (global-undo-tree-mode)
 
-   (defun linum-update-window-scale-fix (win)
-     "fix linum for scaled text"
-     (set-window-margins win
-   		      (ceiling (* (if (boundp 'text-scale-mode-step)
-   				      (expt text-scale-mode-step
-   					    text-scale-mode-amount) 1)
-   				  (if (car (window-margins))
-   				      (car (window-margins)) 1)
-   				  ))))
-   (advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
+     (defun linum-update-window-scale-fix (win)
+       "fix linum for scaled text"
+       (set-window-margins win
+                        (ceiling (* (if (boundp 'text-scale-mode-step)
+                                        (expt text-scale-mode-step
+                                              text-scale-mode-amount) 1)
+                                    (if (car (window-margins))
+                                        (car (window-margins)) 1)
+                                    ))))
+     (advice-add #'linum-update-window :after #'linum-update-window-scale-fix)
 
 (use-package lispy
    :straight t)
@@ -4166,3 +4170,4 @@ yasnippet-classic-snippets))
 
 
 
+(put 'dired-find-alternate-file 'disabled nil)

@@ -255,9 +255,9 @@ alias ls='ls -hNF --color=auto --group-directories-first'
 alias ll='ls -lhF --color=auto --group-directories-first'
 alias la='ls -aF --color=auto --group-directories-first'
 
-alias lf="ls -l | egrep -v '^d'"
-alias lfr='ls -d */ --color=auto --group-directories-first'
-#alias lfr="ls -l | egrep '^d' --color=auto --group-directories-first"
+alias lif="ls -l | egrep -v '^d'"
+alias lifr='ls -d */ --color=auto --group-directories-first'
+#alias lifr="ls -l | egrep '^d' --color=auto --group-directories-first"
 
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 alias lsda="ls -alF ${colorflag} | grep --color=never '^d'"
@@ -1010,3 +1010,5 @@ alias | sed -E "s/^alias ([^=]+)='(.*)'$/alias \1 \2 \$*/g; s/'\\\''/'/g;" >~/.e
 #############################
 ## scrot 
 alias scrot='scrot ~/Pictures/screenshots/%b-%d-%Y::%H:%M:%S.png'
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

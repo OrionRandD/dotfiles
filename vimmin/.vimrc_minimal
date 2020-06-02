@@ -53,7 +53,7 @@
     "set iskeyword-=-                    " '-' is an end of word designator
     set showcmd
     set cursorline
-    set clipboard=unnamedplus
+    set clipboard=unnamedplus,unnamed
     set backspace=indent,eol,start  " Backspace for dummies
     set linespace=0                 " No extra spaces between rows
     set number                      " Line numbers on
@@ -373,7 +373,12 @@ nnoremap <leader>xc :r !mysql -uroot -psomepass -h somehost.com <<< `cat %` \| c
 
 " }
 
-"
+" Substitution {
+" type S in normal mode
+nnoremap S :%s//g<left><left>
+
+" }
+
 "" Plugins {
 "
 "" for all configuration using ".vimrc" with PlugInstall, see: "~/OrionRandD/vim-files_mine/_.vimrc" - note that thera are hidden files there

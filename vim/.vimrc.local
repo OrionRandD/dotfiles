@@ -205,3 +205,8 @@ nnoremap <leader>xc :r !mysql -uroot -psomepass -h somehost.com <<< `cat %` \| c
 
 " }
 
+" Substitution {
+" type S in normal mode
+nnoremap S :%s//g<left><left>
+
+" }

@@ -133,6 +133,7 @@ espeak.md
 emacs-dot-files/
 emacs.org_archive
 emacs-reveal-submodules/
+preceding-sexp_fix/
 emacs.service
 emacs.service
 emacs_bak.el
@@ -169,7 +170,7 @@ jabber-otr/
 local.properties
 logos_emacs/
 network-security.data
-nov-places/
+nov-places
 obj/
 org-article/
 out/
@@ -186,7 +187,6 @@ request/
 rs_emacs.sh*
 smex-items
 snippets/
-nov-places/
 srecode-map.el
 target/
 text-translator/
