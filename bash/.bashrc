@@ -1012,3 +1012,7 @@ alias | sed -E "s/^alias ([^=]+)='(.*)'$/alias \1 \2 \$*/g; s/'\\\''/'/g;" >~/.e
 alias scrot='scrot ~/Pictures/screenshots/%b-%d-%Y::%H:%M:%S.png'
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/vagner/.sdkman"
+[[ -s "/home/vagner/.sdkman/bin/sdkman-init.sh" ]] && source "/home/vagner/.sdkman/bin/sdkman-init.sh"
