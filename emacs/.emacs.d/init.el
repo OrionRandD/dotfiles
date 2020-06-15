@@ -78,7 +78,36 @@
 
 ;; [[file:~/.emacs.d/init.org::*small-configs][small-configs:1]]
 (custom-set-variables
-                                           '(initial-frame-alist (quote ((fullscreen . maximized)))))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(beacon-push-mark 10)
+ '(custom-safe-themes
+   (quote
+    ("45482e7ddf47ab1f30fe05f75e5f2d2118635f5797687e88571842ff6f18b4d5" "6e03b7f86fcca5ce4e63cda5cd0da592973e30b5c5edf198eddf51db7a12b832" "595099e6f4a036d71de7e1512656e9375dd72cf60ff69a5f6d14f0171f1de9c1" default)))
+ '(deft-auto-save-interval 0.3)
+ '(deft-directory "~/org~/deft-notes")
+ '(deft-extensions (quote ("org" "md")))
+ '(deft-file-limit 200)
+ '(deft-filter-only-filenames t)
+ '(deft-recursive t)
+ '(deft-use-filename-as-title t)
+ '(dtk-default-module "KJVA" t)
+ '(dtk-default-module-category "Biblical Texts" t)
+ '(dtk-word-wrap t t)
+ '(highlight-defined-face-use-itself t)
+ '(initial-frame-alist (quote ((fullscreen . maximized))))
+ '(nameless-global-aliases nil)
+ '(nameless-private-prefix t)
+ '(org-journal-carryover-items nil)
+ '(org-journal-date-format "%A, %d %B %Y")
+ '(org-journal-dir "~/org~/journal/")
+ '(org-journal-enable-agenda-integration t)
+ '(org-reveal-root "file:/home/vagner/reveal-slides/reveal.js" t)
+ '(org-roam-directory "~/org~/deft-notes")
+ '(telega-notifications-mode t)
+ '(use-package-always-defer t))
                                       ;; for customizing the face (fonts), do:
                                       ;; M-x customize-face RET default RET    
                                       ;;(setq inhibit-startup-screen t)
@@ -1145,21 +1174,19 @@ file with `edit-abbrevs`"
 
         (company-ac-setup)
 
-      (custom-set-faces
-          '(company-preview
-            ((t (:foreground "darkgray" :underline t))))
-          '(company-preview-common
-            ((t (:inherit company-preview))))
-          '(company-tooltip
-            ((t (:background "lightgray" :foreground "black"))))
-          '(company-tooltip-selection
-            ((t (:background "steelblue" :foreground "white"))))
-          '(company-tooltip-common
-            ((((type x)) (:inherit company-tooltip :weight bold))
-             (t (:inherit company-tooltip))))
-          '(company-tooltip-common-selection
-            ((((type x)) (:inherit company-tooltip-selection :weight bold))
-             (t (:inherit company-tooltip-selection)))))
+      
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-preview ((t (:foreground "darkgray" :underline t))))
+ '(company-preview-common ((t (:inherit company-preview))))
+ '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
+ '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
+ '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
+ '(company-tooltip-selection ((t (:background "steelblue" :foreground "white"))))
+ '(fringe ((t (:background "#537182")))))
 
   ;;;;;;;;;;;;;;;;;;
 
@@ -3883,12 +3910,15 @@ Suggest the URL title as a description for resource."
 
 ;; [[file:~/.emacs.d/init.org::*pdf-tools][pdf-tools:1]]
 (use-package pdf-tools
- :straight t
- :config
-  (pdf-tools-install))
+  :straight t
+  :config
+  (pdf-tools-install)
+  (add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1))))
+
+ ;; (add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
 
 (use-package org-pdfview
- :straight t)
+  :straight t)
 ;; pdf-tools:1 ends here
 
 ;; [[file:~/.emacs.d/init.org::*persistent-soft][persistent-soft:1]]
@@ -4004,6 +4034,12 @@ flycheck-plantuml))
         (setq python-indent 3)
         (setq tab-width 3))
         (untabify (point-min) (point-max)))
+
+   (use-package pydoc
+   :ensure t)
+
+   (use-package helm-pydoc
+    :ensure t)
 
 ;; Only tabs - python indentation
 
@@ -4579,34 +4615,48 @@ yasnippet-classic-snippets))
 
 ;; [[file:~/.emacs.d/init.org::*deft][deft:1]]
 (use-package deft
-        :ensure t
-        :custom
-          (deft-extensions '("org" "md" "txt"))
-          (deft-directory "~/org~/deft-notes")
-          (deft-use-filename-as-title t))
+  :ensure t
+  :custom
+   (deft-directory "~/org~/deft-notes")
+   (deft-extensions '("org" "md"))
+   (deft-recursive t)
+   (deft-use-filename-as-title t)
+   (deft-filter-only-filenames t)
+   (deft-auto-save-interval 0.30)
+   (deft-file-limit 200))
 
-       (defun cypher/deft-open-other ()
-       (interactive)
-       (deft-open-file-other-window t))
+ ;;  :config
+;;   (setq deft-directory "~/org~/deft-notes")
+;;   (setq deft-extensions '("org" "md"))
+;;   (setq deft-recursive t)
+;;   (setq deft-use-filename-as-title t)
+;;   (setq deft-filter-only-filenames t)
+;;   (setq deft-auto-save-interval 30.0)
+;;   (setq deft-file-limit 200))
 
-       (defun cypher/deft-open-preview ()
-       (interactive)
-       (deft-open-file-other-window))
 
-  (with-eval-after-load 'deft
-    (define-key deft-mode-map
-      (kbd "<tab>") 'cypher/deft-open-preview)
-    (define-key deft-mode-map
-      (kbd "<s-return>") 'cypher/deft-open-other)
-    (define-key deft-mode-map
-      (kbd "s-j") 'evil-next-line)
-    (define-key deft-mode-map (kbd "s-k") 'evil-previous-line))
+(defun cypher/deft-open-other ()
+(interactive)
+(deft-open-file-other-window t))
+
+(defun cypher/deft-open-preview ()
+  (interactive)
+  (deft-open-file-other-window))
+
+(with-eval-after-load 'deft
+  (define-key deft-mode-map
+    (kbd "<tab>") 'cypher/deft-open-preview)
+  (define-key deft-mode-map
+    (kbd "<s-return>") 'cypher/deft-open-other)
+  (define-key deft-mode-map
+    (kbd "s-j") 'evil-next-line)
+  (define-key deft-mode-map (kbd "s-k") 'evil-previous-line))
 
 (setq deft-strip-summary-regexp
- (concat "\\("
-         "[\n\t]" ;; blank
-         "\\|^#\\+[a-zA-Z_]+:.*$" ;;org-mode metadata
-         "\\)"))
+      (concat "\\("
+              "[\n\t]" ;; blank
+              "\\|^#\\+[a-zA-Z_]+:.*$" ;;org-mode metadata
+              "\\)"))
 ;; deft:1 ends here
 
 ;; [[file:~/.emacs.d/init.org::*zetteldeft][zetteldeft:1]]
@@ -4614,14 +4664,19 @@ yasnippet-classic-snippets))
 ;;  (require 'zetteldeft)
 ;;  (zetteldeft-set-classic-keybindings)
 
-   (use-package zetteldeft
-   :ensure t
-   :after deft
-   :config
-   (zetteldeft-set-classic-keybindings))
+(use-package zetteldeft
+  :ensure t
+  :after deft
+  :config
+  (zetteldeft-set-classic-keybindings)
+  (setq deft-new-file-format zetteldeft-id-format))
 
-    (require 'zetteldeft)
-   ;; (zetteldeft-set-classic-keybindings)
+(defun zetteldeft-generate-id ()
+  "Generate an ID in the format of `zetteldeft-id-format'."
+  (format-time-string zetteldeft-id-format))
+
+(require 'zetteldeft)
+;; (zetteldeft-set-classic-keybindings)
 ;; zetteldeft:1 ends here
 
 ;; [[file:~/.emacs.d/init.org::*nov for epubs][nov for epubs:1]]
@@ -4649,14 +4704,44 @@ yasnippet-classic-snippets))
  :ensure t)
 ;; kotlin:1 ends here
 
-;; [[file:~/.emacs.d/init.org::*my-type-tutor][my-type-tutor:1]]
+;; [[file:~/.emacs.d/init.org::*type-tutor][type-tutor:1]]
 (add-to-list 'load-path "~/.emacs.d/local-repo/type-tutor")
 (require 'type-tutor)
-;; my-type-tutor:1 ends here
+;; type-tutor:1 ends here
 
 ;; [[file:~/.emacs.d/init.org::*Latex skeletons][Latex skeletons:1]]
 
 ;; Latex skeletons:1 ends here
+
+;; [[file:~/.emacs.d/init.org::*haskell-mode][haskell-mode:1]]
+(use-package haskell-mode
+     :ensure t)
+
+(use-package haskell-snippets
+     :ensure t)
+
+(use-package flycheck-haskell
+     :ensure t)
+
+(use-package ac-haskell-process
+     :ensure t)
+
+(use-package haskell-emacs
+     :ensure t)
+
+(use-package haskell-emacs-base
+     :ensure t)
+
+(use-package haskell-emacs-text
+     :ensure t)
+
+(use-package hindent
+     :ensure t)
+;; haskell-mode:1 ends here
+
+;; [[file:~/.emacs.d/init.org::*chezmoi][chezmoi:1]]
+
+;; chezmoi:1 ends here
 
 ;; [[file:~/.emacs.d/init.org::*People with great emacs configs][People with great emacs configs:1]]
 

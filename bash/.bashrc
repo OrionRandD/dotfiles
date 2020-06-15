@@ -186,6 +186,7 @@ alias emacst="emacsclient -t"                      # used to be "emacs -nw"
 alias semacst="sudo emacsclient -t"                # used to be "sudo emacs -nw"
 alias emacsgnd="emacsclient -c -a emacs"           # new - opens the GUI with alternate non-daemon
 alias emacscien='emacs -q -l ~/scimax/init.el'     # emacs startkit for science
+alias emacsv="emacs -Q"                            # emacs vanilla
 
 #####################################################
 
