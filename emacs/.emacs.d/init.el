@@ -78,36 +78,7 @@
 
 ;; [[file:~/.emacs.d/init.org::*small-configs][small-configs:1]]
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(beacon-push-mark 10)
- '(custom-safe-themes
-   (quote
-    ("45482e7ddf47ab1f30fe05f75e5f2d2118635f5797687e88571842ff6f18b4d5" "6e03b7f86fcca5ce4e63cda5cd0da592973e30b5c5edf198eddf51db7a12b832" "595099e6f4a036d71de7e1512656e9375dd72cf60ff69a5f6d14f0171f1de9c1" default)))
- '(deft-auto-save-interval 0.3)
- '(deft-directory "~/org~/deft-notes")
- '(deft-extensions (quote ("org" "md")))
- '(deft-file-limit 200)
- '(deft-filter-only-filenames t)
- '(deft-recursive t)
- '(deft-use-filename-as-title t)
- '(dtk-default-module "KJVA" t)
- '(dtk-default-module-category "Biblical Texts" t)
- '(dtk-word-wrap t t)
- '(highlight-defined-face-use-itself t)
- '(initial-frame-alist (quote ((fullscreen . maximized))))
- '(nameless-global-aliases nil)
- '(nameless-private-prefix t)
- '(org-journal-carryover-items nil)
- '(org-journal-date-format "%A, %d %B %Y")
- '(org-journal-dir "~/org~/journal/")
- '(org-journal-enable-agenda-integration t)
- '(org-reveal-root "file:/home/vagner/reveal-slides/reveal.js" t)
- '(org-roam-directory "~/org~/deft-notes")
- '(telega-notifications-mode t)
- '(use-package-always-defer t))
+                                           '(initial-frame-alist (quote ((fullscreen . maximized)))))
                                       ;; for customizing the face (fonts), do:
                                       ;; M-x customize-face RET default RET    
                                       ;;(setq inhibit-startup-screen t)
@@ -1174,19 +1145,21 @@ file with `edit-abbrevs`"
 
         (company-ac-setup)
 
-      
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-preview ((t (:foreground "darkgray" :underline t))))
- '(company-preview-common ((t (:inherit company-preview))))
- '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
- '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
- '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
- '(company-tooltip-selection ((t (:background "steelblue" :foreground "white"))))
- '(fringe ((t (:background "#537182")))))
+      (custom-set-faces
+          '(company-preview
+            ((t (:foreground "darkgray" :underline t))))
+          '(company-preview-common
+            ((t (:inherit company-preview))))
+          '(company-tooltip
+            ((t (:background "lightgray" :foreground "black"))))
+          '(company-tooltip-selection
+            ((t (:background "steelblue" :foreground "white"))))
+          '(company-tooltip-common
+            ((((type x)) (:inherit company-tooltip :weight bold))
+             (t (:inherit company-tooltip))))
+          '(company-tooltip-common-selection
+            ((((type x)) (:inherit company-tooltip-selection :weight bold))
+             (t (:inherit company-tooltip-selection)))))
 
   ;;;;;;;;;;;;;;;;;;
 
@@ -4178,55 +4151,58 @@ flycheck-plantuml))
 ;; [[file:~/.emacs.d/init.org::*slime swank][slime swank:1]]
 ;; ;; Set your lisp system and, optionally, some contribs
 
-  ;; ;; (setq inferior-lisp-program "/usr/bin/sbcl")
-  ;; ;; Install sbcl from github sources and NOT with apt
-  ;;     (setq inferior-lisp-program "/usr/local/bin/sbcl")
+    ;; ;; (setq inferior-lisp-program "/usr/bin/sbcl")
+    ;; ;; Install sbcl from github sources and NOT with apt
+    ;;     (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
-  ;;   ;; update this path to the correct location.
+    ;;   ;; update this path to the correct location.
 
-  ;;   ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa-src/slime-2.23/")
+    ;;   ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa-src/slime-2.23/")
 
-  ;;   ;; (add-to-list 'load-path "~/.emacs.d/elpa/slime-repl-ansi-color-20190426.1414/")
+    ;;   ;; (add-to-list 'load-path "~/.emacs.d/elpa/slime-repl-ansi-color-20190426.1414/")
 
-  ;;   (add-to-list 'load-path "~/.emacs.d/straight/repos/slime/")
+    ;;   (add-to-list 'load-path "~/.emacs.d/straight/repos/slime/")
 
-  ;;   (require 'slime-autoloads)
+    ;;   (require 'slime-autoloads)
 
-  ;;   (defun cliki:start-slime ()
-  ;; 	(unless (slime-connected-p)
-  ;; 	  (save-excursion (slime))))
-  ;;   (add-hook 'slime-mode-hook 'cliki:start-slime)
+    ;;   (defun cliki:start-slime ()
+    ;; 	(unless (slime-connected-p)
+    ;; 	  (save-excursion (slime))))
+    ;;   (add-hook 'slime-mode-hook 'cliki:start-slime)
 
-  ;;   (eval-after-load "slime"
-  ;;     '(progn
-  ;;       ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa-src/slime-3.23/contrib/")
-  ;;       ;; (add-to-list 'load-path "~/.emacs.d/elpa/slime-20190319.930/contrib")
-  ;;       (add-to-list 'load-path "~/.emacs.d/straight/build/slime/contrib/")
-  ;;        (slime-setup '(slime-fancy slime-banner))
-  ;;       (setq slime-complete-symbol*-fancy t)
-  ;;       (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)))
+    ;;   (eval-after-load "slime"
+    ;;     '(progn
+    ;;       ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/elpa-src/slime-3.23/contrib/")
+    ;;       ;; (add-to-list 'load-path "~/.emacs.d/elpa/slime-20190319.930/contrib")
+    ;;       (add-to-list 'load-path "~/.emacs.d/straight/build/slime/contrib/")
+    ;;        (slime-setup '(slime-fancy slime-banner))
+    ;;       (setq slime-complete-symbol*-fancy t)
+    ;;       (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)))
 
-  ;;   (require 'slime-autoloads)
-  ;;   (setq slime-contribs '(slime-repl))
+    ;;   (require 'slime-autoloads)
+    ;;   (setq slime-contribs '(slime-repl))
 
-(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-(add-hook 'emacs-lisp-mode-hook 'yas-minor-mode)
-(add-hook 'emacs-lisp-mode-hook 'company-mode)
+  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+  (add-hook 'emacs-lisp-mode-hook 'yas-minor-mode)
+  (add-hook 'emacs-lisp-mode-hook 'company-mode)
 
-(use-package slime
-  :straight t
-  :load-path
-   ("~/.emacs.d/straight/repos/slime/")
-  :config
-  (setq inferior-lisp-program "/usr/local/bin/sbcl")
-  (setq slime-contribs '(slime-fancy)))
-  (require 'slime-autoloads)
+  (use-package slime
+    :straight t
+    :load-path
+     ("~/.emacs.d/straight/repos/slime/")
+    :config
+    (setq inferior-lisp-program "/usr/local/bin/sbcl")
+    (setq slime-contribs '(slime-fancy)))
+    (require 'slime-autoloads)
 
-(use-package slime-company
-  :straight t
-  :init
-    (require 'company)
-    (slime-setup '(slime-fancy slime-company)))
+  (use-package slime-company
+    :straight t
+    :init
+      (require 'company)
+      (slime-setup '(slime-fancy slime-company)))
+
+(use-package elisp-slime-nav
+  :ensure t)
 ;; slime swank:1 ends here
 
 ;; [[file:~/.emacs.d/init.org::*smartparens][smartparens:1]]
@@ -4381,6 +4357,52 @@ flycheck-plantuml))
 ;; [[file:~/.emacs.d/init.org::*treemacs][treemacs:1]]
 
 ;; treemacs:1 ends here
+
+;; [[file:~/.emacs.d/init.org::*javascript][javascript:1]]
+(use-package js2-mode
+  :ensure t
+  :interpreter (("node" . js2-mode))
+  :bind (:map js2-mode-map ("C-c C-p" . js2-print-json-path))
+  :mode "\\.\\(js\\|json\\)$"
+  :config
+  (add-hook 'js-mode-hook 'js2-minor-mode)
+  (setq js2-basic-offset 2
+        js2-highlight-level 3
+        js2-mode-show-parse-errors nil
+        js2-mode-show-strict-warnings nil))
+
+(use-package js2-refactor
+  :defer t
+  :diminish js2-refactor-mode
+  :commands js2-refactor-mode
+  :ensure t
+  :init
+  (add-hook 'js2-mode-hook #'js2-refactor-mode)
+  :config
+  (js2r-add-keybindings-with-prefix "C-c C-m"))
+
+(use-package ac-js2
+  :defer t
+  :ensure t
+  :init
+  (add-hook 'js2-mode-hook 'ac-js2-mode)
+  (setq ac-js2-evaluate-calls t))
+
+;; from here test
+;; https://github.com/swank-js/swank-js#user-content-installation
+;; sudo nmp install -g npm 
+;; sudo npm install -g swank-js
+
+(global-set-key [f5] 'slime-js-reload)
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (slime-js-minor-mode 1)))
+
+(add-hook 'css-mode-hook
+          (lambda ()
+            (define-key css-mode-map "\M-\C-x" 'slime-js-refresh-css)
+            (define-key css-mode-map "\C-c\C-r" 'slime-js-embed-css)))
+;; javascript:1 ends here
 
 ;; [[file:~/.emacs.d/init.org::*trident - lisp2javascript][trident - lisp2javascript:1]]
 ;; (add-to-list 'auto-mode-alist (cons "\\.paren\\'" 'lisp-mode))
@@ -4622,8 +4644,10 @@ yasnippet-classic-snippets))
    (deft-recursive t)
    (deft-use-filename-as-title t)
    (deft-filter-only-filenames t)
-   (deft-auto-save-interval 0.30)
+   ;; (deft-auto-save-interval 30.0)
    (deft-file-limit 200))
+
+   (setq deft-auto-save-interval 15.0)
 
  ;;  :config
 ;;   (setq deft-directory "~/org~/deft-notes")
