@@ -4360,48 +4360,56 @@ flycheck-plantuml))
 
 ;; [[file:~/.emacs.d/init.org::*javascript][javascript:1]]
 (use-package js2-mode
-  :ensure t
-  :interpreter (("node" . js2-mode))
-  :bind (:map js2-mode-map ("C-c C-p" . js2-print-json-path))
-  :mode "\\.\\(js\\|json\\)$"
-  :config
-  (add-hook 'js-mode-hook 'js2-minor-mode)
-  (setq js2-basic-offset 2
-        js2-highlight-level 3
-        js2-mode-show-parse-errors nil
-        js2-mode-show-strict-warnings nil))
+    :ensure t
+    :interpreter (("node" . js2-mode))
+    :bind (:map js2-mode-map ("C-c C-p" . js2-print-json-path))
+    :mode "\\.\\(js\\|json\\)$"
+    :config
+    (add-hook 'js-mode-hook 'js2-minor-mode)
+    (setq js2-basic-offset 2
+          js2-highlight-level 3
+          js2-mode-show-parse-errors nil
+          js2-mode-show-strict-warnings nil))
 
-(use-package js2-refactor
-  :defer t
-  :diminish js2-refactor-mode
-  :commands js2-refactor-mode
-  :ensure t
-  :init
-  (add-hook 'js2-mode-hook #'js2-refactor-mode)
-  :config
-  (js2r-add-keybindings-with-prefix "C-c C-m"))
+  (use-package js2-refactor
+    :defer t
+    :diminish js2-refactor-mode
+    :commands js2-refactor-mode
+    :ensure t
+    :init
+    (add-hook 'js2-mode-hook #'js2-refactor-mode)
+    :config
+    (js2r-add-keybindings-with-prefix "C-c C-m"))
 
-(use-package ac-js2
-  :defer t
-  :ensure t
-  :init
-  (add-hook 'js2-mode-hook 'ac-js2-mode)
-  (setq ac-js2-evaluate-calls t))
+  (use-package ac-js2
+    :defer t
+    :ensure t
+    :init
+    (add-hook 'js2-mode-hook 'ac-js2-mode)
+    (setq ac-js2-evaluate-calls t))
 
-;; from here test
-;; https://github.com/swank-js/swank-js#user-content-installation
-;; sudo nmp install -g npm 
-;; sudo npm install -g swank-js
+  ;; from here test
+  ;; https://github.com/swank-js/swank-js#user-content-installation
+  ;; sudo nmp install -g npm 
+  ;; sudo npm install -g swank-js
 
-(global-set-key [f5] 'slime-js-reload)
-(add-hook 'js2-mode-hook
-          (lambda ()
-            (slime-js-minor-mode 1)))
+  (global-set-key [f5] 'slime-js-reload)
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              (slime-js-minor-mode 1)))
 
-(add-hook 'css-mode-hook
-          (lambda ()
-            (define-key css-mode-map "\M-\C-x" 'slime-js-refresh-css)
-            (define-key css-mode-map "\C-c\C-r" 'slime-js-embed-css)))
+  (add-hook 'css-mode-hook
+            (lambda ()
+              (define-key css-mode-map "\M-\C-x" 'slime-js-refresh-css)
+              (define-key css-mode-map "\C-c\C-r" 'slime-js-embed-css)))
+
+ ;; sudo nmp install -g npm 
+ ;; sudo npm install -g indium
+
+(use-package indium
+ :ensure t
+ :config
+ (setq indium-chrome-executable "chromium"))
 ;; javascript:1 ends here
 
 ;; [[file:~/.emacs.d/init.org::*trident - lisp2javascript][trident - lisp2javascript:1]]
