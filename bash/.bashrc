@@ -1003,12 +1003,6 @@ alias bible_verse='fortune bible| cowsay -f bud-frogs'
 # wal -i /home/vagner/Pictures/todas_as_fotos/wallpapers/girls_anime/automata_flying.jpg 
 
 #############################
-## converting bashrc aliases to eshell aliases
-## https://www.emacswiki.org/emacs/EshellAlias
-
-alias | sed -E "s/^alias ([^=]+)='(.*)'$/alias \1 \2 \$*/g; s/'\\\''/'/g;" >~/.emacs.d/eshell/alias
-
-#############################
 ## scrot 
 alias scrot='scrot ~/Pictures/screenshots/%b-%d-%Y::%H:%M:%S.png'
 
@@ -1017,3 +1011,28 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/vagner/.sdkman"
 [[ -s "/home/vagner/.sdkman/bin/sdkman-init.sh" ]] && source "/home/vagner/.sdkman/bin/sdkman-init.sh"
+
+#############################
+## eshell
+
+## converting bashrc aliases to eshell aliases
+## https://www.emacswiki.org/emacs/EshellAlias
+
+# for Emacs
+# alias | sed -E "s/^alias ([^=]+)='(.*)'$/alias \1 \2 \$*/g; s/'\\\''/'/g;" >~/.emacs.d/eshell/alias
+# for Doom-Emacs
+alias | sed -E "s/^alias ([^=]+)='(.*)'$/alias \1 \2 \$*/g; s/'\\\''/'/g;" >~/.doom.d/eshell/aliases
+
+## plus these
+
+alias q="exit"
+alias f="find-file"
+alias ff="find-file"
+alias d="dired"
+alias bd="eshell-up"
+alias rg="rg --color=always"
+alias l="ls -lh"
+alias ll="ls -lah"
+alias ms="magit-status"
+
+#############################

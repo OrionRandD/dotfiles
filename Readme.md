@@ -56,3 +56,6 @@ $ git commit -m "Clean up ignored files"
 
 https://www.git-tower.com/learn/git/faq/ignore-tracked-files-in-git
 pos
+
+https://hacker-tools.github.io/dotfiles/
+

@@ -270,7 +270,7 @@ set thesaurus+=~/thesaurus/brazilian-synonyms.txt
 " notational-fzf-vim {
 " https://github.com/alok/notational-fzf-vim
 
-  let g:nv_search_paths = ['~/vimwiki', '~/anki_flashcards', '~/org~', 'docs.md' , './notes.md', '*.org', './*.org']
+  let g:nv_search_paths = ['/home/vagner/vimwiki', '/home/vagner/anki_flashcards', '/home/vagner/org~', 'docs.md' , './notes.md', '*.org', './*.org']
 " g:nv_use_short_pathnames = 0
 " g:nv_show_preview = 0
 
