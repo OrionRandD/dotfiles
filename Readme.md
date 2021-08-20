@@ -50,6 +50,8 @@ https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-
 https://www.w3docs.com/snippets/git/how-to-generate-ssh-key-for-git.html
 
 and change the access to ssh:
+note: you have to create the rsa.pub using
+ssh port default (22)
 https://help.github.com/em/articles/changing-a-remotes-url
 
 Workflow
