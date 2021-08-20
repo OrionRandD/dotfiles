@@ -1,0 +1,222 @@
+
+" Vim options {
+
+""set formatprg=par\ -w85         " Sets 85 column
+""setlocal linebreak 
+  setlocal nowrap 
+""setlocal wrap 
+  set textwidth=0
+
+" }
+
+" vimwiki with markdown support {"
+" https://github.com/vimwiki/vimwiki
+"https://github.com/gotbletu/shownotes/blob/master/vimwiki.md 
+"https://www.youtube.com/watch?v=ONh95PNBW-Q 
+ let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+" helppage -> :h vimwiki-syntax 
+"}
+
+" vimwiki tab fixing {
+let g:vimwiki_table_mappings = 0 
+"}
+
+" Vim-translate keybindings {
+vmap T <Plug>Translate
+vmap R <Plug>TranslateReplace
+vmap P <Plug>TranslateSpeak
+
+let g:goog_user_conf = { 'langpair': 'en|pt', 'v_key': 'T', 'charset': 'utf-8' }
+"}
+
+" langtool {
+let g:languagetool_jar='/opt/languageTool-3.9/languagetool-commandline.jar'
+" }
+
+"thesaurus {
+set thesaurus+=$HOME/thesaurus/mthesaur.txt
+"}
+
+"Cobol {
+let g:cobol_syntax_checker_cobc_compiler_option = '-free'
+"let g:cobol_syntax_checker_cobc_compiler_option = ''
+let g:cobol_syntax_checker_check_on_read = 1
+let g:cobol_syntax_checker_check_on_write = 1 
+let g:cobol_syntax_checker_loc_auto_open_close = 1
+"}
+
+"Vim copy and paste {
+"vmap <C-c> "+yi
+"vmap <C-x> "+c
+"vmap <C-v> c<ESC>"+p
+"imap <C-v> <ESC>"+pa
+"}
+
+" Spelling {
+
+:setlocal spell spelllang=en_gb,pt_br,es_es
+
+" }
+
+" Fonts nova {
+ colorscheme nova
+" }
+
+" ranger {
+let g:NERDTreeHijackNetrw = 0 
+let g:ranger_replace_netrw = 1 
+" }
+
+" vim-numbertoggle {
+  set number relativenumber
+" }
+
+" Remap Ctrl-k (digraph ) to Ctrl-y {
+"because it conflicts with 'easyMotion plugin'
+inoremap <C-y> <C-k>
+" }
+
+" Mouse Paste Syntax handling {
+let g:skip_defaults_vim = 1
+set mouse=""
+" }
+
+" bash-support Plugin {
+let g:BASH_AuthorName   = 'Vagner Rener'
+let g:BASH_Email        = 'vagnerrener@gmail.com'
+let g:BASH_Company      = 'Sofia Corporation'
+" }
+
+" FastFold {
+  set sessionoptions-=folds
+" }
+
+" vim-stay [cursor,folds,slash,unix] {
+ set viewoptions=folds 
+" }
+
+"pywal {
+" colorscheme wal
+"}
+
+" notational-fzf-vim {
+" https://github.com/alok/notational-fzf-vim
+
+  let g:nv_search_paths = ['~/vimwiki', '~/anki_flashcards', '~/org~', 'docs.md' , './notes.md', '*.org', './*.org']
+" g:nv_use_short_pathnames = 0
+" g:nv_show_preview = 0
+
+" String. Set to '' (the empty string) if you don't want an extension appended by default.
+" Don't forget the dot, unless you don't want one.
+let g:nv_default_extension = '.md'
+
+" String. Default is first directory found in `g:nv_search_paths`. Error thrown
+"if no directory found and g:nv_main_directory is not specified
+"let g:nv_main_directory = g:nv_main_directory or (first directory in g:nv_search_paths)
+
+" Dictionary with string keys and values. Must be in the form 'ctrl-KEY':
+" 'command' or 'alt-KEY' : 'command'. See examples below.
+let g:nv_keymap = ({
+                    \ 'ctrl-s': 'split ',
+                    \ 'ctrl-v': 'vertical split ',
+                    \ 'ctrl-t': 'tabedit ',
+                    \ })
+
+" String. Must be in the form 'ctrl-KEY' or 'alt-KEY'
+let g:nv_create_note_key = 'ctrl-x'
+
+" String. Controls how new note window is created.
+let g:nv_create_note_window = 'vertical split'
+
+" Boolean. Show preview. Set by default. Pressing Alt-p in FZF will toggle this for the current search.
+let g:nv_show_preview = 1
+
+" Boolean. Respect .*ignore files in or above nv_search_paths. Set by default.
+let g:nv_use_ignore_files = 1
+
+" Boolean. Include hidden files and folders in search. Disabled by default.
+let g:nv_include_hidden = 0
+
+" Boolean. Wrap text in preview window.
+let g:nv_wrap_preview_text = 1
+
+" String. Width of window as a percentage of screen's width.
+let g:nv_window_width = '40%'
+
+" String. Determines where the window is. Valid options are: 'right', 'left', 'up', 'down'.
+let g:nv_window_direction = 'down'
+
+" String. Command to open the window (e.g. `vertical` `aboveleft` `30new` `call my_function()`).
+let g:nv_window_command = 'call my_function()'
+
+" Float. Width of preview window as a percentage of screen's width. 50% by default.
+let g:nv_preview_width = 50
+
+" String. Determines where the preview window is. Valid options are: 'right', 'left', 'up', 'down'.
+let g:nv_preview_direction = 'right'
+
+" String. Yanks the selected filenames to the default register.
+let g:nv_yank_key = 'ctrl-y'
+
+" String. Separator used between yanked filenames.
+let g:nv_yank_separator = "\n"
+
+" Boolean. If set, will truncate each path element to a single character. If
+" you have colons in your pathname, this will fail. Set by default.
+let g:nv_use_short_pathnames = 1
+
+"List of Strings. Shell glob patterns. Ignore all filenames that match any of
+" the patterns.
+let g:nv_ignore_pattern = ['summarize-*', 'misc*']
+
+" List of Strings. Key mappings like above in case you want to define your own
+" handler function. Most users won't want to set this to anything.
+
+let g:nv_expect_keys = []
+
+  nnoremap <silent> <c-s> :NV<CR>
+
+" }
+
+" SQHell {
+" https://github.com/joereynolds/SQHell.vim 
+" To connect to your " to connect to your DBMS of choice.
+" The connections are in a dictionary to let you manage
+" multiple hosts. By default SQHell uses the 'default' key
+" details (no surprise there)
+"
+" example:
+"
+" let g:sqh_connections = openCurlBraces
+"    \ 'default': openCurlBraces
+"    \   'user': 'root',
+"    \   'password': 'testing345',
+"    \   'host': 'localhost'
+"    \closeCurlBraces,
+"    \ 'live': openCurlBraces
+"    \   'user': 'root',
+"    \   'password': 'jerw5Y^$Hdfj',
+"    \   'host': '46.121.44.392'
+"    \closeCurlBraces
+"
+"  \closeCurlBraces
+
+nnoremap <leader>xc :r !mysql -uroot -psomepass -h somehost.com <<< `cat %` \| column -t<cr>
+
+" }
+
+" Substitution {
+" type S in normal mode
+nnoremap S :%s//g<left><left>
+
+" }
+"
+" vim_hardtime {
+" https://github.com/takac/vim-hardtime
+" let g:hardtime_default_on = 1
+" let g:hardtime_showmsg = 1
+" let g:hardtime_ignore_quickfix = 1
+" let g:hardtime_allow_different_key = 1
+" let g:hardtime_maxcount = 2
+
+ " }

@@ -1,0 +1,485 @@
+
+"General configuration {
+
+" set spell                   " Spell check on
+" set t_co=256
+set hidden
+set mouse=a
+" set inccommand=split
+let mapleader="\<space>"
+nnoremap <leader>ev :split ~/.vimrc.before.local<cr>
+nnoremap <leader>sv :source ~/.vimrc.before.local<cr>
+
+"}
+
+" Estas linhas sao para não dar erro {
+" na hora de salvar arquivos
+cab W  w
+cab Wq wq
+cab wQ wq
+cab WQ wq
+cab Q  q
+"}
+
+" visualbell {
+ set visualbell
+" }
+
+" AutoCorrect plugin {
+""call AutoCorrect()
+" }
+"
+" NerdTree {
+
+"" https://medium.com/@victormours/a-better-nerdtree-setup-3d3921abc0b9
+
+ nnoremap <C-T> :NERDTreeToggle<CR>
+
+ nnoremap <silent> <Leader>v :NERDTreeFind<CR>
+
+ let NERDTreeQuitOnOpen = 1
+
+ let NERDTreeAutoDeleteBuffer = 1
+
+" let NERDTreeMinimalUI = 1
+ let NERDTreeDirArrows = 1
+
+" }
+
+" registers cleaner {
+command! WipeReg for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
+" }
+
+" Set commands {
+    setlocal formatoptions=1 
+    setlocal noexpandtab 
+    set complete+=s
+
+    ""set formatprg=par\ -w85         " Sets 85 column
+    ""setlocal linebreak 
+    setlocal nowrap 
+    ""setlocal wrap 
+    set textwidth=0
+
+    set list
+    set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+" }
+
+" Trata o hífen como parte da palavra. e não com um delimitador {
+"
+set iskeyword+=-
+
+"}
+
+" Thesaurus {
+" https://smileykrish.wordpress.com/2011/09/24/enable-thesaurus-in-vim/
+" http://www.drbunsen.org/writing-in-vim/ 
+" Usage --> Ctrl-x Ctrl-t (insert mode)
+
+set thesaurus+=/home/vagner/thesaurus/mthesaur.txt
+set thesaurus+=/home/vagner/thesaurus/brazilian-synonyms.txt
+" }
+"
+" deoplete {
+
+let g:deoplete#enable_at_startup = 1
+
+" }
+
+" Nova ortografia do Português brasileiro {
+
+"" Alfabeto
+""  O alfabeto era formado por 23 letras, mais aquelas chamadas “especiais”. A nova ortografia brasileira apresenta então, o “k”, “w” e o “y” como letras que fazem  parte oficialmente  do alfabeto, que agora  é formado por 26 letras. Muito utilizadas em siglas, símbolos e nomes estrangeiros, também são encontradas em seus derivados. Exemplo: km, watt, Byron. Uso do trema. Antigamente usava-se trema em palavras portuguesas  e  aportuguesadas. Hoje, o trema foi eliminado destas palavras.
+
+"" Ortografia antiga --->  Nova ortografia
+
+iab   agüentar aguentar
+iab   conseqüência consequencia
+iab   cinqüenta cinquenta
+iab   qüinqüênio quinquenio
+iab   freqüência frequencia
+iab   freqüente frequente
+iab   eloqüência eloquência
+iab   eloqüente eloquente
+iab   argüição arguição
+iab   delinqüir delinquir
+iab   pingüim pinguim
+iab   tranqüilo tranquilo
+iab   lingüiça linguiça
+
+"" Porém, nomes próprios estrangeiros e seus derivados ainda continuam com  o trema. Exemplo: Muller,  mülleriano. Seria uma  mudança muito brusca,  que implicaria na perda de identidade das palavras. 
+
+"" Acentuação
+"" A nova ortografia brasileira tem novas regras que se aplicam a  acentuação das palavras. Antigamente, os ditongos abertos –ei e –oi eram  acentuados, nas palavras paroxítonas.
+
+iab assembléia assembleia
+iab platéia plateia
+iab idéia ideia
+iab colméia colmeia
+iab boléia boleia 
+iab panacéia panaceia
+iab Coréia Coreia
+iab hebréia hebreia
+iab bóia boia
+iab paranóia paranoia
+iab jibóia jiboia
+
+"" apoio (forma verbal)
+iab apóio apoio
+
+iab heróico heroico
+iab paranóico paranoico.
+
+"" Porém, o acento nos ditongos –éi e –ói permanecem naquelas palavras oxítonas e monossílabas tônicas de som aberto, como herói, constrói, dói, anéis, papéis, anzóis. O ditongo aberto –éu permanece. Ex: chapéu,  céu, véu, ilhéu.
+
+"" Vogais duplicadas
+
+"" Ainda no quesito acentuação, a nova ortografia brasileira não permite  que se acentue o hiato –oo.
+
+iab  enjôo enjoo 
+iab  vôo voo 
+iab  corôo coroo
+iab  perdôo perdoo
+iab  côo coo
+iab  môo moo
+iab  abençôo abençoo
+iab  povôo povoo
+
+"" Além disso, não se acentua o hiato –ee dos verbos crer, dar, ler, ver e seus derivados (na terceira pessoa do plural).
+
+iab crêem creem
+iab dêem deem
+iab lêem leem
+iab vêem veem 
+iab descrêem descreem
+iab relêem relem
+iab revêem reveem
+
+"" Palavras homógrafas
+
+"" Palavras homógrafas são aquelas que se escrevem da mesma forma, mas com sentidos diferentes. Na nova ortografia brasileira, foi acordado que as paroxítonas não serão acentuadas.
+
+ ""pára para  (verbo)
+ ""péla pela  (subst. e verbo)
+ ""pêlo pelo  (subst.)
+ ""pêra pera  (subst.)
+ ""péra pera  (verbo )
+ ""pólo polo  (subst.)
+
+map pára para
+iab péla pela
+iab pêlo pelo
+iab pêra pera
+iab péra pera
+iab pólo polo
+
+"" Algumas exceções à regra também foram impostas, como o acento  diferencial de pôr (verbo) que permanece, em oposição à por (preposição). O acento diferencial permanece também nos homógrafos pode e pôde (o  primeiro, terceira pessoa do singular do presente do indicativo do verbo poder, e o segundo na terceira pessoa do pretérito perfeito do indicativo).
+
+"" Uso do hífen na nova ortografia
+
+"" Hoje em dia, não se emprega mais o hífen em compostos em que o prefixo  ou falso prefixo termine em vogal e o segundo elemento comece pelas letras “r” ou “s”. O que acontece então é que essas consoantes devem se duplicar.
+
+iab ante-sala antessala
+iab ante-sacristia antessacristia
+iab auto-retrato autorretrato
+iab anti-social antissocial
+iab anti-rugas antirrugas
+iab arqui-romântico arquirromântico
+iab arqui-rivalidade arquirrivalidade
+iab auto-regulamentação autorregulamentação
+iab auto-sugestão autossugestão
+iab contra-senso contrassenso
+iab contra-regra contrarregra
+iab contra-senha contrassenha
+iab extra-regimento extrarregimento
+iab extra-sístole extrassístole
+iab extra-seco extrasseco
+iab infra-som infrassom
+iab infra-renal infrarrenal
+iab ultra-romântico ultrarromântico
+iab ultra-sonografia ultrassonografia
+iab semi-real semirreal
+iab semi-sintético semissintético
+iab supra-renal suprarrenal
+iab supra-sensível suprassensível
+
+"" Ainda que desaparecido cada vez mais das palavras, o uso do hífen ainda permanece nos compostos em que os prefixos são: super, hiper, inter, terminados em –r, como: hiper-requintado, super-revista, inter-racial e etc.
+
+"" Uso do hífen em casos especiais
+
+"" Agora, não se emprega mais o hífen em compostos em que o prefixo termina em vogal e o segundo elemento começa com vogal diferente.
+
+iab auto-afirmação autoafirmação
+iab auto-ajuda autoajuda
+iab auto-aprendizagem autoaprendizagem
+iab auto-escola autoescola
+iab auto-estrada autoestrada
+iab auto-instrução autoinstrução
+iab contra-exemplo contraexemplo
+iab contra-indicação contraindicação
+iab contra-ordem contraordem
+iab extra-escolar extraescolar
+iab extra-oficial extraoficial
+iab infra-estrutura infraestrutura
+iab intra-ocular intraocular
+iab intra-uterino intrauterino
+iab neo-expressionista neoexpressionista
+iab neo-imperialista neoimperialista
+iab semi-aberto semiaberto
+iab semi-árido semiárido
+iab semi-automático semiautomático
+iab semi-embriagado semiembriagado
+iab semi-obscuridade semiobscuridade
+iab supra-ocular supraocular
+iab ultra-elevado ultraelevado
+
+"" Agora, o hífen é empregado em compostos em que o prefixo termina em  vogal e o segundo elemento começa por vogal igual, como no caso de:
+
+iab antiibérico anti-ibérico
+iab antiinflamatório anti-inflamatório
+iab antiinflacionário anti-inflacionário
+iab antiimperalista anti-imperalista
+iab arquiinimigo arqui-inimigo
+iab arquiirmandade arqui-irmandade
+iab microondas micro-ondas
+iab microônibus micro-ônibus
+iab microorgânico micro-orgânico
+
+"" Além destes casos, não se usa mais o hífen em compostos em que a palavra já foi consagrada como uma só, como o caso das antigas:
+
+iab manda-chuva mandachuva
+iab pára-quedas paraquedas
+iab pára-quedista paraquedista
+iab pára-lama paralama
+iab pára-brisa parabrisa
+iab pára-choque parachoque
+iab pára-vento paravento
+
+"" Observações para uso do hífen
+
+"" Sem dúvidas, o uso correto do hífen será o maior desafio para os  membros dos países que falam a língua portuguesa em se adaptarem. Em  linhas gerais, podemos acrescentar alguns parâmetros da nova norma.
+
+"" 1. O uso do hífen permanece em compostos com os prefixos específicos: ex-, vice-, soto-, como nas palavras ex-mulher, vice-prefeito.
+
+iab exmulher ex-mulher
+iab viceprefeito vice-prefeito
+
+"" 2. Nos compostos com os prefixos circum- e pan-, o hífen permanece quando o segundo elemento começa por vogal, m ou n, como nos casos de:
+
+iab panamericano pan-americano
+iab circumnavegação circum-navegação.
+
+"" 3. Em compostos com os prefixos acentuados pré-, pró-, e pós-, apenas utilizamos o hífen quando o segundo elemento tem vida própria dentro da língua, como no caso da palavra pré-natal.
+
+iab prénatal pré-natal
+
+"" 4. Está proibida a utilização de hífen em locuções de qualquer tipo,  podendo ser substantivas, adjetivas, pronominais, verbais, adverbiais, prepositivas ou conjuncionais. Assim, cão de guarda, fim de semana, café com leite, pão de mel e outras se escrevem separadas e sem hífen.
+
+"" 5. Por tanto, fique atento às regras da nova ortografia brasileira quando for escrever algo 
+
+"" Fonte https://casadaconsultoria.com.br/nova-ortografia-brasileira/
+
+" }
+
+"Abreviações {
+" abreviatura para o meu nome
+iab tambem também
+iab teh the
+iab latex \LaTeX\
+iab ,m <vagnerrener@gmail.com>
+ab vrfds Vagner Rener Fernandes da Silva
+ab vc você
+iab teh the
+iab a. ª
+iab analize análise
+iab análize análise
+iab angulo ângulo
+iab apos após
+iab apra para
+iab aqeule aquele
+iab aqiulo aquilo
+iab arcoíris arco-íris
+iab aré até
+iab asim assim
+iab aspeto aspecto
+iab assenção ascenção
+iab assin assim
+iab assougue açougue
+iab aue que
+iab augum algum
+iab augun algum
+iab ben bem
+iab beringela berinjela
+iab bon bom
+iab cafe café
+iab caichote caixote
+iab capitões capitães
+iab cidadães cidadãos
+iab ckaro claro
+iab cliche clichê
+iab compreenssão compreensão
+iab comprensão compreensão
+iab comun comum
+iab con com
+iab contezto contexto
+iab corrijir corrigir
+iab coxixar cochichar
+iab cpm com
+iab cppara para
+iab dai daí
+iab danca dança
+iab decer descer
+iab definitamente definitivamente
+iab deshonestidade desonestidade
+iab deshonesto desonesto
+iab detale detalhe
+iab deven devem
+iab díficil difícil
+iab distingeu distingue
+iab dsa das
+iab dze dez
+iab ecessão exceção
+iab ecessões exceções
+iab eentão e então
+iab emb bem
+iab ems sem
+iab emu meu
+iab en em
+iab enbora embora
+iab equ que
+iab ero erro
+iab erv ver
+iab ese esse
+iab esselência excelência
+iab esu seu
+iab excessão exceção
+iab Excesões exceções
+iab excurção excursão
+iab Exenplo exemplo
+iab exeplo exemplo
+iab exijência exigência
+iab exijir exigir
+iab expontâneo espontâneo
+iab ezemplo exemplo
+iab ezercício exercício
+iab faciu fácil
+iab fas faz
+iab fente gente
+iab ferias férias
+iab geito jeito
+iab gibóia jibóia
+iab gipe jipe
+iab ha há
+iab hezitação hesitação
+iab hezitar hesitar
+iab http:\\ http:
+iab iigor igor
+iab interesado interessado
+iab interese interesse
+iab Irria Iria
+iab iso isso
+iab isot isto
+iab ítens itens
+iab ja já
+iab jente gente
+iab linguiça lingüiça
+iab linux GNU/Linux
+iab masi mais
+iab maz mas
+iab con com
+iab mema mesma
+iab mes mês
+iab muinto muito
+iab nao não
+iab nehum nenhum
+iab nenina menina
+iab noã não
+iab no. nº
+iab N. Nº
+iab o. º
+iab obiter obter
+iab observacao observação
+iab ons nos
+iab orijem origem
+iab ospital hospital
+iab poden podem
+iab portugu6es português
+iab potuguês português
+iab precisan precisam
+iab própio próprio
+iab quado quando
+iab quiz quis
+iab recizão rescisão
+iab sanque sangue
+iab sao são
+iab sen sem
+iab sensivel sensível
+iab sequéncia seqüência
+iab significatimente significativam
+iab sinceranete sinceramente
+iab sovre sobre
+iab susseder suceder
+iab tanbem também
+iab testo texto
+iab téxtil têxtil
+iab tydo tudo
+iab una uma
+iab unico único
+iab utilise utilize
+iab vagber Vagner
+iab Vagber Vagner
+iab vega veja
+iab vja veja
+iab voc6e você
+iab wue que
+iab xave chave
+
+iab 1a. 1ª
+iab 2a. 2ª
+iab 3a. 3ª
+iab 4a. 4ª
+iab 5a. 5ª
+iab 6a. 6ª
+iab 7a. 7ª
+iab 8a. 8ª
+iab 9a. 9ª
+iab 10a. 10ª
+iab 11a. 11ª
+iab 12a. 12ª
+iab 13a. 13ª
+iab 14a. 14ª
+iab 15a. 15ª
+"}
+
+"coloca a data tipo Ter 26/Out/2004 hs 10:53 na linha atual {
+iab ,d <C-R>=strftime("%a %d/%b/%Y hs %H:%M")<CR>
+iab ,m <vagnerrener@gmail.com>
+
+" a função (strftime) é predefinida pelo sistema
+iab YDATE <C-R>=strftime("%a %d/%b/%Y hs %H:%M")<CR>
+iab HDATE <C-R>=strftime("%a %d/%b/%Y hs %H:%M")<CR>
+" Example: 1998-11-05 19:20:43 MST
+"}
+
+" Buffer name {
+ let current_file = @%
+ "}
+
+ " Vim-emoji {
+ " e.g. :app<CTRL-X><CTRL-U> to find :apple:"
+
+ " for markdown
+augroup emoji_complete
+  autocmd!
+  autocmd FileType markdown setlocal completefunc=emoji#complete
+augroup END
+
+  "for overall completion
+set completefunc=emoji#complete
+" }
+
+  "for overall completion {
+map <S-t> :vert :term<CR>
+set splitright
+" }
+
