@@ -35,6 +35,8 @@ Copies the contents of the id_rsa.pub file to your clipboard
 
 xclip -sel clip < ~/.ssh/id_rsa.pub
 
+you can access github url through your token now  
+
 https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 
 https://www.w3docs.com/snippets/git/how-to-generate-ssh-key-for-git.html
