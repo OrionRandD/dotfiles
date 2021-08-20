@@ -37,6 +37,10 @@ xclip -sel clip < ~/.ssh/id_rsa.pub
 
 you can access github url through your token now  
 
+and use 
+https://github.com/microsoft/Git-Credential-Manager-Core#linux-install-instructions 
+
+https://github.com/microsoft/Git-Credential-Manager-Core/blob/main/docs/linuxcredstores.md 
 
 credential manager
 https://github.com/microsoft/Git-Credential-Manager-Core#linux-install-instructions
@@ -47,6 +51,7 @@ https://www.w3docs.com/snippets/git/how-to-generate-ssh-key-for-git.html
 
 and change the access to ssh:
 https://help.github.com/em/articles/changing-a-remotes-url
+
 
 Workflow
 1. git add .  or a specific file
