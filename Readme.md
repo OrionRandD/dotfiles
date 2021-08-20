@@ -52,7 +52,6 @@ https://www.w3docs.com/snippets/git/how-to-generate-ssh-key-for-git.html
 and change the access to ssh:
 https://help.github.com/em/articles/changing-a-remotes-url
 
-
 Workflow
 1. git add .  or a specific file
 2. git commit -a  or:
@@ -72,4 +71,6 @@ https://www.git-tower.com/learn/git/faq/ignore-tracked-files-in-git
 pos
 
 https://hacker-tools.github.io/dotfiles/
+
+dude ssh
 
