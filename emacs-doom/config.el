@@ -6539,3 +6539,5 @@ The cursor becomes a blinking bar, per `cypher/cursor-type-mode'."
 (put 'customize-variable 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'customize-group 'disabled nil)
+
+;; test here dude
