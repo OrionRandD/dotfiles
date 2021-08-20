@@ -434,7 +434,6 @@ Plug 'jceb/vim-orgmode'
 "}
 
 " General programming {
-Plug 'pulkomandy/c.vim'
 "Plug 'scrooloose/syntastic'
 "Plug 'tpope/vim-fugitive'
 "Plug 'mattn/webapi-vim'
