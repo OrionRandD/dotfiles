@@ -72,5 +72,4 @@ pos
 
 https://hacker-tools.github.io/dotfiles/
 
-dude ssh
-
+dude all good
