@@ -31,7 +31,7 @@ Generate an ssh-key to connect to github
 
 ssh-keygen -t rsa -b 4096 -C $email-address
 
-Copies the contents of the id_rsa.pub file to your clipboard
+Copy the contents of the id_rsa.pub file to your clipboard
 
 xclip -sel clip < ~/.ssh/id_rsa.pub
 
